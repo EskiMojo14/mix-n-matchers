@@ -433,7 +433,7 @@ export const toHaveBeenNthCalledWithContext = createNthCalledWithContextMatcher(
 
 declare module "./index" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  export interface MiscMatchers<R> {
+  export interface MixNMatchers<R> {
     toBeCalledWithContext<E>(expected: E): R;
     toHaveBeenCalledWithContext<E>(expected: E): R;
 

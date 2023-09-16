@@ -1,4 +1,4 @@
-# misc-matchers
+# mix-n-matchers
 
 Miscellaneous custom Jest matchers
 
@@ -7,11 +7,11 @@ Miscellaneous custom Jest matchers
 Install via `npm` or `yarn`:
 
 ```
-npm install -D misc-matchers
+npm install -D mix-n-matchers
 ```
 
 ```
-yarn add -D misc-matchers
+yarn add -D mix-n-matchers
 ```
 
 ## Setup
@@ -20,11 +20,11 @@ Create a setup script with the following:
 
 ```js
 // add all matchers
-import * as miscMatchers from "misc-matchers";
-expect.extend(miscMatchers);
+import * as mixNMatchers from "mix-n-matchers";
+expect.extend(mixNMatchers);
 
 // or just add specific matchers
-import { toBeCalledWithContext } from "misc-matchers";
+import { toBeCalledWithContext } from "mix-n-matchers";
 expect.extend({ toBeCalledWithContext });
 ```
 
@@ -41,16 +41,16 @@ Add your setup script to your Jest `setupFilesAfterEnv` configuration. [For refe
 To ensure the correct types are included, add a `global.d.ts` file to your project with:
 
 ```ts
-import type { MiscMatchers } from "misc-matchers";
+import type { MixNMatchers } from "mix-n-matchers";
 
 declare global {
   namespace jest {
     // if all matchers
-    export interface Matchers<R> extends MiscMatchers<R> {}
+    export interface Matchers<R> extends MixNMatchers<R> {}
 
     // if some matchers
     export interface Matchers<R>
-      extends Pick<MiscMatchers<R>, "toBeCalledWithContext"> {}
+      extends Pick<MixNMatchers<R>, "toBeCalledWithContext"> {}
   }
 }
 ```
@@ -59,22 +59,22 @@ If only some matchers are added, you can avoid duplication by exporting an objec
 
 ```js
 // setup file
-import { toBeCalledWithContext } from "misc-matchers";
+import { toBeCalledWithContext } from "mix-n-matchers";
 
-export const miscMatchers = { toBeCalledWithContext };
+export const mixNMatchers = { toBeCalledWithContext };
 
-expect.extend(miscMatchers);
+expect.extend(mixNMatchers);
 ```
 
 ```ts
 // global.d.ts
-import type { miscMatchers } from "../testSetup.js";
-import type { MiscMatchers } from "misc-matchers";
+import type { mixNMatchers } from "../testSetup.js";
+import type { MixNMatchers } from "mix-n-matchers";
 
 declare global {
   namespace jest {
     export interface Matchers<R>
-      extends Pick<MiscMatchers<R>, keyof typeof miscMatchers> {}
+      extends Pick<MixNMatchers<R>, keyof typeof mixNMatchers> {}
   }
 }
 ```
