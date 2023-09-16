@@ -1,0 +1,94 @@
+{
+  "name": "misc-matchers",
+  "version": "1.0.0",
+  "description": "Miscellaneous custom Jest matchers",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "build": "tsup",
+    "test": "jest",
+    "lint": "eslint",
+    "pre-commit": "lint-staged"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EskiMojo14/misc-matchers.git"
+  },
+  "keywords": [
+    "jest",
+    "matchers",
+    "extend",
+    "extended",
+    "test",
+    "testing",
+    "assertions"
+  ],
+  "author": "eskimojo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EskiMojo14/misc-matchers/issues"
+  },
+  "homepage": "https://github.com/EskiMojo14/misc-matchers#readme",
+  "devDependencies": {
+    "@types/jest": "^29.5.5",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "eslint": "^8.49.0",
+    "eslint-import-resolver-typescript": "^3.6.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-jest": "^27.4.0",
+    "husky": "^8.0.3",
+    "jest": "^29.7.0",
+    "jest-matcher-utils": "^29.7.0",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
+    "ts-jest": "^29.1.1",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "jest": ">=27.2.5"
+  },
+  "peerDependenciesMeta": {
+    "jest": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": "^14.15.0 || ^16.10.0 || >=18.0.0"
+  },
+  "jest": {
+    "preset": "ts-jest/presets/default-esm",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "./jest-setup.ts"
+    ],
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ]
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.md": "prettier --write"
+  },
+  "tsup": {
+    "entry": [
+      "src/index.ts"
+    ],
+    "sourcemap": true,
+    "format": [
+      "esm",
+      "cjs"
+    ],
+    "dts": true
+  }
+}
