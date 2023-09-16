@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "Miscellaneous custom Jest matchers",
   "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": ".dist/index.d.ts",
   "exports": {
+    "./package.json": "./package.json",
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
@@ -15,9 +19,12 @@
   "scripts": {
     "prepare": "husky install",
     "build": "tsup",
+    "pretest": "npm run build",
     "test": "jest",
     "lint": "eslint",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "attw": "attw",
+    "type": "tsc"
   },
   "repository": {
     "type": "git",
@@ -39,6 +46,7 @@
   },
   "homepage": "https://github.com/EskiMojo14/misc-matchers#readme",
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.10.2",
     "@types/jest": "^29.5.5",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
