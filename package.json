@@ -9,6 +9,9 @@
       "require": "./dist/index.cjs"
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "prepare": "husky install",
     "build": "tsup",
@@ -64,7 +67,7 @@
     "node": "^14.15.0 || ^16.10.0 || >=18.0.0"
   },
   "jest": {
-    "preset": "ts-jest/presets/default-esm",
+    "preset": "ts-jest/presets/js-with-ts-esm",
     "testEnvironment": "node",
     "setupFilesAfterEnv": [
       "./jest-setup.ts"

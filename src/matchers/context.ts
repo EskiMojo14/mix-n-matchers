@@ -6,7 +6,8 @@ import type {
   MatcherUtils,
 } from "expect";
 import type { MatcherHintOptions } from "jest-matcher-utils";
-import { ensureMockOrSpy, getRightAlignedPrinter, isSpy } from "./utils";
+import { ensureMockOrSpy, isSpy } from "../utils";
+import { getRightAlignedPrinter } from "../utils/print";
 
 const PRINT_LIMIT = 3;
 
@@ -198,3 +199,10 @@ export const toBeCalledWithContext = createToHaveBeenCalledWithContextMatcher(
 
 export const toHaveBeenCalledWithContext =
   createToHaveBeenCalledWithContextMatcher("toHaveBeenCalledWithContext");
+
+declare module "./index" {
+  export interface MiscMatchers<R> {
+    toBeCalledWithContext<T>(expected: T): R;
+    toHaveBeenCalledWithContext<T>(expected: T): R;
+  }
+}
