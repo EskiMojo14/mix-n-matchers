@@ -1,92 +1,106 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { alignedAnsiStyleSerializer } from "../utils/tests";
 
 expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 
-describe("Function context matchers", () => {
-  const context = {};
-  const func = jest.fn();
-  afterEach(() => {
-    func.mockClear();
+// Given a Jest mock function, return a minimal mock of a spy.
+const createSpy = (fn: jest.Mock) => {
+  const spy = function () {};
+
+  spy.calls = {
+    all() {
+      const info: Array<jasmine.CallInfo> = [];
+      let i = 0;
+      while (i < fn.mock.calls.length) {
+        const returnRecord = fn.mock.results[i];
+        /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+        info.push({
+          args: fn.mock.calls[i],
+          object: fn.mock.contexts[i],
+          returnValue:
+            returnRecord?.type === "return" ? returnRecord.value : undefined,
+        });
+        /* eslint-enable @typescript-eslint/no-unsafe-assignment */
+        i++;
+      }
+      return info;
+    },
+    count() {
+      return fn.mock.calls.length;
+    },
+  };
+
+  return spy;
+};
+
+describe.each([
+  "toHaveBeenCalledWithContext",
+  "toBeCalledWithContext",
+  "lastCalledWithContext",
+  "toHaveBeenLastCalledWithContext",
+  "nthCalledWithContext",
+  "toHaveBeenNthCalledWithContext",
+] as const)("%s", (calledWithContext) => {
+  function isToHaveNth(
+    calledWithContext: string,
+  ): calledWithContext is
+    | "nthCalledWithContext"
+    | "toHaveBeenNthCalledWithContext" {
+    return (
+      calledWithContext === "nthCalledWithContext" ||
+      calledWithContext === "toHaveBeenNthCalledWithContext"
+    );
+  }
+  const expectedContext = "foo";
+  const wrongContext = "bar";
+  it("works only on spies or jest.fn", () => {
+    const fn = function fn() {};
+    if (isToHaveNth(calledWithContext)) {
+      expect(() => {
+        expect(fn)[calledWithContext](3, expectedContext);
+      }).toThrowErrorMatchingSnapshot();
+    } else {
+      expect(() => {
+        expect(fn)[calledWithContext](expectedContext);
+      }).toThrowErrorMatchingSnapshot();
+    }
   });
-  describe.each([
-    "toHaveBeenCalledWithContext",
-    "toBeCalledWithContext",
-  ] as const)("%s", (toHaveContext) => {
-    it("asserts mock has been called at least once with given context", () => {
-      expect(() => {
-        expect(func)[toHaveContext](context);
-      }).toThrowErrorMatchingSnapshot("no calls");
+  it("works when not called", () => {
+    const fn = jest.fn();
+    if (isToHaveNth(calledWithContext)) {
+      expect(createSpy(fn)).not[calledWithContext](1, expectedContext);
+      expect(fn).not[calledWithContext](1, expectedContext);
 
-      // called once with context we're looking for
-      func.call(context);
       expect(() => {
-        expect(func)[toHaveContext](context);
-      }).not.toThrow();
+        expect(fn)[calledWithContext](1, expectedContext);
+      }).toThrowErrorMatchingSnapshot();
+    } else {
+      expect(createSpy(fn)).not[calledWithContext](expectedContext);
+      expect(fn).not[calledWithContext](expectedContext);
 
-      // called at least once with the context we're looking for
-      func.call(null);
       expect(() => {
-        expect(func)[toHaveContext](context);
-      }).not.toThrow();
-
-      func.mockClear();
-
-      // called once with a different context
-      func.call(null);
-      expect(() => {
-        expect(func)[toHaveContext](context);
-      }).toThrowErrorMatchingSnapshot("single call");
-
-      // called again with a different context
-      func.call(null);
-      expect(() => {
-        expect(func)[toHaveContext](context);
-      }).toThrowErrorMatchingSnapshot("multiple call");
-    });
-    it("asserts mock has not been called with given context", () => {
-      expect(() => {
-        expect(func).not[toHaveContext](context);
-      }).not.toThrow();
-
-      // called once with context we're avoiding
-      func.call(context);
-      expect(() => {
-        expect(func).not[toHaveContext](context);
-      }).toThrowErrorMatchingSnapshot("single call");
-
-      // called at least once with the context we're avoiding
-      func.call(null);
-      expect(() => {
-        expect(func).not[toHaveContext](context);
-      }).toThrowErrorMatchingSnapshot("partial call");
-
-      // called twice with the context we're avoiding
-      func.call(context);
-      expect(() => {
-        expect(func).not[toHaveContext](context);
-      }).toThrowErrorMatchingSnapshot("multiple call");
-
-      func.mockClear();
-
-      // called once with a different context
-      func.call(null);
-      expect(() => {
-        expect(func).not[toHaveContext](context);
-      }).not.toThrow();
-
-      // called again with a different context
-      func.call(null);
-      expect(() => {
-        expect(func).not[toHaveContext](context);
-      }).not.toThrow();
-    });
+        expect(fn)[calledWithContext](expectedContext);
+      }).toThrowErrorMatchingSnapshot();
+    }
   });
-  describe.each([
-    "lastCalledWithContext",
-    "toHaveBeenLastCalledWithContext",
-  ] as const)("%s", (lastCalledWithContext) => {});
-  describe.each([
-    "nthCalledWithContext",
-    "toHaveBeenNthCalledWithContext",
-  ] as const)("%s", (nthCalledWithContext) => {});
+  it("works with contexts that don't match", () => {
+    const fn = jest.fn();
+    fn.call(wrongContext);
+
+    if (isToHaveNth(calledWithContext)) {
+      expect(createSpy(fn)).not[calledWithContext](1, expectedContext);
+      expect(fn).not[calledWithContext](1, expectedContext);
+
+      expect(() => {
+        expect(fn)[calledWithContext](1, expectedContext);
+      }).toThrowErrorMatchingSnapshot();
+    } else {
+      expect(createSpy(fn)).not[calledWithContext](expectedContext);
+      expect(fn).not[calledWithContext](expectedContext);
+
+      expect(() => {
+        expect(fn)[calledWithContext](expectedContext);
+      }).toThrowErrorMatchingSnapshot();
+    }
+  });
 });

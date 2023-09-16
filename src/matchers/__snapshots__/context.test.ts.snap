@@ -113,3 +113,157 @@ Received:     <d>{}</>
 
 Number of calls: <r>1</>
 `;
+
+exports[`lastCalledWithContext works only on spies or jest.fn 1`] = `
+<d>expect(</><r>received</><d>).</>lastCalledWithContext<d>(</><g>expected</><d>)</>
+
+<b>Matcher error</>: <r>received</> value must be a mock or spy function
+
+Received has type:  function
+Received has value: <r>[Function fn]</>
+`;
+
+exports[`lastCalledWithContext works when not called 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>lastCalledWithContext<d>(</><g>expected</><d>)</>
+
+Expected: <g>"foo"</>
+
+Number of calls: <r>0</>
+`;
+
+exports[`lastCalledWithContext works with contexts that don't match 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>lastCalledWithContext<d>(</><g>expected</><d>)</>
+
+Expected: <g>"foo"</>
+Received: <r>"bar"</>
+Number of calls: <r>1</>
+`;
+
+exports[`nthCalledWithContext works only on spies or jest.fn 1`] = `
+<d>expect(</><r>received</><d>).</>nthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+
+<b>Matcher error</>: <r>received</> value must be a mock or spy function
+
+Received has type:  function
+Received has value: <r>[Function fn]</>
+`;
+
+exports[`nthCalledWithContext works when not called 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>nthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+
+n: 1
+Expected: <g>"foo"</>
+
+Number of calls: <r>0</>
+`;
+
+exports[`nthCalledWithContext works with contexts that don't match 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>nthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+
+n: 1
+Expected: <g>"foo"</>
+Received: <r>"bar"</>
+Number of calls: <r>1</>
+`;
+
+exports[`toBeCalledWithContext works only on spies or jest.fn 1`] = `
+<d>expect(</><r>received</><d>).</>toBeCalledWithContext<d>(</><g>expected</><d>)</>
+
+<b>Matcher error</>: <r>received</> value must be a mock or spy function
+
+Received has type:  function
+Received has value: <r>[Function fn]</>
+`;
+
+exports[`toBeCalledWithContext works when not called 1`] = `
+<d>expect(</><r>jest.fn()</><d>).toBeCalledWithContext(</><g>expected</><d>)</>
+
+Expected: <g>"foo"</>
+
+Number of calls: <r>0</>
+`;
+
+exports[`toBeCalledWithContext works with contexts that don't match 1`] = `
+<d>expect(</><r>jest.fn()</><d>).toBeCalledWithContext(</><g>expected</><d>)</>
+
+Expected: <g>"foo"</>
+Received: <r>"bar"</>
+Number of calls: <r>1</>
+`;
+
+exports[`toHaveBeenCalledWithContext works only on spies or jest.fn 1`] = `
+<d>expect(</><r>received</><d>).</>toHaveBeenCalledWithContext<d>(</><g>expected</><d>)</>
+
+<b>Matcher error</>: <r>received</> value must be a mock or spy function
+
+Received has type:  function
+Received has value: <r>[Function fn]</>
+`;
+
+exports[`toHaveBeenCalledWithContext works when not called 1`] = `
+<d>expect(</><r>jest.fn()</><d>).toHaveBeenCalledWithContext(</><g>expected</><d>)</>
+
+Expected: <g>"foo"</>
+
+Number of calls: <r>0</>
+`;
+
+exports[`toHaveBeenCalledWithContext works with contexts that don't match 1`] = `
+<d>expect(</><r>jest.fn()</><d>).toHaveBeenCalledWithContext(</><g>expected</><d>)</>
+
+Expected: <g>"foo"</>
+Received: <r>"bar"</>
+Number of calls: <r>1</>
+`;
+
+exports[`toHaveBeenLastCalledWithContext works only on spies or jest.fn 1`] = `
+<d>expect(</><r>received</><d>).</>toHaveBeenLastCalledWithContext<d>(</><g>expected</><d>)</>
+
+<b>Matcher error</>: <r>received</> value must be a mock or spy function
+
+Received has type:  function
+Received has value: <r>[Function fn]</>
+`;
+
+exports[`toHaveBeenLastCalledWithContext works when not called 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenLastCalledWithContext<d>(</><g>expected</><d>)</>
+
+Expected: <g>"foo"</>
+
+Number of calls: <r>0</>
+`;
+
+exports[`toHaveBeenLastCalledWithContext works with contexts that don't match 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenLastCalledWithContext<d>(</><g>expected</><d>)</>
+
+Expected: <g>"foo"</>
+Received: <r>"bar"</>
+Number of calls: <r>1</>
+`;
+
+exports[`toHaveBeenNthCalledWithContext works only on spies or jest.fn 1`] = `
+<d>expect(</><r>received</><d>).</>toHaveBeenNthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+
+<b>Matcher error</>: <r>received</> value must be a mock or spy function
+
+Received has type:  function
+Received has value: <r>[Function fn]</>
+`;
+
+exports[`toHaveBeenNthCalledWithContext works when not called 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenNthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+
+n: 1
+Expected: <g>"foo"</>
+
+Number of calls: <r>0</>
+`;
+
+exports[`toHaveBeenNthCalledWithContext works with contexts that don't match 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenNthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+
+n: 1
+Expected: <g>"foo"</>
+Received: <r>"bar"</>
+Number of calls: <r>1</>
+`;

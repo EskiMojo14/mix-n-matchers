@@ -1,4 +1,4 @@
-import * as miscMatchers from "./dist";
+import * as miscMatchers from "./src";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

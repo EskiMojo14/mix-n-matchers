@@ -440,7 +440,7 @@ declare module "./index" {
     lastCalledWithContext<E>(expected: E): R;
     toHaveBeenLastCalledWithContext<E>(expected: E): R;
 
-    nthCalledWith<E>(n: number, expected: E): R;
+    nthCalledWithContext<E>(n: number, expected: E): R;
     toHaveBeenNthCalledWithContext<E>(n: number, expected: E): R;
   }
 }
