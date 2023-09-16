@@ -1,115 +1,115 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Function context matchers toBeCalledWithContext asserts mock has been called at least once with given context: multiple call 1`] = `
-"[2mexpect([22m[31mjest.fn()[39m[2m).toBeCalledWithContext([22m[32mexpected[39m[2m)[22m
+<d>expect(</><r>jest.fn()</><d>).toBeCalledWithContext(</><g>expected</><d>)</>
 
-Expected: [32m{}[39m
+Expected: <g>{}</>
 Received
-       1: [31mnull[39m
-       2: [31mnull[39m
+       1: <r>null</>
+       2: <r>null</>
 
-Number of calls: [31m2[39m"
+Number of calls: <r>2</>
 `;
 
 exports[`Function context matchers toBeCalledWithContext asserts mock has been called at least once with given context: no calls 1`] = `
-"[2mexpect([22m[31mjest.fn()[39m[2m).toBeCalledWithContext([22m[32mexpected[39m[2m)[22m
+<d>expect(</><r>jest.fn()</><d>).toBeCalledWithContext(</><g>expected</><d>)</>
 
-Expected: [32m{}[39m
+Expected: <g>{}</>
 
-Number of calls: [31m0[39m"
+Number of calls: <r>0</>
 `;
 
 exports[`Function context matchers toBeCalledWithContext asserts mock has been called at least once with given context: single call 1`] = `
-"[2mexpect([22m[31mjest.fn()[39m[2m).toBeCalledWithContext([22m[32mexpected[39m[2m)[22m
+<d>expect(</><r>jest.fn()</><d>).toBeCalledWithContext(</><g>expected</><d>)</>
 
-Expected: [32m{}[39m
-Received: [31mnull[39m
-Number of calls: [31m1[39m"
+Expected: <g>{}</>
+Received: <r>null</>
+Number of calls: <r>1</>
 `;
 
 exports[`Function context matchers toBeCalledWithContext asserts mock has not been called with given context: multiple call 1`] = `
-"[2mexpect([22m[31mjest.fn()[39m[2m).[22mnot[2m.toBeCalledWithContext([22m[32mexpected[39m[2m)[22m
+<d>expect(</><r>jest.fn()</><d>).</>not<d>.toBeCalledWithContext(</><g>expected</><d>)</>
 
-Expected: not [32m{}[39m
+Expected: not <g>{}</>
 Received
-       1:     [2m{}[22m
-       3:     [2m{}[22m
+       1:     <d>{}</>
+       3:     <d>{}</>
 
-Number of calls: [31m3[39m"
+Number of calls: <r>3</>
 `;
 
 exports[`Function context matchers toBeCalledWithContext asserts mock has not been called with given context: partial call 1`] = `
-"[2mexpect([22m[31mjest.fn()[39m[2m).[22mnot[2m.toBeCalledWithContext([22m[32mexpected[39m[2m)[22m
+<d>expect(</><r>jest.fn()</><d>).</>not<d>.toBeCalledWithContext(</><g>expected</><d>)</>
 
-Expected: not [32m{}[39m
+Expected: not <g>{}</>
 Received
-       1:     [2m{}[22m
+       1:     <d>{}</>
 
-Number of calls: [31m2[39m"
+Number of calls: <r>2</>
 `;
 
 exports[`Function context matchers toBeCalledWithContext asserts mock has not been called with given context: single call 1`] = `
-"[2mexpect([22m[31mjest.fn()[39m[2m).[22mnot[2m.toBeCalledWithContext([22m[32mexpected[39m[2m)[22m
+<d>expect(</><r>jest.fn()</><d>).</>not<d>.toBeCalledWithContext(</><g>expected</><d>)</>
 
-Expected: not [32m{}[39m
-Received:     [2m{}[22m
+Expected: not <g>{}</>
+Received:     <d>{}</>
 
-Number of calls: [31m1[39m"
+Number of calls: <r>1</>
 `;
 
 exports[`Function context matchers toHaveBeenCalledWithContext asserts mock has been called at least once with given context: multiple call 1`] = `
-"[2mexpect([22m[31mjest.fn()[39m[2m).toHaveBeenCalledWithContext([22m[32mexpected[39m[2m)[22m
+<d>expect(</><r>jest.fn()</><d>).toHaveBeenCalledWithContext(</><g>expected</><d>)</>
 
-Expected: [32m{}[39m
+Expected: <g>{}</>
 Received
-       1: [31mnull[39m
-       2: [31mnull[39m
+       1: <r>null</>
+       2: <r>null</>
 
-Number of calls: [31m2[39m"
+Number of calls: <r>2</>
 `;
 
 exports[`Function context matchers toHaveBeenCalledWithContext asserts mock has been called at least once with given context: no calls 1`] = `
-"[2mexpect([22m[31mjest.fn()[39m[2m).toHaveBeenCalledWithContext([22m[32mexpected[39m[2m)[22m
+<d>expect(</><r>jest.fn()</><d>).toHaveBeenCalledWithContext(</><g>expected</><d>)</>
 
-Expected: [32m{}[39m
+Expected: <g>{}</>
 
-Number of calls: [31m0[39m"
+Number of calls: <r>0</>
 `;
 
 exports[`Function context matchers toHaveBeenCalledWithContext asserts mock has been called at least once with given context: single call 1`] = `
-"[2mexpect([22m[31mjest.fn()[39m[2m).toHaveBeenCalledWithContext([22m[32mexpected[39m[2m)[22m
+<d>expect(</><r>jest.fn()</><d>).toHaveBeenCalledWithContext(</><g>expected</><d>)</>
 
-Expected: [32m{}[39m
-Received: [31mnull[39m
-Number of calls: [31m1[39m"
+Expected: <g>{}</>
+Received: <r>null</>
+Number of calls: <r>1</>
 `;
 
 exports[`Function context matchers toHaveBeenCalledWithContext asserts mock has not been called with given context: multiple call 1`] = `
-"[2mexpect([22m[31mjest.fn()[39m[2m).[22mnot[2m.toHaveBeenCalledWithContext([22m[32mexpected[39m[2m)[22m
+<d>expect(</><r>jest.fn()</><d>).</>not<d>.toHaveBeenCalledWithContext(</><g>expected</><d>)</>
 
-Expected: not [32m{}[39m
+Expected: not <g>{}</>
 Received
-       1:     [2m{}[22m
-       3:     [2m{}[22m
+       1:     <d>{}</>
+       3:     <d>{}</>
 
-Number of calls: [31m3[39m"
+Number of calls: <r>3</>
 `;
 
 exports[`Function context matchers toHaveBeenCalledWithContext asserts mock has not been called with given context: partial call 1`] = `
-"[2mexpect([22m[31mjest.fn()[39m[2m).[22mnot[2m.toHaveBeenCalledWithContext([22m[32mexpected[39m[2m)[22m
+<d>expect(</><r>jest.fn()</><d>).</>not<d>.toHaveBeenCalledWithContext(</><g>expected</><d>)</>
 
-Expected: not [32m{}[39m
+Expected: not <g>{}</>
 Received
-       1:     [2m{}[22m
+       1:     <d>{}</>
 
-Number of calls: [31m2[39m"
+Number of calls: <r>2</>
 `;
 
 exports[`Function context matchers toHaveBeenCalledWithContext asserts mock has not been called with given context: single call 1`] = `
-"[2mexpect([22m[31mjest.fn()[39m[2m).[22mnot[2m.toHaveBeenCalledWithContext([22m[32mexpected[39m[2m)[22m
+<d>expect(</><r>jest.fn()</><d>).</>not<d>.toHaveBeenCalledWithContext(</><g>expected</><d>)</>
 
-Expected: not [32m{}[39m
-Received:     [2m{}[22m
+Expected: not <g>{}</>
+Received:     <d>{}</>
 
-Number of calls: [31m1[39m"
+Number of calls: <r>1</>
 `;

@@ -1,3 +1,7 @@
+import { alignedAnsiStyleSerializer } from "../utils/tests";
+
+expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
+
 describe("Function context matchers", () => {
   const context = {};
   const func = jest.fn();
@@ -77,4 +81,12 @@ describe("Function context matchers", () => {
       }).not.toThrow();
     });
   });
+  describe.each([
+    "lastCalledWithContext",
+    "toHaveBeenLastCalledWithContext",
+  ] as const)("%s", (lastCalledWithContext) => {});
+  describe.each([
+    "nthCalledWithContext",
+    "toHaveBeenNthCalledWithContext",
+  ] as const)("%s", (nthCalledWithContext) => {});
 });

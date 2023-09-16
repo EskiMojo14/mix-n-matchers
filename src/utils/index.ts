@@ -32,3 +32,14 @@ export function ensureMockOrSpy(
     );
   }
 }
+
+export type EqualValue = (
+  a: unknown,
+  b: unknown,
+  strictCheck?: boolean,
+) => boolean;
+
+export const makeEqualValue =
+  (utils: MatcherUtils): EqualValue =>
+  (a, b, strictCheck) =>
+    utils.equals(a, b, utils.customTesters, strictCheck);
