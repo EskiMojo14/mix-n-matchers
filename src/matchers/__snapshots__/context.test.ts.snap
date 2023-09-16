@@ -1,115 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Function context matchers toBeCalledWithContext asserts mock has been called at least once with given context: multiple call 1`] = `
-<d>expect(</><r>jest.fn()</><d>).toBeCalledWithContext(</><g>expected</><d>)</>
+exports[`lastCalledWithContext includes the custom mock name in the error message 1`] = `
+<d>expect(</><r>named-mock</><d>).</>not<d>.</>lastCalledWithContext<d>(</><g>expected</><d>)</>
 
-Expected: <g>{}</>
-Received
-       1: <r>null</>
-       2: <r>null</>
-
-Number of calls: <r>2</>
-`;
-
-exports[`Function context matchers toBeCalledWithContext asserts mock has been called at least once with given context: no calls 1`] = `
-<d>expect(</><r>jest.fn()</><d>).toBeCalledWithContext(</><g>expected</><d>)</>
-
-Expected: <g>{}</>
-
-Number of calls: <r>0</>
-`;
-
-exports[`Function context matchers toBeCalledWithContext asserts mock has been called at least once with given context: single call 1`] = `
-<d>expect(</><r>jest.fn()</><d>).toBeCalledWithContext(</><g>expected</><d>)</>
-
-Expected: <g>{}</>
-Received: <r>null</>
-Number of calls: <r>1</>
-`;
-
-exports[`Function context matchers toBeCalledWithContext asserts mock has not been called with given context: multiple call 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.toBeCalledWithContext(</><g>expected</><d>)</>
-
-Expected: not <g>{}</>
-Received
-       1:     <d>{}</>
-       3:     <d>{}</>
-
-Number of calls: <r>3</>
-`;
-
-exports[`Function context matchers toBeCalledWithContext asserts mock has not been called with given context: partial call 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.toBeCalledWithContext(</><g>expected</><d>)</>
-
-Expected: not <g>{}</>
-Received
-       1:     <d>{}</>
-
-Number of calls: <r>2</>
-`;
-
-exports[`Function context matchers toBeCalledWithContext asserts mock has not been called with given context: single call 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.toBeCalledWithContext(</><g>expected</><d>)</>
-
-Expected: not <g>{}</>
-Received:     <d>{}</>
-
-Number of calls: <r>1</>
-`;
-
-exports[`Function context matchers toHaveBeenCalledWithContext asserts mock has been called at least once with given context: multiple call 1`] = `
-<d>expect(</><r>jest.fn()</><d>).toHaveBeenCalledWithContext(</><g>expected</><d>)</>
-
-Expected: <g>{}</>
-Received
-       1: <r>null</>
-       2: <r>null</>
-
-Number of calls: <r>2</>
-`;
-
-exports[`Function context matchers toHaveBeenCalledWithContext asserts mock has been called at least once with given context: no calls 1`] = `
-<d>expect(</><r>jest.fn()</><d>).toHaveBeenCalledWithContext(</><g>expected</><d>)</>
-
-Expected: <g>{}</>
-
-Number of calls: <r>0</>
-`;
-
-exports[`Function context matchers toHaveBeenCalledWithContext asserts mock has been called at least once with given context: single call 1`] = `
-<d>expect(</><r>jest.fn()</><d>).toHaveBeenCalledWithContext(</><g>expected</><d>)</>
-
-Expected: <g>{}</>
-Received: <r>null</>
-Number of calls: <r>1</>
-`;
-
-exports[`Function context matchers toHaveBeenCalledWithContext asserts mock has not been called with given context: multiple call 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.toHaveBeenCalledWithContext(</><g>expected</><d>)</>
-
-Expected: not <g>{}</>
-Received
-       1:     <d>{}</>
-       3:     <d>{}</>
-
-Number of calls: <r>3</>
-`;
-
-exports[`Function context matchers toHaveBeenCalledWithContext asserts mock has not been called with given context: partial call 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.toHaveBeenCalledWithContext(</><g>expected</><d>)</>
-
-Expected: not <g>{}</>
-Received
-       1:     <d>{}</>
-
-Number of calls: <r>2</>
-`;
-
-exports[`Function context matchers toHaveBeenCalledWithContext asserts mock has not been called with given context: single call 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>not<d>.toHaveBeenCalledWithContext(</><g>expected</><d>)</>
-
-Expected: not <g>{}</>
-Received:     <d>{}</>
+Expected: not <g>"foo"</>
 
 Number of calls: <r>1</>
 `;
@@ -131,11 +25,45 @@ Expected: <g>"foo"</>
 Number of calls: <r>0</>
 `;
 
-exports[`lastCalledWithContext works with contexts that don't match 1`] = `
+exports[`lastCalledWithContext works with a context that doesn't match 1`] = `
 <d>expect(</><r>jest.fn()</><d>).</>lastCalledWithContext<d>(</><g>expected</><d>)</>
 
 Expected: <g>"foo"</>
 Received: <r>"bar"</>
+Number of calls: <r>1</>
+`;
+
+exports[`lastCalledWithContext works with a context that doesn't match with matchers 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>lastCalledWithContext<d>(</><g>expected</><d>)</>
+
+Expected: <g>Any<Number></>
+Received: <r>"bar"</>
+Number of calls: <r>1</>
+`;
+
+exports[`lastCalledWithContext works with a context that matches 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>lastCalledWithContext<d>(</><g>expected</><d>)</>
+
+Expected: not <g>"foo"</>
+
+Number of calls: <r>1</>
+`;
+
+exports[`lastCalledWithContext works with a context that matches with a matcher 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>lastCalledWithContext<d>(</><g>expected</><d>)</>
+
+Expected: not <g>Any<String></>
+Received:     <d>"foo"</>
+
+Number of calls: <r>1</>
+`;
+
+exports[`nthCalledWithContext includes the custom mock name in the error message 1`] = `
+<d>expect(</><r>named-mock</><d>).</>not<d>.</>nthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+
+n: 1
+Expected: not <g>"foo"</>
+
 Number of calls: <r>1</>
 `;
 
@@ -157,12 +85,49 @@ Expected: <g>"foo"</>
 Number of calls: <r>0</>
 `;
 
-exports[`nthCalledWithContext works with contexts that don't match 1`] = `
+exports[`nthCalledWithContext works with a context that doesn't match 1`] = `
 <d>expect(</><r>jest.fn()</><d>).</>nthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: <g>"foo"</>
 Received: <r>"bar"</>
+Number of calls: <r>1</>
+`;
+
+exports[`nthCalledWithContext works with a context that doesn't match with matchers 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>nthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+
+n: 1
+Expected: <g>Any<Number></>
+Received: <r>"bar"</>
+Number of calls: <r>1</>
+`;
+
+exports[`nthCalledWithContext works with a context that matches 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>nthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+
+n: 1
+Expected: not <g>"foo"</>
+
+Number of calls: <r>1</>
+`;
+
+exports[`nthCalledWithContext works with a context that matches with a matcher 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>nthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+
+n: 1
+Expected: not <g>Any<String></>
+Received:     <d>"foo"</>
+
+Number of calls: <r>1</>
+`;
+
+exports[`toBeCalledWithContext includes the custom mock name in the error message 1`] = `
+<d>expect(</><r>named-mock</><d>).</>not<d>.toBeCalledWithContext(</><g>expected</><d>)</>
+
+Expected: not <g>"foo"</>
+Received:     <d>"foo"</>
+
 Number of calls: <r>1</>
 `;
 
@@ -183,11 +148,46 @@ Expected: <g>"foo"</>
 Number of calls: <r>0</>
 `;
 
-exports[`toBeCalledWithContext works with contexts that don't match 1`] = `
+exports[`toBeCalledWithContext works with a context that doesn't match 1`] = `
 <d>expect(</><r>jest.fn()</><d>).toBeCalledWithContext(</><g>expected</><d>)</>
 
 Expected: <g>"foo"</>
 Received: <r>"bar"</>
+Number of calls: <r>1</>
+`;
+
+exports[`toBeCalledWithContext works with a context that doesn't match with matchers 1`] = `
+<d>expect(</><r>jest.fn()</><d>).toBeCalledWithContext(</><g>expected</><d>)</>
+
+Expected: <g>Any<Number></>
+Received: <r>"bar"</>
+Number of calls: <r>1</>
+`;
+
+exports[`toBeCalledWithContext works with a context that matches 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>not<d>.toBeCalledWithContext(</><g>expected</><d>)</>
+
+Expected: not <g>"foo"</>
+Received:     <d>"foo"</>
+
+Number of calls: <r>1</>
+`;
+
+exports[`toBeCalledWithContext works with a context that matches with a matcher 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>not<d>.toBeCalledWithContext(</><g>expected</><d>)</>
+
+Expected: not <g>Any<String></>
+Received:     <d>"foo"</>
+
+Number of calls: <r>1</>
+`;
+
+exports[`toHaveBeenCalledWithContext includes the custom mock name in the error message 1`] = `
+<d>expect(</><r>named-mock</><d>).</>not<d>.toHaveBeenCalledWithContext(</><g>expected</><d>)</>
+
+Expected: not <g>"foo"</>
+Received:     <d>"foo"</>
+
 Number of calls: <r>1</>
 `;
 
@@ -208,11 +208,45 @@ Expected: <g>"foo"</>
 Number of calls: <r>0</>
 `;
 
-exports[`toHaveBeenCalledWithContext works with contexts that don't match 1`] = `
+exports[`toHaveBeenCalledWithContext works with a context that doesn't match 1`] = `
 <d>expect(</><r>jest.fn()</><d>).toHaveBeenCalledWithContext(</><g>expected</><d>)</>
 
 Expected: <g>"foo"</>
 Received: <r>"bar"</>
+Number of calls: <r>1</>
+`;
+
+exports[`toHaveBeenCalledWithContext works with a context that doesn't match with matchers 1`] = `
+<d>expect(</><r>jest.fn()</><d>).toHaveBeenCalledWithContext(</><g>expected</><d>)</>
+
+Expected: <g>Any<Number></>
+Received: <r>"bar"</>
+Number of calls: <r>1</>
+`;
+
+exports[`toHaveBeenCalledWithContext works with a context that matches 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>not<d>.toHaveBeenCalledWithContext(</><g>expected</><d>)</>
+
+Expected: not <g>"foo"</>
+Received:     <d>"foo"</>
+
+Number of calls: <r>1</>
+`;
+
+exports[`toHaveBeenCalledWithContext works with a context that matches with a matcher 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>not<d>.toHaveBeenCalledWithContext(</><g>expected</><d>)</>
+
+Expected: not <g>Any<String></>
+Received:     <d>"foo"</>
+
+Number of calls: <r>1</>
+`;
+
+exports[`toHaveBeenLastCalledWithContext includes the custom mock name in the error message 1`] = `
+<d>expect(</><r>named-mock</><d>).</>not<d>.</>toHaveBeenLastCalledWithContext<d>(</><g>expected</><d>)</>
+
+Expected: not <g>"foo"</>
+
 Number of calls: <r>1</>
 `;
 
@@ -233,11 +267,45 @@ Expected: <g>"foo"</>
 Number of calls: <r>0</>
 `;
 
-exports[`toHaveBeenLastCalledWithContext works with contexts that don't match 1`] = `
+exports[`toHaveBeenLastCalledWithContext works with a context that doesn't match 1`] = `
 <d>expect(</><r>jest.fn()</><d>).</>toHaveBeenLastCalledWithContext<d>(</><g>expected</><d>)</>
 
 Expected: <g>"foo"</>
 Received: <r>"bar"</>
+Number of calls: <r>1</>
+`;
+
+exports[`toHaveBeenLastCalledWithContext works with a context that doesn't match with matchers 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenLastCalledWithContext<d>(</><g>expected</><d>)</>
+
+Expected: <g>Any<Number></>
+Received: <r>"bar"</>
+Number of calls: <r>1</>
+`;
+
+exports[`toHaveBeenLastCalledWithContext works with a context that matches 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenLastCalledWithContext<d>(</><g>expected</><d>)</>
+
+Expected: not <g>"foo"</>
+
+Number of calls: <r>1</>
+`;
+
+exports[`toHaveBeenLastCalledWithContext works with a context that matches with a matcher 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenLastCalledWithContext<d>(</><g>expected</><d>)</>
+
+Expected: not <g>Any<String></>
+Received:     <d>"foo"</>
+
+Number of calls: <r>1</>
+`;
+
+exports[`toHaveBeenNthCalledWithContext includes the custom mock name in the error message 1`] = `
+<d>expect(</><r>named-mock</><d>).</>not<d>.</>toHaveBeenNthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+
+n: 1
+Expected: not <g>"foo"</>
+
 Number of calls: <r>1</>
 `;
 
@@ -259,11 +327,39 @@ Expected: <g>"foo"</>
 Number of calls: <r>0</>
 `;
 
-exports[`toHaveBeenNthCalledWithContext works with contexts that don't match 1`] = `
+exports[`toHaveBeenNthCalledWithContext works with a context that doesn't match 1`] = `
 <d>expect(</><r>jest.fn()</><d>).</>toHaveBeenNthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
 
 n: 1
 Expected: <g>"foo"</>
 Received: <r>"bar"</>
+Number of calls: <r>1</>
+`;
+
+exports[`toHaveBeenNthCalledWithContext works with a context that doesn't match with matchers 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenNthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+
+n: 1
+Expected: <g>Any<Number></>
+Received: <r>"bar"</>
+Number of calls: <r>1</>
+`;
+
+exports[`toHaveBeenNthCalledWithContext works with a context that matches 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenNthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+
+n: 1
+Expected: not <g>"foo"</>
+
+Number of calls: <r>1</>
+`;
+
+exports[`toHaveBeenNthCalledWithContext works with a context that matches with a matcher 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>not<d>.</>toHaveBeenNthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+
+n: 1
+Expected: not <g>Any<String></>
+Received:     <d>"foo"</>
+
 Number of calls: <r>1</>
 `;

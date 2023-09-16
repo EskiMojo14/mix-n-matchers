@@ -19,7 +19,6 @@
   "scripts": {
     "prepare": "husky install",
     "build": "tsup",
-    "pretest": "npm run build",
     "test": "jest",
     "lint": "eslint",
     "pre-commit": "lint-staged",

@@ -51,55 +51,133 @@ describe.each([
       calledWithContext === "toHaveBeenNthCalledWithContext"
     );
   }
-  const expectedContext = "foo";
-  const wrongContext = "bar";
   it("works only on spies or jest.fn", () => {
     const fn = function fn() {};
     if (isToHaveNth(calledWithContext)) {
       expect(() => {
-        expect(fn)[calledWithContext](3, expectedContext);
+        expect(fn)[calledWithContext](3, "foo");
       }).toThrowErrorMatchingSnapshot();
     } else {
       expect(() => {
-        expect(fn)[calledWithContext](expectedContext);
+        expect(fn)[calledWithContext]("foo");
       }).toThrowErrorMatchingSnapshot();
     }
   });
   it("works when not called", () => {
     const fn = jest.fn();
     if (isToHaveNth(calledWithContext)) {
-      expect(createSpy(fn)).not[calledWithContext](1, expectedContext);
-      expect(fn).not[calledWithContext](1, expectedContext);
+      expect(createSpy(fn)).not[calledWithContext](1, "foo");
+      expect(fn).not[calledWithContext](1, "foo");
 
       expect(() => {
-        expect(fn)[calledWithContext](1, expectedContext);
+        expect(fn)[calledWithContext](1, "foo");
       }).toThrowErrorMatchingSnapshot();
     } else {
-      expect(createSpy(fn)).not[calledWithContext](expectedContext);
-      expect(fn).not[calledWithContext](expectedContext);
+      expect(createSpy(fn)).not[calledWithContext]("foo");
+      expect(fn).not[calledWithContext]("foo");
 
       expect(() => {
-        expect(fn)[calledWithContext](expectedContext);
+        expect(fn)[calledWithContext]("foo");
       }).toThrowErrorMatchingSnapshot();
     }
   });
-  it("works with contexts that don't match", () => {
+  it("works with a context that doesn't match", () => {
     const fn = jest.fn();
-    fn.call(wrongContext);
+    fn.call("bar");
 
     if (isToHaveNth(calledWithContext)) {
-      expect(createSpy(fn)).not[calledWithContext](1, expectedContext);
-      expect(fn).not[calledWithContext](1, expectedContext);
+      expect(createSpy(fn)).not[calledWithContext](1, "foo");
+      expect(fn).not[calledWithContext](1, "foo");
 
       expect(() => {
-        expect(fn)[calledWithContext](1, expectedContext);
+        expect(fn)[calledWithContext](1, "foo");
       }).toThrowErrorMatchingSnapshot();
     } else {
-      expect(createSpy(fn)).not[calledWithContext](expectedContext);
-      expect(fn).not[calledWithContext](expectedContext);
+      expect(createSpy(fn)).not[calledWithContext]("foo");
+      expect(fn).not[calledWithContext]("foo");
 
       expect(() => {
-        expect(fn)[calledWithContext](expectedContext);
+        expect(fn)[calledWithContext]("foo");
+      }).toThrowErrorMatchingSnapshot();
+    }
+  });
+  it("works with a context that doesn't match with matchers", () => {
+    const fn = jest.fn();
+    fn.call("bar");
+
+    if (isToHaveNth(calledWithContext)) {
+      expect(createSpy(fn)).not[calledWithContext](1, expect.any(Number));
+      expect(fn).not[calledWithContext](1, expect.any(Number));
+
+      expect(() => {
+        expect(fn)[calledWithContext](1, expect.any(Number));
+      }).toThrowErrorMatchingSnapshot();
+    } else {
+      expect(createSpy(fn)).not[calledWithContext](expect.any(Number));
+      expect(fn).not[calledWithContext](expect.any(Number));
+
+      expect(() => {
+        expect(fn)[calledWithContext](expect.any(Number));
+      }).toThrowErrorMatchingSnapshot();
+    }
+  });
+  it("works with a context that matches", () => {
+    const fn = jest.fn();
+    fn.call("foo");
+
+    if (isToHaveNth(calledWithContext)) {
+      expect(createSpy(fn))[calledWithContext](1, "foo");
+      expect(fn)[calledWithContext](1, "foo");
+
+      expect(() => {
+        expect(fn).not[calledWithContext](1, "foo");
+      }).toThrowErrorMatchingSnapshot();
+    } else {
+      expect(createSpy(fn))[calledWithContext]("foo");
+      expect(fn)[calledWithContext]("foo");
+
+      expect(() => {
+        expect(fn).not[calledWithContext]("foo");
+      }).toThrowErrorMatchingSnapshot();
+    }
+  });
+  it("works with a context that matches with a matcher", () => {
+    const fn = jest.fn();
+    fn.call("foo");
+
+    if (isToHaveNth(calledWithContext)) {
+      expect(createSpy(fn))[calledWithContext](1, expect.any(String));
+      expect(fn)[calledWithContext](1, expect.any(String));
+
+      expect(() => {
+        expect(fn).not[calledWithContext](1, expect.any(String));
+      }).toThrowErrorMatchingSnapshot();
+    } else {
+      expect(createSpy(fn))[calledWithContext](expect.any(String));
+      expect(fn)[calledWithContext](expect.any(String));
+
+      expect(() => {
+        expect(fn).not[calledWithContext](expect.any(String));
+      }).toThrowErrorMatchingSnapshot();
+    }
+  });
+
+  it("includes the custom mock name in the error message", () => {
+    const fn = jest.fn().mockName("named-mock");
+
+    fn.call("foo");
+
+    if (isToHaveNth(calledWithContext)) {
+      expect(fn)[calledWithContext](1, "foo");
+
+      expect(() => {
+        expect(fn).not[calledWithContext](1, "foo");
+      }).toThrowErrorMatchingSnapshot();
+    } else {
+      expect(fn)[calledWithContext]("foo");
+
+      expect(() => {
+        expect(fn).not[calledWithContext]("foo");
       }).toThrowErrorMatchingSnapshot();
     }
   });
