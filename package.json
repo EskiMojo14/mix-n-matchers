@@ -83,6 +83,7 @@
     ],
     "*.md": "prettier --write"
   },
+  "prettier": {},
   "tsup": {
     "entry": [
       "src/index.ts"
