@@ -1,10 +1,5 @@
 import type { EqualsFunction } from "@jest/expect-utils";
-import type {
-  MatcherContext,
-  MatcherFunction,
-  Tester,
-  MatcherUtils,
-} from "expect";
+import type { MatcherFunction, Tester, MatcherUtils } from "expect";
 import type { MatcherHintOptions } from "jest-matcher-utils";
 import { ensureMockOrSpy, isSpy } from "../utils";
 import { getRightAlignedPrinter } from "../utils/print";
@@ -108,7 +103,7 @@ const printReceivedContextsPositive = (
 const createToHaveBeenCalledWithContextMatcher = (
   matcherName: string,
 ): MatcherFunction<[expected: unknown]> =>
-  function (this: MatcherContext, received, expected) {
+  function (received, expected) {
     const { utils } = this;
     const options: MatcherHintOptions = {
       isNot: this.isNot,
