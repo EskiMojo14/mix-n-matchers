@@ -2,6 +2,19 @@ import type { MatcherFunction } from "expect";
 import type { MatcherHintOptions } from "jest-matcher-utils";
 import type { AsymmetricMatcher } from "../utils/types";
 
+/**
+ * Matches against the provided value using `Object.is`.
+ * You can use it inside "deep equal" matchers like `toBeCalledWith` to ensure that only the correct reference will be allowed.
+ * @example
+ * const fn = jest.fn();
+ * const ref = {};
+ *
+ * fn(ref);
+ *
+ * expect(fn).toBeCalledWith({})
+ * expect(fn).not.toBeCalledWith(expect.exactly({}))
+ * expect(fn).toBeCalledWith(expect.exactly(ref))
+ */
 export const exactly: MatcherFunction<[expected: unknown]> = function (
   received,
   expected,
@@ -38,6 +51,19 @@ export const exactly: MatcherFunction<[expected: unknown]> = function (
 
 declare module "./index" {
   export interface AsymmetricMixNMatchers {
+    /**
+     * Matches against the provided value using `Object.is`.
+     * You can use it inside "deep equal" matchers like `toBeCalledWith` to ensure that only the correct reference will be allowed.
+     * @example
+     * const fn = jest.fn();
+     * const ref = {};
+     *
+     * fn(ref);
+     *
+     * expect(fn).toBeCalledWith({})
+     * expect(fn).not.toBeCalledWith(expect.exactly({}))
+     * expect(fn).toBeCalledWith(expect.exactly(ref))
+     */
     exactly<E>(expected: E): AsymmetricMatcher;
   }
 }

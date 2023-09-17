@@ -408,25 +408,55 @@ const createNthCalledWithContextMatcher = (
     };
   };
 
+/**
+ * Ensure a mock function is called with a specific context (`this`)
+ *
+ * Optionally you can provide a type for the expected context via a generic.
+ */
 export const toBeCalledWithContext = createToBeCalledWithContextMatcher(
   "toBeCalledWithContext",
 );
 
+/**
+ * Ensure a mock function is called with a specific context (`this`)
+ *
+ * Optionally you can provide a type for the expected context via a generic.
+ */
 export const toHaveBeenCalledWithContext = createToBeCalledWithContextMatcher(
   "toHaveBeenCalledWithContext",
 );
 
+/**
+ * Ensure the last call to a mock function was provided a specific context (`this`)
+ *
+ * Optionally you can provide a type for the expected context via a generic.
+ */
 export const lastCalledWithContext = createLastCalledWithContextMatcher(
   "lastCalledWithContext",
 );
 
+/**
+ * Ensure the last call to a mock function was provided a specific context (`this`)
+ *
+ * Optionally you can provide a type for the expected context via a generic.
+ */
 export const toHaveBeenLastCalledWithContext =
   createLastCalledWithContextMatcher("toHaveBeenLastCalledWithContext");
 
+/**
+ * Ensure that a mock function was called with a specific context on an Nth call.
+ *
+ * Optionally you can provide a type for the expected context via a generic.
+ */
 export const nthCalledWithContext = createNthCalledWithContextMatcher(
   "nthCalledWithContext",
 );
 
+/**
+ * Ensure that a mock function was called with a specific context on an Nth call.
+ *
+ * Optionally you can provide a type for the expected context via a generic.
+ */
 export const toHaveBeenNthCalledWithContext = createNthCalledWithContextMatcher(
   "toHaveBeenNthCalledWithContext",
 );
@@ -434,13 +464,44 @@ export const toHaveBeenNthCalledWithContext = createNthCalledWithContextMatcher(
 declare module "./index" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   export interface MixNMatchers<R> {
+    /**
+     * Ensure a mock function is called with a specific context (`this`)
+     *
+     * Optionally you can provide a type for the expected context via a generic.
+     */
     toBeCalledWithContext<E>(expected: E): R;
+    /**
+     * Ensure a mock function is called with a specific context (`this`)
+     *
+     * Optionally you can provide a type for the expected context via a generic.
+     */
     toHaveBeenCalledWithContext<E>(expected: E): R;
 
+    /**
+     * Ensure the last call to a mock function was provided a specific context (`this`)
+     *
+     * Optionally you can provide a type for the expected context via a generic.
+     */
     lastCalledWithContext<E>(expected: E): R;
+    /**
+     * Ensure the last call to a mock function was provided a specific context (`this`)
+     *
+     * Optionally you can provide a type for the expected context via a generic.
+     */
     toHaveBeenLastCalledWithContext<E>(expected: E): R;
 
+    /**
+     * Ensure that a mock function was called with a specific context on an Nth call.
+     *
+     * Optionally you can provide a type for the expected context via a generic.
+     */
     nthCalledWithContext<E>(n: number, expected: E): R;
+
+    /**
+     * Ensure that a mock function was called with a specific context on an Nth call.
+     *
+     * Optionally you can provide a type for the expected context via a generic.
+     */
     toHaveBeenNthCalledWithContext<E>(n: number, expected: E): R;
   }
 }
