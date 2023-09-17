@@ -11,10 +11,15 @@
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./all": {
+      "import": "./dist/all.js",
+      "require": "./dist/all.cjs"
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "all"
   ],
   "scripts": {
     "prepare": "husky install",
@@ -89,7 +94,8 @@
   "prettier": {},
   "tsup": {
     "entry": [
-      "src/index.ts"
+      "src/index.ts",
+      "src/all.ts"
     ],
     "sourcemap": true,
     "format": [

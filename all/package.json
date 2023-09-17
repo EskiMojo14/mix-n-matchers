@@ -1,0 +1,42 @@
+{
+  "name": "mix-n-matchers-all",
+  "version": "1.0.0",
+  "description": "Miscellaneous custom Jest matchers",
+  "type": "module",
+  "main": "../dist/all.cjs",
+  "module": "../dist/all.js",
+  "types": "../dist/all.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EskiMojo14/mix-n-matchers.git"
+  },
+  "keywords": [
+    "jest",
+    "matchers",
+    "extend",
+    "extended",
+    "test",
+    "testing",
+    "assertions"
+  ],
+  "author": "eskimojo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EskiMojo14/mix-n-matchers/issues"
+  },
+  "homepage": "https://github.com/EskiMojo14/mix-n-matchers#readme",
+  "peerDependencies": {
+    "jest": ">=28.0.0"
+  },
+  "peerDependenciesMeta": {
+    "jest": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": "^14.15.0 || ^16.10.0 || >=18.0.0"
+  }
+}

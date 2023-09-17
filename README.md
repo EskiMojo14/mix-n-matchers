@@ -47,23 +47,30 @@ Add your setup script to your Jest `setupFilesAfterEnv` configuration. [For refe
 }
 ```
 
+To automatically extend `expect` with all matchers, you can use
+
+```json
+"jest": {
+  "setupFilesAfterEnv": ["mix-n-matchers/all"]
+}
+```
+
 ## Typescript
 
-To ensure the correct types are included, add a `global.d.ts` file to your project with:
+If your editor does not recognise the custom `mix-n-matchers` matchers, add a `global.d.ts` file to your project with:
 
 ```ts
+import "mix-n-matchers/all";
+```
+
+If you want finer control of which matchers are included (i.e. you're only extending with some), you can set this up yourself:
+
+```ts
+// global.d.ts
 import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
 
 declare global {
   namespace jest {
-    // if all matchers
-    export interface Matchers<R> extends MixNMatchers<R> {}
-
-    export interface Expect extends AsymmetricMixNMatchers {}
-
-    export interface InverseAsymmetricMatchers extends AsymmetricMixNMatchers {}
-
-    // if some matchers
     export interface Matchers<R>
       extends Pick<
         MixNMatchers<R>,
@@ -80,10 +87,10 @@ declare global {
 }
 ```
 
-If only some matchers are added, you can avoid duplication by exporting objects from your setup file.
+One method of ensuring this is in line with your actual setup file would be by exporting objects:
 
 ```js
-// setup file
+// testSetup.js
 import {
   toBeCalledWithContext,
   lastCalledWithContext,
