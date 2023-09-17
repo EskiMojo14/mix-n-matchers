@@ -96,6 +96,7 @@
       "esm",
       "cjs"
     ],
-    "dts": true
+    "dts": true,
+    "minify": true
   }
 }
