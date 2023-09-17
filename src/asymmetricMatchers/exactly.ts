@@ -40,8 +40,4 @@ declare module "./index" {
   export interface AsymmetricMixNMatchers {
     exactly<E>(expected: E): AsymmetricMatcher;
   }
-
-  export interface InverseAsymmetricMixNMatchers {
-    exactly<E>(expected: E): AsymmetricMatcher;
-  }
 }
