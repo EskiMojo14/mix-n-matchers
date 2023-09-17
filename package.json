@@ -23,12 +23,15 @@
   ],
   "scripts": {
     "prepare": "husky install",
+    "prebuild": "npm run type",
     "build": "tsup",
     "test": "jest",
     "lint": "eslint",
     "pre-commit": "lint-staged",
     "attw": "attw",
-    "type": "tsc"
+    "publint": "publint",
+    "type": "tsc",
+    "prepack": "npm run publint"
   },
   "repository": {
     "type": "git",
@@ -63,6 +66,7 @@
     "jest-matcher-utils": "^29.7.0",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
+    "publint": "^0.2.2",
     "ts-jest": "^29.1.1",
     "tsup": "^7.2.0",
     "typescript": "^5.2.2"
