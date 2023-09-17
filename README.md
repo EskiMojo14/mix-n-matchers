@@ -219,8 +219,8 @@ Assert the Nth call of a function was with a specific context (`this`).
 <td>
 
 ```ts
-expect(mock).lastCalledWithContext(expectedContext);
-expect(mock).toHaveBeenLastCalledWithContext(expectedContext);
+expect(mock).nthCalledWithContext(1, expectedContext);
+expect(mock).toHaveBeenNthCalledWithContext(1, expectedContext);
 ```
 
 </td>
