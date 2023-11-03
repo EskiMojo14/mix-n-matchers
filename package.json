@@ -113,6 +113,9 @@
       "cjs"
     ],
     "dts": true,
-    "minify": true
+    "minify": true,
+    "external": [
+      "@jest/globals"
+    ]
   }
 }
