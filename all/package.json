@@ -7,7 +7,7 @@
   "module": "../dist/all.js",
   "types": "../dist/all.d.ts",
   "files": [
-    "dist"
+    "../dist"
   ],
   "repository": {
     "type": "git",

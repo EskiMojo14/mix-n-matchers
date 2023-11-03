@@ -7,7 +7,7 @@
   "module": "../dist/jest-globals.js",
   "types": "../dist/jest-globals.d.ts",
   "files": [
-    "dist"
+    "../dist"
   ],
   "repository": {
     "type": "git",
