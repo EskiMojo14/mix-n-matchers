@@ -15,11 +15,16 @@
     "./all": {
       "import": "./dist/all.js",
       "require": "./dist/all.cjs"
+    },
+    "./jest-globals": {
+      "import": "./dist/jest-globals.js",
+      "require": "./dist/jest-globals.cjs"
     }
   },
   "files": [
     "dist",
-    "all"
+    "all",
+    "jest-globals"
   ],
   "scripts": {
     "prepare": "husky install",
@@ -99,7 +104,8 @@
   "tsup": {
     "entry": [
       "src/index.ts",
-      "src/all.ts"
+      "src/all.ts",
+      "src/jest-globals.ts"
     ],
     "sourcemap": true,
     "format": [
