@@ -55,11 +55,20 @@ To automatically extend `expect` with all matchers, you can use
 }
 ```
 
+If you're using `@jest/globals` instead of injecting globals, you should use the `jest-globals` entry point instead of `all`.
+
+```json
+"jest": {
+  "setupFilesAfterEnv": ["mix-n-matchers/jest-globals"]
+}
+```
+
 ## Typescript
 
 If your editor does not recognise the custom `mix-n-matchers` matchers, add a `global.d.ts` file to your project with:
 
 ```ts
+// global.d.ts
 import "mix-n-matchers/all";
 ```
 
@@ -127,6 +136,35 @@ declare global {
     export interface InverseAsymmetricMatchers
       extends Pick<AsymmetricMixNMatchers, keyof typeof asymmMixNMatchers> {}
   }
+}
+```
+
+### `@jest/globals`
+
+If you disable `injectGlobals` for Jest and instead import from `'@jest/globals'`, the setup will look slightly different.
+
+If you just want all of the matchers, your `global.d.ts` file should have:
+
+```ts
+// global.d.ts
+import "mix-n-matchers/jest-globals";
+```
+
+If you want finer control over which matchers are added, you should use the below:
+
+```ts
+// global.d.ts
+import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
+
+declare module "@jest/extend" {
+  export interface Matchers<R>
+    extends Pick<
+      MixNMatchers<R>,
+      "toBeCalledWithContext" | "lastCalledWithContext" | "nthCalledWithContext"
+    > {}
+
+  export interface AsymmetricMatchers
+    extends Pick<AsymmetricMixNMatchers, "exactly"> {}
 }
 ```
 
