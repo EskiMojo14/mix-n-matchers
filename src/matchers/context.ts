@@ -1,4 +1,4 @@
-import type { MatcherFunction, MatcherUtils } from "expect";
+import type { MatcherFunction, MatcherUtils } from "../utils/types";
 import type { MatcherHintOptions } from "jest-matcher-utils";
 import type { EqualValue } from "../utils";
 import { ensureMockOrSpy, makeEqualValue, isSpy } from "../utils";

@@ -19,12 +19,17 @@
     "./jest-globals": {
       "import": "./dist/jest-globals.js",
       "require": "./dist/jest-globals.cjs"
+    },
+    "./vitest": {
+      "import": "./dist/vitest.js",
+      "require": "./dist/vitest.cjs"
     }
   },
   "files": [
     "dist",
     "all",
-    "jest-globals"
+    "jest-globals",
+    "vitest"
   ],
   "scripts": {
     "prepare": "husky install",
@@ -74,7 +79,8 @@
     "publint": "^0.2.2",
     "ts-jest": "^29.1.1",
     "tsup": "^7.2.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
   },
   "peerDependencies": {
     "jest": ">=28.0.0"
@@ -105,7 +111,8 @@
     "entry": [
       "src/index.ts",
       "src/all.ts",
-      "src/jest-globals.ts"
+      "src/jest-globals.ts",
+      "src/vitest.ts"
     ],
     "sourcemap": true,
     "format": [
@@ -115,7 +122,8 @@
     "dts": true,
     "minify": true,
     "external": [
-      "@jest/globals"
+      "@jest/globals",
+      "vitest"
     ]
   }
 }

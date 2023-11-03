@@ -1,6 +1,5 @@
-import type { MatcherFunction } from "expect";
 import type { MatcherHintOptions } from "jest-matcher-utils";
-import type { AsymmetricMatcher } from "../utils/types";
+import type { MatcherFunction, AsymmetricMatcher } from "../utils/types";
 
 /**
  * Matches against the provided value using `Object.is`.

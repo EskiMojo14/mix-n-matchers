@@ -1,5 +1,5 @@
 import type { MatcherHintOptions } from "jest-matcher-utils";
-import type { MatcherUtils } from "expect";
+import type { MatcherUtils } from "./types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isMock = (received: any): received is jest.Mock =>
