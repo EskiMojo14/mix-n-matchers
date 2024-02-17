@@ -1,6 +1,5 @@
 import type { MatcherFunction } from "expect";
 import type { MatcherHintOptions } from "jest-matcher-utils";
-import type { AsymmetricMatcher } from "../utils/types";
 
 /**
  * Matches against the provided value using `Object.is`.
@@ -64,6 +63,6 @@ declare module "./index" {
      * expect(fn).not.toBeCalledWith(expect.exactly({}))
      * expect(fn).toBeCalledWith(expect.exactly(ref))
      */
-    exactly<E>(expected: E): AsymmetricMatcher;
+    exactly<E>(expected: E): any;
   }
 }
