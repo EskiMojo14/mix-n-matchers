@@ -1,3 +1,4 @@
+import { expect, it, describe, vi } from "vitest";
 import { alignedAnsiStyleSerializer } from "../utils/tests";
 
 expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
@@ -5,7 +6,7 @@ expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 describe("exactly", () => {
   it("allows Object.is equality where deep equality would normally be used", () => {
     const ref = {};
-    const fn = jest.fn();
+    const fn = vi.fn();
     fn(ref);
     expect(fn).toHaveBeenCalledWith(expect.exactly(ref));
     expect(() => {

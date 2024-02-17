@@ -1,0 +1,53 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`exactly > allows Object.is equality where deep equality would normally be used 1`] = `
+expected "spy" to be called with arguments: [ CustomMatcher{ …(3) } ][90m
+
+Received: 
+
+<b>  1st spy call:
+
+</><d>  Array [</>
+<g>-   exactly<[object Object]>,[90m
+<r>+   Object {},[90m
+<d>  ]</>
+</>[90m
+
+Number of calls: <b>1</>
+</>
+`;
+
+exports[`exactly > allows Object.is equality where deep equality would normally be used 2`] = `
+expected "spy" to be called with arguments: [ CustomMatcher{ …(3) } ][90m
+
+Received: 
+
+<b>  1st spy call:
+
+</><d>  Array [</>
+<g>-   not.exactly<[object Object]>,[90m
+<r>+   Object {},[90m
+<d>  ]</>
+</>[90m
+
+Number of calls: <b>1</>
+</>
+`;
+
+exports[`exactly allows Object.is equality where deep equality would normally be used 1`] = `
+<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
+
+Expected: <g>exactly<[object Object]></>
+Received: <r>{}</>
+
+Number of calls: <r>1</>
+`;
+
+exports[`exactly allows Object.is equality where deep equality would normally be used 2`] = `
+<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
+
+Expected: <g>not.exactly<[object Object]></>
+Received: <r>{}</>
+
+Number of calls: <r>1</>
+`;

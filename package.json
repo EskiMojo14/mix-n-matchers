@@ -36,6 +36,7 @@
     "prebuild": "npm run type",
     "build": "tsup",
     "test": "jest",
+    "vitest": "vitest",
     "lint": "eslint",
     "pre-commit": "lint-staged",
     "attw": "attw",
@@ -101,6 +102,9 @@
     ],
     "extensionsToTreatAsEsm": [
       ".ts"
+    ],
+    "testPathIgnorePatterns": [
+      "src/(.*/)*.*\\.vi\\.test\\.ts"
     ]
   },
   "lint-staged": {
