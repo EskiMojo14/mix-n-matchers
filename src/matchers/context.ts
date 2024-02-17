@@ -68,11 +68,11 @@ const printReceivedContextsPositive = (
   // TODO: diff?
   if (isOnlyCall && (iExpectedCall === 0 || iExpectedCall === undefined)) {
     const received = indexedContexts[0]?.[1];
-    return `${
+    return (
       expectedLine +
       label +
       printReceivedContext(utils, equalValue, received, expected)
-    }`;
+    );
   }
 
   const printAligned = getRightAlignedPrinter(label);
@@ -108,7 +108,7 @@ const createToBeCalledWithContextMatcher = (
 
     const contexts: Array<unknown> = receivedIsSpy
       ? received.calls.all().map((x): unknown => x.object)
-      : received.mock.contexts;
+      : received.mock.contexts || received.mock.instances;
 
     const pass = contexts.some((actual) => equalValue(actual, expected));
     return {
@@ -193,7 +193,7 @@ const createLastCalledWithContextMatcher = (
 
     const contexts: Array<unknown> = receivedIsSpy
       ? received.calls.all().map((x): unknown => x.object)
-      : received.mock.contexts;
+      : received.mock.contexts || received.mock.instances;
     const iLast = contexts.length - 1;
 
     const pass = iLast >= 0 && equalValue(expected, contexts[iLast]);
@@ -292,7 +292,7 @@ const createNthCalledWithContextMatcher = (
 
     const contexts: Array<unknown> = receivedIsSpy
       ? received.calls.all().map((x): unknown => x.object)
-      : received.mock.contexts;
+      : received.mock.contexts || received.mock.instances;
 
     const { length } = contexts;
     const iNth = nth - 1;
