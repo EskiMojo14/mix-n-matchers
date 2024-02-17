@@ -1,6 +1,6 @@
 {
   "name": "mix-n-matchers",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Miscellaneous custom Jest matchers",
   "type": "module",
   "main": "./dist/index.cjs",
