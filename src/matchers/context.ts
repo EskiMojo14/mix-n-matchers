@@ -1,28 +1,34 @@
-import type { MatcherFunction, MatcherUtils } from "../utils/types";
-import type { MatcherHintOptions } from "jest-matcher-utils";
+import type { MatcherFunction } from "../utils/types";
+import {
+  matcherErrorMessage,
+  matcherHint,
+  printWithType,
+  type MatcherHintOptions,
+  stringify,
+  printExpected,
+  printReceived,
+  DIM_COLOR,
+} from "jest-matcher-utils";
 import type { EqualValue } from "../utils";
 import { ensureMockOrSpy, makeEqualValue, isSpy } from "../utils";
 import { getRightAlignedPrinter } from "../utils/print";
 
 const PRINT_LIMIT = 3;
 
-const printCommon = (utils: MatcherUtils["utils"], val: unknown) =>
-  utils.DIM_COLOR(utils.stringify(val));
+const printCommon = (val: unknown) => DIM_COLOR(stringify(val));
 
 type IndexedContext = [number, unknown];
 
 const printReceivedContext = (
-  utils: MatcherUtils["utils"],
   equalValue: EqualValue,
   received: unknown,
   expected: unknown,
 ): string =>
   equalValue(received, expected)
-    ? printCommon(utils, received)
-    : utils.printReceived(received);
+    ? printCommon(received)
+    : printReceived(received);
 
 const printReceivedContextsNegative = (
-  utils: MatcherUtils["utils"],
   equalValue: EqualValue,
   expected: unknown,
   indexedContexts: Array<IndexedContext>,
@@ -37,7 +43,7 @@ const printReceivedContextsNegative = (
   if (isOnlyCall) {
     return `${
       label +
-      printReceivedContext(utils, equalValue, indexedContexts[0]?.[1], expected)
+      printReceivedContext(equalValue, indexedContexts[0]?.[1], expected)
     }\n`;
   }
 
@@ -48,21 +54,20 @@ const printReceivedContextsNegative = (
       `${
         printed +
         printAligned(String(i + 1), i === iExpectedCall) +
-        printReceivedContext(utils, equalValue, context, expected)
+        printReceivedContext(equalValue, context, expected)
       }\n`,
     "",
   )}`;
 };
 
 const printReceivedContextsPositive = (
-  utils: MatcherUtils["utils"],
   equalValue: EqualValue,
   expected: unknown,
   indexedContexts: Array<IndexedContext>,
   isOnlyCall: boolean,
   iExpectedCall?: number,
 ) => {
-  const expectedLine = `Expected: ${utils.printExpected(expected)}\n`;
+  const expectedLine = `Expected: ${printExpected(expected)}\n`;
   if (indexedContexts.length === 0) return expectedLine;
   const label = "Received: ";
   // TODO: diff?
@@ -71,7 +76,7 @@ const printReceivedContextsPositive = (
     return (
       expectedLine +
       label +
-      printReceivedContext(utils, equalValue, received, expected)
+      printReceivedContext(equalValue, received, expected)
     );
   }
 
@@ -83,9 +88,7 @@ const printReceivedContextsPositive = (
     indexedContexts.reduce((printed, [i, received]) => {
       const aligned = printAligned(String(i + 1), i === iExpectedCall);
       return `${
-        printed +
-        aligned +
-        printReceivedContext(utils, equalValue, received, expected)
+        printed + aligned + printReceivedContext(equalValue, received, expected)
       }\n`;
     }, "")
   );
@@ -95,13 +98,12 @@ const createToBeCalledWithContextMatcher = (
   matcherName: string,
 ): MatcherFunction<[expected: unknown]> =>
   function (received, expected) {
-    const { utils } = this;
     const equalValue = makeEqualValue(this);
     const options: MatcherHintOptions = {
       isNot: this.isNot,
       promise: this.promise,
     };
-    ensureMockOrSpy(utils, received, matcherName, undefined, options);
+    ensureMockOrSpy(received, matcherName, undefined, options);
 
     const receivedIsSpy = isSpy(received);
     const receivedName = receivedIsSpy ? "spy" : received.getMockName();
@@ -129,22 +131,16 @@ const createToBeCalledWithContextMatcher = (
               i += 1;
             }
             return (
-              utils.matcherHint(
-                `.${matcherName}`,
-                receivedName,
-                undefined,
-                options,
-              ) +
+              matcherHint(`.${matcherName}`, receivedName, undefined, options) +
               "\n\n" +
-              `Expected: not ${utils.printExpected(expected)}\n` +
+              `Expected: not ${printExpected(expected)}\n` +
               printReceivedContextsNegative(
-                utils,
                 equalValue,
                 expected,
                 indexedContexts,
                 contexts.length === 1,
               ) +
-              `\nNumber of calls: ${utils.printReceived(contexts.length)}`
+              `\nNumber of calls: ${printReceived(contexts.length)}`
             );
           }
         : () => {
@@ -158,21 +154,15 @@ const createToBeCalledWithContextMatcher = (
               i += 1;
             }
             return (
-              utils.matcherHint(
-                `.${matcherName}`,
-                receivedName,
-                undefined,
-                options,
-              ) +
+              matcherHint(`.${matcherName}`, receivedName, undefined, options) +
               "\n\n" +
               printReceivedContextsPositive(
-                utils,
                 equalValue,
                 expected,
                 indexedContexts,
                 contexts.length === 1,
               ) +
-              `\nNumber of calls: ${utils.printReceived(contexts.length)}`
+              `\nNumber of calls: ${printReceived(contexts.length)}`
             );
           },
     };
@@ -182,13 +172,12 @@ const createLastCalledWithContextMatcher = (
   matcherName: string,
 ): MatcherFunction<[expected: unknown]> =>
   function (received, expected) {
-    const { utils } = this;
     const equalValue = makeEqualValue(this);
     const options: MatcherHintOptions = {
       isNot: this.isNot,
       promise: this.promise,
     };
-    ensureMockOrSpy(utils, received, matcherName, undefined, options);
+    ensureMockOrSpy(received, matcherName, undefined, options);
 
     const receivedIsSpy = isSpy(received);
     const receivedName = receivedIsSpy ? "spy" : received.getMockName();
@@ -214,21 +203,20 @@ const createLastCalledWithContextMatcher = (
 
             return (
               // eslint-disable-next-line prefer-template
-              utils.matcherHint(matcherName, receivedName, undefined, options) +
+              matcherHint(matcherName, receivedName, undefined, options) +
               "\n\n" +
-              `Expected: not ${utils.printExpected(expected)}\n` +
+              `Expected: not ${printExpected(expected)}\n` +
               (contexts.length === 1 &&
-              utils.stringify(contexts[0]) === utils.stringify(expected)
+              stringify(contexts[0]) === stringify(expected)
                 ? ""
                 : printReceivedContextsNegative(
-                    utils,
                     equalValue,
                     expected,
                     indexedContexts,
                     contexts.length === 1,
                     iLast,
                   )) +
-              `\nNumber of calls: ${utils.printReceived(contexts.length)}`
+              `\nNumber of calls: ${printReceived(contexts.length)}`
             );
           }
         : () => {
@@ -251,17 +239,16 @@ const createLastCalledWithContextMatcher = (
             }
 
             return (
-              utils.matcherHint(matcherName, receivedName, undefined, options) +
+              matcherHint(matcherName, receivedName, undefined, options) +
               "\n\n" +
               printReceivedContextsPositive(
-                utils,
                 equalValue,
                 expected,
                 indexedContexts,
                 contexts.length === 1,
                 iLast,
               ) +
-              `\nNumber of calls: ${utils.printReceived(contexts.length)}`
+              `\nNumber of calls: ${printReceived(contexts.length)}`
             );
           },
     };
@@ -271,7 +258,6 @@ const createNthCalledWithContextMatcher = (
   matcherName: string,
 ): MatcherFunction<[n: number, expected: unknown]> =>
   function (received, nth, expected) {
-    const { utils } = this;
     const equalValue = makeEqualValue(this);
     const expectedArgument = "n";
     const options: MatcherHintOptions = {
@@ -280,13 +266,13 @@ const createNthCalledWithContextMatcher = (
       promise: this.promise,
       secondArgument: "expected",
     };
-    ensureMockOrSpy(utils, received, matcherName, expectedArgument, options);
+    ensureMockOrSpy(received, matcherName, expectedArgument, options);
     if (!Number.isSafeInteger(nth) || nth < 1) {
       throw new Error(
-        utils.matcherErrorMessage(
-          utils.matcherHint(matcherName, undefined, expectedArgument, options),
+        matcherErrorMessage(
+          matcherHint(matcherName, undefined, expectedArgument, options),
           `${expectedArgument} must be a positive integer`,
-          utils.printWithType(expectedArgument, nth, utils.stringify),
+          printWithType(expectedArgument, nth, stringify),
         ),
       );
     }
@@ -321,7 +307,7 @@ const createNthCalledWithContextMatcher = (
             }
 
             return (
-              utils.matcherHint(
+              matcherHint(
                 matcherName,
                 receivedName,
                 expectedArgument,
@@ -329,19 +315,18 @@ const createNthCalledWithContextMatcher = (
               ) +
               "\n\n" +
               `n: ${nth}\n` +
-              `Expected: not ${utils.printExpected(expected)}\n` +
+              `Expected: not ${printExpected(expected)}\n` +
               (contexts.length === 1 &&
-              utils.stringify(contexts[0]) === utils.stringify(expected)
+              stringify(contexts[0]) === stringify(expected)
                 ? ""
                 : printReceivedContextsNegative(
-                    utils,
                     equalValue,
                     expected,
                     indexedContexts,
                     contexts.length === 1,
                     iNth,
                   )) +
-              `\nNumber of calls: ${utils.printReceived(contexts.length)}`
+              `\nNumber of calls: ${printReceived(contexts.length)}`
             );
           }
         : () => {
@@ -392,7 +377,7 @@ const createNthCalledWithContextMatcher = (
 
             return (
               // eslint-disable-next-line prefer-template
-              utils.matcherHint(
+              matcherHint(
                 matcherName,
                 receivedName,
                 expectedArgument,
@@ -401,14 +386,13 @@ const createNthCalledWithContextMatcher = (
               "\n\n" +
               `n: ${nth}\n` +
               printReceivedContextsPositive(
-                utils,
                 equalValue,
                 expected,
                 indexedContexts,
                 contexts.length === 1,
                 iNth,
               ) +
-              `\nNumber of calls: ${utils.printReceived(contexts.length)}`
+              `\nNumber of calls: ${printReceived(contexts.length)}`
             );
           },
     };

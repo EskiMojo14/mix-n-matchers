@@ -1,10 +1,8 @@
 import type {
   MatcherContext as JestMatcherContext,
-  MatcherUtils as JestMatcherUtils,
   ExpectationResult,
   Tester as JestTester,
 } from "expect";
-import type { MatcherState } from "@vitest/expect";
 
 // yuck :(
 export type Tester = {
@@ -22,28 +20,6 @@ export interface MatcherUtils {
     customTesters?: Array<Tester>,
     strictCheck?: boolean,
   ) => boolean;
-  utils:
-    | Pick<
-        JestMatcherUtils["utils"],
-        | "RECEIVED_COLOR"
-        | "printReceived"
-        | "DIM_COLOR"
-        | "stringify"
-        | "printExpected"
-        // Not provided by vitest
-        | "printDiffOrStringify"
-        | "matcherErrorMessage"
-        | "matcherHint"
-        | "printWithType"
-      >
-    | Pick<
-        MatcherState["utils"],
-        | "RECEIVED_COLOR"
-        | "printReceived"
-        | "DIM_COLOR"
-        | "stringify"
-        | "printExpected"
-      >;
 }
 
 export type MatcherContext = Pick<
