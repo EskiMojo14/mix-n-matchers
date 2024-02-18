@@ -277,6 +277,9 @@ expect({ array: [1, 2] }).toEqual({
 expect({ array: [1, 2] }).toEqual({
   array: expect.arrayContainingOnly([1, 2]),
 });
+expect({ array: [1, 1] }).toEqual({
+  array: expect.arrayContainingOnly([1, 2, 2]),
+});
 // will fail
 expect({ array: [1, 2, 3] }).toEqual({
   array: expect.arrayContainingOnly([1, 2]),
