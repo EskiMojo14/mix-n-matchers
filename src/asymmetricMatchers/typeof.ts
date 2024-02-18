@@ -36,7 +36,7 @@ export const typeOf: MatcherFunction<[expected: Type]> = function (
       : () =>
           matcherHint(matcherName, undefined, undefined, options) +
           "\n\n" +
-          `Expected typeof ${printReceived(received)} to be ${printExpected(expected)}, but got ${utils.printReceived(typeof received)}`,
+          `Expected typeof ${printReceived(received)} to be ${printExpected(expected)}, but got ${printReceived(typeof received)}`,
   };
 };
 
