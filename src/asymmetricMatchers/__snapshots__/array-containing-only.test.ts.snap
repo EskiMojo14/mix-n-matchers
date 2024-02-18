@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`arrayContainingOnly should expect an array to contain only the expected values 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>arrayContainingOnly<1,2></g>
+Received: <r>[1, 2, 2, 3]</g>
+`;
+
+exports[`arrayContainingOnly should throw an error if the expected value is not an array 1`] = `Expected value must be an array, not number`;
+
+exports[`arrayContainingOnly should throw an error if the received value is not an array 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>arrayContainingOnly<></g>
+Received: <r>1</g>
+`;
