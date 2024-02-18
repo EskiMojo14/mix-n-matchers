@@ -42,6 +42,13 @@ export const typeOf: MatcherFunction<[expected: Type]> = function (
 
 declare module "./index" {
   export interface AsymmetricMixNMatchers {
+    /**
+     * Matches against the provided value using `typeof`.
+     * @example
+     * expect(1).toEqual(expect.typeOf("number"))
+     *
+     * expect({ value: 1 }).toEqual({ value: expect.typeOf("number") })
+     */
     typeOf(expected: Type): any;
   }
 }
