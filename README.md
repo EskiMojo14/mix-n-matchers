@@ -195,6 +195,25 @@ expect(mock).toBeCalledWith(expect.exactly(reference));
 
 </td>
 </tr>
+<tr>
+<td>
+
+`typeOf`
+
+</td>
+<td>
+
+Checks equality using `typeof`.
+
+</td>
+<td>
+
+```ts
+expect(mock).toBeCalledWith(expect.typeOf("string"));
+```
+
+</td>
+</tr>
 </table>
 
 ### Symmetric Matchers
