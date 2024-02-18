@@ -1,0 +1,12 @@
+{
+  "name": "mix-n-matchers-vitest",
+  "version": "1.0.0",
+  "description": "Miscellaneous custom Jest matchers",
+  "type": "module",
+  "main": "../dist/vitest.cjs",
+  "module": "../dist/vitest.js",
+  "types": "../dist/vitest.d.ts",
+  "files": [
+    "../dist"
+  ]
+}
