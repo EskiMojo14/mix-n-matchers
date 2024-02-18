@@ -63,6 +63,19 @@ If you're using `@jest/globals` instead of injecting globals, you should use the
 }
 ```
 
+If you're using Vitest, you should instead use `mix-n-matchers/vitest`:
+
+```ts
+import { defineConfig } from "vitest/config";
+
+export default defineConfig({
+  test: {
+    setupFiles: ["mix-n-matchers/vitest"],
+    include: ["src/**/*.vi.test.ts"],
+  },
+});
+```
+
 ## Typescript
 
 If your editor does not recognise the custom `mix-n-matchers` matchers, add a `global.d.ts` file to your project with:
@@ -150,7 +163,7 @@ If you just want all of the matchers, your `global.d.ts` file should have:
 import "mix-n-matchers/jest-globals";
 ```
 
-If you want finer control over which matchers are added, you should use the below:
+If you want finer control over which matchers are added, you should follow the below:
 
 ```ts
 // global.d.ts
@@ -165,6 +178,33 @@ declare module "@jest/extend" {
 
   export interface AsymmetricMatchers
     extends Pick<AsymmetricMixNMatchers, "exactly"> {}
+}
+```
+
+### Vitest
+
+If you're using Vitest, you should use `mix-n-matchers/vitest` instead of the 'all' entry point.:
+
+```ts
+// global.d.ts
+import "mix-n-matchers/vitest";
+```
+
+If you want finer control over which matchers are added, you should follow the below:
+
+```ts
+// global.d.ts
+import { expect } from "vitest";
+import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
+
+declare module "vitest" {
+  interface Assertion<T = any>
+    extends Pick<
+      mixNMatchers.MixNMatchers<T>,
+      "toBeCalledWithContext" | "lastCalledWithContext" | "nthCalledWithContext"
+    > {}
+  interface AsymmetricMatchersContaining
+    extends Pick<mixNMatchers.AsymmetricMixNMatchers, "exactly"> {}
 }
 ```
 
