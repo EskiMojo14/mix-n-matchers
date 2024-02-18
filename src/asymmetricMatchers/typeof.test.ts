@@ -7,6 +7,10 @@ describe("typeOf", () => {
     expect(1).toEqual(expect.typeOf("number"));
 
     expect({ value: 1 }).toEqual({ value: expect.typeOf("number") });
+
+    expect(1).toEqual(expect.not.typeOf("string"));
+
+    expect({ value: 1 }).toEqual({ value: expect.not.typeOf("string") });
   });
   it("throws if value mismatches", () => {
     expect(() => {
@@ -15,6 +19,14 @@ describe("typeOf", () => {
 
     expect(() => {
       expect({ value: 1 }).toEqual({ value: expect.typeOf("string") });
+    }).toThrowErrorMatchingSnapshot();
+
+    expect(() => {
+      expect(1).toEqual(expect.not.typeOf("number"));
+    }).toThrowErrorMatchingSnapshot();
+
+    expect(() => {
+      expect({ value: 1 }).toEqual({ value: expect.not.typeOf("number") });
     }).toThrowErrorMatchingSnapshot();
   });
 });

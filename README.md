@@ -254,6 +254,65 @@ expect(mock).toBeCalledWith(expect.typeOf("string"));
 
 </td>
 </tr>
+<tr>
+<td>
+
+`arrayContainingOnly`
+
+</td>
+<td>
+
+Checks that value is an array only containing the specified values. Values can be repeated (or omitted), but all elements present should be present in the expected array.
+
+Put another way, it checks that the received array is a subset of (or equal to) the expected array. This is in contrast to `arrayContaining`, which checks that the received array is a superset of (or equal to) the expected array.
+
+</td>
+<td>
+
+```ts
+// will pass
+expect({ array: [1, 2] }).toEqual({
+  array: expect.arrayContainingOnly([1, 2, 3]),
+});
+expect({ array: [1, 2] }).toEqual({
+  array: expect.arrayContainingOnly([1, 2]),
+});
+expect({ array: [1, 1] }).toEqual({
+  array: expect.arrayContainingOnly([1, 2, 2]),
+});
+// will fail
+expect({ array: [1, 2, 3] }).toEqual({
+  array: expect.arrayContainingOnly([1, 2]),
+});
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+`objectContainingOnly`
+
+</td>
+<td>
+
+Checks that value is an object only containing the specified keys. Keys can be omitted, but all keys present should match the expected object.
+
+Put another way, it checks that the received object is a subset of (or equal to) the expected object. This is in contrast to `objectContaining`, which checks that the received object is a superset of (or equal to) the expected object.
+
+</td>
+<td>
+
+```ts
+// will pass
+expect({ a: 1 }).toEqual(expect.objectContainingOnly({ a: 1, b: 2 }));
+expect({ a: 1, b: 2 }).toEqual(expect.objectContainingOnly({ a: 1, b: 2 }));
+// will fail
+expect({ a: 1, b: 2 }).toEqual(expect.objectContainingOnly({ a: 1 }));
+```
+
+</td>
+</tr>
 </table>
 
 ### Symmetric Matchers

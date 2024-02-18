@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`objectContainingOnly > should check if object contains only the expected properties 1`] = `expected { a: 1, b: 2 } to deeply equal objectContainingOnly<[object Object]>`;
+
+exports[`objectContainingOnly > should check if object contains only the expected properties 2`] = `expected { a: 1, b: 2 } to deeply equal objectContainingOnly<[object Object]>`;
+
+exports[`objectContainingOnly > should check if object contains only the expected properties 3`] = `expected { a: 1, b: 2 } to deeply equal not.objectContainingOnly{…}`;
+
+exports[`objectContainingOnly > should throw an error if expected value is not an object 1`] = `Expected value must be an object, not number`;
+
+exports[`objectContainingOnly > should throw an error if received value is not an object 1`] = `expected 1 to deeply equal objectContainingOnly<[object Object]>`;

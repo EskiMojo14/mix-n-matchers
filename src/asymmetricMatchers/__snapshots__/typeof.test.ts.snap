@@ -18,3 +18,22 @@ exports[`typeOf throws if value mismatches 2`] = `
 <r>+   "value": 1,</g>
 <d>  }</b>
 `;
+
+exports[`typeOf throws if value mismatches 3`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>not.typeOf<number></g>
+Received: <r>1</g>
+`;
+
+exports[`typeOf throws if value mismatches 4`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 1</g>
+
+<d>  Object {</b>
+<g>-   "value": not.typeOf<number>,</g>
+<r>+   "value": 1,</g>
+<d>  }</b>
+`;
