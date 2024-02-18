@@ -33,12 +33,17 @@ export const alignedAnsiStyleSerializer: NewPlugin = {
           return "<Y>";
 
         case style.bold.close:
+          return "</b>";
         case style.dim.close:
+          return "</d>";
         case style.green.close:
+          return "</g>";
         case style.red.close:
+          return "</r>";
         case style.yellow.close:
+          return "</y>";
         case style.bgYellow.close:
-          return "</>";
+          return "</Y>";
 
         default:
           return match; // unexpected escape sequence
