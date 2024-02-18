@@ -9,6 +9,11 @@ describe("arrayContainingOnly", () => {
     expect(() => {
       expect([1, 2, 2, 3]).toEqual(expect.arrayContainingOnly([1, 2]));
     }).toThrowErrorMatchingSnapshot();
+
+    expect([1, 2, 2, 3]).toEqual(expect.not.arrayContainingOnly([1, 2]));
+    expect(() => {
+      expect([1, 2, 2, 3]).toEqual(expect.not.arrayContainingOnly([1, 2, 3]));
+    }).toThrowErrorMatchingSnapshot();
   });
   it("should throw an error if the expected value is not an array", () => {
     expect(() => {

@@ -16,6 +16,14 @@ describe("objectContainingOnly", () => {
         expect.objectContainingOnly({ a: 1, b: 3 }),
       );
     }).toThrowErrorMatchingSnapshot();
+
+    expect({ a: 1, b: 2 }).toEqual(expect.not.objectContainingOnly({ a: 1 }));
+
+    expect(() => {
+      expect({ a: 1, b: 2 }).toEqual(
+        expect.not.objectContainingOnly({ a: 1, b: 2 }),
+      );
+    }).toThrowErrorMatchingSnapshot();
   });
   it("should throw an error if expected value is not an object", () => {
     expect(() => {

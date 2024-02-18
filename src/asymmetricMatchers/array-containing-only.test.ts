@@ -10,6 +10,12 @@ describe("arrayContainingOnly", () => {
       expect([1, 2, 2, 3]).toEqual(expect.arrayContainingOnly([1, 2]));
     }).toThrowErrorMatchingSnapshot();
 
+    expect([1, 2, 2, 3]).toEqual(expect.not.arrayContainingOnly([1, 2]));
+
+    expect(() => {
+      expect([1, 2, 2, 3]).toEqual(expect.not.arrayContainingOnly([1, 2, 3]));
+    }).toThrowErrorMatchingSnapshot();
+
     // vs
     expect([1, 2, 2, 3]).toEqual(expect.arrayContaining([1, 2]));
   });

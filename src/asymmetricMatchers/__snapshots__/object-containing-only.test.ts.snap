@@ -14,6 +14,13 @@ Expected: <g>objectContainingOnly<[object Object]></g>
 Received: <r>{"a": 1, "b": 2}</g>
 `;
 
+exports[`objectContainingOnly should check if object contains only the expected properties 3`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>not.objectContainingOnly<[object Object]></g>
+Received: <r>{"a": 1, "b": 2}</g>
+`;
+
 exports[`objectContainingOnly should throw an error if expected value is not an object 1`] = `Expected value must be an object, not number`;
 
 exports[`objectContainingOnly should throw an error if received value is not an object 1`] = `
