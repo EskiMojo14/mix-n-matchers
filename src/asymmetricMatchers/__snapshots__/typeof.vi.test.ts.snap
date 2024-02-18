@@ -1,0 +1,5 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`typeOf > throws if value mismatches 1`] = `expected 1 to deeply equal typeOf<string>`;
+
+exports[`typeOf > throws if value mismatches 2`] = `expected { value: 1 } to deeply equal { value: typeOf<string> }`;

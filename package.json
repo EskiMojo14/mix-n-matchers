@@ -39,6 +39,8 @@
     "test:dist": "yarn node --experimental-vm-modules $(yarn bin jest) --setupFilesAfterEnv mix-n-matchers/all",
     "vitest": "vitest",
     "vitest:dist": "vitest --config vitest-dist.config.ts",
+    "test:all": "yarn run test && yarn run vitest --run",
+    "test:all:dist": "yarn run test:dist && yarn run vitest:dist --run",
     "lint": "eslint",
     "pre-commit": "lint-staged",
     "attw": "attw",
