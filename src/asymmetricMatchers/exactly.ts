@@ -1,5 +1,10 @@
-import type { MatcherFunction } from "expect";
-import type { MatcherHintOptions } from "jest-matcher-utils";
+import {
+  matcherHint,
+  printExpected,
+  type MatcherHintOptions,
+  printDiffOrStringify,
+} from "jest-matcher-utils";
+import type { MatcherFunction } from "../utils/types";
 
 /**
  * Matches against the provided value using `Object.is`.
@@ -18,7 +23,6 @@ export const exactly: MatcherFunction<[expected: unknown]> = function (
   received,
   expected,
 ) {
-  const { utils } = this;
   const matcherName = "exactly";
   const options: MatcherHintOptions = {
     comment: "Object.is equality",
@@ -32,13 +36,13 @@ export const exactly: MatcherFunction<[expected: unknown]> = function (
     pass,
     message: pass
       ? () =>
-          utils.matcherHint(matcherName, undefined, undefined, options) +
+          matcherHint(matcherName, undefined, undefined, options) +
           "\n\n" +
-          `Expected: not ${utils.printExpected(expected)}`
+          `Expected: not ${printExpected(expected)}`
       : () =>
-          utils.matcherHint(matcherName, undefined, undefined, options) +
+          matcherHint(matcherName, undefined, undefined, options) +
           "\n\n" +
-          utils.printDiffOrStringify(
+          printDiffOrStringify(
             expected,
             received,
             "Expected",

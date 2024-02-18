@@ -1,5 +1,6 @@
-import type { MatcherFunction } from "expect";
 import type { MatcherHintOptions } from "jest-matcher-utils";
+import { matcherHint, printExpected, printReceived } from "jest-matcher-utils";
+import type { MatcherFunction } from "../utils/types";
 
 const possibleTypes = typeof 1;
 
@@ -16,7 +17,6 @@ export const typeOf: MatcherFunction<[expected: Type]> = function (
   received,
   expected,
 ) {
-  const { utils } = this;
   const matcherName = "typeOf";
   const options: MatcherHintOptions = {
     comment: "typeof equality",
@@ -30,18 +30,25 @@ export const typeOf: MatcherFunction<[expected: Type]> = function (
     pass,
     message: pass
       ? () =>
-          utils.matcherHint(matcherName, undefined, undefined, options) +
+          matcherHint(matcherName, undefined, undefined, options) +
           "\n\n" +
-          `Expected typeof ${utils.printReceived(received)} not to be ${utils.printExpected(expected)}`
+          `Expected typeof ${printReceived(received)} not to be ${printExpected(expected)}`
       : () =>
-          utils.matcherHint(matcherName, undefined, undefined, options) +
+          matcherHint(matcherName, undefined, undefined, options) +
           "\n\n" +
-          `Expected typeof ${utils.printReceived(received)} to be ${utils.printExpected(expected)}, but got ${utils.printReceived(typeof received)}`,
+          `Expected typeof ${printReceived(received)} to be ${printExpected(expected)}, but got ${printReceived(typeof received)}`,
   };
 };
 
 declare module "./index" {
   export interface AsymmetricMixNMatchers {
+    /**
+     * Matches against the provided value using `typeof`.
+     * @example
+     * expect(1).toEqual(expect.typeOf("number"))
+     *
+     * expect({ value: 1 }).toEqual({ value: expect.typeOf("number") })
+     */
     typeOf(expected: Type): any;
   }
 }

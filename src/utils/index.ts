@@ -1,8 +1,16 @@
-import type { MatcherHintOptions } from "jest-matcher-utils";
-import type { MatcherUtils } from "expect";
+import {
+  matcherErrorMessage,
+  matcherHint,
+  printWithType,
+  type MatcherHintOptions,
+  RECEIVED_COLOR,
+  printReceived,
+} from "jest-matcher-utils";
+import type { MatcherUtils } from "./types";
+import type { Mock } from "vitest";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const isMock = (received: any): received is jest.Mock =>
+export const isMock = (received: any): received is jest.Mock | Mock =>
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   received?._isMockFunction === true;
 
@@ -14,20 +22,17 @@ export const isSpy = (received: any): received is jasmine.Spy =>
   typeof received?.calls?.count === "function";
 
 export function ensureMockOrSpy(
-  utils: MatcherUtils["utils"],
   received: unknown,
   matcherName: string,
   expectedArgument?: string,
   options?: MatcherHintOptions,
-): asserts received is jest.Mock | jasmine.Spy {
+): asserts received is jest.Mock | jasmine.Spy | Mock {
   if (!isMock(received) && !isSpy(received)) {
     throw new Error(
-      utils.matcherErrorMessage(
-        utils.matcherHint(matcherName, undefined, expectedArgument, options),
-        `${utils.RECEIVED_COLOR(
-          "received",
-        )} value must be a mock or spy function`,
-        utils.printWithType("Received", received, utils.printReceived),
+      matcherErrorMessage(
+        matcherHint(matcherName, undefined, expectedArgument, options),
+        `${RECEIVED_COLOR("received")} value must be a mock or spy function`,
+        printWithType("Received", received, printReceived),
       ),
     );
   }
