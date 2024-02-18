@@ -2,3 +2,4 @@
 export interface AsymmetricMixNMatchers {}
 
 export { exactly } from "./exactly";
+export { typeOf } from "./typeof";

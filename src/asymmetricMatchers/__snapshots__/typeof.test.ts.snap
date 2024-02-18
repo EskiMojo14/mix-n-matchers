@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`typeOf throws if value mismatches 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>typeOf<string></g>
+Received: <r>1</g>
+`;
+
+exports[`typeOf throws if value mismatches 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 1</g>
+
+<d>  Object {</b>
+<g>-   "value": typeOf<string>,</g>
+<r>+   "value": 1,</g>
+<d>  }</b>
+`;
