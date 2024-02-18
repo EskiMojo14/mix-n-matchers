@@ -1,19 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`exactly allows Object.is equality where deep equality would normally be used 1`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</b><r>jest.fn()</g><d>).</b>toHaveBeenCalledWith<d>(</b><g>...expected</g><d>)</b>
 
-Expected: <g>exactly<[object Object]></>
-Received: <r>{}</>
+Expected: <g>exactly<[object Object]></g>
+Received: <r>{}</g>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
 
 exports[`exactly allows Object.is equality where deep equality would normally be used 2`] = `
-<d>expect(</><r>jest.fn()</><d>).</>toHaveBeenCalledWith<d>(</><g>...expected</><d>)</>
+<d>expect(</b><r>jest.fn()</g><d>).</b>toHaveBeenCalledWith<d>(</b><g>...expected</g><d>)</b>
 
-Expected: <g>not.exactly<[object Object]></>
-Received: <r>{}</>
+Expected: <g>not.exactly<[object Object]></g>
+Received: <r>{}</g>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;

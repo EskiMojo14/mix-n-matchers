@@ -64,7 +64,7 @@ describe.each([
     }
   });
   it("works when not called", () => {
-    const fn = jest.fn();
+    const fn = import.meta.jest.fn();
     if (isToHaveNth(calledWithContext)) {
       expect(createSpy(fn)).not[calledWithContext](1, "foo");
       expect(fn).not[calledWithContext](1, "foo");
@@ -82,7 +82,7 @@ describe.each([
     }
   });
   it("works with a context that doesn't match", () => {
-    const fn = jest.fn();
+    const fn = import.meta.jest.fn();
     fn.call("bar");
 
     if (isToHaveNth(calledWithContext)) {
@@ -102,7 +102,7 @@ describe.each([
     }
   });
   it("works with a context that doesn't match with matchers", () => {
-    const fn = jest.fn();
+    const fn = import.meta.jest.fn();
     fn.call("bar");
 
     if (isToHaveNth(calledWithContext)) {
@@ -122,7 +122,7 @@ describe.each([
     }
   });
   it("works with a context that matches", () => {
-    const fn = jest.fn();
+    const fn = import.meta.jest.fn();
     fn.call("foo");
 
     if (isToHaveNth(calledWithContext)) {
@@ -142,7 +142,7 @@ describe.each([
     }
   });
   it("works with a context that matches with a matcher", () => {
-    const fn = jest.fn();
+    const fn = import.meta.jest.fn();
     fn.call("foo");
 
     if (isToHaveNth(calledWithContext)) {
@@ -163,7 +163,7 @@ describe.each([
   });
 
   it("includes the custom mock name in the error message", () => {
-    const fn = jest.fn().mockName("named-mock");
+    const fn = import.meta.jest.fn().mockName("named-mock");
 
     fn.call("foo");
 

@@ -33,16 +33,16 @@
   ],
   "scripts": {
     "prepare": "husky install",
-    "prebuild": "npm run type",
+    "prebuild": "yarn run type",
     "build": "tsup",
-    "test": "jest",
+    "test": "yarn node --experimental-vm-modules $(yarn bin jest)",
     "vitest": "vitest",
     "lint": "eslint",
     "pre-commit": "lint-staged",
     "attw": "attw",
     "publint": "publint",
     "type": "tsc",
-    "prepack": "npm run publint"
+    "prepack": "yarn run publint"
   },
   "repository": {
     "type": "git",

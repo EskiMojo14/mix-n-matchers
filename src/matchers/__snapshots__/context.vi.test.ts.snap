@@ -1,323 +1,323 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`lastCalledWithContext > includes the custom mock name in the error message 1`] = `
-<d>expect(</><r>named-mock</><d>).</>not<d>.</>lastCalledWithContext<d>(</><g>expected</><d>)</>
+<d>expect(</b><r>named-mock</g><d>).</b>not<d>.</b>lastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: not <g>"foo"</>
+Expected: not <g>"foo"</g>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
 
 exports[`lastCalledWithContext > works only on spies or vi.fn 1`] = `utils.printWithType is not a function`;
 
 exports[`lastCalledWithContext > works when not called 1`] = `
-<d>expect(</><r>spy</><d>).</>lastCalledWithContext<d>(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>lastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: <g>"foo"</>
+Expected: <g>"foo"</g>
 
-Number of calls: <r>0</>
+Number of calls: <r>0</g>
 `;
 
 exports[`lastCalledWithContext > works with a context that doesn't match 1`] = `
-<d>expect(</><r>spy</><d>).</>lastCalledWithContext<d>(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>lastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: <g>"foo"</>
-Received: <r>"bar"</>
-Number of calls: <r>1</>
+Expected: <g>"foo"</g>
+Received: <r>"bar"</g>
+Number of calls: <r>1</g>
 `;
 
 exports[`lastCalledWithContext > works with a context that doesn't match with matchers 1`] = `
-<d>expect(</><r>spy</><d>).</>lastCalledWithContext<d>(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>lastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: <g>Any<Number></>
-Received: <r>"bar"</>
-Number of calls: <r>1</>
+Expected: <g>Any<Number></g>
+Received: <r>"bar"</g>
+Number of calls: <r>1</g>
 `;
 
 exports[`lastCalledWithContext > works with a context that matches 1`] = `
-<d>expect(</><r>spy</><d>).</>not<d>.</>lastCalledWithContext<d>(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>not<d>.</b>lastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: not <g>"foo"</>
+Expected: not <g>"foo"</g>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
 
 exports[`lastCalledWithContext > works with a context that matches with a matcher 1`] = `
-<d>expect(</><r>spy</><d>).</>not<d>.</>lastCalledWithContext<d>(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>not<d>.</b>lastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: not <g>Any<String></>
-Received:     <d>"foo"</>
+Expected: not <g>Any<String></g>
+Received:     <d>"foo"</b>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
 
 exports[`nthCalledWithContext > includes the custom mock name in the error message 1`] = `
-<d>expect(</><r>named-mock</><d>).</>not<d>.</>nthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</b><r>named-mock</g><d>).</b>not<d>.</b>nthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
 n: 1
-Expected: not <g>"foo"</>
+Expected: not <g>"foo"</g>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
 
 exports[`nthCalledWithContext > works only on spies or vi.fn 1`] = `utils.printWithType is not a function`;
 
 exports[`nthCalledWithContext > works when not called 1`] = `
-<d>expect(</><r>spy</><d>).</>nthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>nthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
 n: 1
-Expected: <g>"foo"</>
+Expected: <g>"foo"</g>
 
-Number of calls: <r>0</>
+Number of calls: <r>0</g>
 `;
 
 exports[`nthCalledWithContext > works with a context that doesn't match 1`] = `
-<d>expect(</><r>spy</><d>).</>nthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>nthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
 n: 1
-Expected: <g>"foo"</>
-Received: <r>"bar"</>
-Number of calls: <r>1</>
+Expected: <g>"foo"</g>
+Received: <r>"bar"</g>
+Number of calls: <r>1</g>
 `;
 
 exports[`nthCalledWithContext > works with a context that doesn't match with matchers 1`] = `
-<d>expect(</><r>spy</><d>).</>nthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>nthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
 n: 1
-Expected: <g>Any<Number></>
-Received: <r>"bar"</>
-Number of calls: <r>1</>
+Expected: <g>Any<Number></g>
+Received: <r>"bar"</g>
+Number of calls: <r>1</g>
 `;
 
 exports[`nthCalledWithContext > works with a context that matches 1`] = `
-<d>expect(</><r>spy</><d>).</>not<d>.</>nthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>not<d>.</b>nthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
 n: 1
-Expected: not <g>"foo"</>
+Expected: not <g>"foo"</g>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
 
 exports[`nthCalledWithContext > works with a context that matches with a matcher 1`] = `
-<d>expect(</><r>spy</><d>).</>not<d>.</>nthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>not<d>.</b>nthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
 n: 1
-Expected: not <g>Any<String></>
-Received:     <d>"foo"</>
+Expected: not <g>Any<String></g>
+Received:     <d>"foo"</b>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
 
 exports[`toBeCalledWithContext > includes the custom mock name in the error message 1`] = `
-<d>expect(</><r>named-mock</><d>).</>not<d>.toBeCalledWithContext(</><g>expected</><d>)</>
+<d>expect(</b><r>named-mock</g><d>).</b>not<d>.toBeCalledWithContext(</b><g>expected</g><d>)</b>
 
-Expected: not <g>"foo"</>
-Received:     <d>"foo"</>
+Expected: not <g>"foo"</g>
+Received:     <d>"foo"</b>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
 
 exports[`toBeCalledWithContext > works only on spies or vi.fn 1`] = `utils.printWithType is not a function`;
 
 exports[`toBeCalledWithContext > works when not called 1`] = `
-<d>expect(</><r>spy</><d>).toBeCalledWithContext(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).toBeCalledWithContext(</b><g>expected</g><d>)</b>
 
-Expected: <g>"foo"</>
+Expected: <g>"foo"</g>
 
-Number of calls: <r>0</>
+Number of calls: <r>0</g>
 `;
 
 exports[`toBeCalledWithContext > works with a context that doesn't match 1`] = `
-<d>expect(</><r>spy</><d>).toBeCalledWithContext(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).toBeCalledWithContext(</b><g>expected</g><d>)</b>
 
-Expected: <g>"foo"</>
-Received: <r>"bar"</>
-Number of calls: <r>1</>
+Expected: <g>"foo"</g>
+Received: <r>"bar"</g>
+Number of calls: <r>1</g>
 `;
 
 exports[`toBeCalledWithContext > works with a context that doesn't match with matchers 1`] = `
-<d>expect(</><r>spy</><d>).toBeCalledWithContext(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).toBeCalledWithContext(</b><g>expected</g><d>)</b>
 
-Expected: <g>Any<Number></>
-Received: <r>"bar"</>
-Number of calls: <r>1</>
+Expected: <g>Any<Number></g>
+Received: <r>"bar"</g>
+Number of calls: <r>1</g>
 `;
 
 exports[`toBeCalledWithContext > works with a context that matches 1`] = `
-<d>expect(</><r>spy</><d>).</>not<d>.toBeCalledWithContext(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>not<d>.toBeCalledWithContext(</b><g>expected</g><d>)</b>
 
-Expected: not <g>"foo"</>
-Received:     <d>"foo"</>
+Expected: not <g>"foo"</g>
+Received:     <d>"foo"</b>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
 
 exports[`toBeCalledWithContext > works with a context that matches with a matcher 1`] = `
-<d>expect(</><r>spy</><d>).</>not<d>.toBeCalledWithContext(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>not<d>.toBeCalledWithContext(</b><g>expected</g><d>)</b>
 
-Expected: not <g>Any<String></>
-Received:     <d>"foo"</>
+Expected: not <g>Any<String></g>
+Received:     <d>"foo"</b>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenCalledWithContext > includes the custom mock name in the error message 1`] = `
-<d>expect(</><r>named-mock</><d>).</>not<d>.toHaveBeenCalledWithContext(</><g>expected</><d>)</>
+<d>expect(</b><r>named-mock</g><d>).</b>not<d>.toHaveBeenCalledWithContext(</b><g>expected</g><d>)</b>
 
-Expected: not <g>"foo"</>
-Received:     <d>"foo"</>
+Expected: not <g>"foo"</g>
+Received:     <d>"foo"</b>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenCalledWithContext > works only on spies or vi.fn 1`] = `utils.printWithType is not a function`;
 
 exports[`toHaveBeenCalledWithContext > works when not called 1`] = `
-<d>expect(</><r>spy</><d>).toHaveBeenCalledWithContext(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).toHaveBeenCalledWithContext(</b><g>expected</g><d>)</b>
 
-Expected: <g>"foo"</>
+Expected: <g>"foo"</g>
 
-Number of calls: <r>0</>
+Number of calls: <r>0</g>
 `;
 
 exports[`toHaveBeenCalledWithContext > works with a context that doesn't match 1`] = `
-<d>expect(</><r>spy</><d>).toHaveBeenCalledWithContext(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).toHaveBeenCalledWithContext(</b><g>expected</g><d>)</b>
 
-Expected: <g>"foo"</>
-Received: <r>"bar"</>
-Number of calls: <r>1</>
+Expected: <g>"foo"</g>
+Received: <r>"bar"</g>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenCalledWithContext > works with a context that doesn't match with matchers 1`] = `
-<d>expect(</><r>spy</><d>).toHaveBeenCalledWithContext(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).toHaveBeenCalledWithContext(</b><g>expected</g><d>)</b>
 
-Expected: <g>Any<Number></>
-Received: <r>"bar"</>
-Number of calls: <r>1</>
+Expected: <g>Any<Number></g>
+Received: <r>"bar"</g>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenCalledWithContext > works with a context that matches 1`] = `
-<d>expect(</><r>spy</><d>).</>not<d>.toHaveBeenCalledWithContext(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>not<d>.toHaveBeenCalledWithContext(</b><g>expected</g><d>)</b>
 
-Expected: not <g>"foo"</>
-Received:     <d>"foo"</>
+Expected: not <g>"foo"</g>
+Received:     <d>"foo"</b>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenCalledWithContext > works with a context that matches with a matcher 1`] = `
-<d>expect(</><r>spy</><d>).</>not<d>.toHaveBeenCalledWithContext(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>not<d>.toHaveBeenCalledWithContext(</b><g>expected</g><d>)</b>
 
-Expected: not <g>Any<String></>
-Received:     <d>"foo"</>
+Expected: not <g>Any<String></g>
+Received:     <d>"foo"</b>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenLastCalledWithContext > includes the custom mock name in the error message 1`] = `
-<d>expect(</><r>named-mock</><d>).</>not<d>.</>toHaveBeenLastCalledWithContext<d>(</><g>expected</><d>)</>
+<d>expect(</b><r>named-mock</g><d>).</b>not<d>.</b>toHaveBeenLastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: not <g>"foo"</>
+Expected: not <g>"foo"</g>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenLastCalledWithContext > works only on spies or vi.fn 1`] = `utils.printWithType is not a function`;
 
 exports[`toHaveBeenLastCalledWithContext > works when not called 1`] = `
-<d>expect(</><r>spy</><d>).</>toHaveBeenLastCalledWithContext<d>(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>toHaveBeenLastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: <g>"foo"</>
+Expected: <g>"foo"</g>
 
-Number of calls: <r>0</>
+Number of calls: <r>0</g>
 `;
 
 exports[`toHaveBeenLastCalledWithContext > works with a context that doesn't match 1`] = `
-<d>expect(</><r>spy</><d>).</>toHaveBeenLastCalledWithContext<d>(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>toHaveBeenLastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: <g>"foo"</>
-Received: <r>"bar"</>
-Number of calls: <r>1</>
+Expected: <g>"foo"</g>
+Received: <r>"bar"</g>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenLastCalledWithContext > works with a context that doesn't match with matchers 1`] = `
-<d>expect(</><r>spy</><d>).</>toHaveBeenLastCalledWithContext<d>(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>toHaveBeenLastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: <g>Any<Number></>
-Received: <r>"bar"</>
-Number of calls: <r>1</>
+Expected: <g>Any<Number></g>
+Received: <r>"bar"</g>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenLastCalledWithContext > works with a context that matches 1`] = `
-<d>expect(</><r>spy</><d>).</>not<d>.</>toHaveBeenLastCalledWithContext<d>(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>not<d>.</b>toHaveBeenLastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: not <g>"foo"</>
+Expected: not <g>"foo"</g>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenLastCalledWithContext > works with a context that matches with a matcher 1`] = `
-<d>expect(</><r>spy</><d>).</>not<d>.</>toHaveBeenLastCalledWithContext<d>(</><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>not<d>.</b>toHaveBeenLastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: not <g>Any<String></>
-Received:     <d>"foo"</>
+Expected: not <g>Any<String></g>
+Received:     <d>"foo"</b>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenNthCalledWithContext > includes the custom mock name in the error message 1`] = `
-<d>expect(</><r>named-mock</><d>).</>not<d>.</>toHaveBeenNthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</b><r>named-mock</g><d>).</b>not<d>.</b>toHaveBeenNthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
 n: 1
-Expected: not <g>"foo"</>
+Expected: not <g>"foo"</g>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenNthCalledWithContext > works only on spies or vi.fn 1`] = `utils.printWithType is not a function`;
 
 exports[`toHaveBeenNthCalledWithContext > works when not called 1`] = `
-<d>expect(</><r>spy</><d>).</>toHaveBeenNthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>toHaveBeenNthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
 n: 1
-Expected: <g>"foo"</>
+Expected: <g>"foo"</g>
 
-Number of calls: <r>0</>
+Number of calls: <r>0</g>
 `;
 
 exports[`toHaveBeenNthCalledWithContext > works with a context that doesn't match 1`] = `
-<d>expect(</><r>spy</><d>).</>toHaveBeenNthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>toHaveBeenNthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
 n: 1
-Expected: <g>"foo"</>
-Received: <r>"bar"</>
-Number of calls: <r>1</>
+Expected: <g>"foo"</g>
+Received: <r>"bar"</g>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenNthCalledWithContext > works with a context that doesn't match with matchers 1`] = `
-<d>expect(</><r>spy</><d>).</>toHaveBeenNthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>toHaveBeenNthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
 n: 1
-Expected: <g>Any<Number></>
-Received: <r>"bar"</>
-Number of calls: <r>1</>
+Expected: <g>Any<Number></g>
+Received: <r>"bar"</g>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenNthCalledWithContext > works with a context that matches 1`] = `
-<d>expect(</><r>spy</><d>).</>not<d>.</>toHaveBeenNthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>not<d>.</b>toHaveBeenNthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
 n: 1
-Expected: not <g>"foo"</>
+Expected: not <g>"foo"</g>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenNthCalledWithContext > works with a context that matches with a matcher 1`] = `
-<d>expect(</><r>spy</><d>).</>not<d>.</>toHaveBeenNthCalledWithContext<d>(</>n<d>, </><g>expected</><d>)</>
+<d>expect(</b><r>spy</g><d>).</b>not<d>.</b>toHaveBeenNthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
 n: 1
-Expected: not <g>Any<String></>
-Received:     <d>"foo"</>
+Expected: not <g>Any<String></g>
+Received:     <d>"foo"</b>
 
-Number of calls: <r>1</>
+Number of calls: <r>1</g>
 `;
