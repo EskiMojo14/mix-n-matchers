@@ -10,9 +10,9 @@ import style from "ansi-styles";
 import type { NewPlugin } from "pretty-format";
 
 export const alignedAnsiStyleSerializer: NewPlugin = {
-  serialize(val: string): string {
+  serialize(val: string | Error): string {
     // Return the string itself, not escaped nor enclosed in double quote marks.
-    return val.replace(ansiRegex(), (match) => {
+    return (val instanceof Error ? val.message : val).replace(ansiRegex(), (match) => {
       switch (match) {
         case style.inverse.open:
           return "<i>";
@@ -50,7 +50,7 @@ export const alignedAnsiStyleSerializer: NewPlugin = {
       }
     });
   },
-  test(val: unknown): val is string {
-    return typeof val === "string";
+  test(val: unknown) {
+    return typeof val === "string" || val instanceof Error;
   },
 };

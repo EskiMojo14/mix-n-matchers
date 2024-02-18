@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`exactly > allows Object.is equality where deep equality would normally be used 1`] = `
-expected "spy" to be called with arguments: [ CustomMatcher{ …(3) } ][90m
+expected "spy" to be called with arguments: [ exactly<[object Object]> ][90m
 
 Received: 
 
@@ -18,7 +18,7 @@ Number of calls: <b>1</b>
 `;
 
 exports[`exactly > allows Object.is equality where deep equality would normally be used 2`] = `
-expected "spy" to be called with arguments: [ CustomMatcher{ …(3) } ][90m
+expected "spy" to be called with arguments: [ not.exactly<[object Object]> ][90m
 
 Received: 
 
