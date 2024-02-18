@@ -21,12 +21,7 @@ export type Tester = (
 
 export interface MatcherUtils {
   customTesters?: Array<Tester>;
-  equals: (
-    a: unknown,
-    b: unknown,
-    customTesters?: Array<Tester>,
-    strictCheck?: boolean,
-  ) => boolean;
+  equals: EqualsFunction;
 }
 
 export interface MatcherContext extends MatcherUtils {
