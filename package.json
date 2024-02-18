@@ -86,7 +86,7 @@
     "vitest": "^1"
   },
   "dependencies": {
-    "jest-matcher-utils": "^29.7.0"
+    "jest-matcher-utils": ">=28.0.0"
   },
   "peerDependencies": {
     "jest": ">=28.0.0",
