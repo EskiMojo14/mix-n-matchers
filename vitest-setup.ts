@@ -1,1 +1,1 @@
-import "./src/vitest";
+import "mix-n-matchers/vitest";

@@ -35,8 +35,10 @@
     "prepare": "husky install",
     "prebuild": "yarn run type",
     "build": "tsup",
-    "test": "yarn node --experimental-vm-modules $(yarn bin jest)",
+    "test": "yarn node --experimental-vm-modules $(yarn bin jest) --setupFilesAfterEnv ./src/all.ts",
+    "test:dist": "yarn node --experimental-vm-modules $(yarn bin jest) --setupFilesAfterEnv mix-n-matchers/all",
     "vitest": "vitest",
+    "vitest:dist": "vitest --config vitest-dist.config.ts",
     "lint": "eslint",
     "pre-commit": "lint-staged",
     "attw": "attw",
@@ -99,9 +101,6 @@
   "jest": {
     "preset": "ts-jest/presets/js-with-ts-esm",
     "testEnvironment": "node",
-    "setupFilesAfterEnv": [
-      "./jest-setup.ts"
-    ],
     "extensionsToTreatAsEsm": [
       ".ts"
     ],
