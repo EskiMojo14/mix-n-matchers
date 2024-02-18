@@ -183,7 +183,7 @@ declare module "@jest/extend" {
 
 ### Vitest
 
-If you're using Vitest, you should use `mix-n-matchers/vitest` instead of the 'all' entry point.:
+If you're using Vitest, you should use `mix-n-matchers/vitest` instead of the 'all' entry point:
 
 ```ts
 // global.d.ts
@@ -304,13 +304,3 @@ expect(mock).toHaveBeenNthCalledWithContext(1, expectedContext);
 </td>
 </tr>
 </table>
-
-## Vitest Support
-
-Vitest support is not currently possible as these matchers use Jest utils that aren't provided by Vitest, namely:
-
-- `matcherErrorMessage`
-- `printWithType`
-- `printDiffOrStringify`
-
-These could be inlined or an explicit dependency on `jest-matcher-utils` could be added, but neither of these seem ideal.
