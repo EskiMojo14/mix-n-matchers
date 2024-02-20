@@ -255,6 +255,26 @@ expect(mock).toBeCalledWith(expect.typeOf("string"));
 </td>
 </tr>
 <tr>
+<tr>
+<td>
+
+`oneOf`
+
+</td>
+<td>
+
+Checks that the value matches one of the specified values, using deep equality.
+
+</td>
+<td>
+
+```ts
+expect(mock).toBeCalledWith(expect.oneOf([1, 2, 3]));
+```
+
+</td>
+</tr>
+<tr>
 <td>
 
 `arrayContainingOnly`
