@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`expect.ofEnum can be aliased to expect.enum 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>enum<[object Object]></g>
+Received: <r>"Three"</g>
+`;
+
 exports[`expect.ofEnum works when called with a const object 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
 

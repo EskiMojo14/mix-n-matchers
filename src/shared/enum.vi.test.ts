@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { alignedAnsiStyleSerializer } from "../utils/tests";
+import type { AsymmetricMixNMatchers } from "..";
+import { ofEnum } from "..";
 
 expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 
@@ -135,4 +137,20 @@ describe("expect.ofEnum", () => {
       expect(ConstObject.Zero).toEqual(expect.not.ofEnum(ConstObject));
     }).toThrowErrorMatchingSnapshot();
   });
+
+  it("can be aliased to expect.enum", () => {
+    expect.extend({ enum: ofEnum });
+
+    expect(NumericEnum.Zero).toEqual(expect.enum(NumericEnum));
+
+    expect(() => {
+      expect("Three").toEqual(expect.enum(NumericEnum));
+    }).toThrowErrorMatchingSnapshot();
+  });
 });
+
+declare module "vitest" {
+  interface AsymmetricMatchersContaining {
+    enum: AsymmetricMixNMatchers["ofEnum"];
+  }
+}
