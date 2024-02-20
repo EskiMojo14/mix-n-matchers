@@ -6,3 +6,5 @@ export { exactly } from "./exactly";
 export { objectContainingOnly } from "./object-containing-only";
 export { oneOf } from "./one-of";
 export { typeOf } from "./typeof";
+
+export { ofEnum } from "../shared/enum";

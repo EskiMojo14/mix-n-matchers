@@ -10,4 +10,4 @@ export {
   toHaveBeenNthCalledWithContext,
 } from "./context";
 
-export { toBeEnum } from "./enum";
+export { toBeEnum } from "../shared/enum";

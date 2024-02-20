@@ -1,5 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`expect.ofEnum works when called with a const object 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>ofEnum<[object Object]></g>
+Received: <r>3</g>
+`;
+
+exports[`expect.ofEnum works when called with a const object 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>not.ofEnum<[object Object]></g>
+Received: <r>0</g>
+`;
+
+exports[`expect.ofEnum works when called with a mixed enum 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>ofEnum<[object Object]></g>
+Received: <r>"Three"</g>
+`;
+
+exports[`expect.ofEnum works when called with a mixed enum 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>not.ofEnum<[object Object]></g>
+Received: <r>0</g>
+`;
+
+exports[`expect.ofEnum works when called with a numeric enum 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>ofEnum<[object Object]></g>
+Received: <r>3</g>
+`;
+
+exports[`expect.ofEnum works when called with a numeric enum 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>not.ofEnum<[object Object]></g>
+Received: <r>0</g>
+`;
+
+exports[`expect.ofEnum works when called with a string enum 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>ofEnum<[object Object]></g>
+Received: <r>"Three"</g>
+`;
+
+exports[`expect.ofEnum works when called with a string enum 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>not.ofEnum<[object Object]></g>
+Received: <r>"Zero"</g>
+`;
+
 exports[`toBeEnum works when called with a const object 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toBeEnum<d>(</b><g>expected</g><d>)</b>
 
