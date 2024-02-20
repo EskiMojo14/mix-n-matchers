@@ -5,7 +5,10 @@ import * as mixNMatchers from "./index";
 declare module "vitest" {
   interface Assertion<T = any> extends mixNMatchers.MixNMatchers<T> {}
   interface AsymmetricMatchersContaining
-    extends mixNMatchers.AsymmetricMixNMatchers {}
+    extends mixNMatchers.AsymmetricMixNMatchers {
+    enum: mixNMatchers.AsymmetricMixNMatchers["ofEnum"];
+  }
 }
 
 expect.extend(mixNMatchers);
+expect.extend({ enum: mixNMatchers.ofEnum });

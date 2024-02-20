@@ -1,5 +1,3 @@
-import type { AsymmetricMixNMatchers } from "..";
-import { ofEnum } from "..";
 import { alignedAnsiStyleSerializer } from "../utils/tests";
 
 expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
@@ -138,8 +136,6 @@ describe("expect.ofEnum", () => {
   });
 
   it("can be aliased to expect.enum", () => {
-    expect.extend({ enum: ofEnum });
-
     expect(NumericEnum.Zero).toEqual(expect.enum(NumericEnum));
 
     expect(() => {
@@ -147,12 +143,3 @@ describe("expect.ofEnum", () => {
     }).toThrowErrorMatchingSnapshot();
   });
 });
-
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace jest {
-    interface Expect {
-      enum: AsymmetricMixNMatchers["ofEnum"];
-    }
-  }
-}

@@ -279,18 +279,21 @@ expect(mock).toBeCalledWith(expect.oneOf([1, 2, 3]));
 <tr>
 <td>
 
-`ofEnum`
+`ofEnum` / `enum`
 
 </td>
 <td>
 
 Checks that the value is a member of the specified enum.
 
+Exported as `ofEnum` and aliased as `enum` in auto-setup files. (See [Tips](#aliasing-expectofenum-to-expectenum))
+
 </td>
 <td>
 
 ```ts
 expect(mock).toBeCalledWith(expect.ofEnum(MyEnum));
+expect(mock).toBeCalledWith(expect.enum(MyEnum));
 ```
 
 </td>
@@ -466,6 +469,10 @@ declare global {
     export interface Expect {
       enum: AsymmetricMixNMatchers["ofEnum"];
     }
+
+    interface InverseAsymmetricMatchers {
+      enum: AsymmetricMixNMatchers["ofEnum"];
+    }
   }
 }
 ```
@@ -477,3 +484,5 @@ After this setup, you should be able to use `expect.enum` as a matcher.
 ```ts
 expect(mock).toBeCalledWith(expect.enum(MyEnum));
 ```
+
+This is automatically done for you with the auto-setup files (`mix-n-matchers/all`, `mix-n-matchers/jest-globals`, `mix-n-matchers/vitest`).
