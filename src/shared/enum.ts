@@ -4,7 +4,7 @@ import type { EnumLike } from "../utils/enum";
 import { getValidEnumValues } from "../utils/enum";
 import type { MatcherFunction } from "../utils/types";
 
-const makeEnumMatcher = (
+const createEnumMatcher = (
   matcherName: string,
   asymmetric: boolean,
 ): MatcherFunction<[EnumLike]> =>
@@ -40,7 +40,7 @@ const makeEnumMatcher = (
  *
  * expect(getDirection()).toBeEnum(Direction);
  */
-export const toBeEnum = makeEnumMatcher("toBeEnum", false);
+export const toBeEnum = createEnumMatcher("toBeEnum", false);
 
 declare module "../matchers" {
   interface MixNMatchers<R> {
@@ -61,7 +61,7 @@ declare module "../matchers" {
   }
 }
 
-export const ofEnum = makeEnumMatcher("ofEnum", true);
+export const ofEnum = createEnumMatcher("ofEnum", true);
 
 declare module "../asymmetricMatchers" {
   interface AsymmetricMixNMatchers {
