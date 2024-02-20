@@ -10,15 +10,20 @@ declare global {
   namespace jest {
     interface Matchers<R> extends mixNMatchers.MixNMatchers<R> {}
 
-    interface Expect extends mixNMatchers.AsymmetricMixNMatchers {}
+    interface Expect extends mixNMatchers.AsymmetricMixNMatchers {
+      enum: mixNMatchers.AsymmetricMixNMatchers["ofEnum"];
+    }
 
     interface InverseAsymmetricMatchers
-      extends mixNMatchers.AsymmetricMixNMatchers {}
+      extends mixNMatchers.AsymmetricMixNMatchers {
+      enum: mixNMatchers.AsymmetricMixNMatchers["ofEnum"];
+    }
   }
 }
 
 if (jestExpect !== undefined) {
   jestExpect.extend(mixNMatchers);
+  jestExpect.extend({ enum: mixNMatchers.ofEnum });
 } else {
   throw new Error(
     "Unable to find Jest's global expect. " +

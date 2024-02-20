@@ -9,3 +9,5 @@ export {
   nthCalledWithContext,
   toHaveBeenNthCalledWithContext,
 } from "./context";
+
+export { toBeEnum } from "../shared/enum";

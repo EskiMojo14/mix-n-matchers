@@ -275,6 +275,30 @@ expect(mock).toBeCalledWith(expect.oneOf([1, 2, 3]));
 </td>
 </tr>
 <tr>
+
+<tr>
+<td>
+
+`ofEnum` / `enum`
+
+</td>
+<td>
+
+Checks that the value is a member of the specified enum.
+
+Exported as `ofEnum` and aliased as `enum` in auto-setup files. (See [Tips](#aliasing-expectofenum-to-expectenum))
+
+</td>
+<td>
+
+```ts
+expect(mock).toBeCalledWith(expect.ofEnum(MyEnum));
+expect(mock).toBeCalledWith(expect.enum(MyEnum));
+```
+
+</td>
+</tr>
+<tr>
 <td>
 
 `arrayContainingOnly`
@@ -344,6 +368,25 @@ expect({ a: 1, b: 2 }).toEqual(expect.objectContainingOnly({ a: 1 }));
 <tr>
 <td>
 
+`toBeEnum`
+
+</td>
+<td>
+
+Assert a value is a member of the specified enum.
+
+</td>
+<td>
+
+```ts
+expect(getDirection()).toBeEnum(Direction);
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
 `toBeCalledWithContext`/`toHaveBeenCalledWithContext`
 
 </td>
@@ -402,3 +445,44 @@ expect(mock).toHaveBeenNthCalledWithContext(1, expectedContext);
 </td>
 </tr>
 </table>
+
+## Tips
+
+### Aliasing `expect.ofEnum` to `expect.enum`
+
+As `enum` is a reserved word in Javascript, it is not possible to export a matcher with this name. However, you can alias it in your setup file:
+
+```js
+import { ofEnum } from "mix-n-matchers";
+
+expect.extend({ enum: ofEnum });
+```
+
+To add this to your `global.d.ts`:
+
+```ts
+// global.d.ts
+import type { AsymmetricMixNMatchers } from "mix-n-matchers";
+
+declare global {
+  namespace jest {
+    export interface Expect {
+      enum: AsymmetricMixNMatchers["ofEnum"];
+    }
+
+    interface InverseAsymmetricMatchers {
+      enum: AsymmetricMixNMatchers["ofEnum"];
+    }
+  }
+}
+```
+
+This approach can be adapted for Jest globals and Vitest as well.
+
+After this setup, you should be able to use `expect.enum` as a matcher.
+
+```ts
+expect(mock).toBeCalledWith(expect.enum(MyEnum));
+```
+
+This is automatically done for you with the auto-setup files (`mix-n-matchers/all`, `mix-n-matchers/jest-globals`, `mix-n-matchers/vitest`).

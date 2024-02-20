@@ -1,0 +1,49 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`toBeEnum > works when called with a const object 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeEnum<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>3</g> to be a valid enum value. Valid values are: <g>0</g>, <g>1</g>, <g>2</g>.
+`;
+
+exports[`toBeEnum > works when called with a const object 2`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeEnum<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>0</g> not to be a valid enum value. Valid values are: <g>0</g>, <g>1</g>, <g>2</g>.
+`;
+
+exports[`toBeEnum > works when called with a mixed enum 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeEnum<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>"Three"</g> to be a valid enum value. Valid values are: <g>0</g>, <g>"One"</g>, <g>2</g>.
+`;
+
+exports[`toBeEnum > works when called with a mixed enum 2`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeEnum<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>0</g> not to be a valid enum value. Valid values are: <g>0</g>, <g>"One"</g>, <g>2</g>.
+`;
+
+exports[`toBeEnum > works when called with a numeric enum 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeEnum<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>3</g> to be a valid enum value. Valid values are: <g>0</g>, <g>1</g>, <g>2</g>.
+`;
+
+exports[`toBeEnum > works when called with a numeric enum 2`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeEnum<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>0</g> not to be a valid enum value. Valid values are: <g>0</g>, <g>1</g>, <g>2</g>.
+`;
+
+exports[`toBeEnum > works when called with a string enum 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeEnum<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>"Three"</g> to be a valid enum value. Valid values are: <g>"Zero"</g>, <g>"One"</g>, <g>"Two"</g>.
+`;
+
+exports[`toBeEnum > works when called with a string enum 2`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeEnum<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>"Zero"</g> not to be a valid enum value. Valid values are: <g>"Zero"</g>, <g>"One"</g>, <g>"Two"</g>.
+`;

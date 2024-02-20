@@ -4,7 +4,10 @@ import * as mixNMatchers from "./index";
 
 declare module "@jest/expect" {
   interface Matchers<R> extends mixNMatchers.MixNMatchers<R> {}
-  interface AsymmetricMatchers extends mixNMatchers.AsymmetricMixNMatchers {}
+  interface AsymmetricMatchers extends mixNMatchers.AsymmetricMixNMatchers {
+    enum: mixNMatchers.AsymmetricMixNMatchers["ofEnum"];
+  }
 }
 
 expect.extend(mixNMatchers);
+expect.extend({ enum: mixNMatchers.ofEnum });
