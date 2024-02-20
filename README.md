@@ -275,6 +275,27 @@ expect(mock).toBeCalledWith(expect.oneOf([1, 2, 3]));
 </td>
 </tr>
 <tr>
+
+<tr>
+<td>
+
+`ofEnum`
+
+</td>
+<td>
+
+Checks that the value is a member of the specified enum.
+
+</td>
+<td>
+
+```ts
+expect(mock).toBeCalledWith(expect.ofEnum(MyEnum));
+```
+
+</td>
+</tr>
+<tr>
 <td>
 
 `arrayContainingOnly`
@@ -340,6 +361,25 @@ expect({ a: 1, b: 2 }).toEqual(expect.objectContainingOnly({ a: 1 }));
 <table>
 <tr>
 <th>Name</th><th>Description</th><th>Example</th>
+</tr>
+<tr>
+<td>
+
+`toBeEnum`
+
+</td>
+<td>
+
+Assert a value is a member of the specified enum.
+
+</td>
+<td>
+
+```ts
+expect(getDirection()).toBeEnum(Direction);
+```
+
+</td>
 </tr>
 <tr>
 <td>
