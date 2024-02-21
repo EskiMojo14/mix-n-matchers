@@ -4,7 +4,7 @@ import type { EnumLike } from "../utils/enum";
 import { getValidEnumValues } from "../utils/enum";
 import type { MatcherFunction } from "../utils/types";
 
-export const createEnumMatcher = (
+const createEnumMatcher = (
   matcherName: string,
   asymmetric: boolean,
 ): MatcherFunction<[EnumLike]> =>
