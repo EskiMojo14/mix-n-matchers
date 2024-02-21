@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { expect } from "@jest/globals";
-import * as mixNMatchers from "./index";
+import * as mixNMatchers from ".";
 
 declare module "@jest/expect" {
   interface Matchers<R> extends mixNMatchers.MixNMatchers<R> {}

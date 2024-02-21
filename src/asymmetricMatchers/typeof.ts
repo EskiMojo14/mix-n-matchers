@@ -40,7 +40,7 @@ export const typeOf: MatcherFunction<[expected: Type]> = function (
   };
 };
 
-declare module "./index" {
+declare module "mix-n-matchers" {
   export interface AsymmetricMixNMatchers {
     /**
      * Matches against the provided value using `typeof`.

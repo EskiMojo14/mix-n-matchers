@@ -78,7 +78,7 @@ export const objectContainingOnly: MatcherFunction<
   };
 };
 
-declare module "./index" {
+declare module "mix-n-matchers" {
   interface AsymmetricMixNMatchers {
     /**
      * Matches any object containing only matching keys and values.

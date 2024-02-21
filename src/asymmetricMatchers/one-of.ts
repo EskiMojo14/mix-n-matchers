@@ -39,7 +39,7 @@ export const oneOf: MatcherFunction<[Array<unknown>]> = function (
   };
 };
 
-declare module "./index" {
+declare module "mix-n-matchers" {
   export interface AsymmetricMixNMatchers {
     /**
      * Checks if value matches one of provided values.
