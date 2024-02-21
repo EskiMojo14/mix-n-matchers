@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import * as mixNMatchers from "./index";
+import * as mixNMatchers from ".";
 
 // @ts-expect-error expect isn't typed to be on global
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

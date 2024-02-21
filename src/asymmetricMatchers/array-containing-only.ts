@@ -35,7 +35,7 @@ export const arrayContainingOnly: MatcherFunction<[expected: Array<unknown>]> =
     };
   };
 
-declare module "./index" {
+declare module "mix-n-matchers" {
   export interface AsymmetricMixNMatchers {
     /**
      * Use `arrayContainingOnly` to expect an array to contain only the expected values.

@@ -52,7 +52,7 @@ export const exactly: MatcherFunction<[expected: unknown]> = function (
   };
 };
 
-declare module "./index" {
+declare module "mix-n-matchers" {
   export interface AsymmetricMixNMatchers {
     /**
      * Matches against the provided value using `Object.is`.
