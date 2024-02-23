@@ -5,12 +5,8 @@ export interface EnumLike {
 
 export const getValidEnumValues = (obj: EnumLike) => {
   const filtered = Object.fromEntries(
-    Object.entries(obj).filter(([k]) => {
-      const val = obj[k];
-      if (typeof val === "undefined") return false;
-      // filter out reverse mappings
-      return typeof obj[val] !== "number";
-    }),
+    // filter out reverse mappings
+    Object.entries(obj).filter(([, v]) => typeof obj[v] !== "number"),
   );
   return Object.values(filtered);
 };
