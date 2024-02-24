@@ -373,7 +373,11 @@ Checks that the value is an iterable that satisfies the specified sequence of pr
 expect({
   array: [1, 2, 3],
 }).toEqual({
-  array: expect.sequence([(x) => x === 1, (x) => x === 2, (x) => x === 3]),
+  array: expect.sequence(
+    (x) => x === 1,
+    (x) => x === 2,
+    (x) => x === 3,
+  ),
 });
 ```
 
@@ -421,11 +425,11 @@ Assert a value is an iterable that satisfies the specified sequence of predicate
 <td>
 
 ```ts
-expect([1, 2, 3]).toSatisfySequence([
+expect([1, 2, 3]).toSatisfySequence(
   (x) => x === 1,
   (x) => x === 2,
   (x) => x === 3,
-]);
+);
 ```
 
 </td>
