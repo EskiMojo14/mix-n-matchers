@@ -1,5 +1,6 @@
 import { matcherHint, printReceived } from "jest-matcher-utils";
 import type { MatcherFunction } from "../utils/types";
+import { isIterable } from "../utils";
 
 type Predicate = (value: unknown) => boolean;
 
@@ -17,30 +18,37 @@ export const makeSatisfySequenceMatcher = (
         promise: this.promise,
         isDirectExpectCall: asymmetric,
       }) + "\n\n";
-    if (!Array.isArray(received)) {
+    if (!isIterable(received)) {
       return {
         pass: false,
         message: () =>
-          prefix + `Expected ${printReceived(received)} to be an array`,
+          prefix + `Expected ${printReceived(received)} to be an iterable`,
       };
     }
-    if (predicates.length > received.length) {
+    let i = 0;
+    for (const receivedItem of received) {
+      if (i >= predicates.length) {
+        // we've run out of predicates, so the sequence is satisfied
+        break;
+      }
+      const predicate = predicates[i];
+      if (predicate && !predicate(receivedItem)) {
+        return {
+          pass: false,
+          message: () =>
+            prefix +
+            `Expected ${printReceived(receivedItem)} to satisfy predicate at index ${i}`,
+        };
+      }
+      i++;
+    }
+    if (i < predicates.length) {
       return {
         pass: false,
         message: () =>
           prefix +
           `Expected ${printReceived(received)} to have at least ${predicates.length} items`,
       };
-    }
-    for (const [index, predicate] of predicates.entries()) {
-      if (!predicate(received[index])) {
-        return {
-          pass: false,
-          message: () =>
-            prefix +
-            `Expected ${printReceived(received[index])} to satisfy predicate at index ${index}`,
-        };
-      }
     }
     return {
       pass: true,

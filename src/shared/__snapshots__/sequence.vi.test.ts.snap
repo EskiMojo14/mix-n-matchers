@@ -2,26 +2,38 @@
 
 exports[`sequence > fails if not passed any predicates 1`] = `toSatisfySequence requires at least one predicate`;
 
-exports[`sequence > fails if the array is too short 1`] = `expected { array: [ +0 ] } to deeply equal { array: sequence{…} }`;
+exports[`sequence > fails if the iterable is too short 1`] = `expected { array: [ +0 ] } to deeply equal { array: sequence{…} }`;
 
-exports[`sequence > fails with a non-array 1`] = `expected { array: +0 } to deeply equal { array: sequence<(x) => x === 0> }`;
+exports[`sequence > fails if the iterable is too short 2`] = `expected { array: Set{ +0 } } to deeply equal { array: sequence{…} }`;
+
+exports[`sequence > fails with a non-iterable 1`] = `expected { array: +0 } to deeply equal { array: sequence<(x) => x === 0> }`;
 
 exports[`sequence > works with an array 1`] = `expected { array: [ 1, 2, 3 ] } to deeply equal { array: sequence{…} }`;
 
 exports[`sequence > works with an array 2`] = `expected { array: [ 1, 2, 3 ] } to deeply equal { array: not.sequence{…} }`;
 
+exports[`sequence > works with other iterables 1`] = `expected { array: Set{ 1, 2, 3 } } to deeply equal { array: sequence{…} }`;
+
+exports[`sequence > works with other iterables 2`] = `expected { array: Set{ 1, 2, 3 } } to deeply equal { array: not.sequence{…} }`;
+
 exports[`toSatisfySequence > fails if not passed any predicates 1`] = `toSatisfySequence requires at least one predicate`;
 
-exports[`toSatisfySequence > fails if the array is too short 1`] = `
+exports[`toSatisfySequence > fails if the iterable is too short 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
 
 Expected <r>[0]</g> to have at least 2 items
 `;
 
-exports[`toSatisfySequence > fails with a non-array 1`] = `
+exports[`toSatisfySequence > fails if the iterable is too short 2`] = `
 <d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
 
-Expected <r>0</g> to be an array
+Expected <r>Set {0}</g> to have at least 2 items
+`;
+
+exports[`toSatisfySequence > fails with a non-iterable 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>0</g> to be an iterable
 `;
 
 exports[`toSatisfySequence > works with an array 1`] = `
@@ -34,4 +46,16 @@ exports[`toSatisfySequence > works with an array 2`] = `
 <d>expect(</b><r>received</g><d>).</b>not<d>.</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
 
 Expected <r>[1, 2, 3]</g> not to satisfy sequence
+`;
+
+exports[`toSatisfySequence > works with other iterables 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>2</g> to satisfy predicate at index 1
+`;
+
+exports[`toSatisfySequence > works with other iterables 2`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {1, 2, 3}</g> not to satisfy sequence
 `;
