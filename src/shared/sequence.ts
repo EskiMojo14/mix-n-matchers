@@ -8,7 +8,7 @@ export const makeSatisfySequenceMatcher = (
   matcherName: string,
   asymmetric: boolean,
 ): MatcherFunction<[predicate: Predicate, ...predicates: Array<Predicate>]> =>
-  function (received, ...predicates) {
+  function toSatisfySequence(received, ...predicates) {
     if (predicates.length === 0) {
       throw new Error(`${matcherName} requires at least one predicate`);
     }
