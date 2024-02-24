@@ -46,7 +46,8 @@
     "attw": "attw",
     "publint": "publint",
     "type": "tsc",
-    "prepack": "yarn run publint"
+    "prepack": "yarn run publint",
+    "postinstall": "yarn run build"
   },
   "repository": {
     "type": "git",
