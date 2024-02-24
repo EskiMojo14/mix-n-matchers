@@ -198,7 +198,7 @@ import { expect } from "vitest";
 import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
 
 declare module "vitest" {
-  interface Assertion<T = any>
+  interface Assertion<T>
     extends Pick<
       mixNMatchers.MixNMatchers<void, T>,
       "toBeCalledWithContext" | "lastCalledWithContext" | "nthCalledWithContext"
