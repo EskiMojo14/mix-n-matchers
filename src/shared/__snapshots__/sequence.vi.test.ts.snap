@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`sequence > fails if not passed any predicates 1`] = `toSatisfySequence requires at least one predicate`;
+exports[`sequence > fails if not passed any predicates 1`] = `sequence requires at least one predicate`;
 
 exports[`sequence > fails if the iterable is too short 1`] = `expected { array: [ +0 ] } to deeply equal { array: sequence{…} }`;
 

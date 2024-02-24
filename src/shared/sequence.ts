@@ -10,7 +10,7 @@ export const makeSatisfySequenceMatcher = (
 ): MatcherFunction<[predicate: Predicate, ...predicates: Array<Predicate>]> =>
   function (received, ...predicates) {
     if (predicates.length === 0) {
-      throw new Error("toSatisfySequence requires at least one predicate");
+      throw new Error(`${matcherName} requires at least one predicate`);
     }
     const prefix =
       matcherHint(matcherName, undefined, undefined, {
