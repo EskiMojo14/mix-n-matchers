@@ -275,7 +275,6 @@ expect(mock).toBeCalledWith(expect.oneOf([1, 2, 3]));
 </td>
 </tr>
 <tr>
-
 <tr>
 <td>
 
@@ -357,6 +356,30 @@ expect({ a: 1, b: 2 }).toEqual(expect.objectContainingOnly({ a: 1 }));
 
 </td>
 </tr>
+<tr>
+<td>
+
+`sequence`
+
+</td>
+<td>
+
+Checks that the value is an iterable that satisfies the specified sequence of predicates.
+
+</td>
+<td>
+
+```ts
+expect({
+  array: [1, 2, 3],
+}).toEqual({
+  array: expect.sequence([(x) => x === 1, (x) => x === 2, (x) => x === 3]),
+});
+```
+
+</td>
+</tr>
+<tr>
 </table>
 
 ### Symmetric Matchers
@@ -380,6 +403,29 @@ Assert a value is a member of the specified enum.
 
 ```ts
 expect(getDirection()).toBeEnum(Direction);
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+`toSatisfySequence`
+
+</td>
+<td>
+
+Assert a value is an iterable that satisfies the specified sequence of predicates.
+
+</td>
+<td>
+
+```ts
+expect([1, 2, 3]).toSatisfySequence([
+  (x) => x === 1,
+  (x) => x === 2,
+  (x) => x === 3,
+]);
 ```
 
 </td>
