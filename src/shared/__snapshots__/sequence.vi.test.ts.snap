@@ -1,5 +1,15 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`sequence > fails if not passed any predicates 1`] = `toSatisfySequence requires at least one predicate`;
+
+exports[`sequence > fails if the array is too short 1`] = `expected { array: [ +0 ] } to deeply equal { array: sequence{…} }`;
+
+exports[`sequence > fails with a non-array 1`] = `expected { array: +0 } to deeply equal { array: sequence<(x) => x === 0> }`;
+
+exports[`sequence > works with an array 1`] = `expected { array: [ 1, 2, 3 ] } to deeply equal { array: sequence{…} }`;
+
+exports[`sequence > works with an array 2`] = `expected { array: [ 1, 2, 3 ] } to deeply equal { array: not.sequence{…} }`;
+
 exports[`toSatisfySequence > fails if not passed any predicates 1`] = `toSatisfySequence requires at least one predicate`;
 
 exports[`toSatisfySequence > fails if the array is too short 1`] = `
@@ -17,11 +27,11 @@ Expected <r>0</g> to be an array
 exports[`toSatisfySequence > works with an array 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
 
-Expected <r>""</g> to satisfy predicate at index 1
+Expected <r>2</g> to satisfy predicate at index 1
 `;
 
 exports[`toSatisfySequence > works with an array 2`] = `
 <d>expect(</b><r>received</g><d>).</b>not<d>.</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
 
-Expected <r>[0, "", false]</g> not to satisfy sequence
+Expected <r>[1, 2, 3]</g> not to satisfy sequence
 `;

@@ -8,3 +8,4 @@ export { oneOf } from "./one-of";
 export { typeOf } from "./typeof";
 
 export { ofEnum } from "../shared/enum";
+export { sequence } from "../shared/sequence";

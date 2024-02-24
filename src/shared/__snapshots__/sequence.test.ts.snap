@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sequence fails if not passed any predicates 1`] = `toSatisfySequence requires at least one predicate`;
+
+exports[`sequence fails if the array is too short 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 3</g>
+
+<d>  Object {</b>
+<g>-   "array": sequence<(x) => x === 0, (x) => x === 1>,</g>
+<r>+   "array": Array [</g>
+<r>+     0,</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`sequence fails with a non-array 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 1</g>
+
+<d>  Object {</b>
+<g>-   "array": sequence<(x) => x === 0>,</g>
+<r>+   "array": 0,</g>
+<d>  }</b>
+`;
+
+exports[`sequence works with an array 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": sequence<(x) => x === 1, (x) => x === 3, (x) => x === 2>,</g>
+<r>+   "array": Array [</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`sequence works with an array 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": not.sequence<(x) => x === 1, (x) => x === 2>,</g>
+<r>+   "array": Array [</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`toSatisfySequence fails if not passed any predicates 1`] = `toSatisfySequence requires at least one predicate`;
+
+exports[`toSatisfySequence fails if the array is too short 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[0]</g> to have at least 2 items
+`;
+
+exports[`toSatisfySequence fails with a non-array 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>0</g> to be an array
+`;
+
+exports[`toSatisfySequence works with an array 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>2</g> to satisfy predicate at index 1
+`;
+
+exports[`toSatisfySequence works with an array 2`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[1, 2, 3]</g> not to satisfy sequence
+`;
