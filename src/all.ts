@@ -8,7 +8,7 @@ const jestExpect: jest.Expect | undefined = globalThis.expect;
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jest {
-    interface Matchers<R> extends mixNMatchers.MixNMatchers<R> {}
+    interface Matchers<R, T> extends mixNMatchers.MixNMatchers<R, T> {}
 
     interface Expect extends mixNMatchers.AsymmetricMixNMatchers {
       enum: mixNMatchers.AsymmetricMixNMatchers["ofEnum"];

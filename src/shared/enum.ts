@@ -45,7 +45,7 @@ export const toBeEnum = createEnumMatcher("toBeEnum", false);
 export const ofEnum = createEnumMatcher("ofEnum", true);
 
 declare module "mix-n-matchers" {
-  export interface MixNMatchers<R> {
+  export interface MixNMatchers<R, T = unknown> {
     /**
      * Use .toBeEnum to check that a value is a valid enum value.
      *

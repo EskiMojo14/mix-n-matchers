@@ -93,9 +93,9 @@ import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
 
 declare global {
   namespace jest {
-    export interface Matchers<R>
+    export interface Matchers<R, T>
       extends Pick<
-        MixNMatchers<R>,
+        MixNMatchers<R, T>,
         | "toBeCalledWithContext"
         | "lastCalledWithContext"
         | "nthCalledWithContext"
@@ -140,8 +140,8 @@ import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
 
 declare global {
   namespace jest {
-    export interface Matchers<R>
-      extends Pick<MixNMatchers<R>, keyof typeof mixNMatchers> {}
+    export interface Matchers<R, T>
+      extends Pick<MixNMatchers<R, T>, keyof typeof mixNMatchers> {}
 
     export interface Expect
       extends Pick<AsymmetricMixNMatchers, keyof typeof asymmMixNMatchers> {}
@@ -170,9 +170,9 @@ If you want finer control over which matchers are added, you should follow the b
 import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
 
 declare module "@jest/extend" {
-  export interface Matchers<R>
+  export interface Matchers<R, T>
     extends Pick<
-      MixNMatchers<R>,
+      MixNMatchers<R, T>,
       "toBeCalledWithContext" | "lastCalledWithContext" | "nthCalledWithContext"
     > {}
 
@@ -200,7 +200,7 @@ import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
 declare module "vitest" {
   interface Assertion<T = any>
     extends Pick<
-      mixNMatchers.MixNMatchers<T>,
+      mixNMatchers.MixNMatchers<void, T>,
       "toBeCalledWithContext" | "lastCalledWithContext" | "nthCalledWithContext"
     > {}
   interface AsymmetricMatchersContaining

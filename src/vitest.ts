@@ -3,7 +3,7 @@ import { expect } from "vitest";
 import * as mixNMatchers from ".";
 
 declare module "vitest" {
-  interface Assertion<T = any> extends mixNMatchers.MixNMatchers<T> {}
+  interface Assertion<T> extends mixNMatchers.MixNMatchers<void, T> {}
   interface AsymmetricMatchersContaining
     extends mixNMatchers.AsymmetricMixNMatchers {
     enum: mixNMatchers.AsymmetricMixNMatchers["ofEnum"];

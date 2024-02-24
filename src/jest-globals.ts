@@ -3,7 +3,7 @@ import { expect } from "@jest/globals";
 import * as mixNMatchers from ".";
 
 declare module "@jest/expect" {
-  interface Matchers<R> extends mixNMatchers.MixNMatchers<R> {}
+  interface Matchers<R, T> extends mixNMatchers.MixNMatchers<R, T> {}
   interface AsymmetricMatchers extends mixNMatchers.AsymmetricMixNMatchers {
     enum: mixNMatchers.AsymmetricMixNMatchers["ofEnum"];
   }

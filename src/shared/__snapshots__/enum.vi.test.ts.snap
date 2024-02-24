@@ -1,5 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`expect.ofEnum > can be aliased to expect.enum 1`] = `expected 'Three' to deeply equal enum<[object Object]>`;
+
 exports[`expect.ofEnum > works when called with a const object 1`] = `expected 3 to deeply equal ofEnum<[object Object]>`;
 
 exports[`expect.ofEnum > works when called with a const object 2`] = `expected +0 to deeply equal not.ofEnum<[object Object]>`;
