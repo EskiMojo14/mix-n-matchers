@@ -75,6 +75,7 @@ const makeSatisfySequenceMatcher = (
 
 /**
  * Asserts that an iterable satisfies a sequence of predicates.
+ *
  * @example
  * expect([1, 2, 3]).toSatisfySequence(
  *   (x) => x === 1,
@@ -89,6 +90,7 @@ export const toSatisfySequence = makeSatisfySequenceMatcher(
 
 /**
  * Matches an iterable that satisfies a sequence of predicates.
+ *
  * @example
  * expect({ value: [1, 2, 3] }).toEqual({
  *  value: sequence(
@@ -185,6 +187,8 @@ export const toEqualSequence = makeEqualSequenceMatcher(
 
 /**
  * Asserts that an iterable matches a sequence of expected items, using strict deep equality.
+ *
+ * @see https://jestjs.io/docs/expect#tostrictequalvalue
  * @example
  * expect([1, 2, 3]).toStrictEqualSequence(1, 2, 3);
  */
@@ -196,6 +200,7 @@ export const toStrictEqualSequence = makeEqualSequenceMatcher(
 
 /**
  * Matches an iterable of a sequence of expected items, using deep equality.
+ *
  * @example
  * expect({ value: [1, 2, 3] }).toEqual({
  *   value: sequenceOf(1, 2, 3),
@@ -206,6 +211,7 @@ export const sequenceOf = makeEqualSequenceMatcher("sequenceOf", true);
 /**
  * Matches an iterable of a sequence of expected items, using strict deep equality.
  *
+ * @see https://jestjs.io/docs/expect#tostrictequalvalue
  * @example
  * expect({ value: [1, 2, 3] }).toEqual({
  *  value: strictSequenceOf(1, 2, 3),
@@ -243,6 +249,8 @@ declare module "mix-n-matchers" {
      *
      * Optionally, a type parameter can be used to specify the expected sequence type.
      *
+     *
+     * @see https://jestjs.io/docs/expect#tostrictequalvalue
      * @example
      * expect([1, 2, 3]).toStrictEqualSequence(1, 2, 3);
      */
@@ -271,6 +279,8 @@ declare module "mix-n-matchers" {
     sequenceOf<S extends Array<unknown>>(...expected: S): any;
     /**
      * Matches an iterable of a sequence of expected items, using strict deep equality.
+     *
+     * @see https://jestjs.io/docs/expect#tostrictequalvalue
      * @example
      * expect({ value: [1, 2, 3] }).toEqual({
      *   value: strictSequenceOf(1, 2, 3),
