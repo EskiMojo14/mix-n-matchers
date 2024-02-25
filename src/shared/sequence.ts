@@ -30,6 +30,7 @@ export const makeSatisfySequenceMatcher = (
     for (const receivedItem of received) {
       if (i >= predicates.length) {
         // we've run out of predicates, so the sequence is satisfied
+        // this also guards against infinite iterables
         break;
       }
       sequenceSoFar.push(receivedItem);
