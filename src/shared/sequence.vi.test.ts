@@ -241,51 +241,51 @@ describe("sequence", () => {
   });
 });
 
-describe("toMatchSequence", () => {
+describe("toEqualSequence", () => {
   it("works with an array", () => {
-    expect([1, 2, 3]).toMatchSequence(1, 2, 3);
+    expect([1, 2, 3]).toEqualSequence(1, 2, 3);
 
-    expect([1, 2, 3]).not.toMatchSequence(1, 3, 2);
+    expect([1, 2, 3]).not.toEqualSequence(1, 3, 2);
 
-    expect([1, 2, 3]).toMatchSequence(1, 2);
+    expect([1, 2, 3]).toEqualSequence(1, 2);
 
     expect(() => {
-      expect([1, 2, 3]).toMatchSequence(1, 3, 2);
+      expect([1, 2, 3]).toEqualSequence(1, 3, 2);
     }).toThrowErrorMatchingSnapshot();
 
     expect(() => {
-      expect([1, 2, 3]).not.toMatchSequence(1, 2);
+      expect([1, 2, 3]).not.toEqualSequence(1, 2);
     }).toThrowErrorMatchingSnapshot();
   });
 
   it("works with other iterables", () => {
-    expect(new Set([1, 2, 3])).toMatchSequence(1, 2, 3);
+    expect(new Set([1, 2, 3])).toEqualSequence(1, 2, 3);
 
-    expect(new Set([1, 2, 3])).not.toMatchSequence(1, 3, 2);
+    expect(new Set([1, 2, 3])).not.toEqualSequence(1, 3, 2);
 
-    expect(new Set([1, 2, 3])).toMatchSequence(1, 2);
+    expect(new Set([1, 2, 3])).toEqualSequence(1, 2);
 
     expect(() => {
-      expect(new Set([1, 2, 3])).toMatchSequence(1, 3, 2);
+      expect(new Set([1, 2, 3])).toEqualSequence(1, 3, 2);
     }).toThrowErrorMatchingSnapshot();
 
     expect(() => {
-      expect(new Set([1, 2, 3])).not.toMatchSequence(1, 2);
+      expect(new Set([1, 2, 3])).not.toEqualSequence(1, 2);
     }).toThrowErrorMatchingSnapshot();
   });
 
   it("fails with a non-iterable", () => {
     expect(() => {
-      expect(0).toMatchSequence(0);
+      expect(0).toEqualSequence(0);
     }).toThrowErrorMatchingSnapshot();
-    expect(0).not.toMatchSequence(0);
+    expect(0).not.toEqualSequence(0);
   });
   it("fails if the iterable is too short", () => {
     expect(() => {
-      expect([0]).toMatchSequence(0, 1);
+      expect([0]).toEqualSequence(0, 1);
     }).toThrowErrorMatchingSnapshot();
     expect(() => {
-      expect(new Set([0])).toMatchSequence(0, 1);
+      expect(new Set([0])).toEqualSequence(0, 1);
     }).toThrowErrorMatchingSnapshot();
   });
 });

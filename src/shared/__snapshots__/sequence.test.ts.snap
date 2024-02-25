@@ -212,44 +212,44 @@ exports[`sequenceOf works with other iterables 2`] = `
 <d>  }</b>
 `;
 
-exports[`toMatchSequence fails if the iterable is too short 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toMatchSequence<d>(</b><g>expected</g><d>)</b>
+exports[`toEqualSequence fails if the iterable is too short 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqualSequence<d>(</b><g>expected</g><d>)</b>
 
 Expected <r>[0]</g> to have at least 2 items, but it only had 1.
 `;
 
-exports[`toMatchSequence fails if the iterable is too short 2`] = `
-<d>expect(</b><r>received</g><d>).</b>toMatchSequence<d>(</b><g>expected</g><d>)</b>
+exports[`toEqualSequence fails if the iterable is too short 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqualSequence<d>(</b><g>expected</g><d>)</b>
 
 Expected <r>Set {0}</g> to have at least 2 items, but it only had 1.
 `;
 
-exports[`toMatchSequence fails with a non-iterable 1`] = `Expected <r>0</g> to be an iterable, but it was not`;
+exports[`toEqualSequence fails with a non-iterable 1`] = `Expected <r>0</g> to be an iterable, but it was not`;
 
-exports[`toMatchSequence works with an array 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toMatchSequence<d>(</b><g>expected</g><d>)</b>
+exports[`toEqualSequence works with an array 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqualSequence<d>(</b><g>expected</g><d>)</b>
 
 Expected <r>2</g> to match <r>3</g> at index 1
 
 Full sequence so far: <r>1</g>, <r>2</g>
 `;
 
-exports[`toMatchSequence works with an array 2`] = `
-<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toMatchSequence<d>(</b><g>expected</g><d>)</b>
+exports[`toEqualSequence works with an array 2`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toEqualSequence<d>(</b><g>expected</g><d>)</b>
 
 Expected <r>[1, 2, 3]</g> not to match sequence <r>1</g>, <r>2</g>
 `;
 
-exports[`toMatchSequence works with other iterables 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toMatchSequence<d>(</b><g>expected</g><d>)</b>
+exports[`toEqualSequence works with other iterables 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqualSequence<d>(</b><g>expected</g><d>)</b>
 
 Expected <r>2</g> to match <r>3</g> at index 1
 
 Full sequence so far: <r>1</g>, <r>2</g>
 `;
 
-exports[`toMatchSequence works with other iterables 2`] = `
-<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toMatchSequence<d>(</b><g>expected</g><d>)</b>
+exports[`toEqualSequence works with other iterables 2`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toEqualSequence<d>(</b><g>expected</g><d>)</b>
 
 Expected <r>Set {1, 2, 3}</g> not to match sequence <r>1</g>, <r>2</g>
 `;

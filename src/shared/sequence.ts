@@ -98,7 +98,7 @@ const makeMatchSequenceMatcher = (
   matcherName: string,
   asymmetric: boolean,
 ): MatcherFunction<Array<unknown>> =>
-  function toMatchSequence(received, ...expected) {
+  function toEqualSequence(received, ...expected) {
     if (!isIterable(received)) {
       return {
         pass: false,
@@ -154,10 +154,10 @@ const makeMatchSequenceMatcher = (
 /**
  * Asserts that an iterable matches a sequence of expected items, using deep equality.
  * @example
- * expect([1, 2, 3]).toMatchSequence(1, 2, 3);
+ * expect([1, 2, 3]).toEqualSequence(1, 2, 3);
  */
-export const toMatchSequence = makeMatchSequenceMatcher(
-  "toMatchSequence",
+export const toEqualSequence = makeMatchSequenceMatcher(
+  "toEqualSequence",
   false,
 );
 
@@ -188,9 +188,9 @@ declare module "mix-n-matchers" {
      * Optionally, a type parameter can be used to specify the expected sequence type.
      *
      * @example
-     * expect([1, 2, 3]).toMatchSequence(1, 2, 3);
+     * expect([1, 2, 3]).toEqualSequence(1, 2, 3);
      */
-    toMatchSequence<S extends Array<unknown>>(...expected: S): R;
+    toEqualSequence<S extends Array<unknown>>(...expected: S): R;
   }
   export interface AsymmetricMixNMatchers {
     /**
