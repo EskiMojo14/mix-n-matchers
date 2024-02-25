@@ -46,8 +46,7 @@
     "attw": "attw",
     "publint": "publint",
     "type": "tsc",
-    "prepack": "yarn run publint",
-    "postinstall": "yarn run build"
+    "prepack": "yarn run publint"
   },
   "repository": {
     "type": "git",
@@ -89,6 +88,7 @@
     "vitest": "^1"
   },
   "dependencies": {
+    "@jest/expect-utils": "^29.7.0",
     "jest-matcher-utils": ">=28.0.0"
   },
   "peerDependencies": {

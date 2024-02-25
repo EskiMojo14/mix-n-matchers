@@ -10,6 +10,10 @@ export {
   toHaveBeenNthCalledWithContext,
 } from "./context";
 
-export { toSatisfySequence, toEqualSequence } from "../shared/sequence";
+export {
+  toSatisfySequence,
+  toEqualSequence,
+  toStrictEqualSequence,
+} from "../shared/sequence";
 
 export { toBeEnum } from "../shared/enum";

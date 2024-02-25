@@ -290,6 +290,79 @@ describe("toEqualSequence", () => {
   });
 });
 
+describe("toStrictEqualSequence", () => {
+  it("works with an array", () => {
+    expect([{ value: 1 }, { value: 2 }, { value: 3 }]).toStrictEqualSequence(
+      { value: 1 },
+      { value: 2 },
+      { value: 3 },
+    );
+    expect([
+      { value: 1 },
+      { value: 2 },
+      { value: 3 },
+    ]).not.toStrictEqualSequence(
+      { value: 1, surplus: undefined },
+      { value: 2, surplus: undefined },
+      { value: 3, surplus: undefined },
+    );
+
+    expect([{ value: 1 }, { value: 2 }, { value: 3 }]).toStrictEqualSequence(
+      { value: 1 },
+      { value: 2 },
+    );
+
+    expect(() => {
+      expect([{ value: 1 }, { value: 2 }, { value: 3 }]).toStrictEqualSequence(
+        { value: 1 },
+        { value: 3 },
+        { value: 2 },
+      );
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("works with other iterables", () => {
+    expect(
+      new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
+    ).toStrictEqualSequence({ value: 1 }, { value: 2 }, { value: 3 });
+    expect(
+      new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
+    ).not.toStrictEqualSequence(
+      { value: 1, surplus: undefined },
+      { value: 2, surplus: undefined },
+      { value: 3, surplus: undefined },
+    );
+
+    expect(
+      new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
+    ).toStrictEqualSequence({ value: 1 }, { value: 2 });
+
+    expect(() => {
+      expect(
+        new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
+      ).toStrictEqualSequence({ value: 1 }, { value: 3 }, { value: 2 });
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails with a non-iterable", () => {
+    expect(() => {
+      expect(0).toStrictEqualSequence(0);
+    }).toThrowErrorMatchingSnapshot();
+    expect(0).not.toStrictEqualSequence(0);
+  });
+
+  it("fails if the iterable is too short", () => {
+    expect(() => {
+      expect([{ value: 0 }]).toStrictEqualSequence({ value: 0 }, { value: 1 });
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect(new Set([{ value: 0 }])).toStrictEqualSequence(
+        { value: 0 },
+        { value: 1 },
+      );
+    }).toThrowErrorMatchingSnapshot();
+  });
+});
+
 describe("sequenceOf", () => {
   it("works with an array", () => {
     expect({ value: [1, 2, 3] }).toEqual({
@@ -361,6 +434,95 @@ describe("sequenceOf", () => {
     expect(() => {
       expect({ value: new Set([0]) }).toEqual({
         value: expect.sequenceOf(0, 1),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+});
+
+describe("strictSequenceOf", () => {
+  it("works with an array", () => {
+    expect({ value: [{ value: 1 }, { value: 2 }, { value: 3 }] }).toEqual({
+      value: expect.strictSequenceOf({ value: 1 }, { value: 2 }, { value: 3 }),
+    });
+    expect({ value: [{ value: 1 }, { value: 2 }, { value: 3 }] }).toEqual({
+      value: expect.not.strictSequenceOf(
+        { value: 1, surplus: undefined },
+        { value: 2, surplus: undefined },
+        { value: 3, surplus: undefined },
+      ),
+    });
+
+    expect({ value: [{ value: 1 }, { value: 2 }, { value: 3 }] }).toEqual({
+      value: expect.strictSequenceOf({ value: 1 }, { value: 2 }),
+    });
+
+    expect(() => {
+      expect({ value: [{ value: 1 }, { value: 2 }, { value: 3 }] }).toEqual({
+        value: expect.strictSequenceOf(
+          { value: 1 },
+          { value: 3 },
+          { value: 2 },
+        ),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("works with other iterables", () => {
+    expect({
+      value: new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
+    }).toEqual({
+      value: expect.strictSequenceOf({ value: 1 }, { value: 2 }, { value: 3 }),
+    });
+    expect({
+      value: new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
+    }).toEqual({
+      value: expect.not.strictSequenceOf(
+        { value: 1, surplus: undefined },
+        { value: 2, surplus: undefined },
+        { value: 3, surplus: undefined },
+      ),
+    });
+
+    expect({
+      value: new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
+    }).toEqual({
+      value: expect.strictSequenceOf({ value: 1 }, { value: 2 }),
+    });
+
+    expect(() => {
+      expect({
+        value: new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
+      }).toEqual({
+        value: expect.strictSequenceOf(
+          { value: 1 },
+          { value: 3 },
+          { value: 2 },
+        ),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails with a non-iterable", () => {
+    expect(() => {
+      expect({ value: 0 }).toEqual({
+        value: expect.strictSequenceOf(0),
+      });
+    }).toThrowErrorMatchingSnapshot();
+    expect({ value: 0 }).toEqual({
+      value: expect.not.strictSequenceOf(0),
+    });
+  });
+
+  it("fails if the iterable is too short", () => {
+    expect(() => {
+      expect({ value: [{ value: 0 }] }).toEqual({
+        value: expect.strictSequenceOf({ value: 0 }, { value: 1 }),
+      });
+    }).toThrowErrorMatchingSnapshot();
+
+    expect(() => {
+      expect({ value: new Set([{ value: 0 }]) }).toEqual({
+        value: expect.strictSequenceOf({ value: 0 }, { value: 1 }),
       });
     }).toThrowErrorMatchingSnapshot();
   });

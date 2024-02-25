@@ -1,7 +1,13 @@
 import { matcherHint, printReceived } from "jest-matcher-utils";
-import type { MatcherFunction } from "../utils/types";
+import type { MatcherFunction, Tester } from "../utils/types";
 import { isIterable, makeEqualValue } from "../utils";
 import { assert } from "../utils/assert";
+import {
+  arrayBufferEquality,
+  iterableEquality,
+  sparseArrayEquality,
+  typeEquality,
+} from "@jest/expect-utils";
 
 type Predicate = (value: unknown) => boolean;
 
@@ -94,9 +100,17 @@ export const toSatisfySequence = makeSatisfySequenceMatcher(
  */
 export const sequence = makeSatisfySequenceMatcher("sequence", true);
 
-const makeMatchSequenceMatcher = (
+const toStrictEqualTesters: Array<Tester> = [
+  iterableEquality,
+  typeEquality,
+  sparseArrayEquality,
+  arrayBufferEquality,
+];
+
+const makeEqualSequenceMatcher = (
   matcherName: string,
   asymmetric: boolean,
+  strict = false,
 ): MatcherFunction<Array<unknown>> =>
   function toEqualSequence(received, ...expected) {
     if (!isIterable(received)) {
@@ -112,7 +126,15 @@ const makeMatchSequenceMatcher = (
         promise: this.promise,
         isDirectExpectCall: asymmetric,
       }) + "\n\n";
-    const equalValue = makeEqualValue(this);
+    const equalValue = (a: unknown, b: unknown) =>
+      this.equals(
+        a,
+        b,
+        strict
+          ? [...(this.customTesters ?? []), ...toStrictEqualTesters]
+          : this.customTesters,
+        strict,
+      );
     let i = 0;
     const sequenceSoFar: Array<unknown> = [];
     for (const receivedItem of received) {
@@ -156,9 +178,20 @@ const makeMatchSequenceMatcher = (
  * @example
  * expect([1, 2, 3]).toEqualSequence(1, 2, 3);
  */
-export const toEqualSequence = makeMatchSequenceMatcher(
+export const toEqualSequence = makeEqualSequenceMatcher(
   "toEqualSequence",
   false,
+);
+
+/**
+ * Asserts that an iterable matches a sequence of expected items, using strict deep equality.
+ * @example
+ * expect([1, 2, 3]).toStrictEqualSequence(1, 2, 3);
+ */
+export const toStrictEqualSequence = makeEqualSequenceMatcher(
+  "toStrictEqualSequence",
+  false,
+  true,
 );
 
 /**
@@ -168,7 +201,21 @@ export const toEqualSequence = makeMatchSequenceMatcher(
  *   value: sequenceOf(1, 2, 3),
  * });
  */
-export const sequenceOf = makeMatchSequenceMatcher("sequenceOf", true);
+export const sequenceOf = makeEqualSequenceMatcher("sequenceOf", true);
+
+/**
+ * Matches an iterable of a sequence of expected items, using strict deep equality.
+ *
+ * @example
+ * expect({ value: [1, 2, 3] }).toEqual({
+ *  value: strictSequenceOf(1, 2, 3),
+ * });
+ */
+export const strictSequenceOf = makeEqualSequenceMatcher(
+  "strictSequenceOf",
+  true,
+  true,
+);
 
 declare module "mix-n-matchers" {
   export interface MixNMatchers<R = any, T = unknown> {
@@ -191,6 +238,15 @@ declare module "mix-n-matchers" {
      * expect([1, 2, 3]).toEqualSequence(1, 2, 3);
      */
     toEqualSequence<S extends Array<unknown>>(...expected: S): R;
+    /**
+     * Asserts that an iterable matches a sequence of expected items, using strict deep equality.
+     *
+     * Optionally, a type parameter can be used to specify the expected sequence type.
+     *
+     * @example
+     * expect([1, 2, 3]).toStrictEqualSequence(1, 2, 3);
+     */
+    toStrictEqualSequence<S extends Array<unknown>>(...expected: S): R;
   }
   export interface AsymmetricMixNMatchers {
     /**
@@ -213,5 +269,13 @@ declare module "mix-n-matchers" {
      * });
      */
     sequenceOf<S extends Array<unknown>>(...expected: S): any;
+    /**
+     * Matches an iterable of a sequence of expected items, using strict deep equality.
+     * @example
+     * expect({ value: [1, 2, 3] }).toEqual({
+     *   value: strictSequenceOf(1, 2, 3),
+     * });
+     */
+    strictSequenceOf<S extends Array<unknown>>(...expected: S): any;
   }
 }
