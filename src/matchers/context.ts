@@ -97,7 +97,7 @@ const printReceivedContextsPositive = (
 const createToBeCalledWithContextMatcher = (
   matcherName: string,
 ): MatcherFunction<[expected: unknown]> =>
-  function (received, expected) {
+  function toBeCalledWithContext(received, expected) {
     const equalValue = makeEqualValue(this);
     const options: MatcherHintOptions = {
       isNot: this.isNot,
@@ -171,7 +171,7 @@ const createToBeCalledWithContextMatcher = (
 const createLastCalledWithContextMatcher = (
   matcherName: string,
 ): MatcherFunction<[expected: unknown]> =>
-  function (received, expected) {
+  function lastCalledWithContext(received, expected) {
     const equalValue = makeEqualValue(this);
     const options: MatcherHintOptions = {
       isNot: this.isNot,
@@ -257,7 +257,7 @@ const createLastCalledWithContextMatcher = (
 const createNthCalledWithContextMatcher = (
   matcherName: string,
 ): MatcherFunction<[n: number, expected: unknown]> =>
-  function (received, nth, expected) {
+  function nthCalledWithContext(received, nth, expected) {
     const equalValue = makeEqualValue(this);
     const expectedArgument = "n";
     const options: MatcherHintOptions = {
@@ -453,7 +453,7 @@ export const toHaveBeenNthCalledWithContext = createNthCalledWithContextMatcher(
 
 declare module "mix-n-matchers" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  export interface MixNMatchers<R> {
+  export interface MixNMatchers<R, T = unknown> {
     /**
      * Ensure a mock function is called with a specific context (`this`)
      *

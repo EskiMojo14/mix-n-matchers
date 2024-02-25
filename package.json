@@ -88,6 +88,7 @@
     "vitest": "^1"
   },
   "dependencies": {
+    "@jest/expect-utils": "^29.7.0",
     "jest-matcher-utils": ">=28.0.0"
   },
   "peerDependencies": {

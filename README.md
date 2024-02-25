@@ -93,9 +93,9 @@ import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
 
 declare global {
   namespace jest {
-    export interface Matchers<R>
+    export interface Matchers<R, T>
       extends Pick<
-        MixNMatchers<R>,
+        MixNMatchers<R, T>,
         | "toBeCalledWithContext"
         | "lastCalledWithContext"
         | "nthCalledWithContext"
@@ -140,8 +140,8 @@ import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
 
 declare global {
   namespace jest {
-    export interface Matchers<R>
-      extends Pick<MixNMatchers<R>, keyof typeof mixNMatchers> {}
+    export interface Matchers<R, T>
+      extends Pick<MixNMatchers<R, T>, keyof typeof mixNMatchers> {}
 
     export interface Expect
       extends Pick<AsymmetricMixNMatchers, keyof typeof asymmMixNMatchers> {}
@@ -170,9 +170,9 @@ If you want finer control over which matchers are added, you should follow the b
 import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
 
 declare module "@jest/extend" {
-  export interface Matchers<R>
+  export interface Matchers<R, T>
     extends Pick<
-      MixNMatchers<R>,
+      MixNMatchers<R, T>,
       "toBeCalledWithContext" | "lastCalledWithContext" | "nthCalledWithContext"
     > {}
 
@@ -198,9 +198,9 @@ import { expect } from "vitest";
 import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
 
 declare module "vitest" {
-  interface Assertion<T = any>
+  interface Assertion<T>
     extends Pick<
-      mixNMatchers.MixNMatchers<T>,
+      mixNMatchers.MixNMatchers<void, T>,
       "toBeCalledWithContext" | "lastCalledWithContext" | "nthCalledWithContext"
     > {}
   interface AsymmetricMatchersContaining
@@ -275,7 +275,6 @@ expect(mock).toBeCalledWith(expect.oneOf([1, 2, 3]));
 </td>
 </tr>
 <tr>
-
 <tr>
 <td>
 
@@ -357,6 +356,79 @@ expect({ a: 1, b: 2 }).toEqual(expect.objectContainingOnly({ a: 1 }));
 
 </td>
 </tr>
+<tr>
+<td>
+
+`sequence`
+
+</td>
+<td>
+
+Matches an iterable that satisfies the specified sequence of predicates.
+
+</td>
+<td>
+
+```ts
+expect({
+  array: [1, 2, 3],
+}).toEqual({
+  array: expect.sequence(
+    (x) => x === 1,
+    (x) => x === 2,
+    (x) => x === 3,
+  ),
+});
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+`sequenceOf`
+
+</td>
+<td>
+
+Matches an iterable that satisfies the specified sequence of values, using deep equality.
+
+</td>
+<td>
+
+```ts
+expect({
+  array: [1, 2, 3],
+}).toEqual({
+  array: expect.sequenceOf(1, 2, 3),
+});
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+`strictSequenceOf`
+
+</td>
+<td>
+
+Matches an iterable that satisfies the specified sequence of values, using [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
+
+</td>
+<td>
+
+```ts
+expect({
+  array: [1, 2, 3],
+}).toEqual({
+  array: expect.strictSequenceOf(1, 2, 3),
+});
+```
+
+</td>
+</tr>
 </table>
 
 ### Symmetric Matchers
@@ -380,6 +452,68 @@ Assert a value is a member of the specified enum.
 
 ```ts
 expect(getDirection()).toBeEnum(Direction);
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+`toSatisfySequence`
+
+</td>
+<td>
+
+Assert a value is an iterable that satisfies the specified sequence of predicates.
+
+</td>
+<td>
+
+```ts
+expect([1, 2, 3]).toSatisfySequence(
+  (x) => x === 1,
+  (x) => x === 2,
+  (x) => x === 3,
+);
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+`toEqualSequence`
+
+</td>
+<td>
+
+Assert a value is an iterable that satisfies the specified sequence of values, using deep equality.
+
+</td>
+<td>
+
+```ts
+expect([1, 2, 3]).toEqualSequence(1, 2, 3);
+```
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`toStrictEqualSequence`
+
+</td>
+<td>
+
+Assert a value is an iterable that satisfies the specified sequence of values, using [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
+
+</td>
+<td>
+
+```ts
+expect([1, 2, 3]).toStrictEqualSequence(1, 2, 3);
 ```
 
 </td>

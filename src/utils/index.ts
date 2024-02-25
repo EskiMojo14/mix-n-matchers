@@ -48,3 +48,7 @@ export const makeEqualValue =
   (utils: MatcherUtils): EqualValue =>
   (a, b, strictCheck) =>
     utils.equals(a, b, utils.customTesters, strictCheck);
+
+export const isIterable = (received: unknown): received is Iterable<unknown> =>
+  received != null &&
+  typeof (received as Iterable<unknown>)[Symbol.iterator] === "function";

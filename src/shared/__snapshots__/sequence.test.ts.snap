@@ -1,0 +1,423 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sequence fails if not passed any predicates 1`] = `sequence requires at least one predicate`;
+
+exports[`sequence fails if the iterable is too short 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 3</g>
+
+<d>  Object {</b>
+<g>-   "array": sequence<(x) => x === 0, (x) => x === 1>,</g>
+<r>+   "array": Array [</g>
+<r>+     0,</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`sequence fails if the iterable is too short 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 3</g>
+
+<d>  Object {</b>
+<g>-   "array": sequence<(x) => x === 0, (x) => x === 1>,</g>
+<r>+   "array": Set {</g>
+<r>+     0,</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
+exports[`sequence fails with a non-iterable 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 1</g>
+
+<d>  Object {</b>
+<g>-   "array": sequence<(x) => x === 0>,</g>
+<r>+   "array": 0,</g>
+<d>  }</b>
+`;
+
+exports[`sequence throws if one of the predicates is not a function 1`] = `predicate must be a function, but predicate at index 1 was "number"`;
+
+exports[`sequence works with an array 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": sequence<(x) => x === 1, (x) => x === 3, (x) => x === 2>,</g>
+<r>+   "array": Array [</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`sequence works with an array 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": not.sequence<(x) => x === 1, (x) => x === 2>,</g>
+<r>+   "array": Array [</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`sequence works with other iterables 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": sequence<(x) => x === 1, (x) => x === 3, (x) => x === 2>,</g>
+<r>+   "array": Set {</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
+exports[`sequence works with other iterables 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": not.sequence<(x) => x === 1, (x) => x === 2>,</g>
+<r>+   "array": Set {</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
+exports[`sequenceOf fails if the iterable is too short 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 3</g>
+
+<d>  Object {</b>
+<g>-   "value": sequenceOf<0, 1>,</g>
+<r>+   "value": Array [</g>
+<r>+     0,</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`sequenceOf fails if the iterable is too short 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 3</g>
+
+<d>  Object {</b>
+<g>-   "value": sequenceOf<0, 1>,</g>
+<r>+   "value": Set {</g>
+<r>+     0,</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
+exports[`sequenceOf fails with a non-iterable 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 1</g>
+
+<d>  Object {</b>
+<g>-   "value": sequenceOf<0>,</g>
+<r>+   "value": 0,</g>
+<d>  }</b>
+`;
+
+exports[`sequenceOf works with an array 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "value": sequenceOf<1, 3, 2>,</g>
+<r>+   "value": Array [</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`sequenceOf works with an array 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "value": not.sequenceOf<1, 2>,</g>
+<r>+   "value": Array [</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`sequenceOf works with other iterables 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "value": sequenceOf<1, 3, 2>,</g>
+<r>+   "value": Set {</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
+exports[`sequenceOf works with other iterables 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "value": not.sequenceOf<1, 2>,</g>
+<r>+   "value": Set {</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
+exports[`strictSequenceOf fails if the iterable is too short 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "value": strictSequenceOf<[object Object], [object Object]>,</g>
+<r>+   "value": Array [</g>
+<r>+     Object {</g>
+<r>+       "value": 0,</g>
+<r>+     },</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`strictSequenceOf fails if the iterable is too short 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "value": strictSequenceOf<[object Object], [object Object]>,</g>
+<r>+   "value": Set {</g>
+<r>+     Object {</g>
+<r>+       "value": 0,</g>
+<r>+     },</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
+exports[`strictSequenceOf fails with a non-iterable 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 1</g>
+
+<d>  Object {</b>
+<g>-   "value": strictSequenceOf<0>,</g>
+<r>+   "value": 0,</g>
+<d>  }</b>
+`;
+
+exports[`strictSequenceOf works with an array 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  -  1</g>
+<r>+ Received  + 11</g>
+
+<d>  Object {</b>
+<g>-   "value": strictSequenceOf<[object Object], [object Object], [object Object]>,</g>
+<r>+   "value": Array [</g>
+<r>+     Object {</g>
+<r>+       "value": 1,</g>
+<r>+     },</g>
+<r>+     Object {</g>
+<r>+       "value": 2,</g>
+<r>+     },</g>
+<r>+     Object {</g>
+<r>+       "value": 3,</g>
+<r>+     },</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`strictSequenceOf works with other iterables 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  -  1</g>
+<r>+ Received  + 11</g>
+
+<d>  Object {</b>
+<g>-   "value": strictSequenceOf<[object Object], [object Object], [object Object]>,</g>
+<r>+   "value": Set {</g>
+<r>+     Object {</g>
+<r>+       "value": 1,</g>
+<r>+     },</g>
+<r>+     Object {</g>
+<r>+       "value": 2,</g>
+<r>+     },</g>
+<r>+     Object {</g>
+<r>+       "value": 3,</g>
+<r>+     },</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
+exports[`toEqualSequence fails if the iterable is too short 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[0]</g> to have at least 2 items, but it only had 1.
+`;
+
+exports[`toEqualSequence fails if the iterable is too short 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {0}</g> to have at least 2 items, but it only had 1.
+`;
+
+exports[`toEqualSequence fails with a non-iterable 1`] = `Expected <r>0</g> to be an iterable, but it was not`;
+
+exports[`toEqualSequence works with an array 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>2</g> to match <r>3</g> at index 1
+
+Full sequence so far: <r>1</g>, <r>2</g>
+`;
+
+exports[`toEqualSequence works with an array 2`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[1, 2, 3]</g> not to match sequence <r>1</g>, <r>2</g>
+`;
+
+exports[`toEqualSequence works with other iterables 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>2</g> to match <r>3</g> at index 1
+
+Full sequence so far: <r>1</g>, <r>2</g>
+`;
+
+exports[`toEqualSequence works with other iterables 2`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {1, 2, 3}</g> not to match sequence <r>1</g>, <r>2</g>
+`;
+
+exports[`toSatisfySequence fails if not passed any predicates 1`] = `toSatisfySequence requires at least one predicate`;
+
+exports[`toSatisfySequence fails if the iterable is too short 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[0]</g> to have at least 2 items, but it only had 1.
+`;
+
+exports[`toSatisfySequence fails if the iterable is too short 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {0}</g> to have at least 2 items, but it only had 1.
+`;
+
+exports[`toSatisfySequence fails with a non-iterable 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>0</g> to be an iterable
+`;
+
+exports[`toSatisfySequence throws if one of the predicates is not a function 1`] = `predicate must be a function, but predicate at index 1 was "number"`;
+
+exports[`toSatisfySequence works with an array 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>2</g> to satisfy predicate at index 1.
+
+Full sequence so far: <r>1</g>, <r>2</g>
+`;
+
+exports[`toSatisfySequence works with an array 2`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[1, 2, 3]</g> not to satisfy sequence
+`;
+
+exports[`toSatisfySequence works with other iterables 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>2</g> to satisfy predicate at index 1.
+
+Full sequence so far: <r>1</g>, <r>2</g>
+`;
+
+exports[`toSatisfySequence works with other iterables 2`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {1, 2, 3}</g> not to satisfy sequence
+`;
+
+exports[`toStrictEqualSequence fails if the iterable is too short 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toStrictEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[{"value": 0}]</g> to have at least 2 items, but it only had 1.
+`;
+
+exports[`toStrictEqualSequence fails if the iterable is too short 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toStrictEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {{"value": 0}}</g> to have at least 2 items, but it only had 1.
+`;
+
+exports[`toStrictEqualSequence fails with a non-iterable 1`] = `Expected <r>0</g> to be an iterable, but it was not`;
+
+exports[`toStrictEqualSequence works with an array 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toStrictEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>{"value": 2}</g> to match <r>{"value": 3}</g> at index 1
+
+Full sequence so far: <r>{"value": 1}</g>, <r>{"value": 2}</g>
+`;
+
+exports[`toStrictEqualSequence works with other iterables 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toStrictEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>{"value": 2}</g> to match <r>{"value": 3}</g> at index 1
+
+Full sequence so far: <r>{"value": 1}</g>, <r>{"value": 2}</g>
+`;

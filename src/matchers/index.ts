@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-empty-interface, @typescript-eslint/no-unused-vars
-export interface MixNMatchers<R> {}
+export interface MixNMatchers<R, T = unknown> {}
 
 export {
   toBeCalledWithContext,
@@ -9,5 +9,11 @@ export {
   nthCalledWithContext,
   toHaveBeenNthCalledWithContext,
 } from "./context";
+
+export {
+  toSatisfySequence,
+  toEqualSequence,
+  toStrictEqualSequence,
+} from "../shared/sequence";
 
 export { toBeEnum } from "../shared/enum";
