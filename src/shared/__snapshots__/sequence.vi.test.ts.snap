@@ -21,13 +21,13 @@ exports[`toSatisfySequence > fails if not passed any predicates 1`] = `toSatisfy
 exports[`toSatisfySequence > fails if the iterable is too short 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
 
-Expected <r>[0]</g> to have at least 2 items
+Expected <r>[0]</g> to have at least 2 items, but it only had 1.
 `;
 
 exports[`toSatisfySequence > fails if the iterable is too short 2`] = `
 <d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
 
-Expected <r>Set {0}</g> to have at least 2 items
+Expected <r>Set {0}</g> to have at least 2 items, but it only had 1.
 `;
 
 exports[`toSatisfySequence > fails with a non-iterable 1`] = `
@@ -39,7 +39,9 @@ Expected <r>0</g> to be an iterable
 exports[`toSatisfySequence > works with an array 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
 
-Expected <r>2</g> to satisfy predicate at index 1
+Expected <r>2</g> to satisfy predicate at index 1.
+
+Full sequence so far: <r>1</g>, <r>2</g>
 `;
 
 exports[`toSatisfySequence > works with an array 2`] = `
@@ -51,7 +53,9 @@ Expected <r>[1, 2, 3]</g> not to satisfy sequence
 exports[`toSatisfySequence > works with other iterables 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>
 
-Expected <r>2</g> to satisfy predicate at index 1
+Expected <r>2</g> to satisfy predicate at index 1.
+
+Full sequence so far: <r>1</g>, <r>2</g>
 `;
 
 exports[`toSatisfySequence > works with other iterables 2`] = `

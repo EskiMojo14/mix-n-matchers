@@ -26,18 +26,22 @@ export const makeSatisfySequenceMatcher = (
       };
     }
     let i = 0;
+    const sequenceSoFar: Array<unknown> = [];
     for (const receivedItem of received) {
       if (i >= predicates.length) {
         // we've run out of predicates, so the sequence is satisfied
         break;
       }
+      sequenceSoFar.push(receivedItem);
       const predicate = predicates[i];
       if (predicate && !predicate(receivedItem)) {
         return {
           pass: false,
           message: () =>
             prefix +
-            `Expected ${printReceived(receivedItem)} to satisfy predicate at index ${i}`,
+            `Expected ${printReceived(receivedItem)} to satisfy predicate at index ${i}.` +
+            "\n\n" +
+            `Full sequence so far: ${sequenceSoFar.map(printReceived).join(", ")}`,
         };
       }
       i++;
@@ -47,7 +51,7 @@ export const makeSatisfySequenceMatcher = (
         pass: false,
         message: () =>
           prefix +
-          `Expected ${printReceived(received)} to have at least ${predicates.length} items`,
+          `Expected ${printReceived(received)} to have at least ${predicates.length} items, but it only had ${i}.`,
       };
     }
     return {
