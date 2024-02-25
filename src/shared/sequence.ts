@@ -1,6 +1,7 @@
 import { matcherHint, printReceived } from "jest-matcher-utils";
 import type { MatcherFunction } from "../utils/types";
 import { isIterable } from "../utils";
+import { assert } from "../utils/assert";
 
 type Predicate = (value: unknown) => boolean;
 
@@ -35,7 +36,11 @@ export const makeSatisfySequenceMatcher = (
       }
       sequenceSoFar.push(receivedItem);
       const predicate = predicates[i];
-      if (predicate && !predicate(receivedItem)) {
+      assert(
+        typeof predicate === "function",
+        `predicate must be a function, but predicate at index ${i} was "${typeof predicate}"`,
+      );
+      if (!predicate(receivedItem)) {
         return {
           pass: false,
           message: () =>

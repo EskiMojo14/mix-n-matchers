@@ -8,6 +8,8 @@ exports[`sequence > fails if the iterable is too short 2`] = `expected { array: 
 
 exports[`sequence > fails with a non-iterable 1`] = `expected { array: +0 } to deeply equal { array: sequence<(x) => x === 0> }`;
 
+exports[`sequence > throws if one of the predicates is not a function 1`] = `predicate must be a function, but predicate at index 1 was "number"`;
+
 exports[`sequence > works with an array 1`] = `expected { array: [ 1, 2, 3 ] } to deeply equal { array: sequence{…} }`;
 
 exports[`sequence > works with an array 2`] = `expected { array: [ 1, 2, 3 ] } to deeply equal { array: not.sequence{…} }`;
@@ -35,6 +37,8 @@ exports[`toSatisfySequence > fails with a non-iterable 1`] = `
 
 Expected <r>0</g> to be an iterable
 `;
+
+exports[`toSatisfySequence > throws if one of the predicates is not a function 1`] = `predicate must be a function, but predicate at index 1 was "number"`;
 
 exports[`toSatisfySequence > works with an array 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>

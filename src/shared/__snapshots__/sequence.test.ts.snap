@@ -42,6 +42,8 @@ exports[`sequence fails with a non-iterable 1`] = `
 <d>  }</b>
 `;
 
+exports[`sequence throws if one of the predicates is not a function 1`] = `predicate must be a function, but predicate at index 1 was "number"`;
+
 exports[`sequence works with an array 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
 
@@ -125,6 +127,8 @@ exports[`toSatisfySequence fails with a non-iterable 1`] = `
 
 Expected <r>0</g> to be an iterable
 `;
+
+exports[`toSatisfySequence throws if one of the predicates is not a function 1`] = `predicate must be a function, but predicate at index 1 was "number"`;
 
 exports[`toSatisfySequence works with an array 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toSatisfySequence<d>(</b><g>expected</g><d>)</b>

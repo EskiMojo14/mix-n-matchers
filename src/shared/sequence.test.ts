@@ -94,6 +94,15 @@ describe("toSatisfySequence", () => {
       );
     }).toThrowErrorMatchingSnapshot();
   });
+  it("throws if one of the predicates is not a function", () => {
+    expect(() => {
+      expect([0, 1]).toSatisfySequence(
+        (x) => x === 0,
+        // @ts-expect-error testing invalid usage
+        1,
+      );
+    }).toThrowErrorMatchingSnapshot();
+  });
 });
 
 describe("sequence", () => {
@@ -212,6 +221,17 @@ describe("sequence", () => {
         array: expect.sequence(
           (x) => x === 0,
           (x) => x === 1,
+        ),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("throws if one of the predicates is not a function", () => {
+    expect(() => {
+      expect({ array: [0, 1] }).toEqual({
+        array: expect.sequence(
+          (x) => x === 0,
+          // @ts-expect-error testing invalid usage
+          1,
         ),
       });
     }).toThrowErrorMatchingSnapshot();
