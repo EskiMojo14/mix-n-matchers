@@ -18,6 +18,62 @@ exports[`sequence > works with other iterables 1`] = `expected { array: Set{ 1, 
 
 exports[`sequence > works with other iterables 2`] = `expected { array: Set{ 1, 2, 3 } } to deeply equal { array: not.sequence{…} }`;
 
+exports[`sequenceOf > fails if the iterable is too short 1`] = `expected { value: [ +0 ] } to deeply equal { value: sequenceOf<0, 1> }`;
+
+exports[`sequenceOf > fails if the iterable is too short 2`] = `expected { value: Set{ +0 } } to deeply equal { value: sequenceOf<0, 1> }`;
+
+exports[`sequenceOf > fails with a non-iterable 1`] = `expected { value: +0 } to deeply equal { value: sequenceOf<0> }`;
+
+exports[`sequenceOf > works with an array 1`] = `expected { value: [ 1, 2, 3 ] } to deeply equal { value: sequenceOf<1, 3, 2> }`;
+
+exports[`sequenceOf > works with an array 2`] = `expected { value: [ 1, 2, 3 ] } to deeply equal { value: not.sequenceOf<1, 2> }`;
+
+exports[`sequenceOf > works with other iterables 1`] = `expected { value: Set{ 1, 2, 3 } } to deeply equal { value: sequenceOf<1, 3, 2> }`;
+
+exports[`sequenceOf > works with other iterables 2`] = `expected { value: Set{ 1, 2, 3 } } to deeply equal { value: not.sequenceOf<1, 2> }`;
+
+exports[`toMatchSequence > fails if the iterable is too short 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toMatchSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[0]</g> to have at least 2 items, but it only had 1.
+`;
+
+exports[`toMatchSequence > fails if the iterable is too short 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toMatchSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {0}</g> to have at least 2 items, but it only had 1.
+`;
+
+exports[`toMatchSequence > fails with a non-iterable 1`] = `Expected <r>0</g> to be an iterable, but it was not`;
+
+exports[`toMatchSequence > works with an array 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toMatchSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>2</g> to match <r>3</g> at index 1
+
+Full sequence so far: <r>1</g>, <r>2</g>
+`;
+
+exports[`toMatchSequence > works with an array 2`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toMatchSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[1, 2, 3]</g> not to match sequence <r>1</g>, <r>2</g>
+`;
+
+exports[`toMatchSequence > works with other iterables 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toMatchSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>2</g> to match <r>3</g> at index 1
+
+Full sequence so far: <r>1</g>, <r>2</g>
+`;
+
+exports[`toMatchSequence > works with other iterables 2`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toMatchSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {1, 2, 3}</g> not to match sequence <r>1</g>, <r>2</g>
+`;
+
 exports[`toSatisfySequence > fails if not passed any predicates 1`] = `toSatisfySequence requires at least one predicate`;
 
 exports[`toSatisfySequence > fails if the iterable is too short 1`] = `

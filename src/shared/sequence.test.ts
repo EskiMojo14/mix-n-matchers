@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { i } from "vitest/dist/reporters-QGe8gs4b.js";
 import { alignedAnsiStyleSerializer } from "../utils/tests";
 
 expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
@@ -233,6 +234,131 @@ describe("sequence", () => {
           // @ts-expect-error testing invalid usage
           1,
         ),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+});
+
+describe("toMatchSequence", () => {
+  it("works with an array", () => {
+    expect([1, 2, 3]).toMatchSequence(1, 2, 3);
+
+    expect([1, 2, 3]).not.toMatchSequence(1, 3, 2);
+
+    expect([1, 2, 3]).toMatchSequence(1, 2);
+
+    expect(() => {
+      expect([1, 2, 3]).toMatchSequence(1, 3, 2);
+    }).toThrowErrorMatchingSnapshot();
+
+    expect(() => {
+      expect([1, 2, 3]).not.toMatchSequence(1, 2);
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("works with other iterables", () => {
+    expect(new Set([1, 2, 3])).toMatchSequence(1, 2, 3);
+
+    expect(new Set([1, 2, 3])).not.toMatchSequence(1, 3, 2);
+
+    expect(new Set([1, 2, 3])).toMatchSequence(1, 2);
+
+    expect(() => {
+      expect(new Set([1, 2, 3])).toMatchSequence(1, 3, 2);
+    }).toThrowErrorMatchingSnapshot();
+
+    expect(() => {
+      expect(new Set([1, 2, 3])).not.toMatchSequence(1, 2);
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails with a non-iterable", () => {
+    expect(() => {
+      expect(0).toMatchSequence(0);
+    }).toThrowErrorMatchingSnapshot();
+    expect(0).not.toMatchSequence(0);
+  });
+  it("fails if the iterable is too short", () => {
+    expect(() => {
+      expect([0]).toMatchSequence(0, 1);
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect(new Set([0])).toMatchSequence(0, 1);
+    }).toThrowErrorMatchingSnapshot();
+  });
+});
+
+describe("sequenceOf", () => {
+  it("works with an array", () => {
+    expect({ value: [1, 2, 3] }).toEqual({
+      value: expect.sequenceOf(1, 2, 3),
+    });
+    expect({ value: [1, 2, 3] }).toEqual({
+      value: expect.not.sequenceOf(1, 3, 2),
+    });
+
+    expect({ value: [1, 2, 3] }).toEqual({
+      value: expect.sequenceOf(1, 2),
+    });
+
+    expect(() => {
+      expect({ value: [1, 2, 3] }).toEqual({
+        value: expect.sequenceOf(1, 3, 2),
+      });
+    }).toThrowErrorMatchingSnapshot();
+
+    expect(() => {
+      expect({ value: [1, 2, 3] }).toEqual({
+        value: expect.not.sequenceOf(1, 2),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("works with other iterables", () => {
+    expect({ value: new Set([1, 2, 3]) }).toEqual({
+      value: expect.sequenceOf(1, 2, 3),
+    });
+    expect({ value: new Set([1, 2, 3]) }).toEqual({
+      value: expect.not.sequenceOf(1, 3, 2),
+    });
+
+    expect({ value: new Set([1, 2, 3]) }).toEqual({
+      value: expect.sequenceOf(1, 2),
+    });
+
+    expect(() => {
+      expect({ value: new Set([1, 2, 3]) }).toEqual({
+        value: expect.sequenceOf(1, 3, 2),
+      });
+    }).toThrowErrorMatchingSnapshot();
+
+    expect(() => {
+      expect({ value: new Set([1, 2, 3]) }).toEqual({
+        value: expect.not.sequenceOf(1, 2),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails with a non-iterable", () => {
+    expect(() => {
+      expect({ value: 0 }).toEqual({
+        value: expect.sequenceOf(0),
+      });
+    }).toThrowErrorMatchingSnapshot();
+    expect({ value: 0 }).toEqual({
+      value: expect.not.sequenceOf(0),
+    });
+  });
+  it("fails if the iterable is too short", () => {
+    expect(() => {
+      expect({ value: [0] }).toEqual({
+        value: expect.sequenceOf(0, 1),
+      });
+    }).toThrowErrorMatchingSnapshot();
+
+    expect(() => {
+      expect({ value: new Set([0]) }).toEqual({
+        value: expect.sequenceOf(0, 1),
       });
     }).toThrowErrorMatchingSnapshot();
   });
