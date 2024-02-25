@@ -1,7 +1,4 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { alignedAnsiStyleSerializer } from "../utils/tests";
-
-expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 
 // Given a Jest mock function, return a minimal mock of a spy.
 const createSpy = (fn: jest.Mock) => {

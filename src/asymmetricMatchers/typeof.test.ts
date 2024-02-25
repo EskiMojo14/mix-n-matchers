@@ -1,7 +1,4 @@
-import { alignedAnsiStyleSerializer } from "../utils/tests";
-
-expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
-
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 describe("typeOf", () => {
   it("matches against the provided value using `typeof`", () => {
     expect(1).toEqual(expect.typeOf("number"));

@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { describe, expect, it } from "vitest";
-import { alignedAnsiStyleSerializer } from "../utils/tests";
-
-expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 
 describe("toSatisfySequence", () => {
   it("works with an array", () => {

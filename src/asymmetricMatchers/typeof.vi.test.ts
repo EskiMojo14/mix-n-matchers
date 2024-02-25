@@ -1,8 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { expect, it, describe } from "vitest";
-
-import { alignedAnsiStyleSerializer } from "../utils/tests";
-
-expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 
 describe("typeOf", () => {
   it("matches against the provided value using `typeof`", () => {

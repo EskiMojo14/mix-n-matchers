@@ -1,7 +1,4 @@
 import { expect, it, describe } from "vitest";
-import { alignedAnsiStyleSerializer } from "../utils/tests";
-
-expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 
 describe("arrayContainingOnly", () => {
   it("should expect an array to contain only the expected values", () => {

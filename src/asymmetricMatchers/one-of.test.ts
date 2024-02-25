@@ -1,7 +1,3 @@
-import { alignedAnsiStyleSerializer } from "../utils/tests";
-
-expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
-
 describe("oneOf", () => {
   it("should pass if value matches one of provided values", () => {
     expect(1).toEqual(expect.oneOf([1, 2, 3]));

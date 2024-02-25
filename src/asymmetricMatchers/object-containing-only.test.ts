@@ -1,7 +1,3 @@
-import { alignedAnsiStyleSerializer } from "../utils/tests";
-
-expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
-
 describe("objectContainingOnly", () => {
   it("should check if object contains only the expected properties", () => {
     expect({ a: 1 }).toEqual(expect.objectContainingOnly({ a: 1, b: 2 }));
