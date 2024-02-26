@@ -26,9 +26,9 @@ const createEnumMatcher = (
   };
 
 /**
- * Use .toBeEnum to check that a value is a valid enum value.
+ * Asserts that a value is a valid enum value.
  *
- * Takes a standard Typescript enum, which can be numeric, string based, or a mix of both.
+ * Takes a standard Typescript enum, which can be numeric, string based, or a mix of both - or a "const object" style enum.
  *
  * @example
  * enum Direction {
@@ -42,12 +42,27 @@ const createEnumMatcher = (
  */
 export const toBeEnum = createEnumMatcher("toBeEnum", false);
 
+/**
+ * Matches a valid enum value.
+ *
+ * Takes a standard Typescript enum, which can be numeric, string based, or a mix of both - or a "const object" style enum.
+ *
+ * @example
+ * enum Direction {
+ *   Up,
+ *   Down,
+ *   Left,
+ *   Right,
+ * }
+ */
 export const ofEnum = createEnumMatcher("ofEnum", true);
 
 declare module "mix-n-matchers" {
   export interface MixNMatchers<R, T = unknown> {
     /**
-     * Use .toBeEnum to check that a value is a valid enum value.
+     * Asserts that a value is a valid enum value.
+     *
+     * Works with standard Typescript enums, or "const object" style enums.
      *
      * @example
      * enum Direction {
@@ -63,7 +78,9 @@ declare module "mix-n-matchers" {
   }
   interface AsymmetricMixNMatchers {
     /**
-     * Checks that a value is a valid enum value.
+     * Matches a valid enum value.
+     *
+     * Works with standard Typescript enums, or "const object" style enums.
      *
      * @example
      * enum Direction {

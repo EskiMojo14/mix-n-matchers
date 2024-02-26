@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import * as mixNMatchers from ".";
+import type { expect } from "@jest/globals";
 
-// @ts-expect-error expect isn't typed to be on global
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const jestExpect: jest.Expect | undefined = globalThis.expect;
+const jestExpect = (globalThis as { expect?: typeof expect }).expect;
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

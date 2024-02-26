@@ -1,6 +1,6 @@
 import { matcherHint, printReceived } from "jest-matcher-utils";
 import type { MatcherFunction, Tester } from "../utils/types";
-import { isIterable, makeEqualValue } from "../utils";
+import { isIterable } from "../utils";
 import { assert } from "../utils/assert";
 import {
   arrayBufferEquality,
