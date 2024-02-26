@@ -16,12 +16,12 @@ import type {
 } from "vitest";
 import type { Satisfies } from "./types.typetest";
 
-type Each = {
+interface Each {
   <T extends Array<any> | [any]>(
     cases: ReadonlyArray<T>,
   ): (name: string, fn: (...args: T) => void) => void;
   <T>(cases: ReadonlyArray<T>): (name: string, fn: (value: T) => void) => void;
-};
+}
 export declare const describe: (typeof vitestDescribe | typeof jestDescribe) & {
   each: Each;
 };
@@ -35,13 +35,13 @@ type TestEach = Satisfies<
 export declare const expect: typeof vitestExpect | typeof jestExpect;
 export declare const it: typeof vitestIt | typeof jestIt;
 
-export type Mock<R = any, A extends any[] = any[], T = any> =
+export type Mock<R = any, A extends Array<any> = Array<any>, T = any> =
   | jest.Mock<(this: T, ...args: A) => R>
   | VitestMock<A, R>;
 
 export declare const fn: {
   (): Mock;
-  <R, A extends any[], T>(fn?: (this: T, ...args: A) => R): Mock<R, A, T>;
+  <R, A extends Array<any>, T>(fn?: (this: T, ...args: A) => R): Mock<R, A, T>;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
