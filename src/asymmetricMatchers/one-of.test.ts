@@ -1,4 +1,4 @@
-import { describe, it, expect } from "@jest/globals";
+import { describe, it, expect } from "@globals";
 
 describe("oneOf", () => {
   it("should pass if value matches one of provided values", () => {

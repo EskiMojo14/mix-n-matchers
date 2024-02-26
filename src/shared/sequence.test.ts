@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { describe, it, expect } from "@jest/globals";
+import { describe, it, expect } from "@globals";
 
 describe("toSatisfySequence", () => {
   it("works with an array", () => {

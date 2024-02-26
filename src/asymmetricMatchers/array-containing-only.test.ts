@@ -1,4 +1,4 @@
-import { describe, it, expect } from "@jest/globals";
+import { describe, it, expect } from "@globals";
 
 describe("arrayContainingOnly", () => {
   it("should expect an array to contain only the expected values", () => {

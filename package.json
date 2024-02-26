@@ -71,6 +71,7 @@
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.13.2",
     "@jest/globals": "^29.7.0",
+    "@types/node": "^20.11.20",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
     "eslint": "^8.49.0",
@@ -83,6 +84,7 @@
     "prettier": "^3.0.3",
     "publint": "^0.2.2",
     "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.2",
     "tsup": "^8.0.0",
     "typescript": "^5.2.2",
     "vitest": "^1"
@@ -105,16 +107,6 @@
   },
   "engines": {
     "node": "^14.15.0 || ^16.10.0 || >=18.0.0"
-  },
-  "jest": {
-    "preset": "ts-jest/presets/js-with-ts-esm",
-    "testEnvironment": "node",
-    "extensionsToTreatAsEsm": [
-      ".ts"
-    ],
-    "testPathIgnorePatterns": [
-      "src/(.*/)*.*\\.vi\\.test\\.ts"
-    ]
   },
   "lint-staged": {
     "*.{ts,md}": "prettier --write"

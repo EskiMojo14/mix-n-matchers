@@ -1,21 +1,25 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { describe, it, expect, jest } from "@jest/globals";
+import type { Mock } from "@globals";
+import { it, expect, describe, fn } from "@globals";
 import type { CallInfo, Spy } from "../utils";
 
 // Given a Jest mock function, return a minimal mock of a spy.
-const createSpy = (fn: jest.Mock): Spy => {
+const createSpy = (mock: Mock): Spy => {
   const spy = function () {};
 
   spy.calls = {
     all() {
       const info: Array<CallInfo> = [];
       let i = 0;
-      while (i < fn.mock.calls.length) {
-        const returnRecord = fn.mock.results[i];
+      while (i < mock.mock.calls.length) {
+        const returnRecord = mock.mock.results[i];
         /* eslint-disable @typescript-eslint/no-unsafe-assignment */
         info.push({
-          args: fn.mock.calls[i]!,
-          object: fn.mock.contexts[i],
+          args: mock.mock.calls[i]!,
+          object:
+            "contexts" in mock.mock
+              ? mock.mock.contexts[i]
+              : mock.mock.instances[i],
           returnValue:
             returnRecord?.type === "return" ? returnRecord.value : undefined,
         });
@@ -25,7 +29,7 @@ const createSpy = (fn: jest.Mock): Spy => {
       return info;
     },
     count() {
-      return fn.mock.calls.length;
+      return mock.mock.calls.length;
     },
   };
 
@@ -50,133 +54,133 @@ describe.each([
       calledWithContext === "toHaveBeenNthCalledWithContext"
     );
   }
-  it("works only on spies or jest.fn", () => {
-    const fn = function fn() {};
+  it("works only on spies or fn", () => {
+    const mock = function mock() {};
     if (isToHaveNth(calledWithContext)) {
       expect(() => {
-        expect(fn)[calledWithContext](3, "foo");
+        expect(mock)[calledWithContext](3, "foo");
       }).toThrowErrorMatchingSnapshot();
     } else {
       expect(() => {
-        expect(fn)[calledWithContext]("foo");
+        expect(mock)[calledWithContext]("foo");
       }).toThrowErrorMatchingSnapshot();
     }
   });
   it("works when not called", () => {
-    const fn = jest.fn();
+    const mock = fn();
     if (isToHaveNth(calledWithContext)) {
-      expect(createSpy(fn)).not[calledWithContext](1, "foo");
-      expect(fn).not[calledWithContext](1, "foo");
+      expect(createSpy(mock)).not[calledWithContext](1, "foo");
+      expect(mock).not[calledWithContext](1, "foo");
 
       expect(() => {
-        expect(fn)[calledWithContext](1, "foo");
+        expect(mock)[calledWithContext](1, "foo");
       }).toThrowErrorMatchingSnapshot();
     } else {
-      expect(createSpy(fn)).not[calledWithContext]("foo");
-      expect(fn).not[calledWithContext]("foo");
+      expect(createSpy(mock)).not[calledWithContext]("foo");
+      expect(mock).not[calledWithContext]("foo");
 
       expect(() => {
-        expect(fn)[calledWithContext]("foo");
+        expect(mock)[calledWithContext]("foo");
       }).toThrowErrorMatchingSnapshot();
     }
   });
   it("works with a context that doesn't match", () => {
-    const fn = jest.fn();
-    fn.call("bar");
+    const mock = fn();
+    mock.call("bar");
 
     if (isToHaveNth(calledWithContext)) {
-      expect(createSpy(fn)).not[calledWithContext](1, "foo");
-      expect(fn).not[calledWithContext](1, "foo");
+      expect(createSpy(mock)).not[calledWithContext](1, "foo");
+      expect(mock).not[calledWithContext](1, "foo");
 
       expect(() => {
-        expect(fn)[calledWithContext](1, "foo");
+        expect(mock)[calledWithContext](1, "foo");
       }).toThrowErrorMatchingSnapshot();
     } else {
-      expect(createSpy(fn)).not[calledWithContext]("foo");
-      expect(fn).not[calledWithContext]("foo");
+      expect(createSpy(mock)).not[calledWithContext]("foo");
+      expect(mock).not[calledWithContext]("foo");
 
       expect(() => {
-        expect(fn)[calledWithContext]("foo");
+        expect(mock)[calledWithContext]("foo");
       }).toThrowErrorMatchingSnapshot();
     }
   });
   it("works with a context that doesn't match with matchers", () => {
-    const fn = jest.fn();
-    fn.call("bar");
+    const mock = fn();
+    mock.call("bar");
 
     if (isToHaveNth(calledWithContext)) {
-      expect(createSpy(fn)).not[calledWithContext](1, expect.any(Number));
-      expect(fn).not[calledWithContext](1, expect.any(Number));
+      expect(createSpy(mock)).not[calledWithContext](1, expect.any(Number));
+      expect(mock).not[calledWithContext](1, expect.any(Number));
 
       expect(() => {
-        expect(fn)[calledWithContext](1, expect.any(Number));
+        expect(mock)[calledWithContext](1, expect.any(Number));
       }).toThrowErrorMatchingSnapshot();
     } else {
-      expect(createSpy(fn)).not[calledWithContext](expect.any(Number));
-      expect(fn).not[calledWithContext](expect.any(Number));
+      expect(createSpy(mock)).not[calledWithContext](expect.any(Number));
+      expect(mock).not[calledWithContext](expect.any(Number));
 
       expect(() => {
-        expect(fn)[calledWithContext](expect.any(Number));
+        expect(mock)[calledWithContext](expect.any(Number));
       }).toThrowErrorMatchingSnapshot();
     }
   });
   it("works with a context that matches", () => {
-    const fn = jest.fn();
-    fn.call("foo");
+    const mock = fn();
+    mock.call("foo");
 
     if (isToHaveNth(calledWithContext)) {
-      expect(createSpy(fn))[calledWithContext](1, "foo");
-      expect(fn)[calledWithContext](1, "foo");
+      expect(createSpy(mock))[calledWithContext](1, "foo");
+      expect(mock)[calledWithContext](1, "foo");
 
       expect(() => {
-        expect(fn).not[calledWithContext](1, "foo");
+        expect(mock).not[calledWithContext](1, "foo");
       }).toThrowErrorMatchingSnapshot();
     } else {
-      expect(createSpy(fn))[calledWithContext]("foo");
-      expect(fn)[calledWithContext]("foo");
+      expect(createSpy(mock))[calledWithContext]("foo");
+      expect(mock)[calledWithContext]("foo");
 
       expect(() => {
-        expect(fn).not[calledWithContext]("foo");
+        expect(mock).not[calledWithContext]("foo");
       }).toThrowErrorMatchingSnapshot();
     }
   });
   it("works with a context that matches with a matcher", () => {
-    const fn = jest.fn();
-    fn.call("foo");
+    const mock = fn();
+    mock.call("foo");
 
     if (isToHaveNth(calledWithContext)) {
-      expect(createSpy(fn))[calledWithContext](1, expect.any(String));
-      expect(fn)[calledWithContext](1, expect.any(String));
+      expect(createSpy(mock))[calledWithContext](1, expect.any(String));
+      expect(mock)[calledWithContext](1, expect.any(String));
 
       expect(() => {
-        expect(fn).not[calledWithContext](1, expect.any(String));
+        expect(mock).not[calledWithContext](1, expect.any(String));
       }).toThrowErrorMatchingSnapshot();
     } else {
-      expect(createSpy(fn))[calledWithContext](expect.any(String));
-      expect(fn)[calledWithContext](expect.any(String));
+      expect(createSpy(mock))[calledWithContext](expect.any(String));
+      expect(mock)[calledWithContext](expect.any(String));
 
       expect(() => {
-        expect(fn).not[calledWithContext](expect.any(String));
+        expect(mock).not[calledWithContext](expect.any(String));
       }).toThrowErrorMatchingSnapshot();
     }
   });
 
   it("includes the custom mock name in the error message", () => {
-    const fn = jest.fn().mockName("named-mock");
+    const mock = fn().mockName("named-mock");
 
-    fn.call("foo");
+    mock.call("foo");
 
     if (isToHaveNth(calledWithContext)) {
-      expect(fn)[calledWithContext](1, "foo");
+      expect(mock)[calledWithContext](1, "foo");
 
       expect(() => {
-        expect(fn).not[calledWithContext](1, "foo");
+        expect(mock).not[calledWithContext](1, "foo");
       }).toThrowErrorMatchingSnapshot();
     } else {
-      expect(fn)[calledWithContext]("foo");
+      expect(mock)[calledWithContext]("foo");
 
       expect(() => {
-        expect(fn).not[calledWithContext]("foo");
+        expect(mock).not[calledWithContext]("foo");
       }).toThrowErrorMatchingSnapshot();
     }
   });
