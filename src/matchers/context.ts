@@ -70,7 +70,6 @@ const printReceivedContextsPositive = (
   const expectedLine = `Expected: ${printExpected(expected)}\n`;
   if (indexedContexts.length === 0) return expectedLine;
   const label = "Received: ";
-  // TODO: diff?
   if (isOnlyCall && (iExpectedCall === 0 || iExpectedCall === undefined)) {
     const received = indexedContexts[0]?.[1];
     return (
