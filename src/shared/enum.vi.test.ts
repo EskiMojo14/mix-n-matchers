@@ -1,7 +1,4 @@
 import { describe, expect, it } from "vitest";
-import { alignedAnsiStyleSerializer } from "../utils/tests";
-
-expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 
 enum NumericEnum {
   Zero,

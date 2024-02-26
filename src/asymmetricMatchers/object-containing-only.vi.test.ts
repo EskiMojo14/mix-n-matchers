@@ -1,7 +1,4 @@
 import { expect, it, describe } from "vitest";
-import { alignedAnsiStyleSerializer } from "../utils/tests";
-
-expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 
 describe("objectContainingOnly", () => {
   it("should check if object contains only the expected properties", () => {

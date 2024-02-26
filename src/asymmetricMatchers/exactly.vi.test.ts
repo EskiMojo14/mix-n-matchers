@@ -1,7 +1,4 @@
 import { expect, it, describe, vi } from "vitest";
-import { alignedAnsiStyleSerializer } from "../utils/tests";
-
-expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 
 describe("exactly", () => {
   it("allows Object.is equality where deep equality would normally be used", () => {

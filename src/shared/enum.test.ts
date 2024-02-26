@@ -1,7 +1,3 @@
-import { alignedAnsiStyleSerializer } from "../utils/tests";
-
-expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
-
 enum NumericEnum {
   Zero,
   One,

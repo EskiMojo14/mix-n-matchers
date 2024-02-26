@@ -1,7 +1,4 @@
 import { describe, it, expect } from "vitest";
-import { alignedAnsiStyleSerializer } from "../utils/tests";
-
-expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 
 describe("oneOf", () => {
   it("should pass if value matches one of provided values", () => {

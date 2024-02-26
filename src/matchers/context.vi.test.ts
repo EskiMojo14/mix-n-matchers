@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { expect, describe, it, vi } from "vitest";
-import { alignedAnsiStyleSerializer } from "../utils/tests";
-
-expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 
 describe.each([
   "toHaveBeenCalledWithContext",
