@@ -7,13 +7,12 @@ export default defineConfig({
     resolveSnapshotPath: (testPath, snapshotExtension) => {
       return path.join(
         path.dirname(testPath),
-        "__snapshots__",
-        path.basename(testPath).replace(".test", ".vi.test") +
-          snapshotExtension,
+        "__vi_snapshots__",
+        path.basename(testPath) + snapshotExtension,
       );
     },
     alias: {
-      "@globals": import.meta.resolve("./src/utils/globals.ts"),
+      "@globals": import.meta.resolve("./src/utils/globals"),
     },
   },
 });
