@@ -620,3 +620,45 @@ expect(mock).toBeCalledWith(expect.enum(MyEnum));
 ```
 
 This is automatically done for you with the auto-setup files (`mix-n-matchers/all`, `mix-n-matchers/jest-globals`, `mix-n-matchers/vitest`).
+
+### Asymmetric Matchers vs Symmetric Matchers
+
+When `expect.extend` is called, each matcher is added as both an asymmetric and symmetric matcher.
+
+```ts
+expect.extend({
+  foo(received) {
+    const pass = received === "foo";
+    return {
+      pass,
+      message: pass ? () => "Expected 'foo'" : () => "Expected not 'foo'",
+    };
+  },
+});
+
+expect(value).foo(); // symmetric
+
+expect(value).toEqual(expect.foo()); // asymmetric
+```
+
+However, conventionally there is a difference in how these matchers are named. For example, `expect().toBeAnArray` vs `expect.array`.
+
+`mix-n-matchers` intentionally only exposes types for matchers as _either_ asymmetric or symmetric, and not both. Sometimes a matcher is available as both, but with different names. For example, `expect().toBeEnum` and `expect.ofEnum`.
+
+This helps to avoid confusion and makes it clear which matchers are designed to be asymmetric and which are symmetric.
+
+If there's any existing matchers that are only available as asymmetric matchers and you'd like to use them as symmetric matchers (or vice versa), please open an issue or a pull request!
+
+You can of course choose to expose these types yourself to enable both symmetric and asymmetric usage of a matcher.
+
+```ts
+declare module "mix-n-matchers" {
+  interface MixNMatchers<R, T> extends Pick<AsymmetricMixNMatchers, "typeOf"> {}
+  interface AsymmetricMixNMatchers
+    extends Pick<MixNMatchers, "toBeCalledWithContext"> {}
+}
+
+// now allowed
+expect(value).typeOf("string");
+expect(value).toEqual({ fn: expect.toBeCalledWithContext(context) });
+```
