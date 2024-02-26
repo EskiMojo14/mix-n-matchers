@@ -1,6 +1,6 @@
 import { expect, describe, it, jest } from "@jest/globals";
 import { alignedAnsiStyleSerializer } from "./src/utils/tests";
-import type * as globals from "./src/utils/globals";
+import type * as globals from "@globals";
 
 expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 
