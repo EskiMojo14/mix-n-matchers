@@ -1,18 +1,20 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
+import { describe, it, expect, jest } from "@jest/globals";
+import type { CallInfo, Spy } from "../utils";
 
 // Given a Jest mock function, return a minimal mock of a spy.
-const createSpy = (fn: jest.Mock) => {
+const createSpy = (fn: jest.Mock): Spy => {
   const spy = function () {};
 
   spy.calls = {
     all() {
-      const info: Array<jasmine.CallInfo> = [];
+      const info: Array<CallInfo> = [];
       let i = 0;
       while (i < fn.mock.calls.length) {
         const returnRecord = fn.mock.results[i];
         /* eslint-disable @typescript-eslint/no-unsafe-assignment */
         info.push({
-          args: fn.mock.calls[i],
+          args: fn.mock.calls[i]!,
           object: fn.mock.contexts[i],
           returnValue:
             returnRecord?.type === "return" ? returnRecord.value : undefined,
@@ -61,7 +63,7 @@ describe.each([
     }
   });
   it("works when not called", () => {
-    const fn = import.meta.jest.fn();
+    const fn = jest.fn();
     if (isToHaveNth(calledWithContext)) {
       expect(createSpy(fn)).not[calledWithContext](1, "foo");
       expect(fn).not[calledWithContext](1, "foo");
@@ -79,7 +81,7 @@ describe.each([
     }
   });
   it("works with a context that doesn't match", () => {
-    const fn = import.meta.jest.fn();
+    const fn = jest.fn();
     fn.call("bar");
 
     if (isToHaveNth(calledWithContext)) {
@@ -99,7 +101,7 @@ describe.each([
     }
   });
   it("works with a context that doesn't match with matchers", () => {
-    const fn = import.meta.jest.fn();
+    const fn = jest.fn();
     fn.call("bar");
 
     if (isToHaveNth(calledWithContext)) {
@@ -119,7 +121,7 @@ describe.each([
     }
   });
   it("works with a context that matches", () => {
-    const fn = import.meta.jest.fn();
+    const fn = jest.fn();
     fn.call("foo");
 
     if (isToHaveNth(calledWithContext)) {
@@ -139,7 +141,7 @@ describe.each([
     }
   });
   it("works with a context that matches with a matcher", () => {
-    const fn = import.meta.jest.fn();
+    const fn = jest.fn();
     fn.call("foo");
 
     if (isToHaveNth(calledWithContext)) {
@@ -160,7 +162,7 @@ describe.each([
   });
 
   it("includes the custom mock name in the error message", () => {
-    const fn = import.meta.jest.fn().mockName("named-mock");
+    const fn = jest.fn().mockName("named-mock");
 
     fn.call("foo");
 

@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { describe, it, expect } from "@jest/globals";
+
 describe("typeOf", () => {
   it("matches against the provided value using `typeof`", () => {
     expect(1).toEqual(expect.typeOf("number"));

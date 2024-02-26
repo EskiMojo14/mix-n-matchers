@@ -1,3 +1,5 @@
+import { describe, it, expect } from "@jest/globals";
+
 enum NumericEnum {
   Zero,
   One,
