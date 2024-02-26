@@ -1,8 +1,8 @@
-import { defineConfig } from "vitest/config";
+import { mergeConfig } from "vitest/config";
+import defaultConfig from "./vitest.config";
 
-export default defineConfig({
+export default mergeConfig(defaultConfig, {
   test: {
     setupFiles: ["mix-n-matchers/vitest", "./vitest-setup.ts"],
-    include: ["src/**/*.vi.test.ts"],
   },
 });

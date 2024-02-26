@@ -1,4 +1,4 @@
-import { describe, it, expect } from "@jest/globals";
+import { describe, it, expect } from "@globals";
 
 describe("objectContainingOnly", () => {
   it("should check if object contains only the expected properties", () => {

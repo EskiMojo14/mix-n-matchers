@@ -1,4 +1,4 @@
-import { expect, describe, it } from "@jest/globals";
+import { expect, describe, it } from "@globals";
 import { getValidEnumValues } from "./enum";
 
 describe("enum utils", () => {

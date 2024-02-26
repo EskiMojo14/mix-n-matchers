@@ -14,7 +14,8 @@
     "noEmit": true,
     "lib": ["ES2022"],
     "paths": {
-      "mix-n-matchers": ["./src/index.ts"]
+      "mix-n-matchers": ["./src/index"],
+      "@globals": ["./src/utils/globals"]
     }
   }
 }
