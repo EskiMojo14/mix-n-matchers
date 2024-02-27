@@ -1,4 +1,11 @@
-import { printReceived } from "jest-matcher-utils";
+import {
+  EXPECTED_COLOR,
+  matcherErrorMessage,
+  matcherHint,
+  printReceived,
+  printWithType,
+  stringify,
+} from "jest-matcher-utils";
 import { makeEqualValue } from "../utils";
 import type { MatcherFunction } from "../utils/types";
 
@@ -50,7 +57,16 @@ export const objectContainingOnly: MatcherFunction<
   [expected: Record<string | symbol, unknown>]
 > = function (received, expected) {
   if (typeof expected !== "object") {
-    throw new Error(`Expected value must be an object, not ${typeof expected}`);
+    throw new Error(
+      matcherErrorMessage(
+        matcherHint("objectContainingOnly", undefined, expected, {
+          isNot: this.isNot,
+          promise: this.promise,
+        }),
+        `${EXPECTED_COLOR("Expected")} value must be an object`,
+        printWithType("Expected", expected, stringify),
+      ),
+    );
   }
 
   const receivedIsObject = typeof received === "object" && received !== null;

@@ -21,7 +21,14 @@ Expected: <g>not.objectContainingOnly<[object Object]></g>
 Received: <r>{"a": 1, "b": 2}</g>
 `;
 
-exports[`objectContainingOnly should throw an error if expected value is not an object 1`] = `Expected value must be an object, not number`;
+exports[`objectContainingOnly should throw an error if expected value is not an object 1`] = `
+<d>expect(</b><r>received</g><d>).</b>objectContainingOnly<d>(</b><g>1</g><d>)</b>
+
+<b>Matcher error</b>: <g>Expected</g> value must be an object
+
+Expected has type:  number
+Expected has value: 1
+`;
 
 exports[`objectContainingOnly should throw an error if received value is not an object 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>

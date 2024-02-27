@@ -1,4 +1,12 @@
-import { printExpected, printReceived } from "jest-matcher-utils";
+import {
+  EXPECTED_COLOR,
+  matcherErrorMessage,
+  matcherHint,
+  printExpected,
+  printReceived,
+  printWithType,
+  stringify,
+} from "jest-matcher-utils";
 import { makeEqualValue } from "../utils";
 import type { MatcherFunction } from "../utils/types";
 
@@ -17,7 +25,15 @@ export const arrayContainingOnly: MatcherFunction<[expected: Array<unknown>]> =
   function (received, expected) {
     if (!Array.isArray(expected)) {
       throw new Error(
-        `Expected value must be an array, not ${typeof expected}`,
+        matcherErrorMessage(
+          matcherHint("arrayContainingOnly", undefined, expected, {
+            isNot: this.isNot,
+            promise: this.promise,
+            isDirectExpectCall: true,
+          }),
+          `${EXPECTED_COLOR("Expected")} value must be an array`,
+          printWithType("Expected", expected, stringify),
+        ),
       );
     }
     const equalValue = makeEqualValue(this);

@@ -14,7 +14,14 @@ Expected: <g>not.arrayContainingOnly<1,2,3></g>
 Received: <r>[1, 2, 2, 3]</g>
 `;
 
-exports[`arrayContainingOnly should throw an error if the expected value is not an array 1`] = `Expected value must be an array, not number`;
+exports[`arrayContainingOnly should throw an error if the expected value is not an array 1`] = `
+<d>expect.</b>arrayContainingOnly<d>(</b><g>1</g><d>)</b>
+
+<b>Matcher error</b>: <g>Expected</g> value must be an array
+
+Expected has type:  number
+Expected has value: 1
+`;
 
 exports[`arrayContainingOnly should throw an error if the received value is not an array 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>

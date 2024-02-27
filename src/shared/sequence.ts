@@ -1,4 +1,10 @@
-import { matcherHint, printReceived } from "jest-matcher-utils";
+import {
+  matcherErrorMessage,
+  matcherHint,
+  printReceived,
+  printWithType,
+  stringify,
+} from "jest-matcher-utils";
 import type { MatcherFunction, Tester } from "../utils/types";
 import { isIterable } from "../utils";
 import { assert } from "../utils/assert";
@@ -17,7 +23,16 @@ const makeSatisfySequenceMatcher = (
 ): MatcherFunction<[predicate: Predicate, ...predicates: Array<Predicate>]> =>
   function toSatisfySequence(received, ...predicates) {
     if (predicates.length === 0) {
-      throw new Error(`${matcherName} requires at least one predicate`);
+      throw new Error(
+        matcherErrorMessage(
+          matcherHint(matcherName, undefined, undefined, {
+            isNot: this.isNot,
+            promise: this.promise,
+            isDirectExpectCall: asymmetric,
+          }),
+          "At least one predicate must be provided",
+        ),
+      );
     }
     const prefix =
       matcherHint(matcherName, undefined, undefined, {
@@ -42,9 +57,16 @@ const makeSatisfySequenceMatcher = (
       }
       sequenceSoFar.push(receivedItem);
       const predicate = predicates[i];
-      assert(
-        typeof predicate === "function",
-        `predicate must be a function, but predicate at index ${i} was "${typeof predicate}"`,
+      assert(typeof predicate === "function", () =>
+        matcherErrorMessage(
+          matcherHint(matcherName, undefined, undefined, {
+            isNot: this.isNot,
+            promise: this.promise,
+            isDirectExpectCall: asymmetric,
+          }),
+          "All predicates must be functions",
+          printWithType("Predicate at index " + i, predicate, stringify),
+        ),
       );
       if (!predicate(receivedItem)) {
         return {
