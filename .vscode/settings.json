@@ -1,0 +1,4 @@
+{
+  "jest.jestCommandLine": "yarn test",
+  "vitest.commandLine": "yarn vitest"
+}
