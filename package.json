@@ -1,6 +1,6 @@
 {
   "name": "mix-n-matchers",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Miscellaneous custom Jest matchers",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -35,7 +35,7 @@
     "clean": "rimraf dist",
     "prepare": "husky install",
     "prebuild": "yarn run type",
-    "build": "tsup",
+    "build": "yarn clean && tsup",
     "test": "yarn node --experimental-vm-modules $(yarn bin jest) --setupFilesAfterEnv ./src/jest-globals.ts ./jest-setup.ts",
     "test:dist": "yarn node --experimental-vm-modules $(yarn bin jest) --setupFilesAfterEnv mix-n-matchers/jest-globals ./jest-setup.ts",
     "vitest": "vitest",
