@@ -5,15 +5,9 @@ import {
   printWithType,
   stringify,
 } from "jest-matcher-utils";
-import type { MatcherFunction, Tester } from "../utils/types";
-import { isIterable } from "../utils";
+import type { MatcherFunction } from "../utils/types";
+import { isIterable, makeEqualValue } from "../utils";
 import { assert } from "../utils/assert";
-import {
-  arrayBufferEquality,
-  iterableEquality,
-  sparseArrayEquality,
-  typeEquality,
-} from "@jest/expect-utils";
 
 type Predicate = (value: unknown) => boolean;
 
@@ -124,13 +118,6 @@ export const toSatisfySequence = makeSatisfySequenceMatcher(
  */
 export const sequence = makeSatisfySequenceMatcher("sequence", true);
 
-const toStrictEqualTesters: Array<Tester> = [
-  iterableEquality,
-  typeEquality,
-  sparseArrayEquality,
-  arrayBufferEquality,
-];
-
 const makeEqualSequenceMatcher = (
   matcherName: string,
   asymmetric: boolean,
@@ -150,15 +137,7 @@ const makeEqualSequenceMatcher = (
         promise: this.promise,
         isDirectExpectCall: asymmetric,
       }) + "\n\n";
-    const equalValue = (a: unknown, b: unknown) =>
-      this.equals(
-        a,
-        b,
-        strict
-          ? [...(this.customTesters ?? []), ...toStrictEqualTesters]
-          : this.customTesters,
-        strict,
-      );
+    const equalValue = makeEqualValue(this);
     let i = 0;
     const sequenceSoFar: Array<unknown> = [];
     for (const receivedItem of received) {
@@ -169,7 +148,7 @@ const makeEqualSequenceMatcher = (
       }
       sequenceSoFar.push(receivedItem);
       const expectedItem = expected[i];
-      if (!equalValue(receivedItem, expectedItem)) {
+      if (!equalValue(receivedItem, expectedItem, strict)) {
         return {
           pass: false,
           message: () =>

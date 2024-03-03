@@ -6,9 +6,15 @@ import {
   RECEIVED_COLOR,
   printReceived,
 } from "jest-matcher-utils";
-import type { MatcherUtils } from "./types";
+import type { MatcherUtils, Tester } from "./types";
 import type { Mock } from "vitest";
 import type { jest } from "@jest/globals";
+import {
+  arrayBufferEquality,
+  iterableEquality,
+  sparseArrayEquality,
+  typeEquality,
+} from "@jest/expect-utils";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isMock = (received: any): received is jest.Mock | Mock =>
@@ -67,10 +73,24 @@ export type EqualValue = (
   strictCheck?: boolean,
 ) => boolean;
 
+export const toStrictEqualTesters: Array<Tester> = [
+  iterableEquality,
+  typeEquality,
+  sparseArrayEquality,
+  arrayBufferEquality,
+];
+
 export const makeEqualValue =
   (utils: MatcherUtils): EqualValue =>
   (a, b, strictCheck) =>
-    utils.equals(a, b, utils.customTesters, strictCheck);
+    utils.equals(
+      a,
+      b,
+      strictCheck
+        ? [...(utils.customTesters ?? []), ...toStrictEqualTesters]
+        : utils.customTesters,
+      strictCheck,
+    );
 
 export const isIterable = (received: unknown): received is Iterable<unknown> =>
   received != null &&

@@ -1,0 +1,232 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`iterableOf should match an iterable 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>not.iterableOf<Any></g>
+Received: <r>[1, 2, 3]</g>
+`;
+
+exports[`iterableOf should match an iterable 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>not.iterableOf<Any></g>
+Received: <r>Set {1, 2, 3}</g>
+`;
+
+exports[`iterableOf should not match a non-iterable 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>iterableOf<1></g>
+Received: <r>1</g>
+`;
+
+exports[`iterableOf should not match an iterable that contains a different value 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>iterableOf<Any></g>
+Received: <r>[1, 2, 3]</g>
+`;
+
+exports[`iterableOf should not match an iterable that contains a different value 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>iterableOf<Any></g>
+Received: <r>Set {1, 2, 3}</g>
+`;
+
+exports[`recordOf should match a record 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>not.recordOf<Any></g>
+Received: <r>{"a": 1, "b": 2, "c": 3}</g>
+`;
+
+exports[`recordOf should not match a non-record 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>recordOf<1></g>
+Received: <r>1</g>
+`;
+
+exports[`recordOf should not match a record that contains a different value 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>recordOf<Any></g>
+Received: <r>{"a": 1, "b": 2, "c": 3}</g>
+`;
+
+exports[`strictIterableOf should match an iterable 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>not.strictIterableOf<[object Object]></g>
+Received: <r>[{"a": 1}, {"a": 2}, {"a": 3}]</g>
+`;
+
+exports[`strictIterableOf should match an iterable 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>strictIterableOf<[object Object]></g>
+Received: <r>[{"a": 1}, {"a": 2}, {"a": 3}]</g>
+`;
+
+exports[`strictIterableOf should match an iterable 3`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>not.strictIterableOf<[object Object]></g>
+Received: <r>Set {{"a": 1}, {"a": 2}, {"a": 3}}</g>
+`;
+
+exports[`strictIterableOf should match an iterable 4`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>strictIterableOf<[object Object]></g>
+Received: <r>Set {{"a": 1}, {"a": 2}, {"a": 3}}</g>
+`;
+
+exports[`strictIterableOf should not match a non-iterable 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>strictIterableOf<1></g>
+Received: <r>1</g>
+`;
+
+exports[`strictIterableOf should not match an iterable that contains a different value 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>strictIterableOf<[object Object]></g>
+Received: <r>[{"a": 1}, {"a": 2}, {"a": 3}]</g>
+`;
+
+exports[`strictIterableOf should not match an iterable that contains a different value 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>strictIterableOf<[object Object]></g>
+Received: <r>Set {{"a": 1}, {"a": 2}, {"a": 3}}</g>
+`;
+
+exports[`strictRecordOf should match a record 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>not.strictRecordOf<[object Object]></g>
+Received: <r>{"a": {"a": 1}, "b": {"a": 2}}</g>
+`;
+
+exports[`strictRecordOf should match a record 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>strictRecordOf<[object Object]></g>
+Received: <r>{"a": {"a": 1}, "b": {"a": 2}}</g>
+`;
+
+exports[`strictRecordOf should not match a non-record 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>strictRecordOf<1></g>
+Received: <r>1</g>
+`;
+
+exports[`strictRecordOf should not match a record that contains a different value 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>strictRecordOf<[object Object]></g>
+Received: <r>{"a": {"a": 1}, "b": {"a": 2}}</g>
+`;
+
+exports[`toBeIterableOf should match an iterable that contains only the expected values 1`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeIterableOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[1, 2, 3]</g> not to contain only <g>Any<Number></g> values
+`;
+
+exports[`toBeIterableOf should match an iterable that contains only the expected values 2`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeIterableOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {1, 2, 3}</g> not to contain only <g>Any<Number></g> values
+`;
+
+exports[`toBeIterableOf should not match a non-iterable 1`] = `Expected <r>1</g> to be an iterable`;
+
+exports[`toBeIterableOf should not match an iterable that contains a different value 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeIterableOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[1, 2, 3]</g> to contain only <g>Any<String></g> values, but item at index 0 was <r>1</g>
+`;
+
+exports[`toBeIterableOf should not match an iterable that contains a different value 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeIterableOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {1, 2, 3}</g> to contain only <g>Any<String></g> values, but item at index 0 was <r>1</g>
+`;
+
+exports[`toBeRecordOf should match a record that contains only the expected values 1`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeRecordOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>{"a": 1, "b": 2, "c": 3}</g> not to contain only <g>Any<Number></g> values
+`;
+
+exports[`toBeRecordOf should not match a non-record 1`] = `Expected <r>1</g> to be an object, but it was <r>"number"</g>`;
+
+exports[`toBeRecordOf should not match a record that contains a different value 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeRecordOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>{"a": 1, "b": 2, "c": 3}</g> to contain only <g>Any<String></g> values, but item at key a was <r>1</g>
+`;
+
+exports[`toBeStrictIterableOf should match an iterable that contains only the expected values 1`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeStrictIterableOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[{"a": 1}, {"a": 2}, {"a": 3}]</g> not to contain only <g>{"a": Any<Number>}</g> values
+`;
+
+exports[`toBeStrictIterableOf should match an iterable that contains only the expected values 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeStrictIterableOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[{"a": 1}, {"a": 2}, {"a": 3}]</g> to contain only <g>{"a": Any<Number>, "b": undefined}</g> values, but item at index 0 was <r>{"a": 1}</g>
+`;
+
+exports[`toBeStrictIterableOf should match an iterable that contains only the expected values 3`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeStrictIterableOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {{"a": 1}, {"a": 2}, {"a": 3}}</g> not to contain only <g>{"a": Any<Number>}</g> values
+`;
+
+exports[`toBeStrictIterableOf should match an iterable that contains only the expected values 4`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeStrictIterableOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {{"a": 1}, {"a": 2}, {"a": 3}}</g> to contain only <g>{"a": Any<Number>, "b": undefined}</g> values, but item at index 0 was <r>{"a": 1}</g>
+`;
+
+exports[`toBeStrictIterableOf should not match a non-iterable 1`] = `Expected <r>1</g> to be an iterable`;
+
+exports[`toBeStrictIterableOf should not match an iterable that contains a different value 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeStrictIterableOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[{"a": 1}, {"a": 2}, {"a": 3}]</g> to contain only <g>{"a": Any<String>}</g> values, but item at index 0 was <r>{"a": 1}</g>
+`;
+
+exports[`toBeStrictIterableOf should not match an iterable that contains a different value 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeStrictIterableOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {{"a": 1}, {"a": 2}, {"a": 3}}</g> to contain only <g>{"a": Any<String>}</g> values, but item at index 0 was <r>{"a": 1}</g>
+`;
+
+exports[`toBeStrictRecordOf should match a record that contains only the expected values 1`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeStrictRecordOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>{"a": {"a": 1}, "b": {"a": 2}}</g> not to contain only <g>{"a": Any<Number>}</g> values
+`;
+
+exports[`toBeStrictRecordOf should match a record that contains only the expected values 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeStrictRecordOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>{"a": {"a": 1}, "b": {"a": 2}}</g> to contain only <g>{"a": Any<Number>, "b": undefined}</g> values, but item at key a was <r>{"a": 1}</g>
+`;
+
+exports[`toBeStrictRecordOf should not match a non-record 1`] = `Expected <r>1</g> to be an object, but it was <r>"number"</g>`;
+
+exports[`toBeStrictRecordOf should not match a record that contains a different value 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeStrictRecordOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>{"a": {"a": 1}, "b": {"a": 2}}</g> to contain only <g>{"a": Any<String>}</g> values, but item at key a was <r>{"a": 1}</g>
+`;

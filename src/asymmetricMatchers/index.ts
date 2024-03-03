@@ -9,3 +9,9 @@ export { typeOf } from "./typeof";
 
 export { ofEnum } from "../shared/enum";
 export { sequence, sequenceOf, strictSequenceOf } from "../shared/sequence";
+export {
+  iterableOf,
+  strictIterableOf,
+  recordOf,
+  strictRecordOf,
+} from "../shared/iterable-of";
