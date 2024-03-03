@@ -29,7 +29,7 @@ const makeIterableOfMatcher = (
           pass: false,
           message: () =>
             prefix +
-            `Expected ${printReceived(received)} to contain only ${printExpected(expected)} values, but item at index ${i} was ${printReceived(value)}`,
+            `Expected ${printReceived(received)} to contain only values matching ${printExpected(expected)}, but item at index ${i} was ${printReceived(value)}`,
         };
       }
       i++;
@@ -38,7 +38,7 @@ const makeIterableOfMatcher = (
       pass: true,
       message: () =>
         prefix +
-        `Expected ${printReceived(received)} not to contain only ${printExpected(expected)} values`,
+        `Expected ${printReceived(received)} not to contain only values matching ${printExpected(expected)}`,
     };
   };
 
@@ -121,7 +121,7 @@ const makeRecordOfMatcher = (
           pass: false,
           message: () =>
             prefix +
-            `Expected ${printReceived(received)} to contain only ${printExpected(expected)} values, but item at key ${key} was ${printReceived(value)}`,
+            `Expected ${printReceived(received)} to contain only values matching ${printExpected(expected)}, but item at key ${key} was ${printReceived(value)}`,
         };
       }
     }
@@ -129,7 +129,7 @@ const makeRecordOfMatcher = (
       pass: true,
       message: () =>
         prefix +
-        `Expected ${printReceived(received)} not to contain only ${printExpected(expected)} values`,
+        `Expected ${printReceived(received)} not to contain only values matching ${printExpected(expected)}`,
     };
   };
 
