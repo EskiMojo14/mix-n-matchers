@@ -98,8 +98,8 @@ const makeRecordOfMatcher = (
   matcherName: string,
   asymmetric: boolean,
   strict = false,
-): MatcherFunction<[expected: unknown]> =>
-  function toBeRecordOf(received, expected) {
+): MatcherFunction<[expectedKeyOrValue: unknown, expectedValue?: unknown]> =>
+  function toBeRecordOf(received, ...expected) {
     if (typeof received !== "object" || received === null) {
       return {
         pass: false,
@@ -115,13 +115,23 @@ const makeRecordOfMatcher = (
       }) + "\n\n";
     const equalValue = makeEqualValue(this);
 
+    const hasExpectedKey = expected.length >= 2;
+    const expectedValue = expected[hasExpectedKey ? 1 : 0];
     for (const [key, value] of Object.entries(received)) {
-      if (!equalValue(value, expected, strict)) {
+      if (!equalValue(value, expectedValue, strict)) {
         return {
           pass: false,
           message: () =>
             prefix +
-            `Expected ${printReceived(received)} to contain only values matching ${printExpected(expected)}, but item at key ${key} was ${printReceived(value)}`,
+            `Expected ${printReceived(received)} to contain only values matching ${printExpected(expectedValue)}, but item at key ${key} was ${printReceived(value)}`,
+        };
+      }
+      if (hasExpectedKey && !equalValue(key, expected[0], strict)) {
+        return {
+          pass: false,
+          message: () =>
+            prefix +
+            `Expected ${printReceived(received)} to contain only keys matching ${printExpected(expected[0])}, but found key ${printReceived(key)}`,
         };
       }
     }
@@ -129,7 +139,7 @@ const makeRecordOfMatcher = (
       pass: true,
       message: () =>
         prefix +
-        `Expected ${printReceived(received)} not to contain only values matching ${printExpected(expected)}`,
+        `Expected ${printReceived(received)} not to contain only values matching ${printExpected(expectedValue)}`,
     };
   };
 
@@ -186,6 +196,8 @@ declare module "mix-n-matchers" {
     /**
      * Asserts that a value is an iterable where all items are deeply equal to the expected value.
      *
+     * Optionally, you can provide an expected type via the generic.
+     *
      * @example
      * expect([1, 1, 1]).toBeIterableOf(1);
      * expect([1, 1, 2]).not.toBeIterableOf(1);
@@ -195,6 +207,8 @@ declare module "mix-n-matchers" {
     toBeIterableOf<E>(expected: E): R;
     /**
      * Asserts that a value is an iterable where all items are strictly deeply equal to the expected value.
+     *
+     * Optionally, you can provide an expected type via the generic.
      *
      * @example
      * expect([1, 1, 1]).toBeStrictIterableOf(1);
@@ -206,6 +220,8 @@ declare module "mix-n-matchers" {
     /**
      * Asserts that a value is a record (object) where all values are deeply equal to the expected value.
      *
+     * Optionally, you can provide an expected type via the generic.
+     *
      * @example
      * expect({ a: 1, b: 1, c: 1 }).toBeRecordOf(1);
      * expect({ a: 1, b: 1, c: 2 }).not.toBeRecordOf(1);
@@ -214,7 +230,21 @@ declare module "mix-n-matchers" {
      */
     toBeRecordOf<E>(expected: E): R;
     /**
+     * Asserts that a value is a record (object) where all values are deeply equal to the expected value, and all keys are deeply equal to the expected key.
+     *
+     * Optionally, you can provide expected types via the generics.
+     *
+     * @example
+     * expect({ a: 1, b: 1, c: 1 }).toBeRecordOf(expect.oneOf(['a', 'b', 'c']), 1);
+     * expect({ a: 1, b: 1, c: 1 }).not.toBeRecordOf('a', 1);
+     *
+     * expect({ a: 1, b: 2, c: 1 }).toBeRecordOf(expect.any(String), expect.any(Number));
+     */
+    toBeRecordOf<K, V>(expectedKey: K, expectedValue: V): R;
+    /**
      * Asserts that a value is a record (object) where all values are strictly deeply equal to the expected value.
+     *
+     * Optionally, you can provide an expected type via the generic.
      *
      * @example
      * expect({ a: 1, b: 1, c: 1 }).toBeStrictRecordOf(1);
@@ -223,10 +253,22 @@ declare module "mix-n-matchers" {
      * expect({ a: 1, b: 2, c: 1 }).toBeStrictRecordOf(expect.any(Number));
      */
     toBeStrictRecordOf<E>(expected: E): R;
+    /**
+     * Asserts that a value is a record (object) where all values are strictly deeply equal to the expected value, and all keys are strictly deeply equal to the expected key.
+     *
+     * Optionally, you can provide expected types via the generics.
+     *
+     * @example
+     * expect({ a: 1, b: 1, c: 1 }).toBeStrictRecordOf(expect.oneOf(['a', 'b', 'c']), 1);
+     * expect({ a: 1, b: 1, c: 1 }).not.toBeStrictRecordOf('a', 1);
+     */
+    toBeStrictRecordOf<K, V>(expectedKey: K, expectedValue: V): R;
   }
   export interface AsymmetricMixNMatchers {
     /**
      * Matches an iterable where all items are deeply equal to the expected value.
+     *
+     * Optionally, you can provide an expected type via the generic.
      *
      * @example
      * expect({ value: [1, 1, 1] }).toEqual({ value: expect.iterableOf(1) });
@@ -238,6 +280,8 @@ declare module "mix-n-matchers" {
     /**
      * Matches an iterable where all items are strictly deeply equal to the expected value.
      *
+     * Optionally, you can provide an expected type via the generic.
+     *
      * @example
      * expect({ value: [1, 1, 1] }).toEqual({ value: expect.strictIterableOf(1) });
      * expect({ value: [1, 1, 2] }).not.toEqual({ value: expect.strictIterableOf(1) });
@@ -248,6 +292,8 @@ declare module "mix-n-matchers" {
     /**
      * Matches a record (object) where all values are deeply equal to the expected value.
      *
+     * Optionally, you can provide an expected type via the generic.
+     *
      * @example
      * expect({ value: { a: 1, b: 1, c: 1 } }).toEqual({ value: expect.recordOf(1) });
      * expect({ value: { a: 1, b: 1, c: 2 } }).not.toEqual({ value: expect.recordOf(1) });
@@ -256,7 +302,21 @@ declare module "mix-n-matchers" {
      */
     recordOf<E>(expected: E): any;
     /**
+     * Matches a record (object) where all values are deeply equal to the expected value, and all keys are deeply equal to the expected key.
+     *
+     * Optionally, you can provide expected types via the generics.
+     *
+     * @example
+     * expect({ value: { a: 1, b: 1, c: 1 } }).toEqual({ value: expect.recordOf(expect.oneOf(['a', 'b', 'c']), 1) });
+     * expect({ value: { a: 1, b: 1, c: 1 } }).not.toEqual({ value: expect.recordOf('a', 1) });
+     *
+     * expect({ value: { a: 1, b: 2, c: 1 } }).toEqual({ value: expect.recordOf(expect.any(String), expect.any(Number)) });
+     */
+    recordOf<K extends string, V>(expectedKey: K, expectedValue: V): any;
+    /**
      * Matches a record (object) where all values are strictly deeply equal to the expected value.
+     *
+     * Optionally, you can provide an expected type via the generic.
      *
      * @example
      * expect({ value: { a: 1, b: 1, c: 1 } }).toEqual({ value: expect.strictRecordOf(1) });
@@ -265,5 +325,17 @@ declare module "mix-n-matchers" {
      * expect({ value: { a: 1, b: 2, c: 1 } }).toEqual({ value: expect.strictRecordOf(expect.any(Number)) });
      */
     strictRecordOf<E>(expected: E): any;
+    /**
+     * Matches a record (object) where all values are strictly deeply equal to the expected value, and all keys are strictly deeply equal to the expected key.
+     *
+     * Optionally, you can provide expected types via the generics.
+     *
+     * @example
+     * expect({ value: { a: 1, b: 1, c: 1 } }).toEqual({ value: expect.strictRecordOf(expect.oneOf(['a', 'b', 'c']), 1) });
+     * expect({ value: { a: 1, b: 1, c: 1 } }).not.toEqual({ value: expect.strictRecordOf('a', 1) });
+     *
+     * expect({ value: { a: 1, b: 2, c: 1 } }).toEqual({ value: expect.strictRecordOf(expect.any(String), expect.any(Number)) });
+     */
+    strictRecordOf<K extends string, V>(expectedKey: K, expectedValue: V): any;
   }
 }

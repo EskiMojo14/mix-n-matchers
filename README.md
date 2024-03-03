@@ -485,6 +485,10 @@ expect({
 
 Matches an object where every value matches the expected value, using deep equality.
 
+Optionally, you can pass two arguments and the first will be matched against keys.
+
+_Note: keys and values are retrieved using `Object.entries`, so only string (non-symbol) enumerable keys are checked._
+
 </td>
 <td>
 
@@ -493,6 +497,12 @@ expect({
   object: { a: 1, b: 2 },
 }).toEqual({
   object: expect.recordOf(expect.any(Number)),
+});
+
+expect({
+  object: { a: 1, b: 2 },
+}).toEqual({
+  object: expect.recordOf(expect.any(String), expect.any(Number)),
 });
 ```
 
@@ -508,6 +518,10 @@ expect({
 
 Matches an object where every value matches the expected value, using [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
 
+Optionally, you can pass two arguments and the first will be matched against keys.
+
+_Note: keys and values are retrieved using `Object.entries`, so only string (non-symbol) enumerable keys are checked._
+
 </td>
 <td>
 
@@ -516,6 +530,12 @@ expect({
   object: { a: 1, b: 2 },
 }).toEqual({
   object: expect.strictRecordOf(expect.any(Number)),
+});
+
+expect({
+  object: { a: 1, b: 2 },
+}).toEqual({
+  object: expect.strictRecordOf(expect.any(String), expect.any(Number)),
 });
 ```
 
@@ -659,11 +679,16 @@ expect([1, 2, 3]).toBeStrictIterableOf(expect.any(Number));
 
 Assert a value is an object where every value matches the expected value, using deep equality.
 
+Optionally, you can pass two arguments and the first will be matched against keys.
+
+_Note: keys and values are retrieved using `Object.entries`, so only string (non-symbol) enumerable keys are checked._
+
 </td>
 <td>
 
 ```ts
 expect({ a: 1, b: 2 }).toBeRecordOf(expect.any(Number));
+expect({ a: 1, b: 2 }).toBeRecordOf(expect.any(String), expect.any(Number));
 ```
 
 </td>
@@ -679,11 +704,19 @@ expect({ a: 1, b: 2 }).toBeRecordOf(expect.any(Number));
 
 Assert a value is an object where every value matches the expected value, using [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
 
+Optionally, you can pass two arguments and the first will be matched against keys.
+
+_Note: keys and values are retrieved using `Object.entries`, so only string (non-symbol) enumerable keys are checked._
+
 </td>
 <td>
 
 ```ts
 expect({ a: 1, b: 2 }).toBeStrictRecordOf(expect.any(Number));
+expect({ a: 1, b: 2 }).toBeStrictRecordOf(
+  expect.any(String),
+  expect.any(Number),
+);
 ```
 
 </td>

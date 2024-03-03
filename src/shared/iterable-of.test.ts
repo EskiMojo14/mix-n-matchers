@@ -110,6 +110,25 @@ describe("toBeRecordOf", () => {
     }).toThrowErrorMatchingSnapshot();
   });
 
+  it("should match against keys", () => {
+    expect({ a: 1, b: 2, c: 3 }).toBeRecordOf(
+      expect.oneOf(["a", "b", "c"]),
+      expect.any(Number),
+    );
+    expect(() => {
+      expect({ a: 1, b: 2, c: 3 }).not.toBeRecordOf(
+        expect.oneOf(["a", "b", "c"]),
+        expect.any(Number),
+      );
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect({ a: 1, b: 2, c: 3 }).toBeRecordOf(
+        expect.oneOf(["a", "b"]),
+        expect.any(Number),
+      );
+    }).toThrowErrorMatchingSnapshot();
+  });
+
   it("should not match a non-record", () => {
     expect(1).not.toBeRecordOf(1);
     expect(() => {
@@ -144,6 +163,25 @@ describe("toBeStrictRecordOf", () => {
       expect({ a: { a: 1 }, b: { a: 2 } }).toBeStrictRecordOf({
         a: expect.any(String),
       });
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("should match against keys", () => {
+    expect({ a: { a: 1 }, b: { a: 2 } }).toBeStrictRecordOf(
+      expect.oneOf(["a", "b"]),
+      { a: expect.any(Number) },
+    );
+    expect(() => {
+      expect({ a: { a: 1 }, b: { a: 2 } }).not.toBeStrictRecordOf(
+        expect.oneOf(["a", "b"]),
+        { a: expect.any(Number) },
+      );
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect({ a: { a: 1 }, b: { a: 2 } }).toBeStrictRecordOf(
+        expect.oneOf(["a"]),
+        { a: expect.any(Number) },
+      );
     }).toThrowErrorMatchingSnapshot();
   });
 
@@ -268,6 +306,22 @@ describe("recordOf", () => {
     }).toThrowErrorMatchingSnapshot();
   });
 
+  it("should match against keys", () => {
+    expect({ a: 1, b: 2, c: 3 }).toEqual(
+      expect.recordOf(expect.oneOf(["a", "b", "c"]), expect.any(Number)),
+    );
+    expect(() => {
+      expect({ a: 1, b: 2, c: 3 }).toEqual(
+        expect.not.recordOf(expect.oneOf(["a", "b", "c"]), expect.any(Number)),
+      );
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect({ a: 1, b: 2, c: 3 }).toEqual(
+        expect.recordOf(expect.oneOf(["a", "b"]), expect.any(Number)),
+      );
+    }).toThrowErrorMatchingSnapshot();
+  });
+
   it("should not match a non-record", () => {
     expect(() => {
       expect(1).toEqual(expect.recordOf(1));
@@ -299,6 +353,26 @@ describe("strictRecordOf", () => {
     expect(() => {
       expect({ a: { a: 1 }, b: { a: 2 } }).toEqual(
         expect.strictRecordOf({ a: expect.any(String) }),
+      );
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("should match against keys", () => {
+    expect({ a: { a: 1 }, b: { a: 2 } }).toEqual(
+      expect.strictRecordOf(expect.oneOf(["a", "b"]), {
+        a: expect.any(Number),
+      }),
+    );
+    expect(() => {
+      expect({ a: { a: 1 }, b: { a: 2 } }).toEqual(
+        expect.not.strictRecordOf(expect.oneOf(["a", "b"]), {
+          a: expect.any(Number),
+        }),
+      );
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect({ a: { a: 1 }, b: { a: 2 } }).toEqual(
+        expect.strictRecordOf(expect.oneOf(["a"]), { a: expect.any(Number) }),
       );
     }).toThrowErrorMatchingSnapshot();
   });

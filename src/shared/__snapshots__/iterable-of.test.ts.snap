@@ -42,6 +42,20 @@ Expected: <g>not.recordOf<Any></g>
 Received: <r>{"a": 1, "b": 2, "c": 3}</g>
 `;
 
+exports[`recordOf should match against keys 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>not.recordOf<oneOf, Any></g>
+Received: <r>{"a": 1, "b": 2, "c": 3}</g>
+`;
+
+exports[`recordOf should match against keys 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>recordOf<oneOf, Any></g>
+Received: <r>{"a": 1, "b": 2, "c": 3}</g>
+`;
+
 exports[`recordOf should not match a non-record 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
 
@@ -119,6 +133,20 @@ Expected: <g>strictRecordOf<[object Object]></g>
 Received: <r>{"a": {"a": 1}, "b": {"a": 2}}</g>
 `;
 
+exports[`strictRecordOf should match against keys 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>not.strictRecordOf<oneOf, [object Object]></g>
+Received: <r>{"a": {"a": 1}, "b": {"a": 2}}</g>
+`;
+
+exports[`strictRecordOf should match against keys 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+Expected: <g>strictRecordOf<oneOf, [object Object]></g>
+Received: <r>{"a": {"a": 1}, "b": {"a": 2}}</g>
+`;
+
 exports[`strictRecordOf should not match a non-record 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
 
@@ -163,6 +191,18 @@ exports[`toBeRecordOf should match a record that contains only the expected valu
 <d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeRecordOf<d>(</b><g>expected</g><d>)</b>
 
 Expected <r>{"a": 1, "b": 2, "c": 3}</g> not to contain only values matching <g>Any<Number></g>
+`;
+
+exports[`toBeRecordOf should match against keys 1`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeRecordOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>{"a": 1, "b": 2, "c": 3}</g> not to contain only values matching <g>Any<Number></g>
+`;
+
+exports[`toBeRecordOf should match against keys 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeRecordOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>{"a": 1, "b": 2, "c": 3}</g> to contain only keys matching <g>oneOf<a,b></g>, but found key <r>"c"</g>
 `;
 
 exports[`toBeRecordOf should not match a non-record 1`] = `Expected <r>1</g> to be an object, but it was <r>"number"</g>`;
@@ -221,6 +261,18 @@ exports[`toBeStrictRecordOf should match a record that contains only the expecte
 <d>expect(</b><r>received</g><d>).</b>toBeStrictRecordOf<d>(</b><g>expected</g><d>)</b>
 
 Expected <r>{"a": {"a": 1}, "b": {"a": 2}}</g> to contain only values matching <g>{"a": Any<Number>, "b": undefined}</g>, but item at key a was <r>{"a": 1}</g>
+`;
+
+exports[`toBeStrictRecordOf should match against keys 1`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeStrictRecordOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>{"a": {"a": 1}, "b": {"a": 2}}</g> not to contain only values matching <g>{"a": Any<Number>}</g>
+`;
+
+exports[`toBeStrictRecordOf should match against keys 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeStrictRecordOf<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>{"a": {"a": 1}, "b": {"a": 2}}</g> to contain only keys matching <g>oneOf<a></g>, but found key <r>"b"</g>
 `;
 
 exports[`toBeStrictRecordOf should not match a non-record 1`] = `Expected <r>1</g> to be an object, but it was <r>"number"</g>`;
