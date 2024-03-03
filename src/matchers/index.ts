@@ -15,5 +15,10 @@ export {
   toEqualSequence,
   toStrictEqualSequence,
 } from "../shared/sequence";
-
 export { toBeEnum } from "../shared/enum";
+export {
+  toBeIterableOf,
+  toBeStrictIterableOf,
+  toBeRecordOf,
+  toBeStrictRecordOf,
+} from "../shared/iterable-of";

@@ -429,6 +429,118 @@ expect({
 
 </td>
 </tr>
+<tr>
+<td>
+
+`iterableOf`
+
+</td>
+<td>
+
+Matches an iterable where every value matches the expected value, using deep equality.
+
+</td>
+<td>
+
+```ts
+expect({
+  array: [1, 2, 3],
+}).toEqual({
+  array: expect.iterableOf(expect.any(Number)),
+});
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+`strictIterableOf`
+
+</td>
+<td>
+
+Matches an iterable where every value matches the expected value, using [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
+
+</td>
+<td>
+
+```ts
+expect({
+  array: [1, 2, 3],
+}).toEqual({
+  array: expect.strictIterableOf(expect.any(Number)),
+});
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+`recordOf`
+
+</td>
+<td>
+
+Matches an object where every value matches the expected value, using deep equality.
+
+Optionally, you can pass two arguments and the first will be matched against keys.
+
+_Note: keys and values are retrieved using `Object.entries`, so only string (non-symbol) enumerable keys are checked._
+
+</td>
+<td>
+
+```ts
+expect({
+  object: { a: 1, b: 2 },
+}).toEqual({
+  object: expect.recordOf(expect.any(Number)),
+});
+
+expect({
+  object: { a: 1, b: 2 },
+}).toEqual({
+  object: expect.recordOf(expect.any(String), expect.any(Number)),
+});
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+`strictRecordOf`
+
+</td>
+<td>
+
+Matches an object where every value matches the expected value, using [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
+
+Optionally, you can pass two arguments and the first will be matched against keys.
+
+_Note: keys and values are retrieved using `Object.entries`, so only string (non-symbol) enumerable keys are checked._
+
+</td>
+<td>
+
+```ts
+expect({
+  object: { a: 1, b: 2 },
+}).toEqual({
+  object: expect.strictRecordOf(expect.any(Number)),
+});
+
+expect({
+  object: { a: 1, b: 2 },
+}).toEqual({
+  object: expect.strictRecordOf(expect.any(String), expect.any(Number)),
+});
+```
+
+</td>
+</tr>
 </table>
 
 ### Symmetric Matchers
@@ -514,6 +626,97 @@ Assert a value is an iterable that satisfies the specified sequence of values, u
 
 ```ts
 expect([1, 2, 3]).toStrictEqualSequence(1, 2, 3);
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+`toBeIterableOf`
+
+</td>
+<td>
+
+Assert a value is an iterable where every value matches the expected value, using deep equality.
+
+</td>
+<td>
+
+```ts
+expect([1, 2, 3]).toBeIterableOf(expect.any(Number));
+```
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`tobeStrictIterableOf`
+
+</td>
+<td>
+
+Assert a value is an iterable where every value matches the expected value, using [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
+
+</td>
+<td>
+
+```ts
+expect([1, 2, 3]).toBeStrictIterableOf(expect.any(Number));
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+`toBeRecordOf`
+
+</td>
+<td>
+
+Assert a value is an object where every value matches the expected value, using deep equality.
+
+Optionally, you can pass two arguments and the first will be matched against keys.
+
+_Note: keys and values are retrieved using `Object.entries`, so only string (non-symbol) enumerable keys are checked._
+
+</td>
+<td>
+
+```ts
+expect({ a: 1, b: 2 }).toBeRecordOf(expect.any(Number));
+expect({ a: 1, b: 2 }).toBeRecordOf(expect.any(String), expect.any(Number));
+```
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`toBeStrictRecordOf`
+
+</td>
+<td>
+
+Assert a value is an object where every value matches the expected value, using [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
+
+Optionally, you can pass two arguments and the first will be matched against keys.
+
+_Note: keys and values are retrieved using `Object.entries`, so only string (non-symbol) enumerable keys are checked._
+
+</td>
+<td>
+
+```ts
+expect({ a: 1, b: 2 }).toBeStrictRecordOf(expect.any(Number));
+expect({ a: 1, b: 2 }).toBeStrictRecordOf(
+  expect.any(String),
+  expect.any(Number),
+);
 ```
 
 </td>

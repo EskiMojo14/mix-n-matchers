@@ -32,6 +32,7 @@
     "vitest"
   ],
   "scripts": {
+    "clean": "rimraf dist",
     "prepare": "husky install",
     "prebuild": "yarn run type",
     "build": "tsup",
@@ -83,6 +84,7 @@
     "lint-staged": "^15.0.0",
     "prettier": "^3.0.3",
     "publint": "^0.2.2",
+    "rimraf": "^5.0.5",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.2",
     "tsup": "^8.0.0",
