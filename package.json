@@ -129,9 +129,7 @@
     "dts": true,
     "minify": true,
     "external": [
-      "@jest/globals",
-      "vitest",
-      "jest-matcher-utils"
+      "@jest/globals"
     ]
   }
 }
