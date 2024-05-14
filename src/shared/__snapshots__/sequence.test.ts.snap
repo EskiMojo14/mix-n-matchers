@@ -1,5 +1,221 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`containingEqualSequence fails if only part of the sequence is found 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": containingEqualSequence<1, 3>,</g>
+<r>+   "array": Array [</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`containingEqualSequence fails if only part of the sequence is found 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": containingEqualSequence<1, 3>,</g>
+<r>+   "array": Set {</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
+exports[`containingEqualSequence fails if the sequence is not found 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": containingEqualSequence<2, 1>,</g>
+<r>+   "array": Array [</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`containingEqualSequence fails if the sequence is not found 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": containingEqualSequence<2, 1>,</g>
+<r>+   "array": Set {</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
+exports[`containingSequence fails if only part of the sequence is found 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": containingSequence<1, 3>,</g>
+<r>+   "array": Array [</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`containingSequence fails if only part of the sequence is found 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": containingSequence<1, 3>,</g>
+<r>+   "array": Set {</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
+exports[`containingSequence fails if the sequence is not found 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": containingSequence<2, 1>,</g>
+<r>+   "array": Array [</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`containingSequence fails if the sequence is not found 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": containingSequence<2, 1>,</g>
+<r>+   "array": Set {</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
+exports[`containingStrictEqualSequence fails if only part of the sequence is found 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  -  1</g>
+<r>+ Received  + 11</g>
+
+<d>  Object {</b>
+<g>-   "array": containingStrictEqualSequence<[object Object], [object Object]>,</g>
+<r>+   "array": Array [</g>
+<r>+     Object {</g>
+<r>+       "value": 1,</g>
+<r>+     },</g>
+<r>+     Object {</g>
+<r>+       "value": 2,</g>
+<r>+     },</g>
+<r>+     Object {</g>
+<r>+       "value": 3,</g>
+<r>+     },</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`containingStrictEqualSequence fails if only part of the sequence is found 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  -  1</g>
+<r>+ Received  + 11</g>
+
+<d>  Object {</b>
+<g>-   "array": containingStrictEqualSequence<[object Object], [object Object]>,</g>
+<r>+   "array": Set {</g>
+<r>+     Object {</g>
+<r>+       "value": 1,</g>
+<r>+     },</g>
+<r>+     Object {</g>
+<r>+       "value": 2,</g>
+<r>+     },</g>
+<r>+     Object {</g>
+<r>+       "value": 3,</g>
+<r>+     },</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
+exports[`containingStrictEqualSequence fails if the sequence is not found 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  -  1</g>
+<r>+ Received  + 11</g>
+
+<d>  Object {</b>
+<g>-   "array": containingStrictEqualSequence<[object Object], [object Object]>,</g>
+<r>+   "array": Array [</g>
+<r>+     Object {</g>
+<r>+       "value": 1,</g>
+<r>+     },</g>
+<r>+     Object {</g>
+<r>+       "value": 2,</g>
+<r>+     },</g>
+<r>+     Object {</g>
+<r>+       "value": 3,</g>
+<r>+     },</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`containingStrictEqualSequence fails if the sequence is not found 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  -  1</g>
+<r>+ Received  + 11</g>
+
+<d>  Object {</b>
+<g>-   "array": containingStrictEqualSequence<[object Object], [object Object]>,</g>
+<r>+   "array": Set {</g>
+<r>+     Object {</g>
+<r>+       "value": 1,</g>
+<r>+     },</g>
+<r>+     Object {</g>
+<r>+       "value": 2,</g>
+<r>+     },</g>
+<r>+     Object {</g>
+<r>+       "value": 3,</g>
+<r>+     },</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
 exports[`sequence fails if not passed any predicates 1`] = `
 <d>expect.</b>sequence<d>(</b><g>expected</g><d>)</b>
 
@@ -309,6 +525,102 @@ exports[`strictSequenceOf works with other iterables 1`] = `
 <r>+     },</g>
 <r>+   },</g>
 <d>  }</b>
+`;
+
+exports[`toContainEqualSequence fails if only part of the sequence is found 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[1, 2, 3]</g> to contain sequence <r>1</g>, <r>3</g>
+
+Full sequence: <r>1</g>, <r>2</g>, <r>3</g>
+`;
+
+exports[`toContainEqualSequence fails if only part of the sequence is found 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {1, 2, 3}</g> to contain sequence <r>1</g>, <r>3</g>
+
+Full sequence: <r>1</g>, <r>2</g>, <r>3</g>
+`;
+
+exports[`toContainEqualSequence fails if the sequence is not found 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[1, 2, 3]</g> to contain sequence <r>2</g>, <r>1</g>
+
+Full sequence: <r>1</g>, <r>2</g>, <r>3</g>
+`;
+
+exports[`toContainEqualSequence fails if the sequence is not found 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {1, 2, 3}</g> to contain sequence <r>2</g>, <r>1</g>
+
+Full sequence: <r>1</g>, <r>2</g>, <r>3</g>
+`;
+
+exports[`toContainSequence fails if only part of the sequence is found 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[1, 2, 3]</g> to contain sequence <r>1</g>, <r>3</g>
+
+Full sequence: <r>1</g>, <r>2</g>, <r>3</g>
+`;
+
+exports[`toContainSequence fails if only part of the sequence is found 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {1, 2, 3}</g> to contain sequence <r>1</g>, <r>3</g>
+
+Full sequence: <r>1</g>, <r>2</g>, <r>3</g>
+`;
+
+exports[`toContainSequence fails if the sequence is not found 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[1, 2, 3]</g> to contain sequence <r>2</g>, <r>1</g>
+
+Full sequence: <r>1</g>, <r>2</g>, <r>3</g>
+`;
+
+exports[`toContainSequence fails if the sequence is not found 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {1, 2, 3}</g> to contain sequence <r>2</g>, <r>1</g>
+
+Full sequence: <r>1</g>, <r>2</g>, <r>3</g>
+`;
+
+exports[`toContainStrictEqualSequence fails if only part of the sequence is found 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainStrictEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[{"value": 1}, {"value": 2}, {"value": 3}]</g> to contain sequence <r>{"value": 1}</g>, <r>{"value": 3}</g>
+
+Full sequence: <r>{"value": 1}</g>, <r>{"value": 2}</g>, <r>{"value": 3}</g>
+`;
+
+exports[`toContainStrictEqualSequence fails if only part of the sequence is found 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainStrictEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {{"value": 1}, {"value": 2}, {"value": 3}}</g> to contain sequence <r>{"value": 1}</g>, <r>{"value": 3}</g>
+
+Full sequence: <r>{"value": 1}</g>, <r>{"value": 2}</g>, <r>{"value": 3}</g>
+`;
+
+exports[`toContainStrictEqualSequence fails if the sequence is not found 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainStrictEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[{"value": 1}, {"value": 2}, {"value": 3}]</g> to contain sequence <r>{"value": 2}</g>, <r>{"value": 1}</g>
+
+Full sequence: <r>{"value": 1}</g>, <r>{"value": 2}</g>, <r>{"value": 3}</g>
+`;
+
+exports[`toContainStrictEqualSequence fails if the sequence is not found 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainStrictEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {{"value": 1}, {"value": 2}, {"value": 3}}</g> to contain sequence <r>{"value": 2}</g>, <r>{"value": 1}</g>
+
+Full sequence: <r>{"value": 1}</g>, <r>{"value": 2}</g>, <r>{"value": 3}</g>
 `;
 
 exports[`toEqualSequence fails if the iterable is too short 1`] = `

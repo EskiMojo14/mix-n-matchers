@@ -14,6 +14,9 @@ export {
   toSatisfySequence,
   toEqualSequence,
   toStrictEqualSequence,
+  toContainSequence,
+  toContainEqualSequence,
+  toContainStrictEqualSequence,
 } from "../shared/sequence";
 export { toBeEnum } from "../shared/enum";
 export {
