@@ -17,6 +17,7 @@ export {
   toContainSequence,
   toContainEqualSequence,
   toContainStrictEqualSequence,
+  toContainSequenceSatisfying,
 } from "../shared/sequence";
 export { toBeEnum } from "../shared/enum";
 export {

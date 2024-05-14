@@ -128,6 +128,79 @@ exports[`containingSequence fails if the sequence is not found 2`] = `
 <d>  }</b>
 `;
 
+exports[`containingSequenceSatisfying fails if one of the predicates is not a function 1`] = `
+<d>expect.</b>containingSequenceSatisfying<d>(</b><g>expected</g><d>)</b>
+
+<b>Matcher error</b>: All predicates must be functions
+
+Predicate at index 1 has type:  number
+Predicate at index 1 has value: 1
+`;
+
+exports[`containingSequenceSatisfying fails if only part of the sequence is found 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": containingSequenceSatisfying<(x) => x === 1, (x) => x === 3>,</g>
+<r>+   "array": Array [</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`containingSequenceSatisfying fails if only part of the sequence is found 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": containingSequenceSatisfying<(x) => x === 1, (x) => x === 3>,</g>
+<r>+   "array": Set {</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
+exports[`containingSequenceSatisfying fails if the sequence is not found 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": containingSequenceSatisfying<(x) => x === 2, (x) => x === 1>,</g>
+<r>+   "array": Array [</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`containingSequenceSatisfying fails if the sequence is not found 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": containingSequenceSatisfying<(x) => x === 2, (x) => x === 1>,</g>
+<r>+   "array": Set {</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
 exports[`containingStrictEqualSequence fails if only part of the sequence is found 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
 
@@ -587,6 +660,47 @@ exports[`toContainSequence fails if the sequence is not found 2`] = `
 <d>expect(</b><r>received</g><d>).</b>toContainSequence<d>(</b><g>expected</g><d>)</b>
 
 Expected <r>Set {1, 2, 3}</g> to contain sequence <r>2</g>, <r>1</g>
+
+Full sequence: <r>1</g>, <r>2</g>, <r>3</g>
+`;
+
+exports[`toContainSequenceSatisfying fails if one of the predicates is not a function 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainSequenceSatisfying<d>(</b><g>expected</g><d>)</b>
+
+<b>Matcher error</b>: All predicates must be functions
+
+Predicate at index 1 has type:  number
+Predicate at index 1 has value: 1
+`;
+
+exports[`toContainSequenceSatisfying fails if only part of the sequence is found 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainSequenceSatisfying<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[1, 2, 3]</g> to contain sequence satisfying predicates
+
+Full sequence: <r>1</g>, <r>2</g>, <r>3</g>
+`;
+
+exports[`toContainSequenceSatisfying fails if only part of the sequence is found 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainSequenceSatisfying<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {1, 2, 3}</g> to contain sequence satisfying predicates
+
+Full sequence: <r>1</g>, <r>2</g>, <r>3</g>
+`;
+
+exports[`toContainSequenceSatisfying fails if the sequence is not found 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainSequenceSatisfying<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[1, 2, 3]</g> to contain sequence satisfying predicates
+
+Full sequence: <r>1</g>, <r>2</g>, <r>3</g>
+`;
+
+exports[`toContainSequenceSatisfying fails if the sequence is not found 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainSequenceSatisfying<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {1, 2, 3}</g> to contain sequence satisfying predicates
 
 Full sequence: <r>1</g>, <r>2</g>, <r>3</g>
 `;

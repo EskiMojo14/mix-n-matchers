@@ -360,10 +360,117 @@ export const containingStrictEqualSequence = makeContainSequenceMatcher(
   true,
 );
 
+export const makeContainSatisfySequenceMatcher = (
+  matcherName: string,
+  asymmetric: boolean,
+): MatcherFunction<[predicate: Predicate, ...predicates: Array<Predicate>]> =>
+  function toContainSequenceSatisfying(received, ...predicates) {
+    if (predicates.length === 0) {
+      throw new Error(
+        matcherErrorMessage(
+          matcherHint(matcherName, undefined, undefined, {
+            isNot: this.isNot,
+            promise: this.promise,
+            isDirectExpectCall: asymmetric,
+          }),
+          "At least one predicate must be provided",
+        ),
+      );
+    }
+    const prefix =
+      matcherHint(matcherName, undefined, undefined, {
+        isNot: this.isNot,
+        promise: this.promise,
+        isDirectExpectCall: asymmetric,
+      }) + "\n\n";
+    if (!isIterable(received)) {
+      return {
+        pass: false,
+        message: () =>
+          prefix + `Expected ${printReceived(received)} to be an iterable`,
+      };
+    }
+    let status: "unmatched" | "partial" | "matched" = "unmatched";
+    let expectedIdx = 0;
+    const sequenceSoFar: Array<unknown> = [];
+    for (const receivedItem of received) {
+      sequenceSoFar.push(receivedItem);
+      const predicate = predicates[expectedIdx];
+      assert(typeof predicate === "function", () =>
+        matcherErrorMessage(
+          matcherHint(matcherName, undefined, undefined, {
+            isNot: this.isNot,
+            promise: this.promise,
+            isDirectExpectCall: asymmetric,
+          }),
+          "All predicates must be functions",
+          printWithType(
+            "Predicate at index " + expectedIdx,
+            predicate,
+            stringify,
+          ),
+        ),
+      );
+      if (predicate(receivedItem)) {
+        if (status === "unmatched") {
+          status = "partial";
+        }
+        expectedIdx++;
+        if (expectedIdx === predicates.length) {
+          status = "matched";
+          break;
+        }
+      } else if (status === "partial") {
+        status = "unmatched";
+        expectedIdx = 0;
+      }
+    }
+    const pass = status === "matched";
+    return {
+      pass,
+      message: () =>
+        prefix +
+        `Expected ${printReceived(received)} ${pass ? "not " : ""}to contain sequence satisfying predicates` +
+        "\n\n" +
+        `Full sequence: ${printReceivedSequence(sequenceSoFar)}`,
+    };
+  };
+
+/**
+ * Asserts that an iterable contains a sequence satisfying a sequence of predicates.
+ *
+ * @example
+ * expect([1, 2, 3]).toContainSequenceSatisfying(
+ *   (x) => x === 2,
+ *   (x) => x === 3,
+ * );
+ */
+export const toContainSequenceSatisfying = makeContainSatisfySequenceMatcher(
+  "toContainSequenceSatisfying",
+  false,
+);
+
+/**
+ * Matches an iterable that contains a sequence satisfying a sequence of predicates.
+ *
+ * @example
+ * expect({ value: [1, 2, 3] }).toEqual({
+ *   value: expect.containingSequenceSatisfying(
+ *     (x) => x === 2,
+ *     (x) => x === 3,
+ *   ),
+ * });
+ */
+export const containingSequenceSatisfying = makeContainSatisfySequenceMatcher(
+  "containingSequenceSatisfying",
+  true,
+);
+
 declare module "mix-n-matchers" {
   export interface MixNMatchers<R = any, T = unknown> {
     /**
      * Asserts that an iterable satisfies a sequence of predicates.
+     *
      * @example
      * expect([1, 2, 3]).toSatisfySequence(
      *   (x) => x === 1,
@@ -425,10 +532,25 @@ declare module "mix-n-matchers" {
      * expect([1, 2, 3, 4]).toContainStrictEqualSequence(1, 2, 3);
      */
     toContainStrictEqualSequence<S extends Array<unknown>>(...expected: S): R;
+
+    /**
+     * Asserts that an iterable contains a sequence satisfying a sequence of predicates.
+     *
+     * @example
+     * expect([1, 2, 3]).toContainSequenceSatisfying(
+     *   (x) => x === 2,
+     *   (x) => x === 3,
+     * );
+     */
+    toContainSequenceSatisfying(
+      predicate: Predicate,
+      ...predicates: Array<Predicate>
+    ): R;
   }
   export interface AsymmetricMixNMatchers {
     /**
      * Matches an iterable that satisfies a sequence of predicates.
+     *
      * @example
      * expect({ value: [1, 2, 3] }).toEqual({
      *   value: expect.sequence(
@@ -441,6 +563,7 @@ declare module "mix-n-matchers" {
     sequence(predicate: Predicate, ...predicates: Array<Predicate>): any;
     /**
      * Matches an iterable of a sequence of expected items, using deep equality.
+     *
      * @example
      * expect({ value: [1, 2, 3] }).toEqual({
      *   value: expect.sequenceOf(1, 2, 3),
@@ -451,6 +574,7 @@ declare module "mix-n-matchers" {
      * Matches an iterable of a sequence of expected items, using strict deep equality.
      *
      * @see https://jestjs.io/docs/expect#tostrictequalvalue
+     *
      * @example
      * expect({ value: [1, 2, 3] }).toEqual({
      *   value: expect.strictSequenceOf(1, 2, 3),
@@ -460,6 +584,7 @@ declare module "mix-n-matchers" {
 
     /**
      * Matches an iterable that contains a sequence of expected items, using reference equality (===).
+     *
      * @example
      * expect({ value: [1, 2, 3] }).toEqual({
      *   value: expect.containingSequence(1, 2, 3),
@@ -469,6 +594,7 @@ declare module "mix-n-matchers" {
 
     /**
      * Matches an iterable that contains a sequence of expected items, using deep equality.
+     *
      * @example
      * expect({ value: [1, 2, 3] }).toEqual({
      *   value: expect.containingEqualSequence(1, 2, 3),
@@ -478,6 +604,7 @@ declare module "mix-n-matchers" {
 
     /**
      * Matches an iterable that contains a sequence of expected items, using strict deep equality.
+     *
      * @example
      * expect({ value: [1, 2, 3] }).toEqual({
      *   value: expect.containingStrictEqualSequence(1, 2, 3),
@@ -485,6 +612,22 @@ declare module "mix-n-matchers" {
      */
     containingStrictEqualSequence<S extends Array<unknown>>(
       ...expected: S
+    ): any;
+
+    /**
+     * Matches an iterable that contains a sequence satisfying a sequence of predicates.
+     *
+     * @example
+     * expect({ value: [1, 2, 3] }).toEqual({
+     *   value: expect.containingSequenceSatisfying(
+     *     (x) => x === 2,
+     *     (x) => x === 3,
+     *   ),
+     * });
+     */
+    containingSequenceSatisfying(
+      predicate: Predicate,
+      ...predicates: Array<Predicate>
     ): any;
   }
 }

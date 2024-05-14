@@ -15,6 +15,7 @@ export {
   containingSequence,
   containingEqualSequence,
   containingStrictEqualSequence,
+  containingSequenceSatisfying,
 } from "../shared/sequence";
 export {
   iterableOf,
