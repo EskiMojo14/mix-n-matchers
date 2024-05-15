@@ -34,6 +34,8 @@ const config: Config = {
     locales: ["en"],
   },
 
+  plugins: ["docusaurus-plugin-sass"],
+
   presets: [
     [
       "classic",
@@ -45,7 +47,7 @@ const config: Config = {
         },
         blog: false,
         theme: {
-          customCss: "./src/css/custom.css",
+          customCss: "./src/scss/global.scss",
         },
       } satisfies Preset.Options,
     ],

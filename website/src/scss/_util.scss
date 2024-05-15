@@ -1,0 +1,40 @@
+@use "sass:color";
+@use "sass:math";
+
+/// Slightly lighten a color
+/// @access public
+/// @param {Color} $color - color to tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+
+@function tint($color, $percentage) {
+  @return color.mix(white, $color, $percentage);
+}
+
+/// Slightly darken a color
+/// @access public
+/// @param {Color} $color - color to shade
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+
+@function shade($color, $percentage) {
+  @return color.mix(black, $color, $percentage);
+}
+
+@function tone($color, $percentage) {
+  @return color.mix(hsl(0, 0%, 50%), $color, $percentage);
+}
+
+/// Darken a color if percentage is negative, otherwise lighten it
+/// @access public
+/// @param {Color} $color - color to shade/tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+
+@function tintOrShade($color, $percentage) {
+  @return if(
+    $percentage >= 0%,
+    tint($color, math.abs($percentage)),
+    shade($color, math.abs($percentage))
+  );
+}
