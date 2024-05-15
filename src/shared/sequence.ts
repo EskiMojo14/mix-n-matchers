@@ -116,21 +116,30 @@ const makeEqualSequenceMatcher = (
   matcherName: string,
   asymmetric: boolean,
   strict = false,
-): MatcherFunction<Array<unknown>> =>
+): MatcherFunction<[value: unknown, ...sequence: Array<unknown>]> =>
   function toEqualSequence(received, ...expected) {
+    const hint = matcherHint(matcherName, undefined, undefined, {
+      isNot: this.isNot,
+      promise: this.promise,
+      isDirectExpectCall: asymmetric,
+    });
+    if (expected.length === 0) {
+      throw new Error(
+        matcherErrorMessage(
+          hint,
+          "At least one expected item must be provided",
+        ),
+      );
+    }
+    const prefix = hint + "\n\n";
     if (!isIterable(received)) {
       return {
         pass: false,
         message: () =>
+          prefix +
           `Expected ${printReceived(received)} to be an iterable, but it was not`,
       };
     }
-    const prefix =
-      matcherHint(matcherName, undefined, undefined, {
-        isNot: this.isNot,
-        promise: this.promise,
-        isDirectExpectCall: asymmetric,
-      }) + "\n\n";
     const equalValue = makeEqualValue(this);
     let i = 0;
     const sequenceSoFar: Array<unknown> = [];
@@ -222,24 +231,34 @@ const makeContainSequenceMatcher = (
   matcherName: string,
   asymmetric: boolean,
   strict: boolean | "reference",
-): MatcherFunction<Array<unknown>> =>
+): MatcherFunction<[value: unknown, ...sequence: Array<unknown>]> =>
   function toContainSequence(received, ...expected) {
+    const hint = matcherHint(matcherName, undefined, undefined, {
+      isNot: this.isNot,
+      promise: this.promise,
+      isDirectExpectCall: asymmetric,
+    });
+    const prefix = hint + "\n\n";
+
+    if (expected.length === 0) {
+      throw new Error(
+        matcherErrorMessage(
+          hint,
+          "At least one expected item must be provided",
+        ),
+      );
+    }
+
     if (!isIterable(received)) {
       return {
         pass: false,
         message: () =>
+          prefix +
           `Expected ${printReceived(received)} to be an iterable, but it was not`,
       };
     }
-    const prefix =
-      matcherHint(matcherName, undefined, undefined, {
-        isNot: this.isNot,
-        promise: this.promise,
-        isDirectExpectCall: asymmetric,
-      }) + "\n\n";
 
     const equalValue = makeEqualValue(this);
-    let status: "unmatched" | "partial" | "matched" = "unmatched";
     let expectedIdx = 0;
     const sequenceSoFar: Array<unknown> = [];
     for (const receivedItem of received) {
@@ -250,20 +269,15 @@ const makeContainSequenceMatcher = (
           ? receivedItem === expectedItem
           : equalValue(receivedItem, expectedItem, strict);
       if (equal) {
-        if (status === "unmatched") {
-          status = "partial";
-        }
         expectedIdx++;
         if (expectedIdx === expected.length) {
-          status = "matched";
           break;
         }
-      } else if (status === "partial") {
-        status = "unmatched";
+      } else {
         expectedIdx = 0;
       }
     }
-    const pass = status === "matched";
+    const pass = expectedIdx === expected.length;
     return {
       pass,
       message: () =>
@@ -465,7 +479,7 @@ declare module "mix-n-matchers" {
      * @example
      * expect([1, 2, 3]).toEqualSequence(1, 2, 3);
      */
-    toEqualSequence<S extends Array<unknown>>(...expected: S): R;
+    toEqualSequence<S extends [unknown, ...Array<unknown>]>(...expected: S): R;
     /**
      * Asserts that an iterable matches a sequence of expected items, using strict deep equality.
      *
@@ -476,7 +490,9 @@ declare module "mix-n-matchers" {
      * @example
      * expect([1, 2, 3]).toStrictEqualSequence(1, 2, 3);
      */
-    toStrictEqualSequence<S extends Array<unknown>>(...expected: S): R;
+    toStrictEqualSequence<S extends [unknown, ...Array<unknown>]>(
+      ...expected: S
+    ): R;
 
     /**
      * Asserts that an iterable contains a sequence of expected items, using reference equality (===).
@@ -487,7 +503,9 @@ declare module "mix-n-matchers" {
      * expect([0, 1, 2, 3]).toContainSequence(1, 2, 3);
      * expect([1, 2, 3, 4]).toContainSequence(1, 2, 3);
      */
-    toContainSequence<S extends Array<unknown>>(...expected: S): R;
+    toContainSequence<S extends [unknown, ...Array<unknown>]>(
+      ...expected: S
+    ): R;
 
     /**
      * Asserts that an iterable contains a sequence of expected items, using deep equality.
@@ -498,7 +516,9 @@ declare module "mix-n-matchers" {
      * expect([0, 1, 2, 3]).toContainEqualSequence(1, 2, 3);
      * expect([1, 2, 3, 4]).toContainEqualSequence(1, 2, 3);
      */
-    toContainEqualSequence<S extends Array<unknown>>(...expected: S): R;
+    toContainEqualSequence<S extends [unknown, ...Array<unknown>]>(
+      ...expected: S
+    ): R;
 
     /**
      * Asserts that an iterable contains a sequence of expected items, using strict deep equality.
@@ -509,7 +529,9 @@ declare module "mix-n-matchers" {
      * expect([0, 1, 2, 3]).toContainStrictEqualSequence(1, 2, 3);
      * expect([1, 2, 3, 4]).toContainStrictEqualSequence(1, 2, 3);
      */
-    toContainStrictEqualSequence<S extends Array<unknown>>(...expected: S): R;
+    toContainStrictEqualSequence<S extends [unknown, ...Array<unknown>]>(
+      ...expected: S
+    ): R;
 
     /**
      * Asserts that an iterable contains a sequence satisfying a sequence of predicates.
@@ -547,7 +569,7 @@ declare module "mix-n-matchers" {
      *   value: expect.sequenceOf(1, 2, 3),
      * });
      */
-    sequenceOf<S extends Array<unknown>>(...expected: S): any;
+    sequenceOf<S extends [unknown, ...Array<unknown>]>(...expected: S): any;
     /**
      * Matches an iterable of a sequence of expected items, using strict deep equality.
      *
@@ -558,7 +580,9 @@ declare module "mix-n-matchers" {
      *   value: expect.strictSequenceOf(1, 2, 3),
      * });
      */
-    strictSequenceOf<S extends Array<unknown>>(...expected: S): any;
+    strictSequenceOf<S extends [unknown, ...Array<unknown>]>(
+      ...expected: S
+    ): any;
 
     /**
      * Matches an iterable that contains a sequence of expected items, using reference equality (===).
@@ -568,7 +592,9 @@ declare module "mix-n-matchers" {
      *   value: expect.containingSequence(1, 2, 3),
      * });
      */
-    containingSequence<S extends Array<unknown>>(...expected: S): any;
+    containingSequence<S extends [unknown, ...Array<unknown>]>(
+      ...expected: S
+    ): any;
 
     /**
      * Matches an iterable that contains a sequence of expected items, using deep equality.
@@ -578,7 +604,9 @@ declare module "mix-n-matchers" {
      *   value: expect.containingEqualSequence(1, 2, 3),
      * });
      */
-    containingEqualSequence<S extends Array<unknown>>(...expected: S): any;
+    containingEqualSequence<S extends [unknown, ...Array<unknown>]>(
+      ...expected: S
+    ): any;
 
     /**
      * Matches an iterable that contains a sequence of expected items, using strict deep equality.
@@ -588,7 +616,7 @@ declare module "mix-n-matchers" {
      *   value: expect.containingStrictEqualSequence(1, 2, 3),
      * });
      */
-    containingStrictEqualSequence<S extends Array<unknown>>(
+    containingStrictEqualSequence<S extends [unknown, ...Array<unknown>]>(
       ...expected: S
     ): any;
 

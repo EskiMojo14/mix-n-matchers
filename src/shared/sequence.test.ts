@@ -283,6 +283,12 @@ describe("toEqualSequence", () => {
       expect(new Set([0])).toEqualSequence(0, 1);
     }).toThrowErrorMatchingSnapshot();
   });
+  it("fails if no expected values are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect([]).toEqualSequence();
+    }).toThrowErrorMatchingSnapshot();
+  });
 });
 
 describe("toStrictEqualSequence", () => {
@@ -354,6 +360,13 @@ describe("toStrictEqualSequence", () => {
         { value: 0 },
         { value: 1 },
       );
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails if no expected values are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect([]).toStrictEqualSequence();
     }).toThrowErrorMatchingSnapshot();
   });
 });
@@ -430,6 +443,13 @@ describe("sequenceOf", () => {
       expect({ value: new Set([0]) }).toEqual({
         value: expect.sequenceOf(0, 1),
       });
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("throws if no expected values are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect({ value: [] }).toEqual({ value: expect.sequenceOf() });
     }).toThrowErrorMatchingSnapshot();
   });
 });
@@ -521,6 +541,13 @@ describe("strictSequenceOf", () => {
       });
     }).toThrowErrorMatchingSnapshot();
   });
+
+  it("throws if no expected values are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect({ value: [] }).toEqual({ value: expect.strictSequenceOf() });
+    }).toThrowErrorMatchingSnapshot();
+  });
 });
 
 describe("toContainSequence", () => {
@@ -552,6 +579,13 @@ describe("toContainSequence", () => {
     expect([2, 1, 2, 3]).toContainSequence(2, 3);
     // not possible with a Set, as values only appear once
   });
+
+  it("fails if no expected values are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect([]).toContainSequence();
+    }).toThrowErrorMatchingSnapshot();
+  });
 });
 
 describe("toContainEqualSequence", () => {
@@ -582,6 +616,12 @@ describe("toContainEqualSequence", () => {
   it("succeeds if the sequence is after a part of the sequence", () => {
     expect([2, 1, 2, 3]).toContainEqualSequence(2, 3);
     // not possible with a Set, as values only appear once
+  });
+  it("fails if no expected values are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect([]).toContainEqualSequence();
+    }).toThrowErrorMatchingSnapshot();
   });
 });
 
@@ -645,6 +685,12 @@ describe("toContainStrictEqualSequence", () => {
       new Set([{ value: 2 }, { value: 1 }, { value: 2 }, { value: 3 }]),
     ).toContainStrictEqualSequence({ value: 2 }, { value: 3 });
   });
+  it("fails if no expected values are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect([]).toContainStrictEqualSequence();
+    }).toThrowErrorMatchingSnapshot();
+  });
 });
 
 describe("containingSequence", () => {
@@ -694,6 +740,12 @@ describe("containingSequence", () => {
     });
     // not possible with a Set, as values only appear once
   });
+  it("fails if no expected values are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect({ array: [] }).toEqual({ array: expect.containingSequence() });
+    }).toThrowErrorMatchingSnapshot();
+  });
 });
 
 describe("containingEqualSequence", () => {
@@ -742,6 +794,14 @@ describe("containingEqualSequence", () => {
       array: expect.containingEqualSequence(2, 3),
     });
     // not possible with a Set, as values only appear once
+  });
+  it("fails if no expected values are passed", () => {
+    expect(() => {
+      expect({ array: [] }).toEqual({
+        // @ts-expect-error testing invalid usage
+        array: expect.containingEqualSequence(),
+      });
+    }).toThrowErrorMatchingSnapshot();
   });
 });
 
@@ -814,6 +874,14 @@ describe("containingStrictEqualSequence", () => {
       array: expect.containingStrictEqualSequence({ value: 2 }, { value: 3 }),
     });
   });
+  it("fails if no expected values are passed", () => {
+    expect(() => {
+      expect({ array: [] }).toEqual({
+        // @ts-expect-error testing invalid usage
+        array: expect.containingStrictEqualSequence(),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
 });
 
 describe("toContainSequenceSatisfying", () => {
@@ -881,6 +949,12 @@ describe("toContainSequenceSatisfying", () => {
         // @ts-expect-error testing invalid usage
         1,
       );
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("fails if no predicates are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect([]).toContainSequenceSatisfying();
     }).toThrowErrorMatchingSnapshot();
   });
 });
@@ -969,6 +1043,14 @@ describe("containingSequenceSatisfying", () => {
           // @ts-expect-error testing invalid usage
           1,
         ),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("fails if no predicates are passed", () => {
+    expect(() => {
+      expect({ array: [] }).toEqual({
+        // @ts-expect-error testing invalid usage
+        array: expect.containingSequenceSatisfying(),
       });
     }).toThrowErrorMatchingSnapshot();
   });

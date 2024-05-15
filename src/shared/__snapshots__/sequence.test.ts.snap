@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`containingEqualSequence fails if no expected values are passed 1`] = `
+<d>expect.</b>containingEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+<b>Matcher error</b>: At least one expected item must be provided
+`;
+
 exports[`containingEqualSequence fails if only part of the sequence is found 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
 
@@ -64,6 +70,12 @@ exports[`containingEqualSequence fails if the sequence is not found 2`] = `
 <d>  }</b>
 `;
 
+exports[`containingSequence fails if no expected values are passed 1`] = `
+<d>expect.</b>containingSequence<d>(</b><g>expected</g><d>)</b>
+
+<b>Matcher error</b>: At least one expected item must be provided
+`;
+
 exports[`containingSequence fails if only part of the sequence is found 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
 
@@ -126,6 +138,12 @@ exports[`containingSequence fails if the sequence is not found 2`] = `
 <r>+     3,</g>
 <r>+   },</g>
 <d>  }</b>
+`;
+
+exports[`containingSequenceSatisfying fails if no predicates are passed 1`] = `
+<d>expect.</b>containingSequenceSatisfying<d>(</b><g>expected</g><d>)</b>
+
+<b>Matcher error</b>: At least one predicate must be provided
 `;
 
 exports[`containingSequenceSatisfying fails if one of the predicates is not a function 1`] = `
@@ -199,6 +217,12 @@ exports[`containingSequenceSatisfying fails if the sequence is not found 2`] = `
 <r>+     3,</g>
 <r>+   },</g>
 <d>  }</b>
+`;
+
+exports[`containingStrictEqualSequence fails if no expected values are passed 1`] = `
+<d>expect.</b>containingStrictEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+<b>Matcher error</b>: At least one expected item must be provided
 `;
 
 exports[`containingStrictEqualSequence fails if only part of the sequence is found 1`] = `
@@ -448,6 +472,12 @@ exports[`sequenceOf fails with a non-iterable 1`] = `
 <d>  }</b>
 `;
 
+exports[`sequenceOf throws if no expected values are passed 1`] = `
+<d>expect.</b>sequenceOf<d>(</b><g>expected</g><d>)</b>
+
+<b>Matcher error</b>: At least one expected item must be provided
+`;
+
 exports[`sequenceOf works with an array 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
 
@@ -556,6 +586,12 @@ exports[`strictSequenceOf fails with a non-iterable 1`] = `
 <d>  }</b>
 `;
 
+exports[`strictSequenceOf throws if no expected values are passed 1`] = `
+<d>expect.</b>strictSequenceOf<d>(</b><g>expected</g><d>)</b>
+
+<b>Matcher error</b>: At least one expected item must be provided
+`;
+
 exports[`strictSequenceOf works with an array 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
 
@@ -600,6 +636,12 @@ exports[`strictSequenceOf works with other iterables 1`] = `
 <d>  }</b>
 `;
 
+exports[`toContainEqualSequence fails if no expected values are passed 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+<b>Matcher error</b>: At least one expected item must be provided
+`;
+
 exports[`toContainEqualSequence fails if only part of the sequence is found 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toContainEqualSequence<d>(</b><g>expected</g><d>)</b>
 
@@ -632,6 +674,12 @@ Expected <r>Set {1, 2, 3}</g> to contain sequence <r>2</g>, <r>1</g>
 Full sequence: <r>1</g>, <r>2</g>, <r>3</g>
 `;
 
+exports[`toContainSequence fails if no expected values are passed 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainSequence<d>(</b><g>expected</g><d>)</b>
+
+<b>Matcher error</b>: At least one expected item must be provided
+`;
+
 exports[`toContainSequence fails if only part of the sequence is found 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toContainSequence<d>(</b><g>expected</g><d>)</b>
 
@@ -662,6 +710,12 @@ exports[`toContainSequence fails if the sequence is not found 2`] = `
 Expected <r>Set {1, 2, 3}</g> to contain sequence <r>2</g>, <r>1</g>
 
 Full sequence: <r>1</g>, <r>2</g>, <r>3</g>
+`;
+
+exports[`toContainSequenceSatisfying fails if no predicates are passed 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainSequenceSatisfying<d>(</b><g>expected</g><d>)</b>
+
+<b>Matcher error</b>: At least one predicate must be provided
 `;
 
 exports[`toContainSequenceSatisfying fails if one of the predicates is not a function 1`] = `
@@ -705,6 +759,12 @@ Expected <r>Set {1, 2, 3}</g> to contain sequence satisfying predicates
 Full sequence: <r>1</g>, <r>2</g>, <r>3</g>
 `;
 
+exports[`toContainStrictEqualSequence fails if no expected values are passed 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toContainStrictEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+<b>Matcher error</b>: At least one expected item must be provided
+`;
+
 exports[`toContainStrictEqualSequence fails if only part of the sequence is found 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toContainStrictEqualSequence<d>(</b><g>expected</g><d>)</b>
 
@@ -737,6 +797,12 @@ Expected <r>Set {{"value": 1}, {"value": 2}, {"value": 3}}</g> to contain sequen
 Full sequence: <r>{"value": 1}</g>, <r>{"value": 2}</g>, <r>{"value": 3}</g>
 `;
 
+exports[`toEqualSequence fails if no expected values are passed 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+<b>Matcher error</b>: At least one expected item must be provided
+`;
+
 exports[`toEqualSequence fails if the iterable is too short 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toEqualSequence<d>(</b><g>expected</g><d>)</b>
 
@@ -749,7 +815,11 @@ exports[`toEqualSequence fails if the iterable is too short 2`] = `
 Expected <r>Set {0}</g> to have at least 2 items, but it only had 1.
 `;
 
-exports[`toEqualSequence fails with a non-iterable 1`] = `Expected <r>0</g> to be an iterable, but it was not`;
+exports[`toEqualSequence fails with a non-iterable 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>0</g> to be an iterable, but it was not
+`;
 
 exports[`toEqualSequence works with an array 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toEqualSequence<d>(</b><g>expected</g><d>)</b>
@@ -840,6 +910,12 @@ exports[`toSatisfySequence works with other iterables 2`] = `
 Expected <r>Set {1, 2, 3}</g> not to satisfy sequence
 `;
 
+exports[`toStrictEqualSequence fails if no expected values are passed 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toStrictEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+<b>Matcher error</b>: At least one expected item must be provided
+`;
+
 exports[`toStrictEqualSequence fails if the iterable is too short 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toStrictEqualSequence<d>(</b><g>expected</g><d>)</b>
 
@@ -852,7 +928,11 @@ exports[`toStrictEqualSequence fails if the iterable is too short 2`] = `
 Expected <r>Set {{"value": 0}}</g> to have at least 2 items, but it only had 1.
 `;
 
-exports[`toStrictEqualSequence fails with a non-iterable 1`] = `Expected <r>0</g> to be an iterable, but it was not`;
+exports[`toStrictEqualSequence fails with a non-iterable 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toStrictEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>0</g> to be an iterable, but it was not
+`;
 
 exports[`toStrictEqualSequence works with an array 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toStrictEqualSequence<d>(</b><g>expected</g><d>)</b>
