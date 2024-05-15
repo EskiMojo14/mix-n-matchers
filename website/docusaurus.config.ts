@@ -4,6 +4,15 @@ import type * as Preset from "@docusaurus/preset-classic";
 
 const organizationName = "EskiMojo14";
 const projectName = "mix-n-matchers";
+/**
+ * Creates magic comments from a map of names to classes (or pass `true` for a key to use `code-block-${name}-line` as the class)
+ */
+const makeMagicComments = (classMap: Record<string, string | true>) =>
+  Object.entries(classMap).map(([name, className]) => ({
+    className: className === true ? `code-block-${name}-line` : className,
+    line: `${name}-next-line`,
+    block: { start: `${name}-start`, end: `${name}-end` },
+  }));
 
 const config: Config = {
   title: "Mix 'n' Matchers",
@@ -76,6 +85,13 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+      magicComments: makeMagicComments({
+        highlight: "theme-code-block-highlighted-line",
+        error: true,
+        success: true,
+        "ts-only": true,
+        "js-only": true,
+      }),
     },
   } satisfies Preset.ThemeConfig,
 };
