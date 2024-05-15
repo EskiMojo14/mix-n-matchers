@@ -21,24 +21,17 @@ const makeSatisfySequenceMatcher = (
   asymmetric: boolean,
 ): MatcherFunction<[predicate: Predicate, ...predicates: Array<Predicate>]> =>
   function toSatisfySequence(received, ...predicates) {
+    const hint = matcherHint(matcherName, undefined, undefined, {
+      isNot: this.isNot,
+      promise: this.promise,
+      isDirectExpectCall: asymmetric,
+    });
     if (predicates.length === 0) {
       throw new Error(
-        matcherErrorMessage(
-          matcherHint(matcherName, undefined, undefined, {
-            isNot: this.isNot,
-            promise: this.promise,
-            isDirectExpectCall: asymmetric,
-          }),
-          "At least one predicate must be provided",
-        ),
+        matcherErrorMessage(hint, "At least one predicate must be provided"),
       );
     }
-    const prefix =
-      matcherHint(matcherName, undefined, undefined, {
-        isNot: this.isNot,
-        promise: this.promise,
-        isDirectExpectCall: asymmetric,
-      }) + "\n\n";
+    const prefix = hint + "\n\n";
     if (!isIterable(received)) {
       return {
         pass: false,
@@ -58,11 +51,7 @@ const makeSatisfySequenceMatcher = (
       const predicate = predicates[i];
       assert(typeof predicate === "function", () =>
         matcherErrorMessage(
-          matcherHint(matcherName, undefined, undefined, {
-            isNot: this.isNot,
-            promise: this.promise,
-            isDirectExpectCall: asymmetric,
-          }),
+          hint,
           "All predicates must be functions",
           printWithType("Predicate at index " + i, predicate, stringify),
         ),
@@ -365,24 +354,17 @@ export const makeContainSatisfySequenceMatcher = (
   asymmetric: boolean,
 ): MatcherFunction<[predicate: Predicate, ...predicates: Array<Predicate>]> =>
   function toContainSequenceSatisfying(received, ...predicates) {
+    const hint = matcherHint(matcherName, undefined, undefined, {
+      isNot: this.isNot,
+      promise: this.promise,
+      isDirectExpectCall: asymmetric,
+    });
     if (predicates.length === 0) {
       throw new Error(
-        matcherErrorMessage(
-          matcherHint(matcherName, undefined, undefined, {
-            isNot: this.isNot,
-            promise: this.promise,
-            isDirectExpectCall: asymmetric,
-          }),
-          "At least one predicate must be provided",
-        ),
+        matcherErrorMessage(hint, "At least one predicate must be provided"),
       );
     }
-    const prefix =
-      matcherHint(matcherName, undefined, undefined, {
-        isNot: this.isNot,
-        promise: this.promise,
-        isDirectExpectCall: asymmetric,
-      }) + "\n\n";
+    const prefix = hint + "\n\n";
     if (!isIterable(received)) {
       return {
         pass: false,
@@ -398,11 +380,7 @@ export const makeContainSatisfySequenceMatcher = (
       const predicate = predicates[expectedIdx];
       assert(typeof predicate === "function", () =>
         matcherErrorMessage(
-          matcherHint(matcherName, undefined, undefined, {
-            isNot: this.isNot,
-            promise: this.promise,
-            isDirectExpectCall: asymmetric,
-          }),
+          hint,
           "All predicates must be functions",
           printWithType(
             "Predicate at index " + expectedIdx,
