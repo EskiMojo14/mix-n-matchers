@@ -62,14 +62,9 @@ const config: Config = {
       title: "Mix 'n' Matchers",
       items: [
         {
-          type: "docSidebar",
-          sidebarId: "docs",
-          position: "left",
-          label: "Docs",
-        },
-        {
           href: `https://github.com/${organizationName}/${projectName}`,
-          label: "GitHub",
+          className: "header-github-link",
+          "aria-label": "GitHub",
           position: "right",
         },
       ],
