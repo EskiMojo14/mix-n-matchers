@@ -391,7 +391,7 @@ expect({
 </td>
 <td>
 
-Matches an iterable that satisfies the specified sequence of values, using deep equality.
+Matches an iterable that matches the specified sequence of values, using deep equality.
 
 </td>
 <td>
@@ -414,7 +414,7 @@ expect({
 </td>
 <td>
 
-Matches an iterable that satisfies the specified sequence of values, using [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
+Matches an iterable that matches the specified sequence of values, using [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
 
 </td>
 <td>
@@ -424,6 +424,102 @@ expect({
   array: [1, 2, 3],
 }).toEqual({
   array: expect.strictSequenceOf(1, 2, 3),
+});
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+`containingSequenceSatisfying`
+
+</td>
+<td>
+
+Matches an iterable that contains a sequence that satisfies the specified sequence of predicates.
+
+</td>
+<td>
+
+```ts
+expect({
+  array: [1, 2, 3],
+}).toEqual({
+  array: expect.containingSequenceSatisfying(
+    (x) => x === 2,
+    (x) => x === 3,
+  ),
+});
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+`containingSequence`
+
+</td>
+<td>
+
+Matches an iterable that contains the specified sequence of values, using reference equality.
+
+</td>
+<td>
+
+```ts
+expect({
+  array: [1, 2, 3],
+}).toEqual({
+  array: expect.containingSequence(2, 3),
+});
+```
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`containingEqualSequence`
+
+</td>
+<td>
+
+Matches an iterable that contains the specified sequence of values, using deep equality.
+
+</td>
+<td>
+
+```ts
+expect({
+  array: [1, 2, 3],
+}).toEqual({
+  array: expect.containingEqualSequence(2, 3),
+});
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+`containingStrictEqualSequence`
+
+</td>
+<td>
+
+Matches an iterable that contains the specified sequence of values, using [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
+
+</td>
+<td>
+
+```ts
+expect({
+  array: [1, 2, 3],
+}).toEqual({
+  array: expect.containingStrictEqualSequence(2, 3),
 });
 ```
 
@@ -599,7 +695,7 @@ expect([1, 2, 3]).toSatisfySequence(
 </td>
 <td>
 
-Assert a value is an iterable that satisfies the specified sequence of values, using deep equality.
+Assert a value is an iterable that matches the specified sequence of values, using deep equality.
 
 </td>
 <td>
@@ -619,13 +715,95 @@ expect([1, 2, 3]).toEqualSequence(1, 2, 3);
 </td>
 <td>
 
-Assert a value is an iterable that satisfies the specified sequence of values, using [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
+Assert a value is an iterable that matches the specified sequence of values, using [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
 
 </td>
 <td>
 
 ```ts
 expect([1, 2, 3]).toStrictEqualSequence(1, 2, 3);
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+`toContainSequenceSatisfying`
+
+</td>
+<td>
+
+Assert an iterable contains a sequence satisfying a sequence of predicates.
+
+</td>
+<td>
+
+```ts
+expect([1, 2, 3]).toContainSequenceSatisfying(
+  (x) => x === 2,
+  (x) => x === 3,
+);
+```
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`toContainSequence`
+
+</td>
+<td>
+
+Assert a value is an iterable that contains the specified sequence of values, using reference equality (===).
+
+</td>
+<td>
+
+```ts
+expect([1, 2, 3]).toContainSequence(2, 3);
+```
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`toContainEqualSequence`
+
+</td>
+<td>
+
+Assert a value is an iterable that contains the specified sequence of values, using deep equality.
+
+</td>
+<td>
+
+```ts
+expect([1, 2, 3]).toContainEqualSequence(2, 3);
+```
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`toContainStrictEqualSequence`
+
+</td>
+<td>
+
+Assert a value is an iterable that contains the specified sequence of values, using [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
+
+</td>
+<td>
+
+```ts
+expect([1, 2, 3]).toContainStrictEqualSequence(2, 3);
 ```
 
 </td>

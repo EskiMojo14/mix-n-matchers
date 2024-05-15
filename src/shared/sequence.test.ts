@@ -283,6 +283,12 @@ describe("toEqualSequence", () => {
       expect(new Set([0])).toEqualSequence(0, 1);
     }).toThrowErrorMatchingSnapshot();
   });
+  it("fails if no expected values are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect([]).toEqualSequence();
+    }).toThrowErrorMatchingSnapshot();
+  });
 });
 
 describe("toStrictEqualSequence", () => {
@@ -354,6 +360,13 @@ describe("toStrictEqualSequence", () => {
         { value: 0 },
         { value: 1 },
       );
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails if no expected values are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect([]).toStrictEqualSequence();
     }).toThrowErrorMatchingSnapshot();
   });
 });
@@ -430,6 +443,13 @@ describe("sequenceOf", () => {
       expect({ value: new Set([0]) }).toEqual({
         value: expect.sequenceOf(0, 1),
       });
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("throws if no expected values are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect({ value: [] }).toEqual({ value: expect.sequenceOf() });
     }).toThrowErrorMatchingSnapshot();
   });
 });
@@ -518,6 +538,519 @@ describe("strictSequenceOf", () => {
     expect(() => {
       expect({ value: new Set([{ value: 0 }]) }).toEqual({
         value: expect.strictSequenceOf({ value: 0 }, { value: 1 }),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("throws if no expected values are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect({ value: [] }).toEqual({ value: expect.strictSequenceOf() });
+    }).toThrowErrorMatchingSnapshot();
+  });
+});
+
+describe("toContainSequence", () => {
+  it("matches a full sequence", () => {
+    expect([1, 2, 3]).toContainSequence(1, 2, 3);
+    expect(new Set([1, 2, 3])).toContainSequence(1, 2, 3);
+  });
+  it("matches a partial sequence", () => {
+    expect([1, 2, 3]).toContainSequence(2, 3);
+    expect(new Set([1, 2, 3])).toContainSequence(2, 3);
+  });
+  it("fails if the sequence is not found", () => {
+    expect(() => {
+      expect([1, 2, 3]).toContainSequence(2, 1);
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect(new Set([1, 2, 3])).toContainSequence(2, 1);
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("fails if only part of the sequence is found", () => {
+    expect(() => {
+      expect([1, 2, 3]).toContainSequence(1, 3);
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect(new Set([1, 2, 3])).toContainSequence(1, 3);
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("succeeds if the sequence is after a part of the sequence", () => {
+    expect([2, 1, 2, 3]).toContainSequence(2, 3);
+    // not possible with a Set, as values only appear once
+  });
+
+  it("fails if no expected values are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect([]).toContainSequence();
+    }).toThrowErrorMatchingSnapshot();
+  });
+});
+
+describe("toContainEqualSequence", () => {
+  it("matches a full sequence", () => {
+    expect([1, 2, 3]).toContainEqualSequence(1, 2, 3);
+    expect(new Set([1, 2, 3])).toContainEqualSequence(1, 2, 3);
+  });
+  it("matches a partial sequence", () => {
+    expect([1, 2, 3]).toContainEqualSequence(2, 3);
+    expect(new Set([1, 2, 3])).toContainEqualSequence(2, 3);
+  });
+  it("fails if the sequence is not found", () => {
+    expect(() => {
+      expect([1, 2, 3]).toContainEqualSequence(2, 1);
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect(new Set([1, 2, 3])).toContainEqualSequence(2, 1);
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("fails if only part of the sequence is found", () => {
+    expect(() => {
+      expect([1, 2, 3]).toContainEqualSequence(1, 3);
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect(new Set([1, 2, 3])).toContainEqualSequence(1, 3);
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("succeeds if the sequence is after a part of the sequence", () => {
+    expect([2, 1, 2, 3]).toContainEqualSequence(2, 3);
+    // not possible with a Set, as values only appear once
+  });
+  it("fails if no expected values are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect([]).toContainEqualSequence();
+    }).toThrowErrorMatchingSnapshot();
+  });
+});
+
+describe("toContainStrictEqualSequence", () => {
+  it("matches a full sequence", () => {
+    expect([
+      { value: 1 },
+      { value: 2 },
+      { value: 3 },
+    ]).toContainStrictEqualSequence({ value: 1 }, { value: 2 }, { value: 3 });
+    expect(
+      new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
+    ).toContainStrictEqualSequence({ value: 1 }, { value: 2 }, { value: 3 });
+  });
+  it("matches a partial sequence", () => {
+    expect([
+      { value: 1 },
+      { value: 2 },
+      { value: 3 },
+    ]).toContainStrictEqualSequence({ value: 2 }, { value: 3 });
+    expect(
+      new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
+    ).toContainStrictEqualSequence({ value: 2 }, { value: 3 });
+  });
+  it("fails if the sequence is not found", () => {
+    expect(() => {
+      expect([
+        { value: 1 },
+        { value: 2 },
+        { value: 3 },
+      ]).toContainStrictEqualSequence({ value: 2 }, { value: 1 });
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect(
+        new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
+      ).toContainStrictEqualSequence({ value: 2 }, { value: 1 });
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("fails if only part of the sequence is found", () => {
+    expect(() => {
+      expect([
+        { value: 1 },
+        { value: 2 },
+        { value: 3 },
+      ]).toContainStrictEqualSequence({ value: 1 }, { value: 3 });
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect(
+        new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
+      ).toContainStrictEqualSequence({ value: 1 }, { value: 3 });
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("succeeds if the sequence is after a part of the sequence", () => {
+    expect([
+      { value: 2 },
+      { value: 1 },
+      { value: 2 },
+      { value: 3 },
+    ]).toContainStrictEqualSequence({ value: 2 }, { value: 3 });
+    expect(
+      new Set([{ value: 2 }, { value: 1 }, { value: 2 }, { value: 3 }]),
+    ).toContainStrictEqualSequence({ value: 2 }, { value: 3 });
+  });
+  it("fails if no expected values are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect([]).toContainStrictEqualSequence();
+    }).toThrowErrorMatchingSnapshot();
+  });
+});
+
+describe("containingSequence", () => {
+  it("matches a full sequence", () => {
+    expect({ array: [1, 2, 3] }).toEqual({
+      array: expect.containingSequence(1, 2, 3),
+    });
+    expect({ array: new Set([1, 2, 3]) }).toEqual({
+      array: expect.containingSequence(1, 2, 3),
+    });
+  });
+  it("matches a partial sequence", () => {
+    expect({ array: [1, 2, 3] }).toEqual({
+      array: expect.containingSequence(2, 3),
+    });
+    expect({ array: new Set([1, 2, 3]) }).toEqual({
+      array: expect.containingSequence(2, 3),
+    });
+  });
+  it("fails if the sequence is not found", () => {
+    expect(() => {
+      expect({ array: [1, 2, 3] }).toEqual({
+        array: expect.containingSequence(2, 1),
+      });
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect({ array: new Set([1, 2, 3]) }).toEqual({
+        array: expect.containingSequence(2, 1),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("fails if only part of the sequence is found", () => {
+    expect(() => {
+      expect({ array: [1, 2, 3] }).toEqual({
+        array: expect.containingSequence(1, 3),
+      });
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect({ array: new Set([1, 2, 3]) }).toEqual({
+        array: expect.containingSequence(1, 3),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("succeeds if the sequence is after a part of the sequence", () => {
+    expect({ array: [2, 1, 2, 3] }).toEqual({
+      array: expect.containingSequence(2, 3),
+    });
+    // not possible with a Set, as values only appear once
+  });
+  it("fails if no expected values are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect({ array: [] }).toEqual({ array: expect.containingSequence() });
+    }).toThrowErrorMatchingSnapshot();
+  });
+});
+
+describe("containingEqualSequence", () => {
+  it("matches a full sequence", () => {
+    expect({ array: [1, 2, 3] }).toEqual({
+      array: expect.containingEqualSequence(1, 2, 3),
+    });
+    expect({ array: new Set([1, 2, 3]) }).toEqual({
+      array: expect.containingEqualSequence(1, 2, 3),
+    });
+  });
+  it("matches a partial sequence", () => {
+    expect({ array: [1, 2, 3] }).toEqual({
+      array: expect.containingEqualSequence(2, 3),
+    });
+    expect({ array: new Set([1, 2, 3]) }).toEqual({
+      array: expect.containingEqualSequence(2, 3),
+    });
+  });
+  it("fails if the sequence is not found", () => {
+    expect(() => {
+      expect({ array: [1, 2, 3] }).toEqual({
+        array: expect.containingEqualSequence(2, 1),
+      });
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect({ array: new Set([1, 2, 3]) }).toEqual({
+        array: expect.containingEqualSequence(2, 1),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("fails if only part of the sequence is found", () => {
+    expect(() => {
+      expect({ array: [1, 2, 3] }).toEqual({
+        array: expect.containingEqualSequence(1, 3),
+      });
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect({ array: new Set([1, 2, 3]) }).toEqual({
+        array: expect.containingEqualSequence(1, 3),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("succeeds if the sequence is after a part of the sequence", () => {
+    expect({ array: [2, 1, 2, 3] }).toEqual({
+      array: expect.containingEqualSequence(2, 3),
+    });
+    // not possible with a Set, as values only appear once
+  });
+  it("fails if no expected values are passed", () => {
+    expect(() => {
+      expect({ array: [] }).toEqual({
+        // @ts-expect-error testing invalid usage
+        array: expect.containingEqualSequence(),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+});
+
+describe("containingStrictEqualSequence", () => {
+  it("matches a full sequence", () => {
+    expect({ array: [{ value: 1 }, { value: 2 }, { value: 3 }] }).toEqual({
+      array: expect.containingStrictEqualSequence(
+        { value: 1 },
+        { value: 2 },
+        { value: 3 },
+      ),
+    });
+    expect({
+      array: new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
+    }).toEqual({
+      array: expect.containingStrictEqualSequence(
+        { value: 1 },
+        { value: 2 },
+        { value: 3 },
+      ),
+    });
+  });
+  it("matches a partial sequence", () => {
+    expect({ array: [{ value: 1 }, { value: 2 }, { value: 3 }] }).toEqual({
+      array: expect.containingStrictEqualSequence({ value: 2 }, { value: 3 }),
+    });
+    expect({
+      array: new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
+    }).toEqual({
+      array: expect.containingStrictEqualSequence({ value: 2 }, { value: 3 }),
+    });
+  });
+  it("fails if the sequence is not found", () => {
+    expect(() => {
+      expect({ array: [{ value: 1 }, { value: 2 }, { value: 3 }] }).toEqual({
+        array: expect.containingStrictEqualSequence({ value: 2 }, { value: 1 }),
+      });
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect({
+        array: new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
+      }).toEqual({
+        array: expect.containingStrictEqualSequence({ value: 2 }, { value: 1 }),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("fails if only part of the sequence is found", () => {
+    expect(() => {
+      expect({ array: [{ value: 1 }, { value: 2 }, { value: 3 }] }).toEqual({
+        array: expect.containingStrictEqualSequence({ value: 1 }, { value: 3 }),
+      });
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect({
+        array: new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
+      }).toEqual({
+        array: expect.containingStrictEqualSequence({ value: 1 }, { value: 3 }),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("succeeds if the sequence is after a part of the sequence", () => {
+    expect({
+      array: [{ value: 2 }, { value: 1 }, { value: 2 }, { value: 3 }],
+    }).toEqual({
+      array: expect.containingStrictEqualSequence({ value: 2 }, { value: 3 }),
+    });
+    expect({
+      array: new Set([{ value: 2 }, { value: 1 }, { value: 2 }, { value: 3 }]),
+    }).toEqual({
+      array: expect.containingStrictEqualSequence({ value: 2 }, { value: 3 }),
+    });
+  });
+  it("fails if no expected values are passed", () => {
+    expect(() => {
+      expect({ array: [] }).toEqual({
+        // @ts-expect-error testing invalid usage
+        array: expect.containingStrictEqualSequence(),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+});
+
+describe("toContainSequenceSatisfying", () => {
+  it("matches a full sequence", () => {
+    expect([1, 2, 3]).toContainSequenceSatisfying(
+      (x) => x === 1,
+      (x) => x === 2,
+      (x) => x === 3,
+    );
+    expect(new Set([1, 2, 3])).toContainSequenceSatisfying(
+      (x) => x === 1,
+      (x) => x === 2,
+      (x) => x === 3,
+    );
+  });
+  it("matches a partial sequence", () => {
+    expect([1, 2, 3]).toContainSequenceSatisfying(
+      (x) => x === 2,
+      (x) => x === 3,
+    );
+    expect(new Set([1, 2, 3])).toContainSequenceSatisfying(
+      (x) => x === 2,
+      (x) => x === 3,
+    );
+  });
+  it("fails if the sequence is not found", () => {
+    expect(() => {
+      expect([1, 2, 3]).toContainSequenceSatisfying(
+        (x) => x === 2,
+        (x) => x === 1,
+      );
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect(new Set([1, 2, 3])).toContainSequenceSatisfying(
+        (x) => x === 2,
+        (x) => x === 1,
+      );
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("fails if only part of the sequence is found", () => {
+    expect(() => {
+      expect([1, 2, 3]).toContainSequenceSatisfying(
+        (x) => x === 1,
+        (x) => x === 3,
+      );
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect(new Set([1, 2, 3])).toContainSequenceSatisfying(
+        (x) => x === 1,
+        (x) => x === 3,
+      );
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("succeeds if the sequence is after a part of the sequence", () => {
+    expect([2, 1, 2, 3]).toContainSequenceSatisfying(
+      (x) => x === 2,
+      (x) => x === 3,
+    );
+    // not possible with a Set, as values only appear once
+  });
+  it("fails if one of the predicates is not a function", () => {
+    expect(() => {
+      expect([0, 1]).toContainSequenceSatisfying(
+        (x) => x === 0,
+        // @ts-expect-error testing invalid usage
+        1,
+      );
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("fails if no predicates are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect([]).toContainSequenceSatisfying();
+    }).toThrowErrorMatchingSnapshot();
+  });
+});
+
+describe("containingSequenceSatisfying", () => {
+  it("matches a full sequence", () => {
+    expect({ array: [1, 2, 3] }).toEqual({
+      array: expect.containingSequenceSatisfying(
+        (x) => x === 1,
+        (x) => x === 2,
+        (x) => x === 3,
+      ),
+    });
+    expect({ array: new Set([1, 2, 3]) }).toEqual({
+      array: expect.containingSequenceSatisfying(
+        (x) => x === 1,
+        (x) => x === 2,
+        (x) => x === 3,
+      ),
+    });
+  });
+  it("matches a partial sequence", () => {
+    expect({ array: [1, 2, 3] }).toEqual({
+      array: expect.containingSequenceSatisfying(
+        (x) => x === 2,
+        (x) => x === 3,
+      ),
+    });
+    expect({ array: new Set([1, 2, 3]) }).toEqual({
+      array: expect.containingSequenceSatisfying(
+        (x) => x === 2,
+        (x) => x === 3,
+      ),
+    });
+  });
+  it("fails if the sequence is not found", () => {
+    expect(() => {
+      expect({ array: [1, 2, 3] }).toEqual({
+        array: expect.containingSequenceSatisfying(
+          (x) => x === 2,
+          (x) => x === 1,
+        ),
+      });
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect({ array: new Set([1, 2, 3]) }).toEqual({
+        array: expect.containingSequenceSatisfying(
+          (x) => x === 2,
+          (x) => x === 1,
+        ),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("fails if only part of the sequence is found", () => {
+    expect(() => {
+      expect({ array: [1, 2, 3] }).toEqual({
+        array: expect.containingSequenceSatisfying(
+          (x) => x === 1,
+          (x) => x === 3,
+        ),
+      });
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect({ array: new Set([1, 2, 3]) }).toEqual({
+        array: expect.containingSequenceSatisfying(
+          (x) => x === 1,
+          (x) => x === 3,
+        ),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("succeeds if the sequence is after a part of the sequence", () => {
+    expect({ array: [2, 1, 2, 3] }).toEqual({
+      array: expect.containingSequenceSatisfying(
+        (x) => x === 2,
+        (x) => x === 3,
+      ),
+    });
+    // not possible with a Set, as values only appear once
+  });
+  it("fails if one of the predicates is not a function", () => {
+    expect(() => {
+      expect({ array: [0, 1] }).toEqual({
+        array: expect.containingSequenceSatisfying(
+          (x) => x === 0,
+          // @ts-expect-error testing invalid usage
+          1,
+        ),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("fails if no predicates are passed", () => {
+    expect(() => {
+      expect({ array: [] }).toEqual({
+        // @ts-expect-error testing invalid usage
+        array: expect.containingSequenceSatisfying(),
       });
     }).toThrowErrorMatchingSnapshot();
   });
