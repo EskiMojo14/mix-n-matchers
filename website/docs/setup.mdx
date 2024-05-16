@@ -1,0 +1,252 @@
+---
+sidebar_position: 1
+slug: /
+---
+
+# Setup
+
+Mix 'n' Matchers is a set of custom Jest matchers, aiming to fill perceived gaps in the Jest matcher ecosystem. This guide will help you get started.
+
+## Installation
+
+Install with your package manager of choice:
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs groupId="package-manager">
+  <TabItem value="npm" default>
+    ```bash
+    
+    npm install -D mix-n-matchers
+
+    ```
+
+  </TabItem>
+  <TabItem value="yarn">
+    ```bash
+
+    yarn add -D mix-n-matchers
+
+    ```
+
+  </TabItem>
+  <TabItem value="bun">
+    ```bash
+
+    bun add -D mix-n-matchers
+
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Configuration
+
+### Automatic setup
+
+The easiest way to add the matchers to your environment is by importing one of the automatic setup files, which will add all of the matchers for you.
+
+Import one of these into a setup file, and include that setup file in your Jest/Vitest configuration. Using this setup will also ensure that the matchers are available in your TypeScript files.
+
+<Tabs groupId="test-runner">
+  <TabItem value="Jest" default>
+    ```ts title="test-setup.ts"
+
+    import "mix-n-matchers/all";
+
+    ```
+
+    ```ts title="jest.config.ts"
+
+    import type { Config } from 'jest';
+
+    const config: Config = {
+      setupFilesAfterEnv: ["<rootDir>/test-setup.ts"]
+    };
+
+    export default config;
+
+    ```
+
+  </TabItem>
+  <TabItem value="Jest (no globals)">
+    ```ts title="test-setup.ts"
+
+    import "mix-n-matchers/jest-globals";
+
+    ```
+    ```ts title="jest.config.ts"
+
+    import type { Config } from 'jest';
+
+    const config: Config = {
+      setupFilesAfterEnv: ["<rootDir>/test-setup.ts"]
+    };
+
+    export default config;
+
+    ```
+
+  </TabItem>
+  <TabItem value="Vitest">
+    ```ts title="test-setup.ts"
+
+    import "mix-n-matchers/vitest";
+
+    ```
+    ```ts title="vitest.config.ts"
+
+    export default defineConfig({
+      test: {
+        setupFiles: ["./test-setup.ts"],
+      },
+    })
+
+    ```
+
+  </TabItem>
+</Tabs>
+
+### Manual setup
+
+If you'd prefer to add the matchers manually, you can import the individual matchers as needed into your setup file.
+
+<Tabs groupId="test-runner">
+  <TabItem value="Jest" default>
+    ```ts title="test-setup.ts"
+
+    import {
+      toBeCalledWithContext,
+      lastCalledWithContext,
+      nthCalledWithContext,
+      exactly,
+    } from "mix-n-matchers";
+    import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
+
+    const matchers = {
+      toBeCalledWithContext,
+      lastCalledWithContext,
+      nthCalledWithContext,
+      exactly,
+    };
+
+    expect.extend(matchers);
+
+    declare global {
+      namespace jest {
+        interface Matchers<R, T> extends Pick<MixNMatchers<R, T>, keyof typeof matchers & keyof MixNMatchers<R, T>> {}
+
+        interface Expect extends Pick<AsymmetricMixNMatchers, keyof typeof matchers & keyof AsymmetricMixNMatchers> {}
+
+        interface InverseAsymmetricMatchers
+          extends Pick<AsymmetricMixNMatchers, keyof typeof matchers & keyof AsymmetricMixNMatchers> {}
+      }
+    }
+
+    ```
+
+  </TabItem>
+  <TabItem value="Jest (no globals)">
+    ```ts title="test-setup.ts"
+
+    import { expect } from "@jest/globals";
+    import {
+      toBeCalledWithContext,
+      lastCalledWithContext,
+      nthCalledWithContext,
+      exactly,
+    } from "mix-n-matchers";
+    import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
+
+    const matchers = {
+      toBeCalledWithContext,
+      lastCalledWithContext,
+      nthCalledWithContext,
+      exactly,
+    };
+
+    expect.extend(matchers);
+
+    declare module "@jest/expect" {
+      interface Matchers<R, T> extends Pick<MixNMatchers<R, T>, keyof typeof matchers & keyof MixNMatchers<R, T>> {}
+      interface AsymmetricMatchers extends Pick<AsymmetricMixNMatchers, keyof typeof matchers & keyof AsymmetricMixNMatchers> {}
+    }
+
+    ```
+
+  </TabItem>
+  <TabItem value="Vitest">
+    ```ts title="test-setup.ts"
+
+    import { expect } from "vitest";
+    import {
+      toBeCalledWithContext,
+      lastCalledWithContext,
+      nthCalledWithContext,
+      exactly,
+    } from "mix-n-matchers";
+    import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
+
+    const matchers = {
+      toBeCalledWithContext,
+      lastCalledWithContext,
+      nthCalledWithContext,
+      exactly,
+    };
+
+    expect.extend(matchers);
+
+    declare module "vitest" {
+      interface Assertion<T> extends Pick<MixNMatchers<void, T>, keyof typeof matchers & keyof MixNMatchers<void, T>> {}
+      interface AsymmetricMatchersContaining extends Pick<AsymmetricMixNMatchers, keyof typeof matchers & keyof AsymmetricMixNMatchers> {}
+    }
+
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Usage
+
+### Asymmetric Matchers vs Symmetric Matchers
+
+When `expect.extend` is called, each matcher is added as both an asymmetric and symmetric matcher.
+
+```ts
+expect.extend({
+  foo(received) {
+    const pass = received === "foo";
+    return {
+      pass,
+      message: pass ? () => "Expected 'foo'" : () => "Expected not 'foo'",
+    };
+  },
+});
+
+expect(value).foo(); // symmetric
+
+expect(value).toEqual(expect.foo()); // asymmetric
+```
+
+However, conventionally there is a difference in how these matchers are named. For example, `.toBeAnArray()` vs `expect.array()`.
+
+`mix-n-matchers` intentionally only exposes types for matchers as _either_ asymmetric or symmetric, and not both. Sometimes a matcher is available as both, but with different names. For example, [`.toBeEnum()` and `expect.ofEnum`](/matchers/enums).
+
+This helps to avoid confusion and makes it clear which matchers are designed to be asymmetric and which are symmetric.
+
+If there's any existing matchers that are only available as asymmetric matchers and you'd like to use them as symmetric matchers (or vice versa), please open an issue or a pull request!
+
+You can of course choose to expose these types yourself to enable both symmetric and asymmetric usage of a matcher.
+
+```ts
+declare module "mix-n-matchers" {
+  interface MixNMatchers<R, T> extends Pick<AsymmetricMixNMatchers, "typeOf"> {}
+  interface AsymmetricMixNMatchers
+    extends Pick<MixNMatchers<any, any>, "toBeCalledWithContext"> {}
+}
+
+// now allowed
+expect(value).typeOf("string");
+expect(value).toEqual({ fn: expect.toBeCalledWithContext(context) });
+```
