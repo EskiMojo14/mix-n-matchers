@@ -23,15 +23,15 @@ export const TestFile: React.FC<{ name: string; children: string }> = ({
         dependencies: { "mix-n-matchers": "^1" },
       }}
       files={{
-        "/entry.js": {
+        "/entry.ts": {
           code: "",
           hidden: true,
         },
-        "/extended.test.js": {
+        "/extended.test.ts": {
           code: setup,
           hidden: true,
         },
-        [`/${name}.test.js`]: children,
+        [`/${name}.test.ts`]: children,
       }}
     >
       <SandpackLayout>

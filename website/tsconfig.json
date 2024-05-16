@@ -4,6 +4,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "strict": true,
-    "types": ["docusaurus-plugin-sass"]
+    "types": ["docusaurus-plugin-sass"],
+    "paths": {
+      "mix-n-matchers": ["../src"],
+      "mix-n-matchers/*": ["../src/*"]
+    }
   }
 }

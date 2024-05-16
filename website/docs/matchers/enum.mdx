@@ -1,0 +1,42 @@
+
+import {  TestFile } from "/src/components/TestFile";
+
+# Enums
+
+## `toBeEnum`, `expect.ofEnum`
+
+Use to assert that a value is a member of an enum.
+
+<TestFile name="toBeEnum">
+{`
+enum Direction {
+  Up,
+  Down,
+  Left,
+  Right,
+}
+
+it("is a member of the enum", () => {
+  expect(Direction.Up).toBeEnum(Direction);
+  expect({ direction: Direction.Up }).toEqual({ direction: expect.ofEnum(Direction) });
+});
+
+/* or
+enum Direction {
+  Up = "UP",
+  Down = "DOWN",
+  Left = "LEFT",
+  Right = "RIGHT",
+}
+*/
+
+/* or
+const Direction = {
+  Up: "UP",
+  Down: "DOWN",
+  Left: "LEFT",
+  Right: "RIGHT",
+} as const;
+*/
+`}
+</TestFile>
