@@ -1,4 +1,6 @@
 import { TestFile } from "/src/components/TestFile";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Enums
 
@@ -45,32 +47,114 @@ Right: "RIGHT",
 :::tip Aliasing `expect.ofEnum` to `expect.enum`
 
 As `enum` is a reserved word in Javascript, it is not possible to export a matcher with this name. However, you can alias it in your setup file:
+<Tabs groupId="test-runner">
+  <TabItem value="Jest" default>
+    ```ts title="test-setup.ts"
 
-```js
-import { ofEnum } from "mix-n-matchers";
+    import { exactly, ofEnum } from "mix-n-matchers";
+    import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
 
-expect.extend({ enum: ofEnum });
-```
+    const matchers = {
+      exactly,
+      enum: ofEnum,
+    };
+    
+    expect.extend(matchers);
 
-To add this to your `global.d.ts`:
+    declare global {
+      namespace jest {
+        interface Matchers<R, T>
+          extends Pick<
+            MixNMatchers<R, T>,
+            keyof typeof matchers & keyof MixNMatchers<R, T>
+          > {}
 
-```ts title="global.d.ts"
-import type { AsymmetricMixNMatchers } from "mix-n-matchers";
+        interface Expect
+          extends Pick<
+            AsymmetricMixNMatchers,
+            keyof typeof matchers & keyof AsymmetricMixNMatchers
+          > {
+          enum: AsymmetricMatchers["ofEnum"];
+        }
 
-declare global {
-  namespace jest {
-    export interface Expect {
-      enum: AsymmetricMixNMatchers["ofEnum"];
+        interface InverseAsymmetricMatchers
+          extends Pick<
+            AsymmetricMixNMatchers,
+            keyof typeof matchers & keyof AsymmetricMixNMatchers
+          > {
+          enum: AsymmetricMatchers["ofEnum"];
+        }
+      }
     }
 
-    interface InverseAsymmetricMatchers {
-      enum: AsymmetricMixNMatchers["ofEnum"];
-    }
-  }
-}
-```
+    ```
 
-This approach can be adapted for [Jest globals and Vitest](/#manual-setup) as well.
+  </TabItem>
+  <TabItem value="Jest (no globals)">
+    ```ts title="test-setup.ts"
+
+    import { expect } from "@jest/globals";
+    import { exactly, ofEnum } from "mix-n-matchers";
+    import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
+
+    const matchers = {
+      exactly,
+      enum: ofEnum,
+    };
+
+    expect.extend(matchers);
+
+    declare module "@jest/expect" {
+      interface Matchers<R, T>
+        extends Pick<
+          MixNMatchers<R, T>,
+          keyof typeof matchers & keyof MixNMatchers<R, T>
+        > {}
+      interface AsymmetricMatchers
+        extends Pick<
+          AsymmetricMixNMatchers,
+          keyof typeof matchers & keyof AsymmetricMixNMatchers
+        > {
+        enum: AsymmetricMatchers["ofEnum"];
+      }
+    }
+
+    ```
+
+  </TabItem>
+  <TabItem value="Vitest">
+    ```ts title="test-setup.ts"
+
+    import { expect } from "vitest";
+    import { exactly, ofEnum } from "mix-n-matchers";
+    import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
+
+    const matchers = {
+      exactly,
+      enum: ofEnum,
+    };
+
+    expect.extend(matchers);
+
+    declare module "vitest" {
+      interface Assertion<T>
+        extends Pick<
+          MixNMatchers<void, T>,
+          keyof typeof matchers & keyof MixNMatchers<void, T>
+        > {}
+      interface AsymmetricMatchersContaining
+        extends Pick<
+          AsymmetricMixNMatchers,
+          keyof typeof matchers & keyof AsymmetricMixNMatchers
+        > {
+        enum: AsymmetricMatchers["ofEnum"];
+      }
+    }
+
+    ```
+
+  </TabItem>
+</Tabs>
 
 After this setup, you should be able to use `expect.enum` as a matcher.
 
