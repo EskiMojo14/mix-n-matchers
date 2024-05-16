@@ -577,6 +577,7 @@ describe("toContainSequence", () => {
   });
   it("succeeds if the sequence is after a part of the sequence", () => {
     expect([2, 1, 2, 3]).toContainSequence(2, 3);
+    expect([2, 2, 3]).toContainSequence(2, 3);
     // not possible with a Set, as values only appear once
   });
 
@@ -615,6 +616,7 @@ describe("toContainEqualSequence", () => {
   });
   it("succeeds if the sequence is after a part of the sequence", () => {
     expect([2, 1, 2, 3]).toContainEqualSequence(2, 3);
+    expect([2, 2, 3]).toContainEqualSequence(2, 3);
     // not possible with a Set, as values only appear once
   });
   it("fails if no expected values are passed", () => {
@@ -681,6 +683,11 @@ describe("toContainStrictEqualSequence", () => {
       { value: 2 },
       { value: 3 },
     ]).toContainStrictEqualSequence({ value: 2 }, { value: 3 });
+    expect([
+      { value: 2 },
+      { value: 2 },
+      { value: 3 },
+    ]).toContainStrictEqualSequence({ value: 2 }, { value: 3 });
     expect(
       new Set([{ value: 2 }, { value: 1 }, { value: 2 }, { value: 3 }]),
     ).toContainStrictEqualSequence({ value: 2 }, { value: 3 });
@@ -738,6 +745,9 @@ describe("containingSequence", () => {
     expect({ array: [2, 1, 2, 3] }).toEqual({
       array: expect.containingSequence(2, 3),
     });
+    expect({ array: [2, 2, 3] }).toEqual({
+      array: expect.containingSequence(2, 3),
+    });
     // not possible with a Set, as values only appear once
   });
   it("fails if no expected values are passed", () => {
@@ -791,6 +801,9 @@ describe("containingEqualSequence", () => {
   });
   it("succeeds if the sequence is after a part of the sequence", () => {
     expect({ array: [2, 1, 2, 3] }).toEqual({
+      array: expect.containingEqualSequence(2, 3),
+    });
+    expect({ array: [2, 2, 3] }).toEqual({
       array: expect.containingEqualSequence(2, 3),
     });
     // not possible with a Set, as values only appear once
@@ -869,6 +882,11 @@ describe("containingStrictEqualSequence", () => {
       array: expect.containingStrictEqualSequence({ value: 2 }, { value: 3 }),
     });
     expect({
+      array: [{ value: 2 }, { value: 2 }, { value: 3 }],
+    }).toEqual({
+      array: expect.containingStrictEqualSequence({ value: 2 }, { value: 3 }),
+    });
+    expect({
       array: new Set([{ value: 2 }, { value: 1 }, { value: 2 }, { value: 3 }]),
     }).toEqual({
       array: expect.containingStrictEqualSequence({ value: 2 }, { value: 3 }),
@@ -937,6 +955,10 @@ describe("toContainSequenceSatisfying", () => {
   });
   it("succeeds if the sequence is after a part of the sequence", () => {
     expect([2, 1, 2, 3]).toContainSequenceSatisfying(
+      (x) => x === 2,
+      (x) => x === 3,
+    );
+    expect([2, 2, 3]).toContainSequenceSatisfying(
       (x) => x === 2,
       (x) => x === 3,
     );
@@ -1028,6 +1050,12 @@ describe("containingSequenceSatisfying", () => {
   });
   it("succeeds if the sequence is after a part of the sequence", () => {
     expect({ array: [2, 1, 2, 3] }).toEqual({
+      array: expect.containingSequenceSatisfying(
+        (x) => x === 2,
+        (x) => x === 3,
+      ),
+    });
+    expect({ array: [2, 2, 3] }).toEqual({
       array: expect.containingSequenceSatisfying(
         (x) => x === 2,
         (x) => x === 3,
