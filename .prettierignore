@@ -1,1 +1,1 @@
-matchers/*.mdx
+**/matchers/**/*.mdx
