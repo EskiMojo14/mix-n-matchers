@@ -180,7 +180,14 @@ html[data-theme="dark"] {
   [data-theme="light"] & {
     --ifm-navbar-background-color: var(--ifm-color-primary);
     --ifm-navbar-link-color: var(--ifm-color-primary-contrast-background);
-    --ifm-navbar-link-hover-color: var(--ifm-color-primary-contrast-foreground);
+    --ifm-navbar-link-hover-color: black;
+  }
+  .color-mode-toggle {
+    color: var(--ifm-navbar-link-color);
+    button:hover {
+      background: transparent;
+      color: var(--ifm-navbar-link-hover-color);
+    }
   }
 }
 
