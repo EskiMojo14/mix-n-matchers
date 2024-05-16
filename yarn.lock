@@ -12403,7 +12403,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mix-n-matchers@workspace:., mix-n-matchers@workspace:^":
+"mix-n-matchers@workspace:.":
   version: 0.0.0-use.local
   resolution: "mix-n-matchers@workspace:."
   dependencies:
@@ -17087,7 +17087,6 @@ __metadata:
     clsx: "npm:^2.0.0"
     docusaurus-plugin-sass: "npm:^0.2.5"
     material-colors: "npm:^1.2.6"
-    mix-n-matchers: "workspace:^"
     prism-react-renderer: "npm:^2.3.0"
     react: "npm:^18.0.0"
     react-dom: "npm:^18.0.0"
