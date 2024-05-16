@@ -1,0 +1,83 @@
+import { TestFile } from "/src/components/TestFile";
+
+# Enums
+
+## `.toBeEnum(enum)`
+
+Also available as an asymmetric matcher, `expect.ofEnum(enum)`.
+
+Use `.toBeEnum` to assert that a value is a member of an enum.
+
+<TestFile name="toBeEnum">
+{`
+enum Direction {
+  Up,
+  Down,
+  Left,
+  Right,
+}
+
+it("is a member of the enum", () => {
+  expect(Direction.Up).toBeEnum(Direction);
+});
+
+/* or
+enum Direction {
+  Up = "UP",
+  Down = "DOWN",
+  Left = "LEFT",
+  Right = "RIGHT",
+}
+*/
+
+/* or
+const Direction = {
+  Up: "UP",
+  Down: "DOWN",
+  Left: "LEFT",
+  Right: "RIGHT",
+} as const;
+*/
+`}
+</TestFile>
+
+:::tip Aliasing `expect.ofEnum` to `expect.enum`
+
+
+As `enum` is a reserved word in Javascript, it is not possible to export a matcher with this name. However, you can alias it in your setup file:
+
+```js
+import { ofEnum } from "mix-n-matchers";
+
+expect.extend({ enum: ofEnum });
+```
+
+To add this to your `global.d.ts`:
+
+```ts title="global.d.ts"
+import type { AsymmetricMixNMatchers } from "mix-n-matchers";
+
+declare global {
+  namespace jest {
+    export interface Expect {
+      enum: AsymmetricMixNMatchers["ofEnum"];
+    }
+
+    interface InverseAsymmetricMatchers {
+      enum: AsymmetricMixNMatchers["ofEnum"];
+    }
+  }
+}
+```
+
+This approach can be adapted for Jest globals and Vitest as well.
+
+After this setup, you should be able to use `expect.enum` as a matcher.
+
+```ts
+expect(mock).toBeCalledWith(expect.enum(MyEnum));
+```
+
+This is automatically done for you with the [auto-setup files](/#auto-setup).
+
+:::
