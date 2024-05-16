@@ -18,31 +18,31 @@ enum Direction {
 }
 
 it("is a member of the enum", () => {
-  expect(Direction.Up).toBeEnum(Direction);
+expect(Direction.Up).toBeEnum(Direction);
 });
 
-/* or
+/_ or
 enum Direction {
-  Up = "UP",
-  Down = "DOWN",
-  Left = "LEFT",
-  Right = "RIGHT",
+Up = "UP",
+Down = "DOWN",
+Left = "LEFT",
+Right = "RIGHT",
 }
-*/
+_/
 
-/* or
+/_ or
 const Direction = {
-  Up: "UP",
-  Down: "DOWN",
-  Left: "LEFT",
-  Right: "RIGHT",
+Up: "UP",
+Down: "DOWN",
+Left: "LEFT",
+Right: "RIGHT",
 } as const;
-*/
+_/
 `}
+
 </TestFile>
 
 :::tip Aliasing `expect.ofEnum` to `expect.enum`
-
 
 As `enum` is a reserved word in Javascript, it is not possible to export a matcher with this name. However, you can alias it in your setup file:
 
@@ -70,7 +70,7 @@ declare global {
 }
 ```
 
-This approach can be adapted for Jest globals and Vitest as well.
+This approach can be adapted for [Jest globals and Vitest](/#manual-setup) as well.
 
 After this setup, you should be able to use `expect.enum` as a matcher.
 

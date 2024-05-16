@@ -115,7 +115,6 @@ If you'd prefer to add the matchers manually, you can import the individual matc
 <Tabs groupId="test-runner">
   <TabItem value="Jest" default>
     ```ts title="test-setup.ts"
-
     import {
       toBeCalledWithContext,
       lastCalledWithContext,
@@ -135,12 +134,23 @@ If you'd prefer to add the matchers manually, you can import the individual matc
 
     declare global {
       namespace jest {
-        interface Matchers<R, T> extends Pick<MixNMatchers<R, T>, keyof typeof matchers & keyof MixNMatchers<R, T>> {}
+        interface Matchers<R, T>
+          extends Pick<
+            MixNMatchers<R, T>,
+            keyof typeof matchers & keyof MixNMatchers<R, T>
+          > {}
 
-        interface Expect extends Pick<AsymmetricMixNMatchers, keyof typeof matchers & keyof AsymmetricMixNMatchers> {}
+        interface Expect
+          extends Pick<
+            AsymmetricMixNMatchers,
+            keyof typeof matchers & keyof AsymmetricMixNMatchers
+          > {}
 
         interface InverseAsymmetricMatchers
-          extends Pick<AsymmetricMixNMatchers, keyof typeof matchers & keyof AsymmetricMixNMatchers> {}
+          extends Pick<
+            AsymmetricMixNMatchers,
+            keyof typeof matchers & keyof AsymmetricMixNMatchers
+          > {}
       }
     }
 
@@ -169,8 +179,16 @@ If you'd prefer to add the matchers manually, you can import the individual matc
     expect.extend(matchers);
 
     declare module "@jest/expect" {
-      interface Matchers<R, T> extends Pick<MixNMatchers<R, T>, keyof typeof matchers & keyof MixNMatchers<R, T>> {}
-      interface AsymmetricMatchers extends Pick<AsymmetricMixNMatchers, keyof typeof matchers & keyof AsymmetricMixNMatchers> {}
+      interface Matchers<R, T>
+        extends Pick<
+          MixNMatchers<R, T>,
+          keyof typeof matchers & keyof MixNMatchers<R, T>
+        > {}
+      interface AsymmetricMatchers
+        extends Pick<
+          AsymmetricMixNMatchers,
+          keyof typeof matchers & keyof AsymmetricMixNMatchers
+        > {}
     }
 
     ```
@@ -178,7 +196,7 @@ If you'd prefer to add the matchers manually, you can import the individual matc
   </TabItem>
   <TabItem value="Vitest">
     ```ts title="test-setup.ts"
-
+    
     import { expect } from "vitest";
     import {
       toBeCalledWithContext,
@@ -187,19 +205,27 @@ If you'd prefer to add the matchers manually, you can import the individual matc
       exactly,
     } from "mix-n-matchers";
     import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
-
+    
     const matchers = {
       toBeCalledWithContext,
       lastCalledWithContext,
       nthCalledWithContext,
       exactly,
     };
-
+    
     expect.extend(matchers);
-
+    
     declare module "vitest" {
-      interface Assertion<T> extends Pick<MixNMatchers<void, T>, keyof typeof matchers & keyof MixNMatchers<void, T>> {}
-      interface AsymmetricMatchersContaining extends Pick<AsymmetricMixNMatchers, keyof typeof matchers & keyof AsymmetricMixNMatchers> {}
+      interface Assertion<T>
+        extends Pick<
+          MixNMatchers<void, T>,
+          keyof typeof matchers & keyof MixNMatchers<void, T>
+        > {}
+      interface AsymmetricMatchersContaining
+        extends Pick<
+          AsymmetricMixNMatchers,
+          keyof typeof matchers & keyof AsymmetricMixNMatchers
+        > {}
     }
 
     ```
