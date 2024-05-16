@@ -273,8 +273,12 @@ const makeContainSequenceMatcher = (
         if (expectedIdx === expected.length) {
           break;
         }
-      } else {
-        expectedIdx = 0;
+      } else if (expectedIdx > 0) {
+        const equalsFirst =
+          strict === "reference"
+            ? receivedItem === expected[0]
+            : equalValue(receivedItem, expected[0], strict);
+        expectedIdx = equalsFirst ? 1 : 0;
       }
     }
     const pass = expectedIdx === expected.length;
@@ -386,7 +390,6 @@ export const makeContainSatisfySequenceMatcher = (
           prefix + `Expected ${printReceived(received)} to be an iterable`,
       };
     }
-    let status: "unmatched" | "partial" | "matched" = "unmatched";
     let expectedIdx = 0;
     const sequenceSoFar: Array<unknown> = [];
     for (const receivedItem of received) {
@@ -404,20 +407,16 @@ export const makeContainSatisfySequenceMatcher = (
         ),
       );
       if (predicate(receivedItem)) {
-        if (status === "unmatched") {
-          status = "partial";
-        }
         expectedIdx++;
         if (expectedIdx === predicates.length) {
-          status = "matched";
           break;
         }
-      } else if (status === "partial") {
-        status = "unmatched";
-        expectedIdx = 0;
+      } else if (expectedIdx > 0) {
+        const satisfiesFirst = predicates[0](receivedItem);
+        expectedIdx = satisfiesFirst ? 1 : 0;
       }
     }
-    const pass = status === "matched";
+    const pass = expectedIdx === predicates.length;
     return {
       pass,
       message: () =>
