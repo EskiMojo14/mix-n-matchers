@@ -1,5 +1,6 @@
 @use "sass:color";
 @use "sass:map";
+@use "sass:string";
 @use "theme";
 @use "util";
 @use "material-colors/dist/colors";
@@ -222,6 +223,11 @@ html[data-theme="dark"] {
   &:hover {
     &::before {
       background-image: make-github-logo(black);
+      [data-theme="dark"] & {
+        background-image: make-github-logo(
+          util.str-replace(#{colors.$md-teal-300}, "#", "%23")
+        );
+      }
     }
   }
   &::before {
