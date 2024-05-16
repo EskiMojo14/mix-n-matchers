@@ -8,8 +8,6 @@ import React from "react";
 import { useColorMode } from "@docusaurus/theme-common";
 import { githubLight, dracula } from "@codesandbox/sandpack-themes";
 
-const setup = `import "mix-n-matchers/all";`;
-
 export const TestFile: React.FC<{ name: string; children: string }> = ({
   name,
   children,
@@ -27,8 +25,8 @@ export const TestFile: React.FC<{ name: string; children: string }> = ({
           code: "",
           hidden: true,
         },
-        "/extended.test.ts": {
-          code: setup,
+        "/setup.test.ts": {
+          code: `import "mix-n-matchers/all";`,
           hidden: true,
         },
         [`/${name}.test.ts`]: children,
