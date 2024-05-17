@@ -4,7 +4,7 @@ sidebar_position: 3
 
 import { TestFile } from "/src/components/TestFile";
 
-# `expect.oneOf(...values)`
+# `expect.oneOf([values])`
 
 An asymmetric matcher that checks if the received value is one of the expected values, using deep equality.
 
@@ -17,9 +17,9 @@ it("is one of the expected values", () => {
     boolean: true,
   };
   expect(values).toEqual({
-    number: expect.oneOf(1, 2),
-    string: expect.oneOf("hello", "world"),
-    boolean: expect.oneOf(true, false),
+    number: expect.oneOf([1, 2]),
+    string: expect.oneOf(["hello", "world"]),
+    boolean: expect.oneOf([true, false]),
   });
 });
 `}
