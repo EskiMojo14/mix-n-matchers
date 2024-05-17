@@ -27,7 +27,6 @@ export const TestFile: React.FC<{ name: string; children: string }> = ({
       theme={{
         ...theme,
         font: {
-          ...theme.font,
           body: "var(--ifm-font-family-base)",
           mono: "var(--ifm-font-family-monospace)",
           size: "var(--ifm-code-font-size)",
