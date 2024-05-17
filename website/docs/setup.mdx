@@ -81,6 +81,7 @@ Import one of these into a setup file, and include that setup file in your Jest/
     import type { Config } from 'jest';
 
     const config: Config = {
+      injectGlobals: false,
       setupFilesAfterEnv: ["<rootDir>/test-setup.ts"]
     };
 
