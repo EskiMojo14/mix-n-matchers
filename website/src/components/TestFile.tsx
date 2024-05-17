@@ -1,3 +1,4 @@
+import type { SandpackFiles } from "@codesandbox/sandpack-react";
 import {
   SandpackCodeEditor,
   SandpackLayout,
@@ -15,9 +16,8 @@ declare module "react" {
   }
 }
 
-export const TestFile: React.FC<{ name: string; children: string }> = ({
-  name,
-  children,
+export const CustomSandpack: React.FC<{ files: SandpackFiles }> = ({
+  files,
 }) => {
   const { colorMode } = useColorMode();
   const theme = colorMode === "dark" ? dracula : githubLight;
@@ -46,7 +46,7 @@ export const TestFile: React.FC<{ name: string; children: string }> = ({
           code: `import "mix-n-matchers/all";`,
           hidden: true,
         },
-        [`/${name}.test.ts`]: children,
+        ...files,
       }}
     >
       <SandpackLayout>
@@ -56,3 +56,8 @@ export const TestFile: React.FC<{ name: string; children: string }> = ({
     </SandpackProvider>
   );
 };
+
+export const TestFile: React.FC<{ name: string; children: string }> = ({
+  name,
+  children,
+}) => <CustomSandpack files={{ [`/${name}.test.ts`]: children }} />;

@@ -1,4 +1,4 @@
-import { TestFile } from "/src/components/TestFile";
+import { CustomSandpack } from "/src/components/TestFile";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
@@ -8,10 +8,10 @@ import TabItem from "@theme/TabItem";
 
 Also available as an asymmetric matcher, `expect.ofEnum(enum)`.
 
-Use `.toBeEnum` to assert that a value is a member of an enum.
+Use `.toBeEnum` to assert that a value is a member of an enum (or const object).
 
-<TestFile name="toBeEnum">
-{`
+<CustomSandpack files={{
+  "/numeric.test.ts":`
 enum Direction {
   Up,
   Down,
@@ -19,30 +19,47 @@ enum Direction {
   Right,
 }
 
-it("is a member of the enum", () => {
+it("is a member of the numeric enum", () => {
   expect(Direction.Up).toBeEnum(Direction);
 });
-
-/* or
+`,
+  "/string.test.ts":`
 enum Direction {
   Up = "UP",
   Down = "DOWN",
   Left = "LEFT",
   Right = "RIGHT",
 }
-*/
 
-/* or
+it("is a member of the string enum", () => {
+  expect(Direction.Up).toBeEnum(Direction);
+});
+`,
+"/heterogenous.test.ts":`
+enum Direction {
+  Up = "UP",
+  Down = 1,
+  Left = "LEFT",
+  Right = 2,
+}
+
+it("is a member of the string enum", () => {
+  expect(Direction.Up).toBeEnum(Direction);
+});
+`,
+  "/const object.test.ts":`
 const Direction = {
   Up: "UP",
   Down: "DOWN",
   Left: "LEFT",
   Right: "RIGHT",
 } as const;
-*/
-`}
 
-</TestFile>
+it("is a member of the const object", () => {
+  expect(Direction.Up).toBeEnum(Direction);
+});
+`
+}}/>
 
 :::tip Aliasing `expect.ofEnum` to `expect.enum`
 
