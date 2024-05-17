@@ -234,9 +234,7 @@ If you'd prefer to add the matchers manually, you can import the individual matc
   </TabItem>
 </Tabs>
 
-## Usage
-
-### Asymmetric Matchers vs Symmetric Matchers
+:::note Asymmetric Matchers vs Symmetric Matchers
 
 When `expect.extend` is called, each matcher is added as both an asymmetric and symmetric matcher.
 
@@ -277,3 +275,5 @@ declare module "mix-n-matchers" {
 expect(value).typeOf("string");
 expect(value).toEqual({ fn: expect.toBeCalledWithContext(context) });
 ```
+
+:::
