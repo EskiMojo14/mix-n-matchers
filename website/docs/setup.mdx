@@ -262,18 +262,122 @@ This helps to avoid confusion and makes it clear which matchers are designed to 
 
 If there's any existing matchers that are only available as asymmetric matchers and you'd like to use them as symmetric matchers (or vice versa), please open an issue or a pull request!
 
-You can of course choose to expose these types yourself to enable both symmetric and asymmetric usage of a matcher.
+You can of course choose to setup the matchers as both asymmetric and symmetric matchers if you prefer.
 
-```ts
-declare module "mix-n-matchers" {
-  interface MixNMatchers<R, T> extends Pick<AsymmetricMixNMatchers, "typeOf"> {}
-  interface AsymmetricMixNMatchers
-    extends Pick<MixNMatchers<any, any>, "toBeCalledWithContext"> {}
-}
+<Tabs groupId="test-runner">
+  <TabItem value="Jest" default>
+    ```ts title="test-setup.ts"
+    import { typeOf, toBeCalledWithContext } from "mix-n-matchers";
+    import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
 
-// now allowed
-expect(value).typeOf("string");
-expect(value).toEqual({ fn: expect.toBeCalledWithContext(context) });
-```
+    const matchers = {
+      typeOf,
+      toBeTypeOf: typeOf,
+      toBeCalledWithContext,
+      calledWithContext: toBeCalledWithContext,
+    };
+
+    expect.extend(matchers);
+
+    declare global {
+      namespace jest {
+        interface Matchers<R, T> extends Pick<MixNMatchers<R, T>, keyof typeof matchers & keyof MixNMatchers<R, T>> {
+          toBeTypeOf: AsymmetricMixNMatchers["typeOf"];
+        }
+
+        interface Expect
+          extends Pick<
+            AsymmetricMixNMatchers,
+            keyof typeof matchers & keyof AsymmetricMixNMatchers
+          > {
+            calledWithContext: MixNMatchers<void, any>["toBeCalledWithContext"];
+        }
+
+        interface InverseAsymmetricMatchers
+          extends Pick<
+            AsymmetricMixNMatchers,
+            keyof typeof matchers & keyof AsymmetricMixNMatchers
+          > {
+            calledWithContext: MixNMatchers<void, any>["toBeCalledWithContext"];
+        }
+      }
+    }
+
+    ```
+
+  </TabItem>
+  <TabItem value="Jest (no globals)">
+    ```ts title="test-setup.ts"
+
+    import { expect } from "@jest/globals";
+    import { typeOf, toBeCalledWithContext } from "mix-n-matchers";
+    import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
+
+    const matchers = {
+      typeOf,
+      toBeTypeOf: typeOf,
+      toBeCalledWithContext,
+      calledWithContext: toBeCalledWithContext,
+    };
+
+    expect.extend(matchers);
+
+    declare module "@jest/expect" {
+      interface Matchers<R, T>
+        extends Pick<
+          MixNMatchers<R, T>,
+          keyof typeof matchers & keyof MixNMatchers<R, T>
+        > {
+          toBeTypeOf: AsymmetricMixNMatchers["typeOf"];
+      }
+      interface AsymmetricMatchers
+        extends Pick<
+          AsymmetricMixNMatchers,
+          keyof typeof matchers & keyof AsymmetricMixNMatchers
+        > {
+          calledWithContext: MixNMatchers<void, any>["toBeCalledWithContext"];
+      }
+    }
+
+    ```
+
+  </TabItem>
+  <TabItem value="Vitest">
+    ```ts title="test-setup.ts"
+    
+    import { expect } from "vitest";
+    import { typeOf, toBeCalledWithContext } from "mix-n-matchers";
+    import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
+
+    const matchers = {
+      typeOf,
+      toBeTypeOf: typeOf,
+      toBeCalledWithContext,
+      calledWithContext: toBeCalledWithContext,
+    };
+
+    expect.extend(matchers);
+
+    declare module "vitest" {
+      interface Assertion<T>
+        extends Pick<
+          MixNMatchers<void, T>,
+          keyof typeof matchers & keyof MixNMatchers<void, T>
+        > {
+          toBeTypeOf: AsymmetricMixNMatchers["typeOf"];
+      }
+      interface AsymmetricMatchersContaining
+        extends Pick<
+          AsymmetricMixNMatchers,
+          keyof typeof matchers & keyof AsymmetricMixNMatchers
+        > {
+          calledWithContext: MixNMatchers<void, any>["toBeCalledWithContext"];
+      }
+    }
+
+    ```
+
+  </TabItem>
+</Tabs>
 
 :::
