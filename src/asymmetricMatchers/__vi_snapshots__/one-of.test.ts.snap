@@ -1,5 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`oneOf > should fail if value does not match any of the provided values 1`] = `expected 4 to deeply equal oneOf<1,2,3>`;
-
-exports[`oneOf > should fail if value does not match any of the provided values 2`] = `expected 1 to deeply equal not.oneOf<1,2,3>`;
