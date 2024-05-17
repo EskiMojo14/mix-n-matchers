@@ -158,25 +158,6 @@ html[data-theme="dark"] {
   );
 }
 
-@each $language in (ts, js) {
-  [data-language="#{$language}"] {
-    $opposite: if($language == "ts", "js", "ts");
-    .#{$opposite}-only,
-    .code-block-#{$opposite}-only-line {
-      display: none;
-    }
-  }
-}
-
-@each $ligature in (none, normal) {
-  [data-ligatures="#{$ligature}"] {
-    pre,
-    code {
-      font-variant-ligatures: $ligature;
-    }
-  }
-}
-
 .navbar {
   [data-theme="light"] & {
     --ifm-navbar-background-color: var(--ifm-color-primary);
