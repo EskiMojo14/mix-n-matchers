@@ -1,0 +1,62 @@
+---
+sidebar_position: 1
+---
+
+import { TestFile } from "/src/components/TestFile";
+
+# Containing Only
+
+## `arrayContainingOnly`
+
+An asymmetric matcher that checks if the received array contains only the expected values, using deep equality.
+
+Values can be repeated (or omitted), but all elements should be present in the expected array.
+
+:::note
+
+Put another way, it checks that the received array is a subset of (or equal to) the expected array. This is in contrast to `arrayContaining`, which checks that the received array is a superset of (or equal to) the expected array.
+
+:::
+
+<TestFile name="arrayContainingOnly">
+{`
+it("contains only the expected values", () => {
+  expect({ array: [1, 2] }).toEqual({
+    array: expect.arrayContainingOnly([1, 2, 3]),
+  });
+  expect({ array: [1, 2] }).toEqual({
+    array: expect.arrayContainingOnly([1, 2]),
+  });
+  expect({ array: [1, 1] }).toEqual({
+    array: expect.arrayContainingOnly([1, 2, 2]),
+  });
+  
+  expect({ array: [1, 2, 3] }).not.toEqual({
+    array: expect.arrayContainingOnly([1, 2]),
+  });
+});
+`}
+</TestFile>
+
+## `objectContainingOnly`
+
+An asymmetric matcher that checks if the received object contains only the expected keys and values, using deep equality.
+
+Keys can be repeated (or omitted), but all keys should be present in the expected object.
+
+:::note
+
+Put another way, it checks that the received object is a subset of (or equal to) the expected object. This is in contrast to `objectContaining`, which checks that the received object is a superset of (or equal to) the expected object.
+
+:::
+
+<TestFile name="objectContainingOnly">
+{`
+it("contains only the expected keys and values", () => {
+  expect({ a: 1 }).toEqual(expect.objectContainingOnly({ a: 1, b: 2 }));
+  expect({ a: 1, b: 2 }).toEqual(expect.objectContainingOnly({ a: 1, b: 2 }));
+
+  expect({ a: 1, b: 2 }).not.toEqual(expect.objectContainingOnly({ a: 1 }));
+});
+`}
+</TestFile>

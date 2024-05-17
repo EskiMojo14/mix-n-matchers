@@ -1,0 +1,30 @@
+import { TestFile } from "/src/components/TestFile";
+
+# Records
+
+## `.toBeRecordOf(expected)`
+
+Also available as an asymmetric matcher, `expect.recordOf(expected)`.
+
+Use `.toBeRecordOf` to assert that a value is an object where each value matches the `expected` value, using deep equality.
+
+Optionally, you can pass two arguments and the first one will be matched against keys.
+
+`.toBeStrictRecordOf(expected)` and `expect.strictRecordOf(expected)` are also available to use [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
+
+<TestFile name="toBeRecordOf">
+{`
+const record = { a: 1, b: 2, c: 3 };
+
+it("is a record of the expected values", () => {
+  expect(record).toBeRecordOf(expect.any(Number));
+  expect(record).toBeRecordOf(expect.any(String), expect.any(Number));
+});
+`}
+</TestFile>
+
+:::caution 
+
+Keys and values are retrieved using `Object.entries`, so only string (non-symbol) enumerable keys are checked.
+
+:::

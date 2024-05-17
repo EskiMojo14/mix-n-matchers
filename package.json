@@ -31,6 +31,9 @@
     "jest-globals",
     "vitest"
   ],
+  "workspaces": [
+    "website"
+  ],
   "scripts": {
     "clean": "rimraf dist",
     "prepare": "husky install",
@@ -131,5 +134,6 @@
     "external": [
       "@jest/globals"
     ]
-  }
+  },
+  "packageManager": "yarn@4.2.2"
 }
