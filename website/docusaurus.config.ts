@@ -69,6 +69,10 @@ const config: Config = {
     },
     navbar: {
       title: "Mix 'n' Matchers",
+      logo: {
+        src: "img/logo.png",
+      },
+
       items: [
         {
           href: `https://github.com/${organizationName}/${projectName}`,
