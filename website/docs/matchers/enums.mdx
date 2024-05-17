@@ -69,7 +69,7 @@ As `enum` is a reserved word in Javascript, it is not possible to export a match
     ```ts title="test-setup.ts"
 
     import { exactly, ofEnum } from "mix-n-matchers";
-    import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
+    import type { MixNMatchersFrom, AsymmetricMixNMatchersFrom } from "mix-n-matchers";
 
     const matchers = {
       exactly,
@@ -80,25 +80,14 @@ As `enum` is a reserved word in Javascript, it is not possible to export a match
 
     declare global {
       namespace jest {
-        interface Matchers<R, T>
-          extends Pick<
-            MixNMatchers<R, T>,
-            keyof typeof matchers & keyof MixNMatchers<R, T>
-          > {}
+        interface Matchers<R, T> extends MixNMatchersFrom<typeof matchers, R, T> {}
 
-        interface Expect
-          extends Pick<
-            AsymmetricMixNMatchers,
-            keyof typeof matchers & keyof AsymmetricMixNMatchers
-          > {
+        interface Expect extends AsymmetricMixNMatchersFrom<typeof matchers> {
           enum: AsymmetricMatchers["ofEnum"];
         }
 
         interface InverseAsymmetricMatchers
-          extends Pick<
-            AsymmetricMixNMatchers,
-            keyof typeof matchers & keyof AsymmetricMixNMatchers
-          > {
+          extends AsymmetricMixNMatchersFrom<typeof matchers> {
           enum: AsymmetricMatchers["ofEnum"];
         }
       }
@@ -112,7 +101,7 @@ As `enum` is a reserved word in Javascript, it is not possible to export a match
 
     import { expect } from "@jest/globals";
     import { exactly, ofEnum } from "mix-n-matchers";
-    import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
+    import type { MixNMatchersFrom, AsymmetricMixNMatchersFrom } from "mix-n-matchers";
 
     const matchers = {
       exactly,
@@ -122,16 +111,9 @@ As `enum` is a reserved word in Javascript, it is not possible to export a match
     expect.extend(matchers);
 
     declare module "@jest/expect" {
-      interface Matchers<R, T>
-        extends Pick<
-          MixNMatchers<R, T>,
-          keyof typeof matchers & keyof MixNMatchers<R, T>
-        > {}
+      interface Matchers<R, T> extends MixNMatchersFrom<typeof matchers, R, T> {}
       interface AsymmetricMatchers
-        extends Pick<
-          AsymmetricMixNMatchers,
-          keyof typeof matchers & keyof AsymmetricMixNMatchers
-        > {
+        extends AsymmetricMixNMatchersFrom<typeof matchers> {
         enum: AsymmetricMatchers["ofEnum"];
       }
     }
@@ -144,7 +126,7 @@ As `enum` is a reserved word in Javascript, it is not possible to export a match
 
     import { expect } from "vitest";
     import { exactly, ofEnum } from "mix-n-matchers";
-    import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
+    import type { MixNMatchersFrom, AsymmetricMixNMatchersFrom } from "mix-n-matchers";
 
     const matchers = {
       exactly,
@@ -154,16 +136,9 @@ As `enum` is a reserved word in Javascript, it is not possible to export a match
     expect.extend(matchers);
 
     declare module "vitest" {
-      interface Assertion<T>
-        extends Pick<
-          MixNMatchers<void, T>,
-          keyof typeof matchers & keyof MixNMatchers<void, T>
-        > {}
+      interface Assertion<T> extends MixNMatchersFrom<typeof matchers, void, T> {}
       interface AsymmetricMatchersContaining
-        extends Pick<
-          AsymmetricMixNMatchers,
-          keyof typeof matchers & keyof AsymmetricMixNMatchers
-        > {
+        extends AsymmetricMixNMatchersFrom<typeof matchers> {
         enum: AsymmetricMatchers["ofEnum"];
       }
     }

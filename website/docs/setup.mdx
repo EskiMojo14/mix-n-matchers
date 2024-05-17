@@ -122,7 +122,7 @@ If you'd prefer to add the matchers manually, you can import the individual matc
       nthCalledWithContext,
       exactly,
     } from "mix-n-matchers";
-    import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
+    import type { MixNMatchersFrom, AsymmetricMixNMatchersFrom } from "mix-n-matchers";
 
     const matchers = {
       toBeCalledWithContext,
@@ -135,23 +135,12 @@ If you'd prefer to add the matchers manually, you can import the individual matc
 
     declare global {
       namespace jest {
-        interface Matchers<R, T>
-          extends Pick<
-            MixNMatchers<R, T>,
-            keyof typeof matchers & keyof MixNMatchers<R, T>
-          > {}
+        interface Matchers<R, T> extends MixNMatchersFrom<typeof matchers, R, T> {}
 
-        interface Expect
-          extends Pick<
-            AsymmetricMixNMatchers,
-            keyof typeof matchers & keyof AsymmetricMixNMatchers
-          > {}
+        interface Expect extends AsymmetricMixNMatchersFrom<typeof matchers> {}
 
         interface InverseAsymmetricMatchers
-          extends Pick<
-            AsymmetricMixNMatchers,
-            keyof typeof matchers & keyof AsymmetricMixNMatchers
-          > {}
+          extends AsymmetricMixNMatchersFrom<typeof matchers> {}
       }
     }
 
@@ -168,7 +157,7 @@ If you'd prefer to add the matchers manually, you can import the individual matc
       nthCalledWithContext,
       exactly,
     } from "mix-n-matchers";
-    import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
+    import type { MixNMatchersFrom, AsymmetricMixNMatchersFrom } from "mix-n-matchers";
 
     const matchers = {
       toBeCalledWithContext,
@@ -180,16 +169,9 @@ If you'd prefer to add the matchers manually, you can import the individual matc
     expect.extend(matchers);
 
     declare module "@jest/expect" {
-      interface Matchers<R, T>
-        extends Pick<
-          MixNMatchers<R, T>,
-          keyof typeof matchers & keyof MixNMatchers<R, T>
-        > {}
+      interface Matchers<R, T> extends MixNMatchersFrom<typeof matchers, R, T> {}
       interface AsymmetricMatchers
-        extends Pick<
-          AsymmetricMixNMatchers,
-          keyof typeof matchers & keyof AsymmetricMixNMatchers
-        > {}
+        extends AsymmetricMixNMatchersFrom<typeof matchers> {}
     }
 
     ```
@@ -205,7 +187,7 @@ If you'd prefer to add the matchers manually, you can import the individual matc
       nthCalledWithContext,
       exactly,
     } from "mix-n-matchers";
-    import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
+    import type { MixNMatchersFrom, AsymmetricMixNMatchersFrom } from "mix-n-matchers";
     
     const matchers = {
       toBeCalledWithContext,
@@ -217,16 +199,9 @@ If you'd prefer to add the matchers manually, you can import the individual matc
     expect.extend(matchers);
     
     declare module "vitest" {
-      interface Assertion<T>
-        extends Pick<
-          MixNMatchers<void, T>,
-          keyof typeof matchers & keyof MixNMatchers<void, T>
-        > {}
+      interface Assertion<T> extends MixNMatchersFrom<typeof matchers, void, T> {}
       interface AsymmetricMatchersContaining
-        extends Pick<
-          AsymmetricMixNMatchers,
-          keyof typeof matchers & keyof AsymmetricMixNMatchers
-        > {}
+        extends AsymmetricMixNMatchersFrom<typeof matchers> {}
     }
 
     ```
@@ -268,7 +243,12 @@ You can of course choose to setup the matchers as both asymmetric and symmetric 
   <TabItem value="Jest" default>
     ```ts title="test-setup.ts"
     import { typeOf, toBeCalledWithContext } from "mix-n-matchers";
-    import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
+    import type { 
+      MixNMatchers,
+      MixNMatchersFrom,
+      AsymmetricMixNMatchers,
+      AsymmetricMixNMatchersFrom
+    } from "mix-n-matchers";
 
     const matchers = {
       typeOf,
@@ -281,23 +261,16 @@ You can of course choose to setup the matchers as both asymmetric and symmetric 
 
     declare global {
       namespace jest {
-        interface Matchers<R, T> extends Pick<MixNMatchers<R, T>, keyof typeof matchers & keyof MixNMatchers<R, T>> {
+        interface Matchers<R, T> extends MixNMatchersFrom<typeof matchers, R, T> {
           toBeTypeOf: AsymmetricMixNMatchers["typeOf"];
         }
 
-        interface Expect
-          extends Pick<
-            AsymmetricMixNMatchers,
-            keyof typeof matchers & keyof AsymmetricMixNMatchers
-          > {
+        interface Expect extends AsymmetricMixNMatchersFrom<typeof matchers> {
             calledWithContext: MixNMatchers<void, any>["toBeCalledWithContext"];
         }
 
         interface InverseAsymmetricMatchers
-          extends Pick<
-            AsymmetricMixNMatchers,
-            keyof typeof matchers & keyof AsymmetricMixNMatchers
-          > {
+          extends AsymmetricMixNMatchersFrom<typeof matchers> {
             calledWithContext: MixNMatchers<void, any>["toBeCalledWithContext"];
         }
       }
@@ -311,7 +284,12 @@ You can of course choose to setup the matchers as both asymmetric and symmetric 
 
     import { expect } from "@jest/globals";
     import { typeOf, toBeCalledWithContext } from "mix-n-matchers";
-    import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
+    import type {
+      MixNMatchers,
+      MixNMatchersFrom,
+      AsymmetricMixNMatchers,
+      AsymmetricMixNMatchersFrom
+    } from "mix-n-matchers";
 
     const matchers = {
       typeOf,
@@ -323,18 +301,10 @@ You can of course choose to setup the matchers as both asymmetric and symmetric 
     expect.extend(matchers);
 
     declare module "@jest/expect" {
-      interface Matchers<R, T>
-        extends Pick<
-          MixNMatchers<R, T>,
-          keyof typeof matchers & keyof MixNMatchers<R, T>
-        > {
+      interface Matchers<R, T> extends MixNMatchersFrom<typeof matchers, R, T> {
           toBeTypeOf: AsymmetricMixNMatchers["typeOf"];
       }
-      interface AsymmetricMatchers
-        extends Pick<
-          AsymmetricMixNMatchers,
-          keyof typeof matchers & keyof AsymmetricMixNMatchers
-        > {
+      interface AsymmetricMatchers extends AsymmetricMixNMatchersFrom<typeof matchers> {
           calledWithContext: MixNMatchers<void, any>["toBeCalledWithContext"];
       }
     }
@@ -347,7 +317,12 @@ You can of course choose to setup the matchers as both asymmetric and symmetric 
     
     import { expect } from "vitest";
     import { typeOf, toBeCalledWithContext } from "mix-n-matchers";
-    import type { MixNMatchers, AsymmetricMixNMatchers } from "mix-n-matchers";
+    import type { 
+      MixNMatchers,
+      MixNMatchersFrom,
+      AsymmetricMixNMatchers,
+      AsymmetricMixNMatchersFrom
+    } from "mix-n-matchers";
 
     const matchers = {
       typeOf,
@@ -359,18 +334,11 @@ You can of course choose to setup the matchers as both asymmetric and symmetric 
     expect.extend(matchers);
 
     declare module "vitest" {
-      interface Assertion<T>
-        extends Pick<
-          MixNMatchers<void, T>,
-          keyof typeof matchers & keyof MixNMatchers<void, T>
-        > {
+      interface Assertion<T> extends MixNMatchersFrom<typeof matchers, void, T> {
           toBeTypeOf: AsymmetricMixNMatchers["typeOf"];
       }
       interface AsymmetricMatchersContaining
-        extends Pick<
-          AsymmetricMixNMatchers,
-          keyof typeof matchers & keyof AsymmetricMixNMatchers
-        > {
+        extends AsymmetricMixNMatchersFrom<typeof matchers> {
           calledWithContext: MixNMatchers<void, any>["toBeCalledWithContext"];
       }
     }

@@ -1,3 +1,6 @@
+import { AsymmetricMixNMatchers } from "../asymmetricMatchers";
+import { MixNMatchers } from "../matchers";
+
 type MaybePromise<T> = T | Promise<T>;
 
 interface ExpectationResult {
@@ -35,3 +38,19 @@ export type MatcherFunction<Expected extends Array<unknown> = []> = (
   value: unknown,
   ...expected: Expected
 ) => MaybePromise<ExpectationResult>;
+
+/**
+ * Extracts the asymmetric matcher types from an object of matcher functions.
+ */
+export type AsymmetricMixNMatchersFrom<
+  Matchers extends Record<string, MatcherFunction<any[]>>,
+> = Pick<AsymmetricMixNMatchers, keyof Matchers & keyof AsymmetricMixNMatchers>;
+
+/**
+ * Extracts the matcher types from an object of matcher functions.
+ */
+export type MixNMatchersFrom<
+  Matchers extends Record<string, MatcherFunction<any[]>>,
+  R = any,
+  T = unknown,
+> = Pick<MixNMatchers<R, T>, keyof Matchers & keyof MixNMatchers<R, T>>;
