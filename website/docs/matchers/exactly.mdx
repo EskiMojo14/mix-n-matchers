@@ -1,0 +1,27 @@
+---
+sidebar_position: 1
+---
+
+import { TestFile } from "/src/components/TestFile";
+
+# `expect.exactly(value)`
+
+An asymmetric matcher that checks if the received value is exactly equal to the expected value, using `Object.is`.
+
+Useful for situations where deep equality would typically be used, but you want to ensure that the values are the same reference.
+
+<TestFile name="exactly">
+{`
+const ref = {}
+const mock = jest.fn();
+mock(ref);
+
+it("is exactly equal", () => {
+  expect(mock).toHaveBeenCalledWith(expect.exactly(ref));
+  expect(mock).not.toHaveBeenCalledWith(expect.exactly({}));
+
+  // this would normally pass
+  expect(mock).toHaveBeenCalledWith({});
+});
+`}
+</TestFile>

@@ -39,5 +39,3 @@ export const TestFile: React.FC<{ name: string; children: string }> = ({
     </SandpackProvider>
   );
 };
-
-export const ts = String.raw;
