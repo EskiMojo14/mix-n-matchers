@@ -236,6 +236,128 @@ describe("sequence", () => {
   });
 });
 
+describe("toBeSequence", () => {
+  it("works with an array", () => {
+    expect([1, 2, 3]).toBeSequence(1, 2, 3);
+
+    expect([1, 2, 3]).not.toBeSequence(1, 3, 2);
+
+    expect([1, 2, 3]).toBeSequence(1, 2);
+
+    expect(() => {
+      expect([1, 2, 3]).toBeSequence(1, 3, 2);
+    }).toThrowErrorMatchingSnapshot();
+
+    expect(() => {
+      expect([1, 2, 3]).not.toBeSequence(1, 2);
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("works with other iterables", () => {
+    expect(new Set([1, 2, 3])).toBeSequence(1, 2, 3);
+
+    expect(new Set([1, 2, 3])).not.toBeSequence(1, 3, 2);
+
+    expect(new Set([1, 2, 3])).toBeSequence(1, 2);
+
+    expect(() => {
+      expect(new Set([1, 2, 3])).toBeSequence(1, 3, 2);
+    }).toThrowErrorMatchingSnapshot();
+
+    expect(() => {
+      expect(new Set([1, 2, 3])).not.toBeSequence(1, 2);
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails with a non-iterable", () => {
+    expect(() => {
+      expect(0).toBeSequence(0);
+    }).toThrowErrorMatchingSnapshot();
+    expect(0).not.toBeSequence(0);
+  });
+  it("fails if the iterable is too short", () => {
+    expect(() => {
+      expect([0]).toBeSequence(0, 1);
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect(new Set([0])).toBeSequence(0, 1);
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("fails if no expected values are passed", () => {
+    expect(() => {
+      // @ts-expect-error testing invalid usage
+      expect([]).toEqualSequence();
+    }).toThrowErrorMatchingSnapshot();
+  });
+});
+
+describe("sequenceMatching", () => {
+  it("works with an array", () => {
+    expect({ array: [1, 2, 3] }).toEqual({
+      array: expect.sequenceMatching(1, 2, 3),
+    });
+    expect({ array: [1, 2, 3] }).toEqual({
+      array: expect.not.sequenceMatching(1, 3, 2),
+    });
+    expect({ array: [1, 2, 3] }).toEqual({
+      array: expect.sequenceMatching(1, 2),
+    });
+    expect(() => {
+      expect({ array: [1, 2, 3] }).toEqual({
+        array: expect.sequenceMatching(1, 3, 2),
+      });
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect({ array: [1, 2, 3] }).toEqual({
+        array: expect.not.sequenceMatching(1, 2),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("works with other iterables", () => {
+    expect({ array: new Set([1, 2, 3]) }).toEqual({
+      array: expect.sequenceMatching(1, 2, 3),
+    });
+    expect({ array: new Set([1, 2, 3]) }).toEqual({
+      array: expect.not.sequenceMatching(1, 3, 2),
+    });
+    expect({ array: new Set([1, 2, 3]) }).toEqual({
+      array: expect.sequenceMatching(1, 2),
+    });
+    expect(() => {
+      expect({ array: new Set([1, 2, 3]) }).toEqual({
+        array: expect.sequenceMatching(1, 3, 2),
+      });
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect({ array: new Set([1, 2, 3]) }).toEqual({
+        array: expect.not.sequenceMatching(1, 2),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+  it("fails with a non-iterable", () => {
+    expect(() => {
+      expect({ array: 0 }).toEqual({
+        array: expect.sequenceMatching(0),
+      });
+    }).toThrowErrorMatchingSnapshot();
+    expect({ array: 0 }).toEqual({
+      array: expect.not.sequenceMatching(0),
+    });
+  });
+  it("fails if the iterable is too short", () => {
+    expect(() => {
+      expect({ array: [0] }).toEqual({
+        array: expect.sequenceMatching(0, 1),
+      });
+    }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect({ array: new Set([0]) }).toEqual({
+        array: expect.sequenceMatching(0, 1),
+      });
+    }).toThrowErrorMatchingSnapshot();
+  });
+});
+
 describe("toEqualSequence", () => {
   it("works with an array", () => {
     expect([1, 2, 3]).toEqualSequence(1, 2, 3);

@@ -432,6 +432,110 @@ exports[`sequence works with other iterables 2`] = `
 <d>  }</b>
 `;
 
+exports[`sequenceMatching fails if the iterable is too short 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 3</g>
+
+<d>  Object {</b>
+<g>-   "array": sequenceMatching<0, 1>,</g>
+<r>+   "array": Array [</g>
+<r>+     0,</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`sequenceMatching fails if the iterable is too short 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 3</g>
+
+<d>  Object {</b>
+<g>-   "array": sequenceMatching<0, 1>,</g>
+<r>+   "array": Set {</g>
+<r>+     0,</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
+exports[`sequenceMatching fails with a non-iterable 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 1</g>
+
+<d>  Object {</b>
+<g>-   "array": sequenceMatching<0>,</g>
+<r>+   "array": 0,</g>
+<d>  }</b>
+`;
+
+exports[`sequenceMatching works with an array 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": sequenceMatching<1, 3, 2>,</g>
+<r>+   "array": Array [</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`sequenceMatching works with an array 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": not.sequenceMatching<1, 2>,</g>
+<r>+   "array": Array [</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   ],</g>
+<d>  }</b>
+`;
+
+exports[`sequenceMatching works with other iterables 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": sequenceMatching<1, 3, 2>,</g>
+<r>+   "array": Set {</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
+exports[`sequenceMatching works with other iterables 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 5</g>
+
+<d>  Object {</b>
+<g>-   "array": not.sequenceMatching<1, 2>,</g>
+<r>+   "array": Set {</g>
+<r>+     1,</g>
+<r>+     2,</g>
+<r>+     3,</g>
+<r>+   },</g>
+<d>  }</b>
+`;
+
 exports[`sequenceOf fails if the iterable is too short 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
 
@@ -634,6 +738,58 @@ exports[`strictSequenceOf works with other iterables 1`] = `
 <r>+     },</g>
 <r>+   },</g>
 <d>  }</b>
+`;
+
+exports[`toBeSequence fails if no expected values are passed 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toEqualSequence<d>(</b><g>expected</g><d>)</b>
+
+<b>Matcher error</b>: At least one expected item must be provided
+`;
+
+exports[`toBeSequence fails if the iterable is too short 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[0]</g> to have at least 2 items, but it only had 1.
+`;
+
+exports[`toBeSequence fails if the iterable is too short 2`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {0}</g> to have at least 2 items, but it only had 1.
+`;
+
+exports[`toBeSequence fails with a non-iterable 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>0</g> to be an iterable, but it was not
+`;
+
+exports[`toBeSequence works with an array 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>2</g> to match <r>3</g> at index 1
+
+Full sequence so far: <r>1</g>, <r>2</g>
+`;
+
+exports[`toBeSequence works with an array 2`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>[1, 2, 3]</g> not to match sequence <r>1</g>, <r>2</g>
+`;
+
+exports[`toBeSequence works with other iterables 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>2</g> to match <r>3</g> at index 1
+
+Full sequence so far: <r>1</g>, <r>2</g>
+`;
+
+exports[`toBeSequence works with other iterables 2`] = `
+<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeSequence<d>(</b><g>expected</g><d>)</b>
+
+Expected <r>Set {1, 2, 3}</g> not to match sequence <r>1</g>, <r>2</g>
 `;
 
 exports[`toContainEqualSequence fails if no expected values are passed 1`] = `

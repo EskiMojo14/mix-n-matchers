@@ -12,6 +12,7 @@ export {
 
 export {
   toSatisfySequence,
+  toBeSequence,
   toEqualSequence,
   toStrictEqualSequence,
   toContainSequence,

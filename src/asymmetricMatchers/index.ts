@@ -10,6 +10,7 @@ export { typeOf } from "./typeof";
 export { ofEnum } from "../shared/enum";
 export {
   sequence,
+  sequenceMatching,
   sequenceOf,
   strictSequenceOf,
   containingSequence,
