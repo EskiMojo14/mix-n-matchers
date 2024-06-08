@@ -160,9 +160,7 @@ html[data-theme="dark"] {
 
 .navbar {
   [data-theme="light"] & {
-    --ifm-navbar-background-color: var(--ifm-color-primary);
-    --ifm-navbar-link-color: var(--ifm-color-primary-contrast-background);
-    --ifm-navbar-link-hover-color: black;
+    --ifm-navbar-background-color: #{colors.$md-grey-200};
   }
   .color-mode-toggle {
     color: var(--ifm-navbar-link-color);
@@ -201,22 +199,27 @@ html[data-theme="dark"] {
 }
 
 .header-github-link {
+  &::before {
+    content: "";
+    width: 24px;
+    height: 24px;
+    display: flex;
+    background-image: make-github-logo(black);
+    background-repeat: no-repeat;
+    [data-theme="dark"] & {
+      background-image: make-github-logo(white);
+    }
+  }
   &:hover {
     &::before {
-      background-image: make-github-logo(black);
+      background-image: make-github-logo(
+        util.str-replace(#{colors.$md-teal-500}, "#", "%23")
+      );
       [data-theme="dark"] & {
         background-image: make-github-logo(
           util.str-replace(#{colors.$md-teal-300}, "#", "%23")
         );
       }
     }
-  }
-  &::before {
-    content: "";
-    width: 24px;
-    height: 24px;
-    display: flex;
-    background-image: make-github-logo(white);
-    background-repeat: no-repeat;
   }
 }

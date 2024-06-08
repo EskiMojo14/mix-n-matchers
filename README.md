@@ -1,5 +1,7 @@
 # mix-n-matchers
 
+![logo](./website/static/img/logo.png)
+
 Miscellaneous custom Jest matchers.
 
 ```ts

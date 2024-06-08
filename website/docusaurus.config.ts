@@ -71,6 +71,7 @@ const config: Config = {
       title: "Mix 'n' Matchers",
       logo: {
         src: "img/logo.png",
+        srcDark: "img/logo-dark.png",
       },
 
       items: [
