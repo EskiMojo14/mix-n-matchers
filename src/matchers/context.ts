@@ -12,6 +12,7 @@ import {
 import type { EqualValue } from "../utils";
 import { ensureMockOrSpy, makeEqualValue, isSpy } from "../utils";
 import { getRightAlignedPrinter } from "../utils/print";
+import { assert } from "../utils/assert";
 
 const PRINT_LIMIT = 3;
 
@@ -266,15 +267,14 @@ const createNthCalledWithContextMatcher = (
       secondArgument: "expected",
     };
     ensureMockOrSpy(received, matcherName, expectedArgument, options);
-    if (!Number.isSafeInteger(nth) || nth < 1) {
-      throw new Error(
-        matcherErrorMessage(
-          matcherHint(matcherName, undefined, expectedArgument, options),
-          `${expectedArgument} must be a positive integer`,
-          printWithType(expectedArgument, nth, stringify),
-        ),
-      );
-    }
+
+    assert(Number.isSafeInteger(nth) && nth > 0, () =>
+      matcherErrorMessage(
+        matcherHint(matcherName, undefined, expectedArgument, options),
+        `${expectedArgument} must be a positive integer`,
+        printWithType(expectedArgument, nth, stringify),
+      ),
+    );
 
     const receivedIsSpy = isSpy(received);
     const receivedName = receivedIsSpy ? "spy" : received.getMockName();

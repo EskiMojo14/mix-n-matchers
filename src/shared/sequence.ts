@@ -26,11 +26,9 @@ const makeSatisfySequenceMatcher = (
       promise: this.promise,
       isDirectExpectCall: asymmetric,
     });
-    if (predicates.length === 0) {
-      throw new Error(
-        matcherErrorMessage(hint, "At least one predicate must be provided"),
-      );
-    }
+    assert(predicates.length > 0, () =>
+      matcherErrorMessage(hint, "At least one predicate must be provided"),
+    );
     const prefix = hint + "\n\n";
     if (!isIterable(received)) {
       return {
@@ -123,14 +121,10 @@ const makeEqualSequenceMatcher = (
       promise: this.promise,
       isDirectExpectCall: asymmetric,
     });
-    if (expected.length === 0) {
-      throw new Error(
-        matcherErrorMessage(
-          hint,
-          "At least one expected item must be provided",
-        ),
-      );
-    }
+    assert(expected.length > 0, () =>
+      matcherErrorMessage(hint, "At least one expected item must be provided"),
+    );
+
     const prefix = hint + "\n\n";
     if (!isIterable(received)) {
       return {
@@ -270,14 +264,9 @@ const makeContainSequenceMatcher = (
     });
     const prefix = hint + "\n\n";
 
-    if (expected.length === 0) {
-      throw new Error(
-        matcherErrorMessage(
-          hint,
-          "At least one expected item must be provided",
-        ),
-      );
-    }
+    assert(expected.length > 0, () =>
+      matcherErrorMessage(hint, "At least one expected item must be provided"),
+    );
 
     if (!isIterable(received)) {
       return {
@@ -407,11 +396,9 @@ export const makeContainSatisfySequenceMatcher = (
       promise: this.promise,
       isDirectExpectCall: asymmetric,
     });
-    if (predicates.length === 0) {
-      throw new Error(
-        matcherErrorMessage(hint, "At least one predicate must be provided"),
-      );
-    }
+    assert(predicates.length > 0, () =>
+      matcherErrorMessage(hint, "At least one predicate must be provided"),
+    );
     const prefix = hint + "\n\n";
     if (!isIterable(received)) {
       return {

@@ -9,6 +9,7 @@ import {
 } from "jest-matcher-utils";
 import { makeEqualValue } from "../utils";
 import type { MatcherFunction } from "../utils/types";
+import { assert } from "../utils/assert";
 
 /**
  * Matches any array that contains only the expected values.
@@ -23,19 +24,17 @@ import type { MatcherFunction } from "../utils/types";
  */
 export const arrayContainingOnly: MatcherFunction<[expected: Array<unknown>]> =
   function (received, expected) {
-    if (!Array.isArray(expected)) {
-      throw new Error(
-        matcherErrorMessage(
-          matcherHint("arrayContainingOnly", undefined, expected, {
-            isNot: this.isNot,
-            promise: this.promise,
-            isDirectExpectCall: true,
-          }),
-          `${EXPECTED_COLOR("Expected")} value must be an array`,
-          printWithType("Expected", expected, stringify),
-        ),
-      );
-    }
+    assert(Array.isArray(expected), () =>
+      matcherErrorMessage(
+        matcherHint("arrayContainingOnly", undefined, expected as never, {
+          isNot: this.isNot,
+          promise: this.promise,
+          isDirectExpectCall: true,
+        }),
+        `${EXPECTED_COLOR("Expected")} value must be an array`,
+        printWithType("Expected", expected, stringify),
+      ),
+    );
     const equalValue = makeEqualValue(this);
     const pass =
       Array.isArray(received) &&

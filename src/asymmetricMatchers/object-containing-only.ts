@@ -8,6 +8,7 @@ import {
 } from "jest-matcher-utils";
 import { makeEqualValue } from "../utils";
 import type { MatcherFunction } from "../utils/types";
+import { assert } from "../utils/assert";
 
 // Retrieves an object's keys for evaluation by getObjectSubset.  This evaluates
 // the prototype chain for string keys but not for non-enumerable symbols.
@@ -56,18 +57,16 @@ export function hasProperty(
 export const objectContainingOnly: MatcherFunction<
   [expected: Record<string | symbol, unknown>]
 > = function (received, expected) {
-  if (typeof expected !== "object") {
-    throw new Error(
-      matcherErrorMessage(
-        matcherHint("objectContainingOnly", undefined, expected, {
-          isNot: this.isNot,
-          promise: this.promise,
-        }),
-        `${EXPECTED_COLOR("Expected")} value must be an object`,
-        printWithType("Expected", expected, stringify),
-      ),
-    );
-  }
+  assert(typeof expected === "object", () =>
+    matcherErrorMessage(
+      matcherHint("objectContainingOnly", undefined, expected as never, {
+        isNot: this.isNot,
+        promise: this.promise,
+      }),
+      `${EXPECTED_COLOR("Expected")} value must be an object`,
+      printWithType("Expected", expected, stringify),
+    ),
+  );
 
   const receivedIsObject = typeof received === "object" && received !== null;
   let pass = receivedIsObject;
