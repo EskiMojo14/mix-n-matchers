@@ -7,8 +7,8 @@ import {
   stringify,
 } from "jest-matcher-utils";
 import { makeEqualValue } from "../utils";
-import type { MatcherFunction } from "../utils/types";
 import { assert } from "../utils/assert";
+import type { MatcherFunction } from "../utils/types";
 
 // Retrieves an object's keys for evaluation by getObjectSubset.  This evaluates
 // the prototype chain for string keys but not for non-enumerable symbols.

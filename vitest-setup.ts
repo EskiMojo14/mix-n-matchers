@@ -1,6 +1,6 @@
 import { expect, describe, it, vi } from "vitest";
-import { alignedAnsiStyleSerializer } from "./src/utils/tests";
 import type * as globals from "@globals";
+import { alignedAnsiStyleSerializer } from "./src/utils/tests";
 
 expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 

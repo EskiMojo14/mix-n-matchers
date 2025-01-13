@@ -1,6 +1,6 @@
-import type { MatcherFunction } from "../utils/types";
 import { matcherHint, printExpected, printReceived } from "jest-matcher-utils";
 import { isIterable, makeEqualValue } from "../utils";
+import type { MatcherFunction } from "../utils/types";
 
 const makeIterableOfMatcher = (
   matcherName: string,

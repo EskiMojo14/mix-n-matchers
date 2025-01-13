@@ -1,6 +1,5 @@
 // to avoid having separate jest and vitest suites, we create common definitions
 // then mock during setup with the appropriate globals
-/* eslint-disable @typescript-eslint/no-empty-function */
 import type {
   describe as jestDescribe,
   it as jestIt,

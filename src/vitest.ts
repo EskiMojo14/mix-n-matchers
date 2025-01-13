@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
 import { expect } from "vitest";
 import * as mixNMatchers from ".";
 

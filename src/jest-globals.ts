@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
 import { expect } from "@jest/globals";
 import * as mixNMatchers from ".";
 

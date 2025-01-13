@@ -1,7 +1,7 @@
 import type { MatcherHintOptions } from "jest-matcher-utils";
 import { matcherHint, printReceived } from "jest-matcher-utils";
-import type { MatcherFunction } from "../utils/types";
 import { makeEqualValue } from "../utils";
+import type { MatcherFunction } from "../utils/types";
 
 /**
  * Checks if value matches one of provided values.

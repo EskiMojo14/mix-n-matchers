@@ -1,4 +1,11 @@
 import {
+  arrayBufferEquality,
+  iterableEquality,
+  sparseArrayEquality,
+  typeEquality,
+} from "@jest/expect-utils";
+import type { jest } from "@jest/globals";
+import {
   matcherErrorMessage,
   matcherHint,
   printWithType,
@@ -6,15 +13,8 @@ import {
   RECEIVED_COLOR,
   printReceived,
 } from "jest-matcher-utils";
-import type { MatcherUtils, Tester } from "./types";
 import type { Mock } from "vitest";
-import type { jest } from "@jest/globals";
-import {
-  arrayBufferEquality,
-  iterableEquality,
-  sparseArrayEquality,
-  typeEquality,
-} from "@jest/expect-utils";
+import type { MatcherUtils, Tester } from "./types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isMock = (received: any): received is jest.Mock | Mock =>

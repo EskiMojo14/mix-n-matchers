@@ -1,6 +1,6 @@
-import type { MatcherContext } from "./types";
 import type { MatcherState } from "@vitest/expect";
 import type { MatcherContext as JestMatcherContext } from "expect";
+import type { MatcherContext } from "./types";
 
 export type Satisfies<T extends U, U> = T;
 

@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
-import * as mixNMatchers from ".";
 import type { expect } from "@jest/globals";
+import * as mixNMatchers from ".";
 
 const jestExpect = (globalThis as { expect?: typeof expect }).expect;
 

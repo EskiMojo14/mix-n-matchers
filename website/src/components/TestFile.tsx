@@ -5,9 +5,9 @@ import {
   SandpackProvider,
   SandpackTests,
 } from "@codesandbox/sandpack-react";
-import React from "react";
-import { useColorMode } from "@docusaurus/theme-common";
 import { githubLight, dracula } from "@codesandbox/sandpack-themes";
+import { useColorMode } from "@docusaurus/theme-common";
+import React from "react";
 
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style

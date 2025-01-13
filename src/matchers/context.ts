@@ -1,4 +1,3 @@
-import type { MatcherFunction } from "../utils/types";
 import {
   matcherErrorMessage,
   matcherHint,
@@ -11,8 +10,9 @@ import {
 } from "jest-matcher-utils";
 import type { EqualValue } from "../utils";
 import { ensureMockOrSpy, makeEqualValue, isSpy } from "../utils";
-import { getRightAlignedPrinter } from "../utils/print";
 import { assert } from "../utils/assert";
+import { getRightAlignedPrinter } from "../utils/print";
+import type { MatcherFunction } from "../utils/types";
 
 const PRINT_LIMIT = 3;
 
@@ -202,7 +202,6 @@ const createLastCalledWithContextMatcher = (
             indexedContexts.push([iLast, contexts[iLast]]);
 
             return (
-              // eslint-disable-next-line prefer-template
               matcherHint(matcherName, receivedName, undefined, options) +
               "\n\n" +
               `Expected: not ${printExpected(expected)}\n` +
@@ -375,7 +374,6 @@ const createNthCalledWithContextMatcher = (
             }
 
             return (
-              // eslint-disable-next-line prefer-template
               matcherHint(
                 matcherName,
                 receivedName,
@@ -451,8 +449,8 @@ export const toHaveBeenNthCalledWithContext = createNthCalledWithContextMatcher(
 );
 
 declare module "mix-n-matchers" {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
   export interface MixNMatchers<R, T = unknown> {
+    /* eslint-disable @typescript-eslint/no-unnecessary-type-parameters */
     /**
      * Ensure a mock function is called with a specific context (`this`)
      *
@@ -492,5 +490,6 @@ declare module "mix-n-matchers" {
      * Optionally you can provide a type for the expected context via a generic.
      */
     toHaveBeenNthCalledWithContext<E>(n: number, expected: E): R;
+    /* eslint-enable @typescript-eslint/no-unnecessary-type-parameters */
   }
 }

@@ -5,9 +5,9 @@ import {
   printWithType,
   stringify,
 } from "jest-matcher-utils";
-import type { MatcherFunction } from "../utils/types";
 import { isIterable, makeEqualValue } from "../utils";
 import { assert } from "../utils/assert";
+import type { MatcherFunction } from "../utils/types";
 
 type Predicate = (value: unknown) => boolean;
 
@@ -417,7 +417,7 @@ export const makeContainSatisfySequenceMatcher = (
           hint,
           "All predicates must be functions",
           printWithType(
-            "Predicate at index " + expectedIdx,
+            `Predicate at index ${expectedIdx}`,
             predicate,
             stringify,
           ),
@@ -476,6 +476,7 @@ export const containingSequenceSatisfying = makeContainSatisfySequenceMatcher(
 
 declare module "mix-n-matchers" {
   export interface MixNMatchers<R = any, T = unknown> {
+    /* eslint-disable @typescript-eslint/no-unnecessary-type-parameters */
     /**
      * Asserts that an iterable satisfies a sequence of predicates.
      *
@@ -671,5 +672,6 @@ declare module "mix-n-matchers" {
       predicate: Predicate,
       ...predicates: Array<Predicate>
     ): any;
+    /* eslint-enable @typescript-eslint/no-unnecessary-type-parameters */
   }
 }

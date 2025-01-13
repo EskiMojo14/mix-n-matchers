@@ -8,8 +8,8 @@ import {
   stringify,
 } from "jest-matcher-utils";
 import { makeEqualValue } from "../utils";
-import type { MatcherFunction } from "../utils/types";
 import { assert } from "../utils/assert";
+import type { MatcherFunction } from "../utils/types";
 
 /**
  * Matches any array that contains only the expected values.
