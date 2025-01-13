@@ -15,11 +15,11 @@ const createSpy = (mock: Mock): Spy => {
         const returnRecord = mock.mock.results[i];
         /* eslint-disable @typescript-eslint/no-unsafe-assignment */
         info.push({
-          args: mock.mock.calls[i]!,
+          args: mock.mock.calls[i] ?? [],
           object:
             "contexts" in mock.mock
               ? mock.mock.contexts[i]
-              : mock.mock.instances[i],
+              : (mock.mock as { instances: Array<unknown> }).instances[i],
           returnValue:
             returnRecord?.type === "return" ? returnRecord.value : undefined,
         });

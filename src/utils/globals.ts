@@ -34,14 +34,13 @@ type TestEach = Satisfies<
 export declare const expect: typeof vitestExpect | typeof jestExpect;
 export declare const it: typeof vitestIt | typeof jestIt;
 
-export type Mock<R = any, A extends Array<any> = Array<any>, T = any> =
-  | jest.Mock<(this: T, ...args: A) => R>
-  | VitestMock<A, R>;
+type Procedure = (...args: Array<any>) => any;
 
-export declare const fn: {
-  (): Mock;
-  <R, A extends Array<any>, T>(fn?: (this: T, ...args: A) => R): Mock<R, A, T>;
-};
+export type Mock<T extends Procedure = Procedure> =
+  | jest.Mock<T>
+  | VitestMock<T>;
+
+export declare const fn: <T extends Procedure = Procedure>(fn?: T) => Mock<T>;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type TestFn = Satisfies<typeof jest.fn | typeof vi.fn, typeof fn>;

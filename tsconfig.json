@@ -17,5 +17,6 @@
       "mix-n-matchers": ["./src/index"],
       "@globals": ["./src/utils/globals"]
     }
-  }
+  },
+  "exclude": ["website"]
 }

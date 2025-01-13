@@ -8,7 +8,8 @@ import {
   printReceived,
   DIM_COLOR,
 } from "jest-matcher-utils";
-import type { EqualValue } from "../utils";
+import type { Mock } from "@globals";
+import type { EqualValue, Spy } from "../utils";
 import { ensureMockOrSpy, makeEqualValue, isSpy } from "../utils";
 import { assert } from "../utils/assert";
 import { getRightAlignedPrinter } from "../utils/print";
@@ -94,6 +95,23 @@ const printReceivedContextsPositive = (
   );
 };
 
+const extractMock = (received: Mock | Spy) => {
+  if (isSpy(received)) {
+    return {
+      receivedName: "spy",
+      contexts: received.calls.all().map((x): unknown => x.object),
+    };
+  }
+  return {
+    receivedName: received.getMockName(),
+    contexts:
+      "contexts" in received.mock
+        ? received.mock.contexts
+        : // legacy
+          (received.mock as { instances: Array<unknown> }).instances,
+  };
+};
+
 const createToBeCalledWithContextMatcher = (
   matcherName: string,
 ): MatcherFunction<[expected: unknown]> =>
@@ -105,14 +123,7 @@ const createToBeCalledWithContextMatcher = (
     };
     ensureMockOrSpy(received, matcherName, undefined, options);
 
-    const receivedIsSpy = isSpy(received);
-    const receivedName = receivedIsSpy ? "spy" : received.getMockName();
-
-    const contexts: Array<unknown> = receivedIsSpy
-      ? received.calls.all().map((x): unknown => x.object)
-      : "contexts" in received.mock
-        ? received.mock.contexts
-        : received.mock.instances;
+    const { receivedName, contexts } = extractMock(received);
 
     const pass = contexts.some((actual) => equalValue(actual, expected));
     return {
@@ -179,14 +190,7 @@ const createLastCalledWithContextMatcher = (
     };
     ensureMockOrSpy(received, matcherName, undefined, options);
 
-    const receivedIsSpy = isSpy(received);
-    const receivedName = receivedIsSpy ? "spy" : received.getMockName();
-
-    const contexts: Array<unknown> = receivedIsSpy
-      ? received.calls.all().map((x): unknown => x.object)
-      : "contexts" in received.mock
-        ? received.mock.contexts
-        : received.mock.instances;
+    const { receivedName, contexts } = extractMock(received);
     const iLast = contexts.length - 1;
 
     const pass = iLast >= 0 && equalValue(expected, contexts[iLast]);
@@ -275,14 +279,7 @@ const createNthCalledWithContextMatcher = (
       ),
     );
 
-    const receivedIsSpy = isSpy(received);
-    const receivedName = receivedIsSpy ? "spy" : received.getMockName();
-
-    const contexts: Array<unknown> = receivedIsSpy
-      ? received.calls.all().map((x): unknown => x.object)
-      : "contexts" in received.mock
-        ? received.mock.contexts
-        : received.mock.instances;
+    const { receivedName, contexts } = extractMock(received);
 
     const { length } = contexts;
     const iNth = nth - 1;
