@@ -104,6 +104,6 @@ declare module "mix-n-matchers" {
      *
      * expect({ a: 1, b: 2 }).toEqual(objectContainingOnly({ a: 1 })); // fail
      */
-    objectContainingOnly<E = {}>(expected: E): boolean;
+    objectContainingOnly<E = {}>(expected: E): any;
   }
 }
