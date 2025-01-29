@@ -50,7 +50,7 @@
     "attw": "attw",
     "publint": "publint",
     "type": "tsc",
-    "prepack": "yarn run publint",
+    "prepack": "yarn run publint --pack false",
     "website": "yarn workspace website start"
   },
   "repository": {
