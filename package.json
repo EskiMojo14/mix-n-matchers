@@ -48,7 +48,7 @@
     "publint": "publint",
     "type": "tsc",
     "prepack": "pnpm run publint --pack false",
-    "website": "pnpm workspace website start"
+    "website": "pnpm --filter website start"
   },
   "repository": {
     "type": "git",
