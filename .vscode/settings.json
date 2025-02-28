@@ -1,4 +1,4 @@
 {
-  "jest.jestCommandLine": "yarn test",
-  "vitest.commandLine": "yarn vitest"
+  "jest.jestCommandLine": "pnpm test",
+  "vitest.commandLine": "pnpm vitest"
 }

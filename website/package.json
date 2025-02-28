@@ -17,8 +17,8 @@
   "dependencies": {
     "@codesandbox/sandpack-react": "^2.13.10",
     "@codesandbox/sandpack-themes": "^2.0.21",
-    "@docusaurus/core": "3.3.2",
-    "@docusaurus/preset-classic": "3.3.2",
+    "@docusaurus/core": "^3.3.2",
+    "@docusaurus/preset-classic": "^3.3.2",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
     "docusaurus-plugin-sass": "^0.2.5",
@@ -29,10 +29,13 @@
     "sass": "^1.77.1"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.3.2",
-    "@docusaurus/tsconfig": "3.3.2",
-    "@docusaurus/types": "3.3.2",
-    "typescript": "~5.2.2"
+    "@docusaurus/module-type-aliases": "^3.3.2",
+    "@docusaurus/theme-common": "^3.7.0",
+    "@docusaurus/tsconfig": "^3.3.2",
+    "@docusaurus/types": "^3.3.2",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "typescript": "~5.7"
   },
   "browserslist": {
     "production": [
