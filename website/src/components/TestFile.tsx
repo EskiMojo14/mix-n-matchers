@@ -35,7 +35,7 @@ export const CustomSandpack: React.FC<{ files: SandpackFiles }> = ({
       }}
       customSetup={{
         entry: "entry.js",
-        dependencies: { "mix-n-matchers": "^1" },
+        dependencies: { "mix-n-matchers": "^2" },
       }}
       files={{
         "/entry.ts": {
