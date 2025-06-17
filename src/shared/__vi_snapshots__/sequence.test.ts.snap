@@ -75,7 +75,7 @@ exports[`sequence > fails if the iterable is too short 1`] = `expected { array: 
 
 exports[`sequence > fails if the iterable is too short 2`] = `expected { array: Set{ +0 } } to deeply equal { array: sequence{…} }`;
 
-exports[`sequence > fails with a non-iterable 1`] = `expected { array: +0 } to deeply equal { array: sequence<(x) => x === 0> }`;
+exports[`sequence > fails with a non-iterable 1`] = `expected { array: +0 } to deeply equal { array: sequence{…} }`;
 
 exports[`sequence > throws if one of the predicates is not a function 1`] = `
 expect.sequence(expected)
