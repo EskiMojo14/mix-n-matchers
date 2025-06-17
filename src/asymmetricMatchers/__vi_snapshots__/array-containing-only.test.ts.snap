@@ -1,8 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`arrayContainingOnly > should expect an array to contain only the expected values 1`] = `expected [ 1, 2, 2, 3 ] to deeply equal arrayContainingOnly<1,2>`;
+exports[`arrayContainingOnly > should expect an array to contain only the expected values 1`] = `expected [ 1, 2, 2, 3 ] to deeply equal { Object ($$typeof, sample, ...) }`;
 
-exports[`arrayContainingOnly > should expect an array to contain only the expected values 2`] = `expected [ 1, 2, 2, 3 ] to deeply equal not.arrayContainingOnly<1,2,3>`;
+exports[`arrayContainingOnly > should expect an array to contain only the expected values 2`] = `expected [ 1, 2, 2, 3 ] to deeply equal not.arrayContainingOnly{…}`;
 
 exports[`arrayContainingOnly > should throw an error if the expected value is not an array 1`] = `
 expect.arrayContainingOnly(1)
@@ -13,4 +13,4 @@ Expected has type:  number
 Expected has value: 1
 `;
 
-exports[`arrayContainingOnly > should throw an error if the received value is not an array 1`] = `expected 1 to deeply equal arrayContainingOnly<>`;
+exports[`arrayContainingOnly > should throw an error if the received value is not an array 1`] = `expected 1 to deeply equal arrayContainingOnly<Array []>`;
