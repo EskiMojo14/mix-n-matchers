@@ -19,49 +19,49 @@ exports[`expect.ofEnum > works when called with a string enum 1`] = `expected 'T
 exports[`expect.ofEnum > works when called with a string enum 2`] = `expected 'Zero' to deeply equal not.ofEnum<[object Object]>`;
 
 exports[`toBeEnum > works when called with a const object 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toBeEnum<d>(</b><g>expected</g><d>)</b>
+expect(received).toBeEnum(expected)
 
-Expected <r>3</g> to be a valid enum value. Valid values are: <g>0</g>, <g>1</g>, <g>2</g>.
+Expected 3 to be a valid enum value. Valid values are: 0, 1, 2.
 `;
 
 exports[`toBeEnum > works when called with a const object 2`] = `
-<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeEnum<d>(</b><g>expected</g><d>)</b>
+expect(received).not.toBeEnum(expected)
 
-Expected <r>0</g> not to be a valid enum value. Valid values are: <g>0</g>, <g>1</g>, <g>2</g>.
+Expected 0 not to be a valid enum value. Valid values are: 0, 1, 2.
 `;
 
 exports[`toBeEnum > works when called with a mixed enum 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toBeEnum<d>(</b><g>expected</g><d>)</b>
+expect(received).toBeEnum(expected)
 
-Expected <r>"Three"</g> to be a valid enum value. Valid values are: <g>0</g>, <g>"One"</g>, <g>2</g>.
+Expected "Three" to be a valid enum value. Valid values are: 0, "One", 2.
 `;
 
 exports[`toBeEnum > works when called with a mixed enum 2`] = `
-<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeEnum<d>(</b><g>expected</g><d>)</b>
+expect(received).not.toBeEnum(expected)
 
-Expected <r>0</g> not to be a valid enum value. Valid values are: <g>0</g>, <g>"One"</g>, <g>2</g>.
+Expected 0 not to be a valid enum value. Valid values are: 0, "One", 2.
 `;
 
 exports[`toBeEnum > works when called with a numeric enum 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toBeEnum<d>(</b><g>expected</g><d>)</b>
+expect(received).toBeEnum(expected)
 
-Expected <r>3</g> to be a valid enum value. Valid values are: <g>0</g>, <g>1</g>, <g>2</g>.
+Expected 3 to be a valid enum value. Valid values are: 0, 1, 2.
 `;
 
 exports[`toBeEnum > works when called with a numeric enum 2`] = `
-<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeEnum<d>(</b><g>expected</g><d>)</b>
+expect(received).not.toBeEnum(expected)
 
-Expected <r>0</g> not to be a valid enum value. Valid values are: <g>0</g>, <g>1</g>, <g>2</g>.
+Expected 0 not to be a valid enum value. Valid values are: 0, 1, 2.
 `;
 
 exports[`toBeEnum > works when called with a string enum 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toBeEnum<d>(</b><g>expected</g><d>)</b>
+expect(received).toBeEnum(expected)
 
-Expected <r>"Three"</g> to be a valid enum value. Valid values are: <g>"Zero"</g>, <g>"One"</g>, <g>"Two"</g>.
+Expected "Three" to be a valid enum value. Valid values are: "Zero", "One", "Two".
 `;
 
 exports[`toBeEnum > works when called with a string enum 2`] = `
-<d>expect(</b><r>received</g><d>).</b>not<d>.</b>toBeEnum<d>(</b><g>expected</g><d>)</b>
+expect(received).not.toBeEnum(expected)
 
-Expected <r>"Zero"</g> not to be a valid enum value. Valid values are: <g>"Zero"</g>, <g>"One"</g>, <g>"Two"</g>.
+Expected "Zero" not to be a valid enum value. Valid values are: "Zero", "One", "Two".
 `;

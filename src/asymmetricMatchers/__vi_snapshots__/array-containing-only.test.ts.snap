@@ -5,9 +5,9 @@ exports[`arrayContainingOnly > should expect an array to contain only the expect
 exports[`arrayContainingOnly > should expect an array to contain only the expected values 2`] = `expected [ 1, 2, 2, 3 ] to deeply equal not.arrayContainingOnly<1,2,3>`;
 
 exports[`arrayContainingOnly > should throw an error if the expected value is not an array 1`] = `
-<d>expect.</b>arrayContainingOnly<d>(</b><g>1</g><d>)</b>
+expect.arrayContainingOnly(1)
 
-<b>Matcher error</b>: <g>Expected</g> value must be an array
+Matcher error: Expected value must be an array
 
 Expected has type:  number
 Expected has value: 1
