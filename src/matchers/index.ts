@@ -2,11 +2,8 @@
 export interface MixNMatchers<R, T = unknown> {}
 
 export {
-  toBeCalledWithContext,
   toHaveBeenCalledWithContext,
-  lastCalledWithContext,
   toHaveBeenLastCalledWithContext,
-  nthCalledWithContext,
   toHaveBeenNthCalledWithContext,
 } from "./context";
 
