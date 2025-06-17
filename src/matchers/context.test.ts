@@ -38,25 +38,12 @@ const createSpy = (mock: Mock): Spy => {
 
 describe.each([
   "toHaveBeenCalledWithContext",
-  "toBeCalledWithContext",
-  "lastCalledWithContext",
   "toHaveBeenLastCalledWithContext",
-  "nthCalledWithContext",
   "toHaveBeenNthCalledWithContext",
 ] as const)("%s", (calledWithContext) => {
-  function isToHaveNth(
-    calledWithContext: string,
-  ): calledWithContext is
-    | "nthCalledWithContext"
-    | "toHaveBeenNthCalledWithContext" {
-    return (
-      calledWithContext === "nthCalledWithContext" ||
-      calledWithContext === "toHaveBeenNthCalledWithContext"
-    );
-  }
   it("works only on spies or fn", () => {
     const mock = function mock() {};
-    if (isToHaveNth(calledWithContext)) {
+    if (calledWithContext === "toHaveBeenNthCalledWithContext") {
       expect(() => {
         expect(mock)[calledWithContext](3, "foo");
       }).toThrowErrorMatchingSnapshot();
@@ -68,7 +55,7 @@ describe.each([
   });
   it("works when not called", () => {
     const mock = fn();
-    if (isToHaveNth(calledWithContext)) {
+    if (calledWithContext === "toHaveBeenNthCalledWithContext") {
       expect(createSpy(mock)).not[calledWithContext](1, "foo");
       expect(mock).not[calledWithContext](1, "foo");
 
@@ -88,7 +75,7 @@ describe.each([
     const mock = fn();
     mock.call("bar");
 
-    if (isToHaveNth(calledWithContext)) {
+    if (calledWithContext === "toHaveBeenNthCalledWithContext") {
       expect(createSpy(mock)).not[calledWithContext](1, "foo");
       expect(mock).not[calledWithContext](1, "foo");
 
@@ -108,7 +95,7 @@ describe.each([
     const mock = fn();
     mock.call("bar");
 
-    if (isToHaveNth(calledWithContext)) {
+    if (calledWithContext === "toHaveBeenNthCalledWithContext") {
       expect(createSpy(mock)).not[calledWithContext](1, expect.any(Number));
       expect(mock).not[calledWithContext](1, expect.any(Number));
 
@@ -128,7 +115,7 @@ describe.each([
     const mock = fn();
     mock.call("foo");
 
-    if (isToHaveNth(calledWithContext)) {
+    if (calledWithContext === "toHaveBeenNthCalledWithContext") {
       expect(createSpy(mock))[calledWithContext](1, "foo");
       expect(mock)[calledWithContext](1, "foo");
 
@@ -148,7 +135,7 @@ describe.each([
     const mock = fn();
     mock.call("foo");
 
-    if (isToHaveNth(calledWithContext)) {
+    if (calledWithContext === "toHaveBeenNthCalledWithContext") {
       expect(createSpy(mock))[calledWithContext](1, expect.any(String));
       expect(mock)[calledWithContext](1, expect.any(String));
 
@@ -170,7 +157,7 @@ describe.each([
 
     mock.call("foo");
 
-    if (isToHaveNth(calledWithContext)) {
+    if (calledWithContext === "toHaveBeenNthCalledWithContext") {
       expect(mock)[calledWithContext](1, "foo");
 
       expect(() => {

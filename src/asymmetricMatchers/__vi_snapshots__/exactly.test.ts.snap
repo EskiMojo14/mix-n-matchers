@@ -1,35 +1,35 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`exactly > allows Object.is equality where deep equality would normally be used 1`] = `
-expected "spy" to be called with arguments: [ exactly<[object Object]> ][90m
+expected "spy" to be called with arguments: [ exactly<[object Object]> ]
 
 Received: 
 
-<b>  1st spy call:
+  1st spy call:
 
-</b><d>  Array [</b>
-<g>-   exactly<[object Object]>,[90m
-<r>+   Object {},[90m
-<d>  ]</b>
-</g>[90m
+  Array [
+-   exactly<[object Object]>,
++   Object {},
+  ]
 
-Number of calls: <b>1</b>
-</g>
+
+Number of calls: 1
+
 `;
 
 exports[`exactly > allows Object.is equality where deep equality would normally be used 2`] = `
-expected "spy" to be called with arguments: [ not.exactly<[object Object]> ][90m
+expected "spy" to be called with arguments: [ not.exactly<[object Object]> ]
 
 Received: 
 
-<b>  1st spy call:
+  1st spy call:
 
-</b><d>  Array [</b>
-<g>-   not.exactly<[object Object]>,[90m
-<r>+   Object {},[90m
-<d>  ]</b>
-</g>[90m
+  Array [
+-   not.exactly<[object Object]>,
++   Object {},
+  ]
 
-Number of calls: <b>1</b>
-</g>
+
+Number of calls: 1
+
 `;

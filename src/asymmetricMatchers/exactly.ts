@@ -8,16 +8,16 @@ import type { MatcherFunction } from "../utils/types";
 
 /**
  * Matches against the provided value using `Object.is`.
- * You can use it inside "deep equal" matchers like `toBeCalledWith` to ensure that only the correct reference will be allowed.
+ * You can use it inside "deep equal" matchers like `toHaveBeenCalledWith` to ensure that only the correct reference will be allowed.
  * @example
  * const fn = jest.fn();
  * const ref = {};
  *
  * fn(ref);
  *
- * expect(fn).toBeCalledWith({})
- * expect(fn).not.toBeCalledWith(expect.exactly({}))
- * expect(fn).toBeCalledWith(expect.exactly(ref))
+ * expect(fn).toHaveBeenCalledWith({})
+ * expect(fn).not.toHaveBeenCalledWith(expect.exactly({}))
+ * expect(fn).toHaveBeenCalledWith(expect.exactly(ref))
  */
 export const exactly: MatcherFunction<[expected: unknown]> = function (
   received,
@@ -56,16 +56,16 @@ declare module "mix-n-matchers" {
   export interface AsymmetricMixNMatchers {
     /**
      * Matches against the provided value using `Object.is`.
-     * You can use it inside "deep equal" matchers like `toBeCalledWith` to ensure that only the correct reference will be allowed.
+     * You can use it inside "deep equal" matchers like `toHaveBeenCalledWith` to ensure that only the correct reference will be allowed.
      * @example
      * const fn = jest.fn();
      * const ref = {};
      *
      * fn(ref);
      *
-     * expect(fn).toBeCalledWith({})
-     * expect(fn).not.toBeCalledWith(expect.exactly({}))
-     * expect(fn).toBeCalledWith(expect.exactly(ref))
+     * expect(fn).toHaveBeenCalledWith({})
+     * expect(fn).not.toHaveBeenCalledWith(expect.exactly({}))
+     * expect(fn).toHaveBeenCalledWith(expect.exactly(ref))
      */
     exactly<E>(expected: E): any;
   }

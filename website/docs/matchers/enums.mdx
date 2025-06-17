@@ -151,7 +151,7 @@ As `enum` is a reserved word in Javascript, it is not possible to export a match
 After this setup, you should be able to use `expect.enum` as a matcher.
 
 ```ts
-expect(mock).toBeCalledWith(expect.enum(MyEnum));
+expect(mock).toHaveBeenCalledWith(expect.enum(MyEnum));
 ```
 
 This is automatically done for you with the [auto-setup files](/#automatic-setup).

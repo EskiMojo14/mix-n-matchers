@@ -7,9 +7,9 @@ exports[`objectContainingOnly > should check if object contains only the expecte
 exports[`objectContainingOnly > should check if object contains only the expected properties 3`] = `expected { a: 1, b: 2 } to deeply equal not.objectContainingOnly{…}`;
 
 exports[`objectContainingOnly > should throw an error if expected value is not an object 1`] = `
-<d>expect(</b><r>received</g><d>).</b>objectContainingOnly<d>(</b><g>1</g><d>)</b>
+expect(received).objectContainingOnly(1)
 
-<b>Matcher error</b>: <g>Expected</g> value must be an object
+Matcher error: Expected value must be an object
 
 Expected has type:  number
 Expected has value: 1

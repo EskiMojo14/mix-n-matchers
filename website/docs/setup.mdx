@@ -117,17 +117,17 @@ If you'd prefer to add the matchers manually, you can import the individual matc
   <TabItem value="Jest" default>
     ```ts title="test-setup.ts"
     import {
-      toBeCalledWithContext,
-      lastCalledWithContext,
-      nthCalledWithContext,
+      toHaveBeenCalledWithContext,
+      toHaveBeenLastCalledWithContext,
+      toHaveBeenNthCalledWithContext,
       exactly,
     } from "mix-n-matchers";
     import type { MixNMatchersFrom, AsymmetricMixNMatchersFrom } from "mix-n-matchers";
 
     const matchers = {
-      toBeCalledWithContext,
-      lastCalledWithContext,
-      nthCalledWithContext,
+      toHaveBeenCalledWithContext,
+      toHaveBeenLastCalledWithContext,
+      toHaveBeenNthCalledWithContext,
       exactly,
     };
 
@@ -152,17 +152,17 @@ If you'd prefer to add the matchers manually, you can import the individual matc
 
     import { expect } from "@jest/globals";
     import {
-      toBeCalledWithContext,
-      lastCalledWithContext,
-      nthCalledWithContext,
+      toHaveBeenCalledWithContext,
+      toHaveBeenLastCalledWithContext,
+      toHaveBeenNthCalledWithContext,
       exactly,
     } from "mix-n-matchers";
     import type { MixNMatchersFrom, AsymmetricMixNMatchersFrom } from "mix-n-matchers";
 
     const matchers = {
-      toBeCalledWithContext,
-      lastCalledWithContext,
-      nthCalledWithContext,
+      toHaveBeenCalledWithContext,
+      toHaveBeenLastCalledWithContext,
+      toHaveBeenNthCalledWithContext,
       exactly,
     };
 
@@ -182,17 +182,17 @@ If you'd prefer to add the matchers manually, you can import the individual matc
     
     import { expect } from "vitest";
     import {
-      toBeCalledWithContext,
-      lastCalledWithContext,
-      nthCalledWithContext,
+      toHaveBeenCalledWithContext,
+      toHaveBeenLastCalledWithContext,
+      toHaveBeenNthCalledWithContext,
       exactly,
     } from "mix-n-matchers";
     import type { MixNMatchersFrom, AsymmetricMixNMatchersFrom } from "mix-n-matchers";
     
     const matchers = {
-      toBeCalledWithContext,
-      lastCalledWithContext,
-      nthCalledWithContext,
+      toHaveBeenCalledWithContext,
+      toHaveBeenLastCalledWithContext,
+      toHaveBeenNthCalledWithContext,
       exactly,
     };
     
@@ -242,7 +242,7 @@ You can of course choose to setup the matchers as both asymmetric and symmetric 
 <Tabs groupId="test-runner">
   <TabItem value="Jest" default>
     ```ts title="test-setup.ts"
-    import { typeOf, toBeCalledWithContext } from "mix-n-matchers";
+    import { typeOf, toHaveBeenCalledWithContext } from "mix-n-matchers";
     import type { 
       MixNMatchers,
       MixNMatchersFrom,
@@ -253,8 +253,8 @@ You can of course choose to setup the matchers as both asymmetric and symmetric 
     const matchers = {
       typeOf,
       toBeTypeOf: typeOf,
-      toBeCalledWithContext,
-      calledWithContext: toBeCalledWithContext,
+      toHaveBeenCalledWithContext,
+      calledWithContext: toHaveBeenCalledWithContext,
     };
 
     expect.extend(matchers);
@@ -266,12 +266,12 @@ You can of course choose to setup the matchers as both asymmetric and symmetric 
         }
 
         interface Expect extends AsymmetricMixNMatchersFrom<typeof matchers> {
-            calledWithContext: MixNMatchers<void, any>["toBeCalledWithContext"];
+            calledWithContext: MixNMatchers<void, any>["toHaveBeenCalledWithContext"];
         }
 
         interface InverseAsymmetricMatchers
           extends AsymmetricMixNMatchersFrom<typeof matchers> {
-            calledWithContext: MixNMatchers<void, any>["toBeCalledWithContext"];
+            calledWithContext: MixNMatchers<void, any>["toHaveBeenCalledWithContext"];
         }
       }
     }
@@ -283,7 +283,7 @@ You can of course choose to setup the matchers as both asymmetric and symmetric 
     ```ts title="test-setup.ts"
 
     import { expect } from "@jest/globals";
-    import { typeOf, toBeCalledWithContext } from "mix-n-matchers";
+    import { typeOf, toHaveBeenCalledWithContext } from "mix-n-matchers";
     import type {
       MixNMatchers,
       MixNMatchersFrom,
@@ -294,8 +294,8 @@ You can of course choose to setup the matchers as both asymmetric and symmetric 
     const matchers = {
       typeOf,
       toBeTypeOf: typeOf,
-      toBeCalledWithContext,
-      calledWithContext: toBeCalledWithContext,
+      toHaveBeenCalledWithContext,
+      calledWithContext: toHaveBeenCalledWithContext,
     };
 
     expect.extend(matchers);
@@ -305,7 +305,7 @@ You can of course choose to setup the matchers as both asymmetric and symmetric 
           toBeTypeOf: AsymmetricMixNMatchers["typeOf"];
       }
       interface AsymmetricMatchers extends AsymmetricMixNMatchersFrom<typeof matchers> {
-          calledWithContext: MixNMatchers<void, any>["toBeCalledWithContext"];
+          calledWithContext: MixNMatchers<void, any>["toHaveBeenCalledWithContext"];
       }
     }
 
@@ -316,7 +316,7 @@ You can of course choose to setup the matchers as both asymmetric and symmetric 
     ```ts title="test-setup.ts"
     
     import { expect } from "vitest";
-    import { typeOf, toBeCalledWithContext } from "mix-n-matchers";
+    import { typeOf, toHaveBeenCalledWithContext } from "mix-n-matchers";
     import type { 
       MixNMatchers,
       MixNMatchersFrom,
@@ -327,8 +327,8 @@ You can of course choose to setup the matchers as both asymmetric and symmetric 
     const matchers = {
       typeOf,
       toBeTypeOf: typeOf,
-      toBeCalledWithContext,
-      calledWithContext: toBeCalledWithContext,
+      toHaveBeenCalledWithContext,
+      calledWithContext: toHaveBeenCalledWithContext,
     };
 
     expect.extend(matchers);
@@ -339,7 +339,7 @@ You can of course choose to setup the matchers as both asymmetric and symmetric 
       }
       interface AsymmetricMatchersContaining
         extends AsymmetricMixNMatchersFrom<typeof matchers> {
-          calledWithContext: MixNMatchers<void, any>["toBeCalledWithContext"];
+          calledWithContext: MixNMatchers<void, any>["toHaveBeenCalledWithContext"];
       }
     }
 

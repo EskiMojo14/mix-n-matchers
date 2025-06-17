@@ -112,16 +112,21 @@ const extractMock = (received: Mock | Spy) => {
   };
 };
 
-const createToBeCalledWithContextMatcher = (
-  matcherName: string,
-): MatcherFunction<[expected: unknown]> =>
-  function toBeCalledWithContext(received, expected) {
+const createToHaveBeenCalledWithContextMatcher = (): MatcherFunction<
+  [expected: unknown]
+> =>
+  function toHaveBeenCalledWithContext(received, expected) {
     const equalValue = makeEqualValue(this);
     const options: MatcherHintOptions = {
       isNot: this.isNot,
       promise: this.promise,
     };
-    ensureMockOrSpy(received, matcherName, undefined, options);
+    ensureMockOrSpy(
+      received,
+      "toHaveBeenCalledWithContext",
+      undefined,
+      options,
+    );
 
     const { receivedName, contexts } = extractMock(received);
 
@@ -142,7 +147,12 @@ const createToBeCalledWithContextMatcher = (
               i += 1;
             }
             return (
-              matcherHint(`.${matcherName}`, receivedName, undefined, options) +
+              matcherHint(
+                `toHaveBeenCalledWithContext`,
+                receivedName,
+                undefined,
+                options,
+              ) +
               "\n\n" +
               `Expected: not ${printExpected(expected)}\n` +
               printReceivedContextsNegative(
@@ -165,7 +175,12 @@ const createToBeCalledWithContextMatcher = (
               i += 1;
             }
             return (
-              matcherHint(`.${matcherName}`, receivedName, undefined, options) +
+              matcherHint(
+                `toHaveBeenCalledWithContext`,
+                receivedName,
+                undefined,
+                options,
+              ) +
               "\n\n" +
               printReceivedContextsPositive(
                 equalValue,
@@ -179,16 +194,21 @@ const createToBeCalledWithContextMatcher = (
     };
   };
 
-const createLastCalledWithContextMatcher = (
-  matcherName: string,
-): MatcherFunction<[expected: unknown]> =>
-  function lastCalledWithContext(received, expected) {
+const createToHaveBeenLastCalledWithContextMatcher = (): MatcherFunction<
+  [expected: unknown]
+> =>
+  function toHaveBeenLastCalledWithContext(received, expected) {
     const equalValue = makeEqualValue(this);
     const options: MatcherHintOptions = {
       isNot: this.isNot,
       promise: this.promise,
     };
-    ensureMockOrSpy(received, matcherName, undefined, options);
+    ensureMockOrSpy(
+      received,
+      "toHaveBeenLastCalledWithContext",
+      undefined,
+      options,
+    );
 
     const { receivedName, contexts } = extractMock(received);
     const iLast = contexts.length - 1;
@@ -206,7 +226,12 @@ const createLastCalledWithContextMatcher = (
             indexedContexts.push([iLast, contexts[iLast]]);
 
             return (
-              matcherHint(matcherName, receivedName, undefined, options) +
+              matcherHint(
+                "toHaveBeenLastCalledWithContext",
+                receivedName,
+                undefined,
+                options,
+              ) +
               "\n\n" +
               `Expected: not ${printExpected(expected)}\n` +
               (contexts.length === 1 &&
@@ -242,7 +267,12 @@ const createLastCalledWithContextMatcher = (
             }
 
             return (
-              matcherHint(matcherName, receivedName, undefined, options) +
+              matcherHint(
+                "toHaveBeenLastCalledWithContext",
+                receivedName,
+                undefined,
+                options,
+              ) +
               "\n\n" +
               printReceivedContextsPositive(
                 equalValue,
@@ -257,10 +287,10 @@ const createLastCalledWithContextMatcher = (
     };
   };
 
-const createNthCalledWithContextMatcher = (
-  matcherName: string,
-): MatcherFunction<[n: number, expected: unknown]> =>
-  function nthCalledWithContext(received, nth, expected) {
+const createToHaveBeenNthCalledWithContextMatcher = (): MatcherFunction<
+  [n: number, expected: unknown]
+> =>
+  function toHaveBeenNthCalledWithContext(received, nth, expected) {
     const equalValue = makeEqualValue(this);
     const expectedArgument = "n";
     const options: MatcherHintOptions = {
@@ -269,11 +299,21 @@ const createNthCalledWithContextMatcher = (
       promise: this.promise,
       secondArgument: "expected",
     };
-    ensureMockOrSpy(received, matcherName, expectedArgument, options);
+    ensureMockOrSpy(
+      received,
+      "toHaveBeenNthCalledWithContext",
+      expectedArgument,
+      options,
+    );
 
     assert(Number.isSafeInteger(nth) && nth > 0, () =>
       matcherErrorMessage(
-        matcherHint(matcherName, undefined, expectedArgument, options),
+        matcherHint(
+          "toHaveBeenNthCalledWithContext",
+          undefined,
+          expectedArgument,
+          options,
+        ),
         `${expectedArgument} must be a positive integer`,
         printWithType(expectedArgument, nth, stringify),
       ),
@@ -303,7 +343,7 @@ const createNthCalledWithContextMatcher = (
 
             return (
               matcherHint(
-                matcherName,
+                `toHaveBeenNthCalledWithContext`,
                 receivedName,
                 expectedArgument,
                 options,
@@ -372,7 +412,7 @@ const createNthCalledWithContextMatcher = (
 
             return (
               matcherHint(
-                matcherName,
+                `toHaveBeenNthCalledWithContext`,
                 receivedName,
                 expectedArgument,
                 options,
@@ -397,27 +437,8 @@ const createNthCalledWithContextMatcher = (
  *
  * Optionally you can provide a type for the expected context via a generic.
  */
-export const toBeCalledWithContext = createToBeCalledWithContextMatcher(
-  "toBeCalledWithContext",
-);
-
-/**
- * Ensure a mock function is called with a specific context (`this`)
- *
- * Optionally you can provide a type for the expected context via a generic.
- */
-export const toHaveBeenCalledWithContext = createToBeCalledWithContextMatcher(
-  "toHaveBeenCalledWithContext",
-);
-
-/**
- * Ensure the last call to a mock function was provided a specific context (`this`)
- *
- * Optionally you can provide a type for the expected context via a generic.
- */
-export const lastCalledWithContext = createLastCalledWithContextMatcher(
-  "lastCalledWithContext",
-);
+export const toHaveBeenCalledWithContext =
+  createToHaveBeenCalledWithContextMatcher();
 
 /**
  * Ensure the last call to a mock function was provided a specific context (`this`)
@@ -425,35 +446,19 @@ export const lastCalledWithContext = createLastCalledWithContextMatcher(
  * Optionally you can provide a type for the expected context via a generic.
  */
 export const toHaveBeenLastCalledWithContext =
-  createLastCalledWithContextMatcher("toHaveBeenLastCalledWithContext");
+  createToHaveBeenLastCalledWithContextMatcher();
 
 /**
  * Ensure that a mock function was called with a specific context on an Nth call.
  *
  * Optionally you can provide a type for the expected context via a generic.
  */
-export const nthCalledWithContext = createNthCalledWithContextMatcher(
-  "nthCalledWithContext",
-);
-
-/**
- * Ensure that a mock function was called with a specific context on an Nth call.
- *
- * Optionally you can provide a type for the expected context via a generic.
- */
-export const toHaveBeenNthCalledWithContext = createNthCalledWithContextMatcher(
-  "toHaveBeenNthCalledWithContext",
-);
+export const toHaveBeenNthCalledWithContext =
+  createToHaveBeenNthCalledWithContextMatcher();
 
 declare module "mix-n-matchers" {
   export interface MixNMatchers<R, T = unknown> {
     /* eslint-disable @typescript-eslint/no-unnecessary-type-parameters */
-    /**
-     * Ensure a mock function is called with a specific context (`this`)
-     *
-     * Optionally you can provide a type for the expected context via a generic.
-     */
-    toBeCalledWithContext<E>(expected: E): R;
     /**
      * Ensure a mock function is called with a specific context (`this`)
      *
@@ -466,20 +471,7 @@ declare module "mix-n-matchers" {
      *
      * Optionally you can provide a type for the expected context via a generic.
      */
-    lastCalledWithContext<E>(expected: E): R;
-    /**
-     * Ensure the last call to a mock function was provided a specific context (`this`)
-     *
-     * Optionally you can provide a type for the expected context via a generic.
-     */
     toHaveBeenLastCalledWithContext<E>(expected: E): R;
-
-    /**
-     * Ensure that a mock function was called with a specific context on an Nth call.
-     *
-     * Optionally you can provide a type for the expected context via a generic.
-     */
-    nthCalledWithContext<E>(n: number, expected: E): R;
 
     /**
      * Ensure that a mock function was called with a specific context on an Nth call.
