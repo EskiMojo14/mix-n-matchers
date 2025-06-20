@@ -35,7 +35,7 @@
     "clean": "rimraf dist",
     "prepare": "husky",
     "prebuild": "pnpm run type",
-    "build": "pnpm clean && tsdown",
+    "build": "pnpm clean && tsup",
     "test": "pnpm node --experimental-vm-modules node_modules/jest/bin/jest.js --setupFilesAfterEnv ./src/jest-globals.ts ./jest-setup.ts",
     "test:dist": "pnpm node --experimental-vm-modules node_modules/jest/bin/jest.js --setupFilesAfterEnv mix-n-matchers/jest-globals ./jest-setup.ts",
     "vitest": "vitest",
@@ -96,7 +96,7 @@
     "rimraf": "^6.0.1",
     "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
-    "tsdown": "^0.12.8",
+    "tsup": "^8.5.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.34.1",
     "vitest": "^3.2.3"
@@ -124,7 +124,7 @@
     "*.{ts,md}": "prettier --write"
   },
   "prettier": {},
-  "tsdown": {
+  "tsup": {
     "entry": [
       "src/index.ts",
       "src/all.ts",
