@@ -1,0 +1,11 @@
+{
+  "name": "mix-n-matchers-utilities",
+  "version": "2.0.1",
+  "type": "module",
+  "main": "../dist/utilities/index.cjs",
+  "module": "../dist/utilities/index.mjs",
+  "types": "../dist/utilities/index.d.mts",
+  "files": [
+    "../dist"
+  ]
+}

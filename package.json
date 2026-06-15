@@ -4,38 +4,73 @@
   "description": "Miscellaneous custom Jest matchers",
   "type": "module",
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./all": {
-      "import": "./dist/all.js",
-      "require": "./dist/all.cjs"
+      "import": {
+        "types": "./dist/all.d.mts",
+        "default": "./dist/all.mjs"
+      },
+      "require": {
+        "types": "./dist/all.d.cts",
+        "default": "./dist/all.cjs"
+      }
     },
     "./jest-globals": {
-      "import": "./dist/jest-globals.js",
-      "require": "./dist/jest-globals.cjs"
+      "import": {
+        "types": "./dist/jest-globals.d.mts",
+        "default": "./dist/jest-globals.mjs"
+      },
+      "require": {
+        "types": "./dist/jest-globals.d.cts",
+        "default": "./dist/jest-globals.cjs"
+      }
     },
     "./vitest": {
-      "import": "./dist/vitest.js",
-      "require": "./dist/vitest.cjs"
+      "import": {
+        "types": "./dist/vitest.d.mts",
+        "default": "./dist/vitest.mjs"
+      },
+      "require": {
+        "types": "./dist/vitest.d.cts",
+        "default": "./dist/vitest.cjs"
+      }
+    },
+    "./utilities": {
+      "import": {
+        "types": "./dist/utilities/index.d.mts",
+        "default": "./dist/utilities/index.mjs"
+      },
+      "require": {
+        "types": "./dist/utilities/index.d.cts",
+        "default": "./dist/utilities/index.cjs"
+      }
     }
   },
   "files": [
     "dist",
     "all",
     "jest-globals",
-    "vitest"
+    "vitest",
+    "utilities"
   ],
   "scripts": {
     "clean": "rimraf dist",
     "prepare": "husky",
     "prebuild": "pnpm run type",
-    "build": "pnpm clean && tsup",
+    "build": "pnpm clean && tsdown",
     "test": "pnpm node --experimental-vm-modules node_modules/jest/bin/jest.js --setupFilesAfterEnv ./src/jest-globals.ts ./jest-setup.ts",
     "test:dist": "pnpm node --experimental-vm-modules node_modules/jest/bin/jest.js --setupFilesAfterEnv mix-n-matchers/jest-globals ./jest-setup.ts",
     "vitest": "vitest",
@@ -96,7 +131,7 @@
     "rimraf": "^6.0.1",
     "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
-    "tsup": "^8.5.0",
+    "tsdown": "^0.22.2",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.34.1",
     "vitest": "^3.2.3"
@@ -124,12 +159,14 @@
     "*.{ts,md}": "prettier --write"
   },
   "prettier": {},
-  "tsup": {
+  "packageManager": "pnpm@11.7.0+sha512.19cc852c120c7125760f2443ee6be0ca5b40f9f50598de1a09a1f177503e010e57c23c77646e01e761de59bf874fb22a3398c33ab9691fc13eb946b6f0f4d620",
+  "tsdown": {
     "entry": [
       "src/index.ts",
       "src/all.ts",
       "src/jest-globals.ts",
-      "src/vitest.ts"
+      "src/vitest.ts",
+      "src/utilities/index.ts"
     ],
     "sourcemap": true,
     "format": [
@@ -140,6 +177,5 @@
     "external": [
       "@jest/globals"
     ]
-  },
-  "packageManager": "pnpm@10.5.2+sha256.79a98daa90248b50815e31460790f118c56fe099113370826caa0153be6daba5"
+  }
 }
