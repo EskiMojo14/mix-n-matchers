@@ -4,8 +4,8 @@
   "description": "Miscellaneous custom Jest matchers",
   "type": "module",
   "main": "../dist/vitest.cjs",
-  "module": "../dist/vitest.js",
-  "types": "../dist/vitest.d.ts",
+  "module": "../dist/vitest.mjs",
+  "types": "../dist/vitest.d.mts",
   "files": [
     "../dist"
   ]

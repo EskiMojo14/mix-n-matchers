@@ -4,8 +4,8 @@
   "description": "Miscellaneous custom Jest matchers",
   "type": "module",
   "main": "../dist/jest-globals.cjs",
-  "module": "../dist/jest-globals.js",
-  "types": "../dist/jest-globals.d.ts",
+  "module": "../dist/jest-globals.mjs",
+  "types": "../dist/jest-globals.d.mts",
   "files": [
     "../dist"
   ]
