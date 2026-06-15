@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`every should throw an error if any element does not satisfy the condition 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeGreaterThan<d>(</b><g>expected</g><d>)</b>
+
+Expected: > <g>2</g>
+Received:   <r>1</g>
+`;
+
+exports[`every should throw an error if any element does not satisfy the condition with async assertion 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeGreaterThan<d>(</b><g>expected</g><d>)</b>
+
+Expected: > <g>2</g>
+Received:   <r>1</g>
+`;
+
+exports[`some should throw an AggregateError if no elements satisfy the condition 1`] = `
+None of the items satisfied the assertion.
+- <d>expect(</b><r>received</g><d>).</b>toBeGreaterThan<d>(</b><g>expected</g><d>)</b>
+
+Expected: > <g>3</g>
+Received:   <r>1</g>
+- <d>expect(</b><r>received</g><d>).</b>toBeGreaterThan<d>(</b><g>expected</g><d>)</b>
+
+Expected: > <g>3</g>
+Received:   <r>2</g>
+- <d>expect(</b><r>received</g><d>).</b>toBeGreaterThan<d>(</b><g>expected</g><d>)</b>
+
+Expected: > <g>3</g>
+Received:   <r>3</g>
+`;
+
+exports[`some should throw an AggregateError with all errors if no elements satisfy the condition with async assertion 1`] = `
+None of the items satisfied the assertion.
+- <d>expect(</b><r>received</g><d>).</b>toBeGreaterThan<d>(</b><g>expected</g><d>)</b>
+
+Expected: > <g>3</g>
+Received:   <r>1</g>
+- <d>expect(</b><r>received</g><d>).</b>toBeGreaterThan<d>(</b><g>expected</g><d>)</b>
+
+Expected: > <g>3</g>
+Received:   <r>2</g>
+- <d>expect(</b><r>received</g><d>).</b>toBeGreaterThan<d>(</b><g>expected</g><d>)</b>
+
+Expected: > <g>3</g>
+Received:   <r>3</g>
+`;
+
+exports[`some should throw an error if the array is empty 1`] = `No items to assert on.`;
