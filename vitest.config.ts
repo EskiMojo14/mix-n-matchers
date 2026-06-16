@@ -12,7 +12,7 @@ export default defineConfig({
       );
     },
     alias: {
-      "@globals": import.meta.resolve("./src/utils/globals"),
+      "@globals": "./src/utils/globals.ts",
     },
   },
 });

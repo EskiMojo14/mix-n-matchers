@@ -1,11 +1,11 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`exactly > allows Object.is equality where deep equality would normally be used 1`] = `
-expected "spy" to be called with arguments: [ exactly<Object {}> ][90m
+expected "vi.fn()" to be called with arguments: [ exactly<Object {}> ][90m
 
-Received: 
+Received:
 
-<b>  1st spy call:
+<b>  1st vi.fn() call:
 
 </b><d>  [</b>
 <g>-   exactly<Object {}>,[90m
@@ -18,11 +18,11 @@ Number of calls: <b>1</b>
 `;
 
 exports[`exactly > allows Object.is equality where deep equality would normally be used 2`] = `
-expected "spy" to be called with arguments: [ not.exactly<Object {}> ][90m
+expected "vi.fn()" to be called with arguments: [ not.exactly<Object {}> ][90m
 
-Received: 
+Received:
 
-<b>  1st spy call:
+<b>  1st vi.fn() call:
 
 </b><d>  [</b>
 <g>-   not.exactly<Object {}>,[90m
