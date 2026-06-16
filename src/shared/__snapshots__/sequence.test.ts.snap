@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`containingEqualSequence fails if no expected values are passed 1`] = `
 <d>expect.</b>containingEqualSequence<d>(</b><g>expected</g><d>)</b>
