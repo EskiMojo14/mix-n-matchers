@@ -14,6 +14,13 @@ Expected: > <g>2</g>
 Received:   <r>1</g>
 `;
 
+exports[`everyAsync should throw an error if any element does not satisfy the condition 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeGreaterThan<d>(</b><g>expected</g><d>)</b>
+
+Expected: > <g>2</g>
+Received:   <r>1</g>
+`;
+
 exports[`some should throw an AggregateError if no elements satisfy the condition 1`] = `
 None of the items satisfied the assertion.
 - <d>expect(</b><r>received</g><d>).</b>toBeGreaterThan<d>(</b><g>expected</g><d>)</b>
@@ -47,3 +54,21 @@ Received:   <r>3</g>
 `;
 
 exports[`some should throw an error if the array is empty 1`] = `No items to assert on.`;
+
+exports[`someAsync should throw an AggregateError if no elements satisfy the condition 1`] = `
+None of the items satisfied the assertion.
+- <d>expect(</b><r>received</g><d>).</b>toBeGreaterThan<d>(</b><g>expected</g><d>)</b>
+
+Expected: > <g>3</g>
+Received:   <r>1</g>
+- <d>expect(</b><r>received</g><d>).</b>toBeGreaterThan<d>(</b><g>expected</g><d>)</b>
+
+Expected: > <g>3</g>
+Received:   <r>2</g>
+- <d>expect(</b><r>received</g><d>).</b>toBeGreaterThan<d>(</b><g>expected</g><d>)</b>
+
+Expected: > <g>3</g>
+Received:   <r>3</g>
+`;
+
+exports[`someAsync should throw an error if the async iterable is empty 1`] = `No items to assert on.`;

@@ -58,3 +58,7 @@ export const alignedAnsiStyleSerializer: NewPlugin = {
     return typeof val === "string" || val instanceof Error;
   },
 };
+
+export function wait(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
