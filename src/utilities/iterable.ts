@@ -90,6 +90,52 @@ async function handleAsyncSome<T, R>(
 }
 
 /**
+ * Runs the assertion function on each element of the async iterable until one of them passes. If none pass, it throws an AggregateError containing all the errors encountered.
+ * If the async iterable is empty, it throws a RangeError indicating that the assertion cannot be performed.
+ *
+ * @template T - The type of the elements in the async iterable.
+ * @template R - The return type of the assertion function.
+ * @param actual - The async iterable of elements to be tested.
+ * @param assertion - The assertion function to be applied to each element of the async iterable.
+ * @returns A Promise that resolves to the result of the assertion function for the first element that passes the assertion.
+ * @throws {RangeError} If the async iterable is empty
+ * @throws {AggregateError} If none of the elements satisfy the assertion, containing all the errors encountered during the assertions.
+ *
+ * @example
+ * const nums = async function* () {
+ *   for (let i = 1; i <= 3; i++) {
+ *     await wait(100); // Simulate async operation
+ *     yield i;
+ *   }
+ * };
+ * const result = await someAsync(nums(), async (value) => {
+ *   expect(value).toBeGreaterThan(2);
+ *   return value;
+ * });
+ * // result will be 3
+ */
+export async function someAsync<T, R>(
+  actual: AsyncIterable<T>,
+  assertion: (value: Awaited<T>) => Promise<R> | R,
+): Promise<R> {
+  const errors: Array<unknown> = [];
+  let hasAsserted = false;
+
+  for await (const item of actual) {
+    hasAsserted = true;
+    try {
+      return await assertion(item);
+    } catch (error) {
+      errors.push(error);
+    }
+  }
+
+  if (!hasAsserted) throw new RangeError("No items to assert on.");
+
+  throw new AggregateError(errors, aggregateErrors(errors));
+}
+
+/**
  * Runs the assertion function on each element of the iterable and collects the results. If any element does not satisfy the assertion, it throws an error.
  *
  * @template T - The type of the elements in the iterable.
@@ -131,4 +177,15 @@ export function every<T, R>(
   }
 
   return hasPromise ? Promise.all(results) : (results as Array<R>);
+}
+
+export async function everyAsync<T, R>(
+  actual: AsyncIterable<T>,
+  assertion: (value: Awaited<T>) => Promise<R> | R,
+): Promise<Array<Awaited<R>>> {
+  const results: Array<Awaited<R>> = [];
+  for await (const item of actual) {
+    results.push(await assertion(item));
+  }
+  return results;
 }
