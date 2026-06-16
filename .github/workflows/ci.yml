@@ -59,6 +59,8 @@ jobs:
             command: pnpm run test
           - name: Vitest
             command: pnpm run vitest --run
+          - name: Rstest
+            command: pnpm run rstest
 
     steps:
       - name: Checkout
@@ -86,7 +88,8 @@ jobs:
             command: pnpm run test:dist
           - name: Vitest
             command: pnpm run vitest:dist --run
-
+          - name: Rstest
+            command: pnpm run rstest:dist
     steps:
       - name: Checkout
         uses: actions/checkout@v4

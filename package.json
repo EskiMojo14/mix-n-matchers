@@ -76,6 +76,16 @@
         "default": "./dist/vitest.cjs"
       }
     },
+    "./rstest": {
+      "import": {
+        "types": "./types/rstest.d.mts",
+        "default": "./dist/rstest.mjs"
+      },
+      "require": {
+        "types": "./types/rstest.d.cts",
+        "default": "./dist/rstest.cjs"
+      }
+    },
     "./utilities": {
       "import": {
         "types": "./dist/utilities/index.d.mts",
@@ -96,8 +106,10 @@
     "test:dist": "pnpm node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest-dist.config.ts",
     "vitest": "FORCE_COLOR=1 vitest",
     "vitest:dist": "FORCE_COLOR=1 vitest --config vitest-dist.config.ts",
-    "test:all": "pnpm run test && pnpm run vitest --run",
-    "test:all:dist": "pnpm run test:dist && pnpm run vitest:dist --run",
+    "rstest": "rstest run",
+    "rstest:dist": "rstest run --config rstest-dist.config.ts",
+    "test:all": "pnpm run test && pnpm run vitest --run && pnpm run rstest",
+    "test:all:dist": "pnpm run test:dist && pnpm run vitest:dist --run && pnpm run rstest:dist",
     "lint": "oxlint",
     "format": "oxfmt",
     "pre-commit": "lint-staged",
@@ -115,6 +127,7 @@
     "@arethetypeswrong/cli": "^0.18.3",
     "@jest/expect": "^30.4.1",
     "@jest/globals": "^30.4.1",
+    "@rstest/core": "^0.10.4",
     "@types/node": "^25.9.3",
     "@typescript/native-preview": "catalog:",
     "@vitest/expect": "^4.1.9",
@@ -137,6 +150,7 @@
     "vitest": "^4.1.9"
   },
   "peerDependencies": {
+    "@rstest/core": ">=0.8.0",
     "jest": ">=28.0.0",
     "vitest": ">=1.0.0"
   },
@@ -145,6 +159,9 @@
       "optional": true
     },
     "vitest": {
+      "optional": true
+    },
+    "@rstest/core": {
       "optional": true
     }
   },
@@ -168,6 +185,7 @@
       "src/all.ts",
       "src/jest-globals.ts",
       "src/vitest.ts",
+      "src/rstest.ts",
       "src/utilities/index.ts"
     ],
     "format": [
