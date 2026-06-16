@@ -3,7 +3,7 @@ import tsParser from "@typescript-eslint/parser";
 import eslintPluginImportX from "eslint-plugin-import-x";
 import globals from "globals";
 import tseslint from "typescript-eslint";
-import vitest from "eslint-plugin-vitest";
+import vitest from "@vitest/eslint-plugin";
 
 export default tseslint.config(
   {
