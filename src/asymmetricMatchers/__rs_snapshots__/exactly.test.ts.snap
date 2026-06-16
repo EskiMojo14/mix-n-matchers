@@ -1,0 +1,35 @@
+// Rstest Snapshot v1
+
+exports[`exactly > allows Object.is equality where deep equality would normally be used 1`] = `
+expected "rstest.fn()" to be called with arguments: [ exactly<Object {}> ][90m
+
+Received: 
+
+<b>  1st rstest.fn() call:
+
+</b><d>  [</b>
+<g>-   exactly<Object {}>,[90m
+<r>+   {},[90m
+<d>  ]</b>
+</g>[90m
+
+Number of calls: <b>1</b>
+</g>
+`;
+
+exports[`exactly > allows Object.is equality where deep equality would normally be used 2`] = `
+expected "rstest.fn()" to be called with arguments: [ not.exactly<Object {}> ][90m
+
+Received: 
+
+<b>  1st rstest.fn() call:
+
+</b><d>  [</b>
+<g>-   not.exactly<Object {}>,[90m
+<r>+   {},[90m
+<d>  ]</b>
+</g>[90m
+
+Number of calls: <b>1</b>
+</g>
+`;

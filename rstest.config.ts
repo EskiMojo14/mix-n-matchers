@@ -2,7 +2,7 @@ import * as path from "node:path";
 import { defineConfig } from "@rstest/core";
 
 export default defineConfig({
-  setupFiles: ["./src/rstest", "./rstest-setup.ts"],
+  setupFiles: ["./src/rstest.ts", "./rstest-setup.ts"],
   resolve: {
     alias: {
       "@globals": import.meta.resolve("./src/utils/globals"),

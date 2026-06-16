@@ -1,0 +1,1271 @@
+// Rstest Snapshot v1
+
+exports[`toBeAborted > fails when the received value is not an AbortSignal or Request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeAborted<d>()</b>
+
+<b>Matcher error</b>: Received value is not an AbortSignal or Request.
+`;
+
+exports[`toBeAborted > fails when the signal/request has not been aborted > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toBeAborted<d>()</b>
+
+Expected request to be aborted, but it was not.
+`;
+
+exports[`toBeAborted > fails when the signal/request has not been aborted > signal 1`] = `
+<d>expect(</b><r>signal</g><d>).</b>toBeAborted<d>()</b>
+
+Expected signal to be aborted, but it was not.
+`;
+
+exports[`toBeAborted > passes when the signal/request has been aborted > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toBeAborted<d>()</b>
+
+Expected request not to be aborted, but it was.
+`;
+
+exports[`toBeAborted > passes when the signal/request has been aborted > signal 1`] = `
+<d>expect(</b><r>signal</g><d>).</b>not<d>.</b>toBeAborted<d>()</b>
+
+Expected signal not to be aborted, but it was.
+`;
+
+exports[`toBeAborted > when AbortSignal is not defined in the global scope > fails 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeAborted<d>()</b>
+
+<b>Matcher error</b>: AbortSignal or Request is not defined in the global scope.
+`;
+
+exports[`toBeAborted > when Request is not defined in the global scope > fails 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeAborted<d>()</b>
+
+<b>Matcher error</b>: AbortSignal or Request is not defined in the global scope.
+`;
+
+exports[`toBeOK > fails when Response is not defined in the global scope 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeOK<d>()</b>
+
+<b>Matcher error</b>: Response is not defined in the global scope.
+`;
+
+exports[`toBeOK > fails when the received value is not a Response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeOK<d>()</b>
+
+<b>Matcher error</b>: Received value is not a Response.
+`;
+
+exports[`toBeOK > fails when the response is not ok 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toBeOK<d>()</b>
+
+Expected response to be ok, but it was not ok.
+`;
+
+exports[`toBeOK > passes when the response is ok 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toBeOK<d>()</b>
+
+Expected response to be not ok, but it was ok.
+`;
+
+exports[`toBeRedirected > fails when Response is not defined in the global scope 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeRedirected<d>()</b>
+
+<b>Matcher error</b>: Response is not defined in the global scope.
+`;
+
+exports[`toBeRedirected > fails when the received value is not a Response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeRedirected<d>()</b>
+
+<b>Matcher error</b>: Received value is not a Response.
+`;
+
+exports[`toBeRedirected > fails when the response is not redirected 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toBeRedirected<d>()</b>
+
+Expected response to be redirected, but it was not redirected.
+`;
+
+exports[`toBeRedirected > passes when the response is redirected 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toBeRedirected<d>()</b>
+
+Expected response to not be redirected, but it was redirected.
+`;
+
+exports[`toHaveFormDataBody > fails when the body has already been used > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveFormDataBody<d>(</b><g>FormData [["foo", "bar"]]</g><d>)</b>
+
+<b>Matcher error</b>: Cannot read body from the request because it has already been used.
+`;
+
+exports[`toHaveFormDataBody > fails when the body has already been used > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveFormDataBody<d>(</b><g>FormData [["foo", "bar"]]</g><d>)</b>
+
+<b>Matcher error</b>: Cannot read body from the response because it has already been used.
+`;
+
+exports[`toHaveFormDataBody > fails when the received value is not a Response or Request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveFormDataBody<d>(</b><g>FormData [["foo", "bar"]]</g><d>)</b>
+
+<b>Matcher error</b>: Received value is not a Request or Response.
+`;
+
+exports[`toHaveFormDataBody > fails when the response/request does not have the expected FormData body > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveFormDataBody<d>(</b><g>FormData [["foo", "bar"]]</g><d>)</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 1</g>
+
+<d>  FormData [</b>
+<d>    Array [</b>
+<d>      "foo",</b>
+<g>-     "bar",</g>
+<r>+     "baz",</g>
+<d>    ],</b>
+<d>  ]</b>
+`;
+
+exports[`toHaveFormDataBody > fails when the response/request does not have the expected FormData body > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveFormDataBody<d>(</b><g>FormData [["foo", "bar"]]</g><d>)</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 1</g>
+
+<d>  FormData [</b>
+<d>    Array [</b>
+<d>      "foo",</b>
+<g>-     "bar",</g>
+<r>+     "baz",</g>
+<d>    ],</b>
+<d>  ]</b>
+`;
+
+exports[`toHaveFormDataBody > when Request is not defined in the global scope > fails > request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveFormDataBody<d>(</b><g>FormData [["foo", "bar"]]</g><d>)</b>
+
+<b>Matcher error</b>: Request, Response, or FormData is not defined in the global scope.
+`;
+
+exports[`toHaveFormDataBody > when Response is not defined in the global scope > fails > response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveFormDataBody<d>(</b><g>FormData [["foo", "bar"]]</g><d>)</b>
+
+<b>Matcher error</b>: Request, Response, or FormData is not defined in the global scope.
+`;
+
+exports[`toHaveHeader > fails when the expected value is not a string or undefined > headers 1`] = `
+<d>expect(</b><r>headers</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>123</g><d>)</b>
+
+<b>Matcher error</b>: Expected value must be a string or undefined.
+
+value has type:  number
+value has value: 123
+`;
+
+exports[`toHaveHeader > fails when the expected value is not a string or undefined > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>123</g><d>)</b>
+
+<b>Matcher error</b>: Expected value must be a string or undefined.
+
+value has type:  number
+value has value: 123
+`;
+
+exports[`toHaveHeader > fails when the expected value is not a string or undefined > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>123</g><d>)</b>
+
+<b>Matcher error</b>: Expected value must be a string or undefined.
+
+value has type:  number
+value has value: 123
+`;
+
+exports[`toHaveHeader > fails when the header name is invalid > headers 1`] = `
+<d>expect(</b><r>headers</g><d>).</b>toHaveHeader<d>(</b><g>"Invalid Header Name"</g><d>)</b>
+
+<b>Matcher error</b>: Failed to get the header.
+`;
+
+exports[`toHaveHeader > fails when the header name is invalid > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveHeader<d>(</b><g>"Invalid Header Name"</g><d>)</b>
+
+<b>Matcher error</b>: Failed to get the header.
+`;
+
+exports[`toHaveHeader > fails when the header name is invalid > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveHeader<d>(</b><g>"Invalid Header Name"</g><d>)</b>
+
+<b>Matcher error</b>: Failed to get the header.
+`;
+
+exports[`toHaveHeader > fails when the header name is not a string > headers 1`] = `
+<d>expect(</b><r>headers</g><d>).</b>toHaveHeader<d>(</b><g>123</g><d>, </b><g>"application/json"</g><d>)</b>
+
+<b>Matcher error</b>: Header name must be a string.
+
+name has type:  number
+name has value: 123
+`;
+
+exports[`toHaveHeader > fails when the header name is not a string > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveHeader<d>(</b><g>123</g><d>, </b><g>"application/json"</g><d>)</b>
+
+<b>Matcher error</b>: Header name must be a string.
+
+name has type:  number
+name has value: 123
+`;
+
+exports[`toHaveHeader > fails when the header name is not a string > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveHeader<d>(</b><g>123</g><d>, </b><g>"application/json"</g><d>)</b>
+
+<b>Matcher error</b>: Header name must be a string.
+
+name has type:  number
+name has value: 123
+`;
+
+exports[`toHaveHeader > fails when the received value is not a Response, Request, or Headers 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
+
+<b>Matcher error</b>: Received value is not a Response, Request, or Headers.
+`;
+
+exports[`toHaveHeader > when Headers is not defined in the global scope > fails > headers 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
+
+<b>Matcher error</b>: Response, Request, or Headers is not defined in the global scope.
+`;
+
+exports[`toHaveHeader > when Request is not defined in the global scope > fails > request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
+
+<b>Matcher error</b>: Response, Request, or Headers is not defined in the global scope.
+`;
+
+exports[`toHaveHeader > when Response is not defined in the global scope > fails > response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
+
+<b>Matcher error</b>: Response, Request, or Headers is not defined in the global scope.
+`;
+
+exports[`toHaveHeader > when expected value is not provided > fails when the response/request does not have the expected header > headers 1`] = `
+<d>expect(</b><r>headers</g><d>).</b>toHaveHeader<d>(</b><g>"Authorization"</g><d>)</b>
+
+Expected headers to have header <g>"Authorization"</g>, but it was not found.
+`;
+
+exports[`toHaveHeader > when expected value is not provided > fails when the response/request does not have the expected header > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveHeader<d>(</b><g>"Authorization"</g><d>)</b>
+
+Expected request to have header <g>"Authorization"</g>, but it was not found.
+`;
+
+exports[`toHaveHeader > when expected value is not provided > fails when the response/request does not have the expected header > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveHeader<d>(</b><g>"Authorization"</g><d>)</b>
+
+Expected response to have header <g>"Authorization"</g>, but it was not found.
+`;
+
+exports[`toHaveHeader > when expected value is not provided > passes when the response/request has the expected header > headers 1`] = `
+<d>expect(</b><r>headers</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>)</b>
+
+Expected headers not to have header <g>"Content-Type"</g>, but it did.
+`;
+
+exports[`toHaveHeader > when expected value is not provided > passes when the response/request has the expected header > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>)</b>
+
+Expected request not to have header <g>"Content-Type"</g>, but it did.
+`;
+
+exports[`toHaveHeader > when expected value is not provided > passes when the response/request has the expected header > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>)</b>
+
+Expected response not to have header <g>"Content-Type"</g>, but it did.
+`;
+
+exports[`toHaveHeader > when expected value is provided > fails when the response/request does not have the expected header and value > headers 1`] = `
+<d>expect(</b><r>headers</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
+
+Expected headers to have header <g>"Content-Type"</g> with a value of <g>"application/json"</g>, but it had a value of <r>"text/html"</g>.
+`;
+
+exports[`toHaveHeader > when expected value is provided > fails when the response/request does not have the expected header and value > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
+
+Expected request to have header <g>"Content-Type"</g> with a value of <g>"application/json"</g>, but it had a value of <r>"text/html"</g>.
+`;
+
+exports[`toHaveHeader > when expected value is provided > fails when the response/request does not have the expected header and value > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
+
+Expected response to have header <g>"Content-Type"</g> with a value of <g>"application/json"</g>, but it had a value of <r>"text/html"</g>.
+`;
+
+exports[`toHaveHeader > when expected value is provided > passes when the response/request has the expected header and value > headers 1`] = `
+<d>expect(</b><r>headers</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
+
+Expected headers not to have header <g>"Content-Type"</g> with a value of <g>"application/json"</g>, but it did.
+`;
+
+exports[`toHaveHeader > when expected value is provided > passes when the response/request has the expected header and value > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
+
+Expected request not to have header <g>"Content-Type"</g> with a value of <g>"application/json"</g>, but it did.
+`;
+
+exports[`toHaveHeader > when expected value is provided > passes when the response/request has the expected header and value > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
+
+Expected response not to have header <g>"Content-Type"</g> with a value of <g>"application/json"</g>, but it did.
+`;
+
+exports[`toHaveHeader > with asymmetric matchers > fails when the header value does not match > headers 1`] = `
+<d>expect(</b><r>headers</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>StringContaining "json"</g><d>)</b>
+
+Expected headers to have header <g>"Content-Type"</g> with a value of <g>StringContaining "json"</g>, but it had a value of <r>"text/html"</g>.
+`;
+
+exports[`toHaveHeader > with asymmetric matchers > fails when the header value does not match > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>StringContaining "json"</g><d>)</b>
+
+Expected request to have header <g>"Content-Type"</g> with a value of <g>StringContaining "json"</g>, but it had a value of <r>"text/html"</g>.
+`;
+
+exports[`toHaveHeader > with asymmetric matchers > fails when the header value does not match > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>StringContaining "json"</g><d>)</b>
+
+Expected response to have header <g>"Content-Type"</g> with a value of <g>StringContaining "json"</g>, but it had a value of <r>"text/html"</g>.
+`;
+
+exports[`toHaveHeader > with asymmetric matchers > passes when the header value matches > headers 1`] = `
+<d>expect(</b><r>headers</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>StringContaining "json"</g><d>)</b>
+
+Expected headers not to have header <g>"Content-Type"</g> with a value of <g>StringContaining "json"</g>, but it did.
+`;
+
+exports[`toHaveHeader > with asymmetric matchers > passes when the header value matches > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>StringContaining "json"</g><d>)</b>
+
+Expected request not to have header <g>"Content-Type"</g> with a value of <g>StringContaining "json"</g>, but it did.
+`;
+
+exports[`toHaveHeader > with asymmetric matchers > passes when the header value matches > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>StringContaining "json"</g><d>)</b>
+
+Expected response not to have header <g>"Content-Type"</g> with a value of <g>StringContaining "json"</g>, but it did.
+`;
+
+exports[`toHaveJSONBody > fails when it cannot clone the body > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Failed to clone the request.
+`;
+
+exports[`toHaveJSONBody > fails when it cannot clone the body > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Failed to clone the response.
+`;
+
+exports[`toHaveJSONBody > fails when it cannot read the body as JSON > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Failed to read body JSON from the request.
+`;
+
+exports[`toHaveJSONBody > fails when it cannot read the body as JSON > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Failed to read body JSON from the response.
+`;
+
+exports[`toHaveJSONBody > fails when the body has already been used > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Cannot read body from the request because it has already been used.
+`;
+
+exports[`toHaveJSONBody > fails when the body has already been used > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Cannot read body from the response because it has already been used.
+`;
+
+exports[`toHaveJSONBody > fails when the received value is not a Response or Request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Received value is not a Request or Response.
+`;
+
+exports[`toHaveJSONBody > fails when the response/request does not have the expected JSON body > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 1</g>
+
+<d>  Object {</b>
+<g>-   "message": "Hello, world!",</g>
+<r>+   "message": "Goodbye, world!",</g>
+<d>  }</b>
+`;
+
+exports[`toHaveJSONBody > fails when the response/request does not have the expected JSON body > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 1</g>
+
+<d>  Object {</b>
+<g>-   "message": "Hello, world!",</g>
+<r>+   "message": "Goodbye, world!",</g>
+<d>  }</b>
+`;
+
+exports[`toHaveJSONBody > passes when the response/request has the expected JSON body > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+Expected request not to have body JSON <g>{"message": "Hello, world!"}</g>, but it did.
+`;
+
+exports[`toHaveJSONBody > passes when the response/request has the expected JSON body > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+Expected response not to have body JSON <g>{"message": "Hello, world!"}</g>, but it did.
+`;
+
+exports[`toHaveJSONBody > when Request is not defined in the global scope > fails > request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Request or Response is not defined in the global scope.
+`;
+
+exports[`toHaveJSONBody > when Response is not defined in the global scope > fails > response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Request or Response is not defined in the global scope.
+`;
+
+exports[`toHaveJSONBodyStrict > fails when it cannot clone the body > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Failed to clone the request.
+`;
+
+exports[`toHaveJSONBodyStrict > fails when it cannot clone the body > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Failed to clone the response.
+`;
+
+exports[`toHaveJSONBodyStrict > fails when it cannot read the body as JSON > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Failed to read body JSON from the request.
+`;
+
+exports[`toHaveJSONBodyStrict > fails when it cannot read the body as JSON > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Failed to read body JSON from the response.
+`;
+
+exports[`toHaveJSONBodyStrict > fails when the body has already been used > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Cannot read body from the request because it has already been used.
+`;
+
+exports[`toHaveJSONBodyStrict > fails when the body has already been used > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Cannot read body from the response because it has already been used.
+`;
+
+exports[`toHaveJSONBodyStrict > fails when the received value is not a Response or Request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Received value is not a Request or Response.
+`;
+
+exports[`toHaveJSONBodyStrict > fails when the response/request does not have the expected JSON body > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 1</g>
+
+<d>  Object {</b>
+<g>-   "message": "Hello, world!",</g>
+<r>+   "message": "Goodbye, world!",</g>
+<d>  }</b>
+`;
+
+exports[`toHaveJSONBodyStrict > fails when the response/request does not have the expected JSON body > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 1</g>
+
+<d>  Object {</b>
+<g>-   "message": "Hello, world!",</g>
+<r>+   "message": "Goodbye, world!",</g>
+<d>  }</b>
+`;
+
+exports[`toHaveJSONBodyStrict > passes when the response/request has the expected JSON body > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+Expected request not to have body JSON <g>{"message": "Hello, world!"}</g>, but it did.
+`;
+
+exports[`toHaveJSONBodyStrict > passes when the response/request has the expected JSON body > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+Expected response not to have body JSON <g>{"message": "Hello, world!"}</g>, but it did.
+`;
+
+exports[`toHaveJSONBodyStrict > when Request is not defined in the global scope > fails > request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Request or Response is not defined in the global scope.
+`;
+
+exports[`toHaveJSONBodyStrict > when Response is not defined in the global scope > fails > response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Request or Response is not defined in the global scope.
+`;
+
+exports[`toHaveMethod > fails when Request is not defined in the global scope 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveMethod<d>(</b><g>"POST"</g><d>)</b>
+
+<b>Matcher error</b>: Request is not defined in the global scope.
+`;
+
+exports[`toHaveMethod > fails when the received value is not a Request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveMethod<d>(</b><g>"POST"</g><d>)</b>
+
+<b>Matcher error</b>: Received value is not a Request.
+`;
+
+exports[`toHaveMethod > fails when the request does not have the expected method 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveMethod<d>(</b><g>"POST"</g><d>)</b>
+
+Expected request to have method <g>"POST"</g>, but it was <r>"GET"</g>.
+`;
+
+exports[`toHaveMethod > is case insensitive 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveMethod<d>(</b><g>"post"</g><d>)</b>
+
+Expected request not to have method <g>"post"</g>, but it did.
+`;
+
+exports[`toHaveMethod > passes when the request has the expected method 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveMethod<d>(</b><g>"POST"</g><d>)</b>
+
+Expected request not to have method <g>"POST"</g>, but it did.
+`;
+
+exports[`toHaveMethod > with asymmetric matchers > fails when the method does not match 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveMethod<d>(</b><g>oneOf<Array [</g>
+<g>  "GET",</g>
+<g>  "POST",</g>
+<g>]></g><d>)</b>
+
+Expected request to have method <g>oneOf<Array [</g>
+<g>  "GET",</g>
+<g>  "POST",</g>
+<g>]></g>, but it was <r>"DELETE"</g>.
+`;
+
+exports[`toHaveMethod > with asymmetric matchers > passes when the method matches 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveMethod<d>(</b><g>oneOf<Array [</g>
+<g>  "GET",</g>
+<g>  "POST",</g>
+<g>]></g><d>)</b>
+
+Expected request not to have method <g>oneOf<Array [</g>
+<g>  "GET",</g>
+<g>  "POST",</g>
+<g>]></g>, but it did.
+`;
+
+exports[`toHaveResponseType > fails when Response is not defined in the global scope 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveResponseType<d>(</b><g>"basic"</g><d>)</b>
+
+<b>Matcher error</b>: Response is not defined in the global scope.
+`;
+
+exports[`toHaveResponseType > fails when the received value is not a Response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveResponseType<d>(</b><g>"basic"</g><d>)</b>
+
+<b>Matcher error</b>: Received value is not a Response.
+`;
+
+exports[`toHaveResponseType > fails when the response does not have the expected type 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveResponseType<d>(</b><g>"basic"</g><d>)</b>
+
+Expected response to have type <g>"basic"</g>, but it was <r>"cors"</g>.
+`;
+
+exports[`toHaveResponseType > passes when the response has the expected type 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveResponseType<d>(</b><g>"basic"</g><d>)</b>
+
+Expected response not to have type <g>"basic"</g>, but it did.
+`;
+
+exports[`toHaveResponseType > with asymmetric matchers > fails when the response type does not match 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveResponseType<d>(</b><g>oneOf<Array [</g>
+<g>  "basic",</g>
+<g>  "cors",</g>
+<g>]></g><d>)</b>
+
+Expected response to have type <g>oneOf<Array [</g>
+<g>  "basic",</g>
+<g>  "cors",</g>
+<g>]></g>, but it was <r>"opaque"</g>.
+`;
+
+exports[`toHaveResponseType > with asymmetric matchers > passes when the response type matches 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveResponseType<d>(</b><g>oneOf<Array [</g>
+<g>  "basic",</g>
+<g>  "cors",</g>
+<g>]></g><d>)</b>
+
+Expected response not to have type <g>oneOf<Array [</g>
+<g>  "basic",</g>
+<g>  "cors",</g>
+<g>]></g>, but it did.
+`;
+
+exports[`toHaveSearchParam > fails when the expected value is not a string or undefined > params 1`] = `
+<d>expect(</b><r>params</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>123</g><d>)</b>
+
+<b>Matcher error</b>: Expected value must be a string or undefined.
+
+value has type:  number
+value has value: 123
+`;
+
+exports[`toHaveSearchParam > fails when the expected value is not a string or undefined > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>123</g><d>)</b>
+
+<b>Matcher error</b>: Expected value must be a string or undefined.
+
+value has type:  number
+value has value: 123
+`;
+
+exports[`toHaveSearchParam > fails when the expected value is not a string or undefined > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>123</g><d>)</b>
+
+<b>Matcher error</b>: Expected value must be a string or undefined.
+
+value has type:  number
+value has value: 123
+`;
+
+exports[`toHaveSearchParam > fails when the expected value is not a string or undefined > url 1`] = `
+<d>expect(</b><r>url</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>123</g><d>)</b>
+
+<b>Matcher error</b>: Expected value must be a string or undefined.
+
+value has type:  number
+value has value: 123
+`;
+
+exports[`toHaveSearchParam > fails when the received value is not a URLSearchParams, URL, Response or Request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+<b>Matcher error</b>: Received value is not a URLSearchParams, URL, Request, or Response.
+`;
+
+exports[`toHaveSearchParam > fails when the search param name is not a string > params 1`] = `
+<d>expect(</b><r>params</g><d>).</b>toHaveSearchParam<d>(</b><g>123</g><d>, </b><g>"bar"</g><d>)</b>
+
+<b>Matcher error</b>: Query parameter name must be a string.
+
+name has type:  number
+name has value: 123
+`;
+
+exports[`toHaveSearchParam > fails when the search param name is not a string > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveSearchParam<d>(</b><g>123</g><d>, </b><g>"bar"</g><d>)</b>
+
+<b>Matcher error</b>: Query parameter name must be a string.
+
+name has type:  number
+name has value: 123
+`;
+
+exports[`toHaveSearchParam > fails when the search param name is not a string > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveSearchParam<d>(</b><g>123</g><d>, </b><g>"bar"</g><d>)</b>
+
+<b>Matcher error</b>: Query parameter name must be a string.
+
+name has type:  number
+name has value: 123
+`;
+
+exports[`toHaveSearchParam > fails when the search param name is not a string > url 1`] = `
+<d>expect(</b><r>url</g><d>).</b>toHaveSearchParam<d>(</b><g>123</g><d>, </b><g>"bar"</g><d>)</b>
+
+<b>Matcher error</b>: Query parameter name must be a string.
+
+name has type:  number
+name has value: 123
+`;
+
+exports[`toHaveSearchParam > when Request is not defined in the global scope > fails > request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+<b>Matcher error</b>: URLSearchParams, URL, Request, or Response is not defined in the global scope.
+`;
+
+exports[`toHaveSearchParam > when Response is not defined in the global scope > fails > response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+<b>Matcher error</b>: URLSearchParams, URL, Request, or Response is not defined in the global scope.
+`;
+
+exports[`toHaveSearchParam > when URL is not defined in the global scope > fails > url 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+<b>Matcher error</b>: URLSearchParams, URL, Request, or Response is not defined in the global scope.
+`;
+
+exports[`toHaveSearchParam > when URLSearchParams is not defined in the global scope > fails > urlsearchparams 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+<b>Matcher error</b>: URLSearchParams, URL, Request, or Response is not defined in the global scope.
+`;
+
+exports[`toHaveSearchParam > when expected value is not provided > fails when the URLSearchParams, URL, Response or Request does not have the expected search param > params 1`] = `
+<d>expect(</b><r>params</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
+
+Expected params to have search parameter <g>"foo"</g>, but it was not found.
+`;
+
+exports[`toHaveSearchParam > when expected value is not provided > fails when the URLSearchParams, URL, Response or Request does not have the expected search param > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
+
+Expected request to have search parameter <g>"foo"</g>, but it was not found.
+`;
+
+exports[`toHaveSearchParam > when expected value is not provided > fails when the URLSearchParams, URL, Response or Request does not have the expected search param > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
+
+Expected response to have search parameter <g>"foo"</g>, but it was not found.
+`;
+
+exports[`toHaveSearchParam > when expected value is not provided > fails when the URLSearchParams, URL, Response or Request does not have the expected search param > url 1`] = `
+<d>expect(</b><r>url</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
+
+Expected url to have search parameter <g>"foo"</g>, but it was not found.
+`;
+
+exports[`toHaveSearchParam > when expected value is not provided > passes when the URLSearchParams, URL, Response or Request has the expected search param > params 1`] = `
+<d>expect(</b><r>params</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
+
+Expected params not to have search parameter <g>"foo"</g>, but it did.
+`;
+
+exports[`toHaveSearchParam > when expected value is not provided > passes when the URLSearchParams, URL, Response or Request has the expected search param > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
+
+Expected request not to have search parameter <g>"foo"</g>, but it did.
+`;
+
+exports[`toHaveSearchParam > when expected value is not provided > passes when the URLSearchParams, URL, Response or Request has the expected search param > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
+
+Expected response not to have search parameter <g>"foo"</g>, but it did.
+`;
+
+exports[`toHaveSearchParam > when expected value is not provided > passes when the URLSearchParams, URL, Response or Request has the expected search param > url 1`] = `
+<d>expect(</b><r>url</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
+
+Expected url not to have search parameter <g>"foo"</g>, but it did.
+`;
+
+exports[`toHaveSearchParam > when expected value is provided > fails when the URLSearchParams, URL, Response or Request does not have the expected search param and value > params 1`] = `
+<d>expect(</b><r>params</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+Expected params to have search parameter <g>"foo"</g> with a value of <g>"bar"</g>, but it had a value of <r>"baz"</g>.
+`;
+
+exports[`toHaveSearchParam > when expected value is provided > fails when the URLSearchParams, URL, Response or Request does not have the expected search param and value > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+Expected request to have search parameter <g>"foo"</g> with a value of <g>"bar"</g>, but it had a value of <r>"baz"</g>.
+`;
+
+exports[`toHaveSearchParam > when expected value is provided > fails when the URLSearchParams, URL, Response or Request does not have the expected search param and value > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+Expected response to have search parameter <g>"foo"</g> with a value of <g>"bar"</g>, but it had a value of <r>"baz"</g>.
+`;
+
+exports[`toHaveSearchParam > when expected value is provided > fails when the URLSearchParams, URL, Response or Request does not have the expected search param and value > url 1`] = `
+<d>expect(</b><r>url</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+Expected url to have search parameter <g>"foo"</g> with a value of <g>"bar"</g>, but it had a value of <r>"baz"</g>.
+`;
+
+exports[`toHaveSearchParam > when expected value is provided > passes when the URLSearchParams, URL, Response or Request has the expected search param and value > params 1`] = `
+<d>expect(</b><r>params</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+Expected params not to have search parameter <g>"foo"</g> with a value of <g>"bar"</g>, but it did.
+`;
+
+exports[`toHaveSearchParam > when expected value is provided > passes when the URLSearchParams, URL, Response or Request has the expected search param and value > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+Expected request not to have search parameter <g>"foo"</g> with a value of <g>"bar"</g>, but it did.
+`;
+
+exports[`toHaveSearchParam > when expected value is provided > passes when the URLSearchParams, URL, Response or Request has the expected search param and value > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+Expected response not to have search parameter <g>"foo"</g> with a value of <g>"bar"</g>, but it did.
+`;
+
+exports[`toHaveSearchParam > when expected value is provided > passes when the URLSearchParams, URL, Response or Request has the expected search param and value > url 1`] = `
+<d>expect(</b><r>url</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+Expected url not to have search parameter <g>"foo"</g> with a value of <g>"bar"</g>, but it did.
+`;
+
+exports[`toHaveSearchParam > with asymmetric matchers > fails when the search param value does not match > params 1`] = `
+<d>expect(</b><r>params</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>StringContaining "bar"</g><d>)</b>
+
+Expected params to have search parameter <g>"foo"</g> with a value of <g>StringContaining "bar"</g>, but it had a value of <r>"baz"</g>.
+`;
+
+exports[`toHaveSearchParam > with asymmetric matchers > fails when the search param value does not match > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>StringContaining "bar"</g><d>)</b>
+
+Expected request to have search parameter <g>"foo"</g> with a value of <g>StringContaining "bar"</g>, but it had a value of <r>"baz"</g>.
+`;
+
+exports[`toHaveSearchParam > with asymmetric matchers > fails when the search param value does not match > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>StringContaining "bar"</g><d>)</b>
+
+Expected response to have search parameter <g>"foo"</g> with a value of <g>StringContaining "bar"</g>, but it had a value of <r>"baz"</g>.
+`;
+
+exports[`toHaveSearchParam > with asymmetric matchers > fails when the search param value does not match > url 1`] = `
+<d>expect(</b><r>url</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>StringContaining "bar"</g><d>)</b>
+
+Expected url to have search parameter <g>"foo"</g> with a value of <g>StringContaining "bar"</g>, but it had a value of <r>"baz"</g>.
+`;
+
+exports[`toHaveSearchParam > with asymmetric matchers > passes when the search param value matches > params 1`] = `
+<d>expect(</b><r>params</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>StringContaining "ba"</g><d>)</b>
+
+Expected params not to have search parameter <g>"foo"</g> with a value of <g>StringContaining "ba"</g>, but it did.
+`;
+
+exports[`toHaveSearchParam > with asymmetric matchers > passes when the search param value matches > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>StringContaining "ba"</g><d>)</b>
+
+Expected request not to have search parameter <g>"foo"</g> with a value of <g>StringContaining "ba"</g>, but it did.
+`;
+
+exports[`toHaveSearchParam > with asymmetric matchers > passes when the search param value matches > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>StringContaining "ba"</g><d>)</b>
+
+Expected response not to have search parameter <g>"foo"</g> with a value of <g>StringContaining "ba"</g>, but it did.
+`;
+
+exports[`toHaveSearchParam > with asymmetric matchers > passes when the search param value matches > url 1`] = `
+<d>expect(</b><r>url</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>StringContaining "ba"</g><d>)</b>
+
+Expected url not to have search parameter <g>"foo"</g> with a value of <g>StringContaining "ba"</g>, but it did.
+`;
+
+exports[`toHaveStatus > fails when Response is not defined in the global scope 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveStatus<d>(</b><g>200</g><d>)</b>
+
+<b>Matcher error</b>: Response is not defined in the global scope.
+`;
+
+exports[`toHaveStatus > fails when the expected status is not a number 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatus<d>(</b><g>"200"</g><d>)</b>
+
+<b>Matcher error</b>: Expected status must be a number.
+
+expectedStatus has type:  string
+expectedStatus has value: "200"
+`;
+
+exports[`toHaveStatus > fails when the received value is not a Response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveStatus<d>(</b><g>200</g><d>)</b>
+
+<b>Matcher error</b>: Received value is not a Response.
+`;
+
+exports[`toHaveStatus > fails when the response does not have the expected status 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatus<d>(</b><g>200</g><d>)</b>
+
+Expected response to have status <g>200</g>, but it was <r>404</g>.
+`;
+
+exports[`toHaveStatus > passes when the response has the expected status 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatus<d>(</b><g>200</g><d>)</b>
+
+Expected response not to have status <g>200</g>, but it did.
+`;
+
+exports[`toHaveStatus > with asymmetric matchers > fails when the status does not match 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatus<d>(</b><g>oneOf<Array [</g>
+<g>  200,</g>
+<g>  201,</g>
+<g>]></g><d>)</b>
+
+Expected response to have status <g>oneOf<Array [</g>
+<g>  200,</g>
+<g>  201,</g>
+<g>]></g>, but it was <r>404</g>.
+`;
+
+exports[`toHaveStatus > with asymmetric matchers > passes when the status matches 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatus<d>(</b><g>oneOf<Array [</g>
+<g>  200,</g>
+<g>  201,</g>
+<g>]></g><d>)</b>
+
+Expected response not to have status <g>oneOf<Array [</g>
+<g>  200,</g>
+<g>  201,</g>
+<g>]></g>, but it did.
+`;
+
+exports[`toHaveStatusGroup > fails when Response is not defined in the global scope 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveStatusGroup<d>(</b><g>2</g><d>)</b>
+
+<b>Matcher error</b>: Response is not defined in the global scope.
+`;
+
+exports[`toHaveStatusGroup > fails when the expected status group is not valid 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatusGroup<d>(</b><g>"invalid"</g><d>)</b>
+
+<b>Matcher error</b>: Expected status group must be one of: 1, "informational", "1xx", 2, "successful", "2xx", 3, "redirection", "3xx", 4, "client error", "4xx", 5, "server error", "5xx"
+
+expected has type:  string
+expected has value: "invalid"
+`;
+
+exports[`toHaveStatusGroup > fails when the received value is not a Response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveStatusGroup<d>(</b><g>2</g><d>)</b>
+
+<b>Matcher error</b>: Received value is not a Response.
+`;
+
+exports[`toHaveStatusGroup > fails when the status is non-standard and does not match any group 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatusGroup<d>(</b><g>2</g><d>)</b>
+
+Expected response to have status group <g>2</g>, but it was <r>"non-standard"</g> (<r>600</g>).
+`;
+
+exports[`toHaveStatusGroup > long > fails when the response does not have the expected status group 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatusGroup<d>(</b><g>"successful"</g><d>)</b>
+
+Expected response to have status group <g>"successful"</g>, but it was <r>"client error"</g> (<r>404</g>).
+`;
+
+exports[`toHaveStatusGroup > long > passes when the response has the expected status group 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatusGroup<d>(</b><g>"successful"</g><d>)</b>
+
+Expected response not to have status group <g>"successful"</g>, but it did (<r>200</g>).
+`;
+
+exports[`toHaveStatusGroup > num > fails when the response does not have the expected status group 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatusGroup<d>(</b><g>2</g><d>)</b>
+
+Expected response to have status group <g>2</g>, but it was <r>4</g> (<r>404</g>).
+`;
+
+exports[`toHaveStatusGroup > num > passes when the response has the expected status group 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatusGroup<d>(</b><g>2</g><d>)</b>
+
+Expected response not to have status group <g>2</g>, but it did (<r>200</g>).
+`;
+
+exports[`toHaveStatusGroup > short > fails when the response does not have the expected status group 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatusGroup<d>(</b><g>"2xx"</g><d>)</b>
+
+Expected response to have status group <g>"2xx"</g>, but it was <r>"4xx"</g> (<r>404</g>).
+`;
+
+exports[`toHaveStatusGroup > short > passes when the response has the expected status group 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatusGroup<d>(</b><g>"2xx"</g><d>)</b>
+
+Expected response not to have status group <g>"2xx"</g>, but it did (<r>200</g>).
+`;
+
+exports[`toHaveStatusGroup > with asymmetric matchers > fails when the status is non-standard 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatusGroup<d>(</b><g>oneOf<Array [</g>
+<g>  2,</g>
+<g>  3,</g>
+<g>]></g><d>)</b>
+
+Expected response to have status group <g>oneOf<Array [</g>
+<g>  2,</g>
+<g>  3,</g>
+<g>]></g>, but it was <r>600</g>.
+`;
+
+exports[`toHaveStatusGroup > with asymmetric matchers > long > fails when the group does not match 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatusGroup<d>(</b><g>oneOf<Array [</g>
+<g>  "successful",</g>
+<g>  "redirection",</g>
+<g>]></g><d>)</b>
+
+Expected response to have status group <g>oneOf<Array [</g>
+<g>  "successful",</g>
+<g>  "redirection",</g>
+<g>]></g>, but it was <r>404</g>.
+`;
+
+exports[`toHaveStatusGroup > with asymmetric matchers > long > passes when the group matches 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatusGroup<d>(</b><g>oneOf<Array [</g>
+<g>  "successful",</g>
+<g>  "redirection",</g>
+<g>]></g><d>)</b>
+
+Expected response not to have status group <g>oneOf<Array [</g>
+<g>  "successful",</g>
+<g>  "redirection",</g>
+<g>]></g>, but it did (<r>200</g>).
+`;
+
+exports[`toHaveStatusGroup > with asymmetric matchers > num > fails when the group does not match 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatusGroup<d>(</b><g>oneOf<Array [</g>
+<g>  2,</g>
+<g>  3,</g>
+<g>]></g><d>)</b>
+
+Expected response to have status group <g>oneOf<Array [</g>
+<g>  2,</g>
+<g>  3,</g>
+<g>]></g>, but it was <r>404</g>.
+`;
+
+exports[`toHaveStatusGroup > with asymmetric matchers > num > passes when the group matches 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatusGroup<d>(</b><g>oneOf<Array [</g>
+<g>  2,</g>
+<g>  3,</g>
+<g>]></g><d>)</b>
+
+Expected response not to have status group <g>oneOf<Array [</g>
+<g>  2,</g>
+<g>  3,</g>
+<g>]></g>, but it did (<r>200</g>).
+`;
+
+exports[`toHaveStatusGroup > with asymmetric matchers > short > fails when the group does not match 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatusGroup<d>(</b><g>oneOf<Array [</g>
+<g>  "2xx",</g>
+<g>  "3xx",</g>
+<g>]></g><d>)</b>
+
+Expected response to have status group <g>oneOf<Array [</g>
+<g>  "2xx",</g>
+<g>  "3xx",</g>
+<g>]></g>, but it was <r>404</g>.
+`;
+
+exports[`toHaveStatusGroup > with asymmetric matchers > short > passes when the group matches 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatusGroup<d>(</b><g>oneOf<Array [</g>
+<g>  "2xx",</g>
+<g>  "3xx",</g>
+<g>]></g><d>)</b>
+
+Expected response not to have status group <g>oneOf<Array [</g>
+<g>  "2xx",</g>
+<g>  "3xx",</g>
+<g>]></g>, but it did (<r>200</g>).
+`;
+
+exports[`toHaveTextBody > fails when it cannot clone the body > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+<b>Matcher error</b>: Failed to clone the request.
+`;
+
+exports[`toHaveTextBody > fails when it cannot clone the body > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+<b>Matcher error</b>: Failed to clone the response.
+`;
+
+exports[`toHaveTextBody > fails when it cannot read the body as text > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+<b>Matcher error</b>: Failed to read body text from the request.
+`;
+
+exports[`toHaveTextBody > fails when it cannot read the body as text > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+<b>Matcher error</b>: Failed to read body text from the response.
+`;
+
+exports[`toHaveTextBody > fails when the body has already been used > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+<b>Matcher error</b>: Cannot read body because it has already been used.
+`;
+
+exports[`toHaveTextBody > fails when the body has already been used > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+<b>Matcher error</b>: Cannot read body because it has already been used.
+`;
+
+exports[`toHaveTextBody > fails when the received value is not a Response or Request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+<b>Matcher error</b>: Received value is not a Request or Response.
+`;
+
+exports[`toHaveTextBody > fails when the response/request does not have the expected body text > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+Expected request to have body text <g>"Hello, world!"</g>, but it was <r>"Goodbye, world!"</g>.
+`;
+
+exports[`toHaveTextBody > fails when the response/request does not have the expected body text > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+Expected response to have body text <g>"Hello, world!"</g>, but it was <r>"Goodbye, world!"</g>.
+`;
+
+exports[`toHaveTextBody > passes when the response/request has the expected body text > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+Expected request not to have body text <g>"Hello, world!"</g>, but it did.
+`;
+
+exports[`toHaveTextBody > passes when the response/request has the expected body text > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+Expected response not to have body text <g>"Hello, world!"</g>, but it did.
+`;
+
+exports[`toHaveTextBody > when Request is not defined in the global scope > fails > request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+<b>Matcher error</b>: Request or Response is not defined in the global scope.
+`;
+
+exports[`toHaveTextBody > when Response is not defined in the global scope > fails > response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+<b>Matcher error</b>: Request or Response is not defined in the global scope.
+`;
+
+exports[`toHaveTextBody > with asymmetric matchers > fails when the body text does not match > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveTextBody<d>(</b><g>StringContaining "Hello"</g><d>)</b>
+
+Expected request to have body text <g>StringContaining "Hello"</g>, but it was <r>"Goodbye, world!"</g>.
+`;
+
+exports[`toHaveTextBody > with asymmetric matchers > fails when the body text does not match > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveTextBody<d>(</b><g>StringContaining "Hello"</g><d>)</b>
+
+Expected response to have body text <g>StringContaining "Hello"</g>, but it was <r>"Goodbye, world!"</g>.
+`;
+
+exports[`toHaveTextBody > with asymmetric matchers > passes when the body text matches > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveTextBody<d>(</b><g>StringContaining "Hello"</g><d>)</b>
+
+Expected request not to have body text <g>StringContaining "Hello"</g>, but it did.
+`;
+
+exports[`toHaveTextBody > with asymmetric matchers > passes when the body text matches > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveTextBody<d>(</b><g>StringContaining "Hello"</g><d>)</b>
+
+Expected response not to have body text <g>StringContaining "Hello"</g>, but it did.
+`;
+
+exports[`toHaveURL > fails when the URL is invalid > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
+
+Expected response to have URL <g>"https://example.com/api"</g>, but it was <r>""</g>.
+`;
+
+exports[`toHaveURL > fails when the expected URL is not a string > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveURL<d>(</b><g>123</g><d>)</b>
+
+<b>Matcher error</b>: Expected URL must be a string.
+
+expected has type:  number
+expected has value: 123
+`;
+
+exports[`toHaveURL > fails when the expected URL is not a string > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveURL<d>(</b><g>123</g><d>)</b>
+
+<b>Matcher error</b>: Expected URL must be a string.
+
+expected has type:  number
+expected has value: 123
+`;
+
+exports[`toHaveURL > fails when the received value is not a Request or Response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
+
+<b>Matcher error</b>: Received value is not a Request or Response.
+`;
+
+exports[`toHaveURL > fails when the response/request does not have the expected URL > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
+
+Expected request to have URL <g>"https://example.com/api"</g>, but it was <r>"https://example.com/other"</g>.
+`;
+
+exports[`toHaveURL > fails when the response/request does not have the expected URL > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
+
+Expected response to have URL <g>"https://example.com/api"</g>, but it was <r>"https://example.com/other"</g>.
+`;
+
+exports[`toHaveURL > passes when the response/request has the expected URL > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
+
+Expected request not to have URL <g>"https://example.com/api"</g>, but it did.
+`;
+
+exports[`toHaveURL > passes when the response/request has the expected URL > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
+
+Expected response not to have URL <g>"https://example.com/api"</g>, but it did.
+`;
+
+exports[`toHaveURL > when Request is not defined in the global scope > fails > request 1`] = `Request is not defined`;
+
+exports[`toHaveURL > when Response is not defined in the global scope > fails > response 1`] = `Response is not defined`;
+
+exports[`toHaveURL > with asymmetric matchers > fails when the URL does not match > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveURL<d>(</b><g>StringContaining "example.com"</g><d>)</b>
+
+Expected request to have URL <g>StringContaining "example.com"</g>, but it was <r>"https://other.com/api"</g>.
+`;
+
+exports[`toHaveURL > with asymmetric matchers > fails when the URL does not match > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveURL<d>(</b><g>StringContaining "example.com"</g><d>)</b>
+
+Expected response to have URL <g>StringContaining "example.com"</g>, but it was <r>"https://other.com/api"</g>.
+`;
+
+exports[`toHaveURL > with asymmetric matchers > passes when the URL matches > request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveURL<d>(</b><g>StringContaining "example.com"</g><d>)</b>
+
+Expected request not to have URL <g>StringContaining "example.com"</g>, but it did.
+`;
+
+exports[`toHaveURL > with asymmetric matchers > passes when the URL matches > response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveURL<d>(</b><g>StringContaining "example.com"</g><d>)</b>
+
+Expected response not to have URL <g>StringContaining "example.com"</g>, but it did.
+`;
