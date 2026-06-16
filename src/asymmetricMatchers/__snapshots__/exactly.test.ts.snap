@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`exactly allows Object.is equality where deep equality would normally be used 1`] = `
 <d>expect(</b><r>jest.fn()</g><d>).</b>toHaveBeenCalledWith<d>(</b><g>...expected</g><d>)</b>
