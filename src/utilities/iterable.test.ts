@@ -28,7 +28,6 @@ describe("some", () => {
     expect(() => {
       some(emptyArray, (value) => {
         expect(value).toBeGreaterThan(2);
-        return value;
       });
     }).toThrowErrorMatchingSnapshot();
   });
@@ -36,7 +35,6 @@ describe("some", () => {
     expect(() => {
       some(nums, (value) => {
         expect(value).toBeGreaterThan(3);
-        return value;
       });
     }).toThrowErrorMatchingSnapshot();
   });
@@ -53,7 +51,6 @@ describe("some", () => {
       some(numsPromises, async (promise) => {
         const value = await promise;
         expect(value).toBeGreaterThan(3);
-        return value;
       }),
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -72,7 +69,6 @@ describe("someAsync", () => {
     await expect(
       someAsync(asyncEmpty(), (value) => {
         expect(value).toBeGreaterThan(2);
-        return value;
       }),
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -80,7 +76,6 @@ describe("someAsync", () => {
     await expect(
       someAsync(asyncNums(), (value) => {
         expect(value).toBeGreaterThan(3);
-        return value;
       }),
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -99,7 +94,6 @@ describe("every", () => {
     expect(() => {
       every(nums, (value) => {
         expect(value).toBeGreaterThan(2);
-        return value;
       });
     }).toThrowErrorMatchingSnapshot();
   });
@@ -117,7 +111,6 @@ describe("every", () => {
       every(numsPromises, async (promise) => {
         const value = await promise;
         expect(value).toBeGreaterThan(2);
-        return value;
       }),
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -136,7 +129,6 @@ describe("everyAsync", () => {
     await expect(
       everyAsync(asyncNums(), (value) => {
         expect(value).toBeGreaterThan(2);
-        return value;
       }),
     ).rejects.toThrowErrorMatchingSnapshot();
   });
