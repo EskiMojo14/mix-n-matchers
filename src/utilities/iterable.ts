@@ -108,7 +108,7 @@ async function handleAsyncSome<T, R>(
  *     yield i;
  *   }
  * };
- * const result = await someAsync(nums(), async (value) => {
+ * const result = await someAsync(nums(), (value) => {
  *   expect(value).toBeGreaterThan(2);
  *   return value;
  * });
@@ -179,6 +179,29 @@ export function every<T, R>(
   return hasPromise ? Promise.all(results) : (results as Array<R>);
 }
 
+/**
+ * Runs the assertion function on each element of the async iterable and collects the results. If any element does not satisfy the assertion, it throws an error.
+ *
+ * @template T - The type of the elements in the async iterable.
+ * @template R - The return type of the assertion function.
+ * @param actual - The async iterable of elements to be tested.
+ * @param assertion - The assertion function to be applied to each element of the async iterable.
+ * @returns A Promise that resolves to an array of results from the assertion function for each element that passes the assertion.
+ * @throws {Error} If any of the elements do not satisfy the assertion.
+ *
+ * @example
+ * const nums = async function* () {
+ *   for (let i = 1; i <= 3; i++) {
+ *     await wait(100); // Simulate async operation
+ *     yield i;
+ *   }
+ * };
+ * const results = await everyAsync(nums(), (value) => {
+ *   expect(value).toBeGreaterThan(0);
+ *   return value * 2;
+ * });
+ * // results will be [2, 4, 6]
+ */
 export async function everyAsync<T, R>(
   actual: AsyncIterable<T>,
   assertion: (value: Awaited<T>) => Promise<R> | R,
