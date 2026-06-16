@@ -8,9 +8,8 @@
 import ansiRegex from "ansi-regex";
 // ansi-styles is ESM - as a result we need to run our Jest tests with `--experimental-vm-modules` flag
 import style from "ansi-styles";
-import type { NewPlugin } from "pretty-format";
 
-export const alignedAnsiStyleSerializer: NewPlugin = {
+export const alignedAnsiStyleSerializer = {
   serialize(val: string | Error): string {
     // Return the string itself, not escaped nor enclosed in double quote marks.
     return (val instanceof Error ? val.message : val).replace(
