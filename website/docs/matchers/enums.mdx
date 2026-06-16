@@ -147,6 +147,31 @@ As `enum` is a reserved word in Javascript, it is not possible to export a match
     ```
 
   </TabItem>
+  <TabItem value="Rstest">
+    ```ts title="test-setup.ts"
+
+    import { expect } from "@rstest/core";
+    import { exactly, ofEnum } from "mix-n-matchers";
+    import type { MixNMatchersFrom, AsymmetricMixNMatchersFrom } from "mix-n-matchers";
+
+    const matchers = {
+      exactly,
+      enum: ofEnum,
+    };
+
+    expect.extend(matchers);
+
+    declare module "@rstest/core" {
+      interface Assertion<T> extends MixNMatchersFrom<typeof matchers, void, T> {}
+      interface AsymmetricMatchersContaining
+        extends AsymmetricMixNMatchersFrom<typeof matchers> {
+        enum: AsymmetricMatchers["ofEnum"];
+      }
+    }
+
+    ```
+
+  </TabItem>
 </Tabs>
 
 After this setup, you should be able to use `expect.enum` as a matcher.

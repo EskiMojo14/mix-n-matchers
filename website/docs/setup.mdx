@@ -23,6 +23,14 @@ import TabItem from "@theme/TabItem";
     ```
 
   </TabItem>
+  <TabItem value="pnpm">
+    ```bash
+
+    pnpm add -D mix-n-matchers
+
+    ```
+
+  </TabItem>
   <TabItem value="yarn">
     ```bash
 
@@ -103,6 +111,23 @@ Import one of these into a setup file, and include that setup file in your Jest/
         setupFiles: ["./test-setup.ts"],
       },
     })
+
+    ```
+
+  </TabItem>
+  <TabItem value="Rstest">
+    ```ts title="test-setup.ts"
+
+    import "mix-n-matchers/rstest";
+
+    ```
+    ```ts title="rstest.config.ts"
+
+    import { defineConfig } from '@rstest/core';
+
+    export default defineConfig({
+      setupFiles: ["./test-setup.ts"],
+    });
 
     ```
 
@@ -199,6 +224,36 @@ If you'd prefer to add the matchers manually, you can import the individual matc
     expect.extend(matchers);
     
     declare module "vitest" {
+      interface Assertion<T> extends MixNMatchersFrom<typeof matchers, void, T> {}
+      interface AsymmetricMatchersContaining
+        extends AsymmetricMixNMatchersFrom<typeof matchers> {}
+    }
+
+    ```
+
+  </TabItem>
+  <TabItem value="Rstest">
+    ```ts title="test-setup.ts"
+    
+    import { expect } from "@rstest/core";
+    import {
+      toHaveBeenCalledWithContext,
+      toHaveBeenLastCalledWithContext,
+      toHaveBeenNthCalledWithContext,
+      exactly,
+    } from "mix-n-matchers";
+    import type { MixNMatchersFrom, AsymmetricMixNMatchersFrom } from "mix-n-matchers";
+    
+    const matchers = {
+      toHaveBeenCalledWithContext,
+      toHaveBeenLastCalledWithContext,
+      toHaveBeenNthCalledWithContext,
+      exactly,
+    };
+    
+    expect.extend(matchers);
+    
+    declare module "@rstest/core" {
       interface Assertion<T> extends MixNMatchersFrom<typeof matchers, void, T> {}
       interface AsymmetricMatchersContaining
         extends AsymmetricMixNMatchersFrom<typeof matchers> {}
@@ -334,6 +389,40 @@ You can of course choose to setup the matchers as both asymmetric and symmetric 
     expect.extend(matchers);
 
     declare module "vitest" {
+      interface Assertion<T> extends MixNMatchersFrom<typeof matchers, void, T> {
+          toBeTypeOf: AsymmetricMixNMatchers["typeOf"];
+      }
+      interface AsymmetricMatchersContaining
+        extends AsymmetricMixNMatchersFrom<typeof matchers> {
+          calledWithContext: MixNMatchers<void, any>["toHaveBeenCalledWithContext"];
+      }
+    }
+
+    ```
+
+  </TabItem>
+  <TabItem value="Rstest">
+    ```ts title="test-setup.ts"
+    
+    import { expect } from "@rstest/core";
+    import { typeOf, toHaveBeenCalledWithContext } from "mix-n-matchers";
+    import type { 
+      MixNMatchers,
+      MixNMatchersFrom,
+      AsymmetricMixNMatchers,
+      AsymmetricMixNMatchersFrom
+    } from "mix-n-matchers";
+
+    const matchers = {
+      typeOf,
+      toBeTypeOf: typeOf,
+      toHaveBeenCalledWithContext,
+      calledWithContext: toHaveBeenCalledWithContext,
+    };
+
+    expect.extend(matchers);
+
+    declare module "@rstest/core" {
       interface Assertion<T> extends MixNMatchersFrom<typeof matchers, void, T> {
           toBeTypeOf: AsymmetricMixNMatchers["typeOf"];
       }
