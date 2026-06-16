@@ -4,6 +4,6 @@ import { alignedAnsiStyleSerializer } from "./src/utils/tests";
 
 expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 
-rs.mock("@globals", (): typeof globals => {
+rs.mock("@globals", (): Record<keyof typeof globals, unknown> => {
   return { describe, it, expect, fn: rs.fn, beforeAll, afterAll };
 });
