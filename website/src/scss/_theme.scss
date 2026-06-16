@@ -33,23 +33,21 @@ $contrast: (
 ) {
   --ifm-color-#{$name}: #{$color};
   @each $shade, $colorOrPct in map.deep-merge($shades, $custom-shades) {
-    --ifm-color-#{$name}#{if($shade == '', '', '-')}#{$shade}: #{if(
-        meta.type-of($colorOrPct) == color,
-        $colorOrPct,
-        util.tintOrShade($color, $colorOrPct)
+    --ifm-color-#{$name}#{if(sass($shade == ''): ''; else: '-')}#{$shade}: #{if(
+        sass(meta.type-of($colorOrPct) == color): $colorOrPct;
+        else: util.tintOrShade($color, $colorOrPct)
       )};
   }
   @each $contrast,
     $colorOrPct
       in map.get(
         map.deep-merge($contrast, $custom-contrast),
-        if($dark, dark, light)
+        if(sass($dark): dark; else: light)
       )
   {
-    --ifm-color-#{$name}-contrast#{if($contrast == '', '', '-')}#{$contrast}: #{if(
-        meta.type-of($colorOrPct) == color,
-        $colorOrPct,
-        util.tintOrShade($color, $colorOrPct)
+    --ifm-color-#{$name}-contrast#{if(sass($contrast == ''): ''; else: '-')}#{$contrast}: #{if(
+        sass(meta.type-of($colorOrPct) == color): $colorOrPct;
+        else: util.tintOrShade($color, $colorOrPct)
       )};
   }
 }
@@ -62,9 +60,8 @@ $contrast: (
       $stop: $i * 100;
       $color: map.get($stops, $stop);
       --ifm-color-emphasis-#{$stop}: #{if(
-          $color,
-          $color,
-          color.mix($start, $end, ($i * -10%) + 100%)
+          sass($color): $color;
+          else: color.mix($start, $end, ($i * -10%) + 100%)
         )};
     }
   } @else {
@@ -74,19 +71,19 @@ $contrast: (
 
 @mixin infima-theme($theme) {
   $colors: map.get($theme, colors);
-  @each $name, $color in if($colors, $colors, ()) {
+  @each $name, $color in if(sass($colors): $colors; else: ()) {
     @include infima-color(
       $name,
-      if(meta.type-of($color) == color, $color, map.get($color, color)),
-      if(meta.type-of($color) == color, (), map.get($color, shades)),
-      if(meta.type-of($color) == color, (), map.get($color, contrast)),
+      if(sass(meta.type-of($color) == color): $color; else: map.get($color, color)),
+      if(sass(meta.type-of($color) == color): (); else: map.get($color, shades)),
+      if(sass(meta.type-of($color) == color): (); else: map.get($color, contrast)),
       $dark: map.get($theme, dark)
     );
   }
-  @if (map.has-key(if($colors, $colors, ()), background)) {
+  @if (map.has-key(if(sass($colors): $colors; else: ()), background)) {
     --ifm-background-color: var(--ifm-color-background);
   }
-  @if (map.has-key(if($colors, $colors, ()), surface)) {
+  @if (map.has-key(if(sass($colors): $colors; else: ()), surface)) {
     --ifm-background-surface-color: var(--ifm-color-surface);
   }
 
@@ -96,23 +93,22 @@ $contrast: (
   }
 
   $fonts: map.get($theme, fonts);
-  @each $family, $fonts in if($fonts, $fonts, ()) {
+  @each $family, $fonts in if(sass($fonts): $fonts; else: ()) {
     --ifm-font-family-#{$family}: #{$fonts};
   }
 }
 
 @mixin docusaurus-theme($theme) {
   $highlights: map.get($theme, highlights);
-  @each $name, $highlight in if($highlights, $highlights, ()) {
+  @each $name, $highlight in if(sass($highlights): $highlights; else: ()) {
     --docusaurus-#{$name}-code-line-border: #{map.get($highlight, border)};
     --docusaurus-#{$name}-code-line-bg: #{map.get($highlight, background)};
     @if $name != "highlighted" {
       $selector: map.get($highlight, selector);
 
       #{if(
-        $selector,
-        $selector,
-        '.code-block-#{$name}-line'
+        sass($selector): $selector;
+        else: '.code-block-#{$name}-line'
       )} {
         // specificity shenanigans
         :where(&) {

@@ -34,9 +34,8 @@
 
 @function tintOrShade($color, $percentage) {
   @return if(
-    $percentage >= 0%,
-    tint($color, math.abs($percentage)),
-    shade($color, math.abs($percentage))
+    sass($percentage >= 0%): tint($color, math.abs($percentage));
+    else: shade($color, math.abs($percentage))
   );
 }
 
