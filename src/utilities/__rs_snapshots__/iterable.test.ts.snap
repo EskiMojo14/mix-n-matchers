@@ -1,0 +1,32 @@
+// Rstest Snapshot v1
+
+exports[`every > should throw an error if any element does not satisfy the condition 1`] = `expected 1 to be greater than 2`;
+
+exports[`every > should throw an error if any element does not satisfy the condition with async assertion 1`] = `expected 1 to be greater than 2`;
+
+exports[`everyAsync > should throw an error if any element does not satisfy the condition 1`] = `expected 1 to be greater than 2`;
+
+exports[`some > should throw an AggregateError if no elements satisfy the condition 1`] = `
+None of the items satisfied the assertion.
+- expected 1 to be greater than 3
+- expected 2 to be greater than 3
+- expected 3 to be greater than 3
+`;
+
+exports[`some > should throw an AggregateError with all errors if no elements satisfy the condition with async assertion 1`] = `
+None of the items satisfied the assertion.
+- expected 1 to be greater than 3
+- expected 2 to be greater than 3
+- expected 3 to be greater than 3
+`;
+
+exports[`some > should throw an error if the array is empty 1`] = `No items to assert on.`;
+
+exports[`someAsync > should throw an AggregateError if no elements satisfy the condition 1`] = `
+None of the items satisfied the assertion.
+- expected 1 to be greater than 3
+- expected 2 to be greater than 3
+- expected 3 to be greater than 3
+`;
+
+exports[`someAsync > should throw an error if the async iterable is empty 1`] = `No items to assert on.`;
