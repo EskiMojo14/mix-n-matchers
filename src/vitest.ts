@@ -1,5 +1,5 @@
 import { expect } from "vitest";
-import * as mixNMatchers from ".";
+import * as mixNMatchers from "mix-n-matchers";
 
 declare module "vitest" {
   interface Assertion<T> extends mixNMatchers.MixNMatchers<void, T> {}

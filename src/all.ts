@@ -1,5 +1,5 @@
 import type { expect } from "@jest/globals";
-import * as mixNMatchers from ".";
+import * as mixNMatchers from "mix-n-matchers";
 
 const jestExpect = (globalThis as { expect?: typeof expect }).expect;
 

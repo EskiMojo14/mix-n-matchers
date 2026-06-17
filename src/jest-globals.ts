@@ -1,5 +1,5 @@
 import { expect } from "@jest/globals";
-import * as mixNMatchers from ".";
+import * as mixNMatchers from "mix-n-matchers";
 
 declare module "@jest/expect" {
   interface Matchers<R, T> extends mixNMatchers.MixNMatchers<R, T> {}
