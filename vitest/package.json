@@ -2,11 +2,11 @@
   "name": "mix-n-matchers-vitest",
   "version": "1.0.0",
   "description": "Miscellaneous custom Jest matchers",
+  "files": [
+    "../dist"
+  ],
   "type": "module",
   "main": "../dist/vitest.cjs",
   "module": "../dist/vitest.mjs",
-  "types": "../dist/vitest.d.mts",
-  "files": [
-    "../dist"
-  ]
+  "types": "../dist/vitest.d.mts"
 }

@@ -2,6 +2,33 @@
   "name": "mix-n-matchers",
   "version": "2.0.1",
   "description": "Miscellaneous custom Jest matchers",
+  "keywords": [
+    "assertions",
+    "extend",
+    "extended",
+    "jest",
+    "matchers",
+    "test",
+    "testing",
+    "vitest"
+  ],
+  "homepage": "https://github.com/EskiMojo14/mix-n-matchers#readme",
+  "bugs": {
+    "url": "https://github.com/EskiMojo14/mix-n-matchers/issues"
+  },
+  "license": "MIT",
+  "author": "eskimojo",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EskiMojo14/mix-n-matchers.git"
+  },
+  "files": [
+    "dist",
+    "all",
+    "jest-globals",
+    "vitest",
+    "utilities"
+  ],
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -59,13 +86,6 @@
       }
     }
   },
-  "files": [
-    "dist",
-    "all",
-    "jest-globals",
-    "vitest",
-    "utilities"
-  ],
   "scripts": {
     "clean": "rimraf dist",
     "prepare": "husky",
@@ -78,6 +98,7 @@
     "test:all": "pnpm run test && pnpm run vitest --run",
     "test:all:dist": "pnpm run test:dist && pnpm run vitest:dist --run",
     "lint": "eslint",
+    "format": "oxfmt",
     "pre-commit": "lint-staged",
     "attw": "attw",
     "publint": "publint",
@@ -85,26 +106,10 @@
     "prepack": "pnpm run publint --pack false",
     "website": "pnpm --filter website start"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/EskiMojo14/mix-n-matchers.git"
+  "dependencies": {
+    "@jest/expect-utils": "^30.4.1",
+    "jest-matcher-utils": "^30.4.1"
   },
-  "keywords": [
-    "jest",
-    "vitest",
-    "matchers",
-    "extend",
-    "extended",
-    "test",
-    "testing",
-    "assertions"
-  ],
-  "author": "eskimojo",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/EskiMojo14/mix-n-matchers/issues"
-  },
-  "homepage": "https://github.com/EskiMojo14/mix-n-matchers#readme",
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.3",
     "@eslint/js": "^10.0.1",
@@ -125,7 +130,7 @@
     "jest": "^30.4.2",
     "jiti": "^2.7.0",
     "lint-staged": "^17.0.7",
-    "prettier": "^3.8.4",
+    "oxfmt": "^0.55.0",
     "publint": "^0.3.21",
     "rimraf": "^6.1.3",
     "ts-jest": "^29.4.11",
@@ -134,10 +139,6 @@
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.61.0",
     "vitest": "^4.1.9"
-  },
-  "dependencies": {
-    "@jest/expect-utils": "^30.4.1",
-    "jest-matcher-utils": "^30.4.1"
   },
   "peerDependencies": {
     "jest": ">=28.0.0",
@@ -151,15 +152,11 @@
       "optional": true
     }
   },
-  "engines": {
-    "node": "^14.15.0 || ^16.10.0 || >=18.0.0"
-  },
   "lint-staged": {
-    "*.{ts,md}": "prettier --write"
+    "*": "oxfmt"
   },
-  "prettier": {},
-  "packageManager": "pnpm@11.7.0+sha512.19cc852c120c7125760f2443ee6be0ca5b40f9f50598de1a09a1f177503e010e57c23c77646e01e761de59bf874fb22a3398c33ab9691fc13eb946b6f0f4d620",
   "tsdown": {
+    "dts": true,
     "entry": [
       "src/index.ts",
       "src/all.ts",
@@ -167,14 +164,17 @@
       "src/vitest.ts",
       "src/utilities/index.ts"
     ],
-    "sourcemap": true,
+    "external": [
+      "@jest/globals"
+    ],
     "format": [
       "esm",
       "cjs"
     ],
-    "dts": true,
-    "external": [
-      "@jest/globals"
-    ]
-  }
+    "sourcemap": true
+  },
+  "engines": {
+    "node": "^14.15.0 || ^16.10.0 || >=18.0.0"
+  },
+  "packageManager": "pnpm@11.7.0+sha512.19cc852c120c7125760f2443ee6be0ca5b40f9f50598de1a09a1f177503e010e57c23c77646e01e761de59bf874fb22a3398c33ab9691fc13eb946b6f0f4d620"
 }

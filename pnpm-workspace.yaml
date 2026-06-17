@@ -1,7 +1,7 @@
 packages:
   - website
 allowBuilds:
-  '@parcel/watcher': false
+  "@parcel/watcher": false
   core-js: false
   core-js-pure: false
   es5-ext: false

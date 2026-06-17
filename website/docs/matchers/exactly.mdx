@@ -17,11 +17,12 @@ const mock = jest.fn();
 mock(ref);
 
 it("is exactly equal", () => {
-  expect(mock).toHaveBeenCalledWith(expect.exactly(ref));
-  expect(mock).not.toHaveBeenCalledWith(expect.exactly({}));
+expect(mock).toHaveBeenCalledWith(expect.exactly(ref));
+expect(mock).not.toHaveBeenCalledWith(expect.exactly({}));
 
-  // this would normally pass
-  expect(mock).toHaveBeenCalledWith({});
+// this would normally pass
+expect(mock).toHaveBeenCalledWith({});
 });
 `}
+
 </TestFile>
