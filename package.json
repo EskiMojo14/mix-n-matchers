@@ -150,6 +150,11 @@
     "*": "oxfmt"
   },
   "tsdown": {
+    "deps": {
+      "neverBundle": [
+        "@jest/globals"
+      ]
+    },
     "dts": true,
     "entry": [
       "src/index.ts",
@@ -157,9 +162,6 @@
       "src/jest-globals.ts",
       "src/vitest.ts",
       "src/utilities/index.ts"
-    ],
-    "external": [
-      "@jest/globals"
     ],
     "format": [
       "esm",
