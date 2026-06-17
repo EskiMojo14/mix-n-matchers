@@ -24,9 +24,7 @@ export const getObjectKeys = (object: object): Array<string | symbol> => {
 };
 
 function getPrototype(obj: object) {
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (Object.getPrototypeOf) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return Object.getPrototypeOf(obj);
   }
 
@@ -34,7 +32,6 @@ function getPrototype(obj: object) {
     return null;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return obj.constructor.prototype;
 }
 
@@ -47,7 +44,6 @@ export function hasProperty(obj: object | null, property: string | symbol): bool
     return true;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   return hasProperty(getPrototype(obj), property);
 }
 
@@ -97,6 +93,7 @@ declare module "mix-n-matchers" {
      *
      * expect({ a: 1, b: 2 }).toEqual(objectContainingOnly({ a: 1 })); // fail
      */
+    // oxlint-disable-next-line typescript/no-unnecessary-type-parameters
     objectContainingOnly<E = {}>(expected: E): any;
   }
 }

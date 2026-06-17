@@ -16,9 +16,8 @@ import {
 import type { Mock } from "vitest";
 import type { MatcherUtils, Tester } from "./types";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isMock = (received: any): received is jest.Mock | Mock =>
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  // oxlint-disable-next-line no-underscore-dangle
   received?._isMockFunction === true;
 
 export interface CallInfo {
@@ -43,12 +42,8 @@ export interface Spy {
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isSpy = (received: any): received is Spy =>
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  typeof received?.calls?.all === "function" &&
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  typeof received?.calls?.count === "function";
+  typeof received?.calls?.all === "function" && typeof received?.calls?.count === "function";
 
 export function ensureMockOrSpy(
   received: unknown,

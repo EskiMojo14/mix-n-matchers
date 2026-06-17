@@ -64,6 +64,7 @@ declare module "mix-n-matchers" {
      * // whereas
      * expect([1, 2, 2, 3]).toEqual(expect.arrayContaining([1, 2])); // pass
      */
+    // oxlint-disable-next-line typescript/no-unnecessary-type-parameters
     arrayContainingOnly<E = any>(expected: Array<E>): any;
   }
 }

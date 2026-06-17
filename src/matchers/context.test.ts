@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import type { Mock } from "@globals";
 import { it, expect, describe, fn } from "@globals";
 import type { CallInfo, Spy } from "../utils";
 
 // Given a Jest mock function, return a minimal mock of a spy.
 const createSpy = (mock: Mock): Spy => {
+  // oxlint-disable-next-line unicorn/consistent-function-scoping
   const spy = function () {};
 
   spy.calls = {
@@ -13,7 +13,6 @@ const createSpy = (mock: Mock): Spy => {
       let i = 0;
       while (i < mock.mock.calls.length) {
         const returnRecord = mock.mock.results[i];
-        /* eslint-disable @typescript-eslint/no-unsafe-assignment */
         info.push({
           args: mock.mock.calls[i] ?? [],
           object:
@@ -22,7 +21,6 @@ const createSpy = (mock: Mock): Spy => {
               : (mock.mock as { instances: Array<unknown> }).instances[i],
           returnValue: returnRecord?.type === "return" ? returnRecord.value : undefined,
         });
-        /* eslint-enable @typescript-eslint/no-unsafe-assignment */
         i++;
       }
       return info;
@@ -41,6 +39,7 @@ describe.each([
   "toHaveBeenNthCalledWithContext",
 ] as const)("%s", (calledWithContext) => {
   it("works only on spies or fn", () => {
+    // oxlint-disable-next-line unicorn/consistent-function-scoping
     const mock = function mock() {};
     if (calledWithContext === "toHaveBeenNthCalledWithContext") {
       expect(() => {

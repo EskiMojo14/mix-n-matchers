@@ -181,6 +181,7 @@ export const strictRecordOf = makeRecordOfMatcher("strictRecordOf", true, true);
 
 declare module "mix-n-matchers" {
   export interface MixNMatchers<R = any, T = unknown> {
+    // oxlint-disable typescript/no-unnecessary-type-parameters
     /**
      * Asserts that a value is an iterable where all items are deeply equal to the expected value.
      *
@@ -325,5 +326,6 @@ declare module "mix-n-matchers" {
      * expect({ value: { a: 1, b: 2, c: 1 } }).toEqual({ value: expect.strictRecordOf(expect.any(String), expect.any(Number)) });
      */
     strictRecordOf<K extends string, V>(expectedKey: K, expectedValue: V): any;
+    // oxlint-enable typescript/no-unnecessary-type-parameters
   }
 }

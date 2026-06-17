@@ -50,6 +50,7 @@ declare module "mix-n-matchers" {
      * expect(3).toEqual(expect.oneOf([1, 2, 3]));
      * expect(4).toEqual(expect.oneOf([1, 2, 3])); // fails
      */
+    // oxlint-disable-next-line typescript/no-unnecessary-type-parameters
     oneOf<E>(expected: ReadonlyArray<E>): any;
   }
 }

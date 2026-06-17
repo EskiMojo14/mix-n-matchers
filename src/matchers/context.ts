@@ -391,7 +391,7 @@ export const toHaveBeenNthCalledWithContext = createToHaveBeenNthCalledWithConte
 
 declare module "mix-n-matchers" {
   export interface MixNMatchers<R, T = unknown> {
-    /* eslint-disable @typescript-eslint/no-unnecessary-type-parameters */
+    // oxlint-disable typescript/no-unnecessary-type-parameters
     /**
      * Ensure a mock function is called with a specific context (`this`)
      *
@@ -412,6 +412,6 @@ declare module "mix-n-matchers" {
      * Optionally you can provide a type for the expected context via a generic.
      */
     toHaveBeenNthCalledWithContext<E>(n: number, expected: E): R;
-    /* eslint-enable @typescript-eslint/no-unnecessary-type-parameters */
+    // oxlint-enable typescript/no-unnecessary-type-parameters
   }
 }

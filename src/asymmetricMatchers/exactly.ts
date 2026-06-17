@@ -58,6 +58,7 @@ declare module "mix-n-matchers" {
      * expect(fn).not.toHaveBeenCalledWith(expect.exactly({}))
      * expect(fn).toHaveBeenCalledWith(expect.exactly(ref))
      */
+    // oxlint-disable-next-line typescript/no-unnecessary-type-parameters
     exactly<E>(expected: E): any;
   }
 }
