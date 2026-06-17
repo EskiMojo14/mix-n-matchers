@@ -17,13 +17,14 @@ Optionally, you can pass two arguments and the first one will be matched against
 const record = { a: 1, b: 2, c: 3 };
 
 it("is a record of the expected values", () => {
-  expect(record).toBeRecordOf(expect.any(Number));
-  expect(record).toBeRecordOf(expect.any(String), expect.any(Number));
+expect(record).toBeRecordOf(expect.any(Number));
+expect(record).toBeRecordOf(expect.any(String), expect.any(Number));
 });
 `}
+
 </TestFile>
 
-:::caution 
+:::caution
 
 Keys and values are retrieved using `Object.entries`, so only string (non-symbol) enumerable keys are checked.
 

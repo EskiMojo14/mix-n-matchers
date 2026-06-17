@@ -2,11 +2,11 @@
   "name": "mix-n-matchers-all",
   "version": "1.0.0",
   "description": "Miscellaneous custom Jest matchers",
+  "files": [
+    "../dist"
+  ],
   "type": "module",
   "main": "../dist/all.cjs",
   "module": "../dist/all.mjs",
-  "types": "../dist/all.d.mts",
-  "files": [
-    "../dist"
-  ]
+  "types": "../dist/all.d.mts"
 }

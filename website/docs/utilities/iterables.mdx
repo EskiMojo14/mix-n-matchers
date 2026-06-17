@@ -15,12 +15,13 @@ import { some } from "mix-n-matchers/utilities";
 const nums = [1, 2, 3];
 
 const result = some(nums, (value) => {
-  expect(value).toBeGreaterThan(2);
-  return value;
+expect(value).toBeGreaterThan(2);
+return value;
 });
 
 expect(result).toBe(3);
 `}
+
 </TestFile>
 
 :::note
@@ -37,19 +38,20 @@ Returns a promise that resolves to the result of calling the assertion on the fi
 {`
 import { someAsync } from "mix-n-matchers/utilities";
 
-const asyncNums = async function* () {
-  yield 1;
-  yield 2;
-  yield 3;
+const asyncNums = async function\* () {
+yield 1;
+yield 2;
+yield 3;
 };
 
 const promise = someAsync(asyncNums(), (value) => {
-  expect(value).toBeGreaterThan(2);
-  return value;
+expect(value).toBeGreaterThan(2);
+return value;
 });
 
 expect(promise).resolves.toBe(3);
 `}
+
 </TestFile>
 
 ## `every(iterable, assertion)`
@@ -65,12 +67,13 @@ import { every } from "mix-n-matchers/utilities";
 const nums = [1, 2, 3];
 
 const results = every(nums, (value) => {
-  expect(value).toBeGreaterThan(0);
-  return value * 2;
+expect(value).toBeGreaterThan(0);
+return value \* 2;
 });
 
 expect(results).toEqual([2, 4, 6]);
 `}
+
 </TestFile>
 
 :::note
@@ -87,17 +90,18 @@ Returns a promise that resolves to an array of the results of calling the assert
 {`
 import { everyAsync } from "mix-n-matchers/utilities";
 
-const asyncNums = async function* () {
-  yield 1;
-  yield 2;
-  yield 3;
+const asyncNums = async function\* () {
+yield 1;
+yield 2;
+yield 3;
 };
 
 const promise = everyAsync(asyncNums(), (value) => {
-  expect(value).toBeGreaterThan(0);
-  return value * 2;
+expect(value).toBeGreaterThan(0);
+return value \* 2;
 });
 
 expect(promise).resolves.toEqual([2, 4, 6]);
 `}
+
 </TestFile>

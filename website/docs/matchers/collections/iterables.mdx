@@ -20,10 +20,11 @@ const array = [1, 1, 2, 3];
 const set = new Set(array);
 
 it("is an iterable of the expected values", () => {
-  expect(array).toBeIterableOf(expect.any(Number));
-  expect(set).toBeIterableOf(expect.any(Number));
+expect(array).toBeIterableOf(expect.any(Number));
+expect(set).toBeIterableOf(expect.any(Number));
 });
 `}
+
 </TestFile>
 
 ## `.toBeSequence(...sequence)`
@@ -38,10 +39,11 @@ const array = [1, 1, 2, 3];
 const set = new Set(array);
 
 it("is an iterable with the exact sequence of values", () => {
-  expect(array).toBeSequence(1, 1, 2, 3);
-  expect(set).toBeSequence(1, 2, 3);
+expect(array).toBeSequence(1, 1, 2, 3);
+expect(set).toBeSequence(1, 2, 3);
 });
 `}
+
 </TestFile>
 
 ## `.toEqualSequence(...sequence)`
@@ -58,10 +60,11 @@ const array = [1, 1, 2, 3];
 const set = new Set(array);
 
 it("is an iterable with the exact sequence of values", () => {
-  expect(array).toEqualSequence(1, 1, 2, 3);
-  expect(set).toEqualSequence(1, 2, 3);
+expect(array).toEqualSequence(1, 1, 2, 3);
+expect(set).toEqualSequence(1, 2, 3);
 });
 `}
+
 </TestFile>
 
 ## `.toSatisfySequence(...predicates)`
@@ -76,19 +79,20 @@ const array = [1, 1, 2, 3];
 const set = new Set(array);
 
 it("is an iterable where each item satisfies the corresponding predicate", () => {
-  expect(array).toSatisfySequence(
-    (value) => value === 1,
-    (value) => value === 1,
-    (value) => value === 2,
-    (value) => value === 3
-  );
-  expect(set).toSatisfySequence(
-    (value) => value === 1,
-    (value) => value === 2,
-    (value) => value === 3
-  );
+expect(array).toSatisfySequence(
+(value) => value === 1,
+(value) => value === 1,
+(value) => value === 2,
+(value) => value === 3
+);
+expect(set).toSatisfySequence(
+(value) => value === 1,
+(value) => value === 2,
+(value) => value === 3
+);
 });
 `}
+
 </TestFile>
 
 ## `.toContainSequence(...sequence)`
@@ -103,10 +107,11 @@ const array = [1, 1, 2, 3];
 const set = new Set(array);
 
 it("is an iterable that contains the exact sequence of values", () => {
-  expect(array).toContainSequence(1, 2);
-  expect(set).toContainSequence(1, 2);
+expect(array).toContainSequence(1, 2);
+expect(set).toContainSequence(1, 2);
 });
 `}
+
 </TestFile>
 
 ## `.toContainEqualSequence(...sequence)`
@@ -123,10 +128,11 @@ const array = [1, 1, 2, 3];
 const set = new Set(array);
 
 it("is an iterable that contains the exact sequence of values", () => {
-  expect(array).toContainEqualSequence(1, 2);
-  expect(set).toContainEqualSequence(1, 2);
+expect(array).toContainEqualSequence(1, 2);
+expect(set).toContainEqualSequence(1, 2);
 });
 `}
+
 </TestFile>
 
 ## `.toContainSequenceSatisfying(...predicates)`
@@ -141,14 +147,15 @@ const array = [1, 1, 2, 3];
 const set = new Set(array);
 
 it("is an iterable that contains the exact sequence of values", () => {
-  expect(array).toContainSequenceSatisfying(
-    (value) => value === 1,
-    (value) => value === 2
-  );
-  expect(set).toContainSequenceSatisfying(
-    (value) => value === 1,
-    (value) => value === 2
-  );
+expect(array).toContainSequenceSatisfying(
+(value) => value === 1,
+(value) => value === 2
+);
+expect(set).toContainSequenceSatisfying(
+(value) => value === 1,
+(value) => value === 2
+);
 });
 `}
+
 </TestFile>

@@ -2,7 +2,7 @@ import { TestFile } from "/src/components/TestFile";
 
 # Mocks
 
-## `.toHaveBeenCalledWithContext(context)` 
+## `.toHaveBeenCalledWithContext(context)`
 
 Use `.toHaveBeenCalledWithContext` to assert that a mock function was called with a specific context (`this` value).
 
@@ -14,9 +14,10 @@ const context = {};
 mock.call(context);
 
 it("was called with the context", () => {
-  expect(mock).toHaveBeenCalledWithContext(context);
+expect(mock).toHaveBeenCalledWithContext(context);
 });
 `}
+
 </TestFile>
 
 ## `.toHaveBeenLastCalledWithContext(context)`
@@ -33,9 +34,10 @@ mock.call({});
 mock.call(context);
 
 it("was last called with the context", () => {
-  expect(mock).toHaveBeenLastCalledWithContext(context);
+expect(mock).toHaveBeenLastCalledWithContext(context);
 });
 `}
+
 </TestFile>
 
 ## `.toHaveBeenNthCalledWithContext(nthCall, context)`
@@ -52,7 +54,8 @@ mock.call(context);
 mock.call({});
 
 it("was nth called with the context", () => {
-  expect(mock).toHaveBeenNthCalledWithContext(2, context);
+expect(mock).toHaveBeenNthCalledWithContext(2, context);
 });
 `}
+
 </TestFile>

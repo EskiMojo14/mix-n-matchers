@@ -19,7 +19,7 @@ Put another way, it checks that the received array is a subset of (or equal to) 
 :::
 
 <TestFile name="arrayContainingOnly">
-{`
+  {`
 it("contains only the expected values", () => {
   expect({ array: [1, 2] }).toEqual({
     array: expect.arrayContainingOnly([1, 2, 3]),
@@ -56,7 +56,8 @@ it("contains only the expected keys and values", () => {
   expect({ a: 1 }).toEqual(expect.objectContainingOnly({ a: 1, b: 2 }));
   expect({ a: 1, b: 2 }).toEqual(expect.objectContainingOnly({ a: 1, b: 2 }));
 
-  expect({ a: 1, b: 2 }).not.toEqual(expect.objectContainingOnly({ a: 1 }));
+expect({ a: 1, b: 2 }).not.toEqual(expect.objectContainingOnly({ a: 1 }));
 });
 `}
+
 </TestFile>

@@ -2,11 +2,11 @@
   "name": "mix-n-matchers-all-globals",
   "version": "1.0.0",
   "description": "Miscellaneous custom Jest matchers",
+  "files": [
+    "../dist"
+  ],
   "type": "module",
   "main": "../dist/jest-globals.cjs",
   "module": "../dist/jest-globals.mjs",
-  "types": "../dist/jest-globals.d.mts",
-  "files": [
-    "../dist"
-  ]
+  "types": "../dist/jest-globals.d.mts"
 }

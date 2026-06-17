@@ -20,43 +20,43 @@ enum Direction {
 }
 
 it("is a member of the numeric enum", () => {
-  expect(Direction.Up).toBeEnum(Direction);
+expect(Direction.Up).toBeEnum(Direction);
 });
 `,
   "/string.test.ts":`
 enum Direction {
-  Up = "UP",
-  Down = "DOWN",
-  Left = "LEFT",
-  Right = "RIGHT",
+Up = "UP",
+Down = "DOWN",
+Left = "LEFT",
+Right = "RIGHT",
 }
 
 it("is a member of the string enum", () => {
-  expect(Direction.Up).toBeEnum(Direction);
+expect(Direction.Up).toBeEnum(Direction);
 });
 `,
 "/heterogenous.test.ts":`
 enum Direction {
-  Up = "UP",
-  Down = 1,
-  Left = "LEFT",
-  Right = 2,
+Up = "UP",
+Down = 1,
+Left = "LEFT",
+Right = 2,
 }
 
 it("is a member of the string enum", () => {
-  expect(Direction.Up).toBeEnum(Direction);
+expect(Direction.Up).toBeEnum(Direction);
 });
 `,
   "/const object.test.ts":`
 const Direction = {
-  Up: "UP",
-  Down: "DOWN",
-  Left: "LEFT",
-  Right: "RIGHT",
+Up: "UP",
+Down: "DOWN",
+Left: "LEFT",
+Right: "RIGHT",
 } as const;
 
 it("is a member of the const object", () => {
-  expect(Direction.Up).toBeEnum(Direction);
+expect(Direction.Up).toBeEnum(Direction);
 });
 `
 }}/>
@@ -64,6 +64,7 @@ it("is a member of the const object", () => {
 :::tip Aliasing `expect.ofEnum` to `expect.enum`
 
 As `enum` is a reserved word in Javascript, it is not possible to export a matcher with this name. However, you can alias it in your setup file:
+
 <Tabs groupId="test-runner">
   <TabItem value="Jest" default>
     ```ts title="test-setup.ts"
@@ -75,7 +76,7 @@ As `enum` is a reserved word in Javascript, it is not possible to export a match
       exactly,
       enum: ofEnum,
     };
-    
+
     expect.extend(matchers);
 
     declare global {
