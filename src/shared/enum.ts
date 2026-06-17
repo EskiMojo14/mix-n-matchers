@@ -4,10 +4,7 @@ import type { EnumLike } from "../utils/enum";
 import { getValidEnumValues } from "../utils/enum";
 import type { MatcherFunction } from "../utils/types";
 
-const createEnumMatcher = (
-  matcherName: string,
-  asymmetric: boolean,
-): MatcherFunction<[EnumLike]> =>
+const createEnumMatcher = (matcherName: string, asymmetric: boolean): MatcherFunction<[EnumLike]> =>
   function toBeEnum(received, expected) {
     const options: MatcherHintOptions = {
       isNot: this.isNot,

@@ -212,13 +212,9 @@ html[data-theme="dark"] {
   }
   &:hover {
     &::before {
-      background-image: make-github-logo(
-        util.str-replace(#{colors.$md-teal-500}, "#", "%23")
-      );
+      background-image: make-github-logo(util.str-replace(#{colors.$md-teal-500}, "#", "%23"));
       [data-theme="dark"] & {
-        background-image: make-github-logo(
-          util.str-replace(#{colors.$md-teal-300}, "#", "%23")
-        );
+        background-image: make-github-logo(util.str-replace(#{colors.$md-teal-300}, "#", "%23"));
       }
     }
   }

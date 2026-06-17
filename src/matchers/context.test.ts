@@ -20,8 +20,7 @@ const createSpy = (mock: Mock): Spy => {
             "contexts" in mock.mock
               ? mock.mock.contexts[i]
               : (mock.mock as { instances: Array<unknown> }).instances[i],
-          returnValue:
-            returnRecord?.type === "return" ? returnRecord.value : undefined,
+          returnValue: returnRecord?.type === "return" ? returnRecord.value : undefined,
         });
         /* eslint-enable @typescript-eslint/no-unsafe-assignment */
         i++;

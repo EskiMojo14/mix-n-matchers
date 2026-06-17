@@ -73,11 +73,7 @@ export const iterableOf = makeIterableOfMatcher("iterableOf", true);
  *
  * expect([1, 2, 1]).toBeStrictIterableOf(expect.any(Number));
  */
-export const toBeStrictIterableOf = makeIterableOfMatcher(
-  "toBeStrictIterableOf",
-  false,
-  true,
-);
+export const toBeStrictIterableOf = makeIterableOfMatcher("toBeStrictIterableOf", false, true);
 
 /**
  * Matches an iterable where all items are strictly deeply equal to the expected value.
@@ -88,11 +84,7 @@ export const toBeStrictIterableOf = makeIterableOfMatcher(
  *
  * expect({ value: [1, 2, 1] }).toEqual({ value: expect.strictIterableOf(expect.any(Number)) });
  */
-export const strictIterableOf = makeIterableOfMatcher(
-  "strictIterableOf",
-  true,
-  true,
-);
+export const strictIterableOf = makeIterableOfMatcher("strictIterableOf", true, true);
 
 const makeRecordOfMatcher = (
   matcherName: string,
@@ -174,11 +166,7 @@ export const recordOf = makeRecordOfMatcher("recordOf", true);
  *
  * expect({ a: 1, b: 2, c: 1 }).toBeStrictRecordOf(expect.any(Number));
  */
-export const toBeStrictRecordOf = makeRecordOfMatcher(
-  "toBeStrictRecordOf",
-  false,
-  true,
-);
+export const toBeStrictRecordOf = makeRecordOfMatcher("toBeStrictRecordOf", false, true);
 
 /**
  * Matches a record (object) where all values are strictly deeply equal to the expected value.

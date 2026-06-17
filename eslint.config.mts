@@ -36,10 +36,7 @@ export default tseslint.config(
       "@typescript-eslint/no-empty-object-type": "off",
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/only-throw-error": "off",
-      "@typescript-eslint/restrict-template-expressions": [
-        "error",
-        { allowNumber: true },
-      ],
+      "@typescript-eslint/restrict-template-expressions": ["error", { allowNumber: true }],
       "import-x/order": [
         "error",
         {
@@ -48,15 +45,7 @@ export default tseslint.config(
             orderImportKind: "asc",
             caseInsensitive: true,
           },
-          groups: [
-            "builtin",
-            "external",
-            "internal",
-            "parent",
-            "sibling",
-            "index",
-            "object",
-          ],
+          groups: ["builtin", "external", "internal", "parent", "sibling", "index", "object"],
           pathGroups: [
             {
               pattern: "*.{css,scss}",

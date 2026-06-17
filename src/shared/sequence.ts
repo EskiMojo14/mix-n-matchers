@@ -11,10 +11,8 @@ import type { MatcherFunction } from "../utils/types";
 
 type Predicate = (value: unknown) => boolean;
 
-const printReceivedSequence = (received: Array<unknown>) =>
-  received.map(printReceived).join(", ");
-const printExpectedSequence = (expected: Array<unknown>) =>
-  expected.map(printReceived).join(", ");
+const printReceivedSequence = (received: Array<unknown>) => received.map(printReceived).join(", ");
+const printExpectedSequence = (expected: Array<unknown>) => expected.map(printReceived).join(", ");
 
 const makeSatisfySequenceMatcher = (
   matcherName: string,
@@ -33,8 +31,7 @@ const makeSatisfySequenceMatcher = (
     if (!isIterable(received)) {
       return {
         pass: false,
-        message: () =>
-          prefix + `Expected ${printReceived(received)} to be an iterable`,
+        message: () => prefix + `Expected ${printReceived(received)} to be an iterable`,
       };
     }
     let i = 0;
@@ -76,8 +73,7 @@ const makeSatisfySequenceMatcher = (
     }
     return {
       pass: true,
-      message: () =>
-        prefix + `Expected ${printReceived(received)} not to satisfy sequence`,
+      message: () => prefix + `Expected ${printReceived(received)} not to satisfy sequence`,
     };
   };
 
@@ -91,10 +87,7 @@ const makeSatisfySequenceMatcher = (
  *   (x) => x === 3,
  * );
  */
-export const toSatisfySequence = makeSatisfySequenceMatcher(
-  "toSatisfySequence",
-  false,
-);
+export const toSatisfySequence = makeSatisfySequenceMatcher("toSatisfySequence", false);
 
 /**
  * Matches an iterable that satisfies a sequence of predicates.
@@ -130,8 +123,7 @@ const makeEqualSequenceMatcher = (
       return {
         pass: false,
         message: () =>
-          prefix +
-          `Expected ${printReceived(received)} to be an iterable, but it was not`,
+          prefix + `Expected ${printReceived(received)} to be an iterable, but it was not`,
       };
     }
     const equalValue = makeEqualValue(this);
@@ -182,22 +174,14 @@ const makeEqualSequenceMatcher = (
  * @example
  * expect([1, 2, 3]).toBeSequence(1, 2, 3);
  */
-export const toBeSequence = makeEqualSequenceMatcher(
-  "toBeSequence",
-  false,
-  "reference",
-);
+export const toBeSequence = makeEqualSequenceMatcher("toBeSequence", false, "reference");
 
 /**
  * Asserts that an iterable matches a sequence of expected items, using deep equality.
  * @example
  * expect([1, 2, 3]).toEqualSequence(1, 2, 3);
  */
-export const toEqualSequence = makeEqualSequenceMatcher(
-  "toEqualSequence",
-  false,
-  false,
-);
+export const toEqualSequence = makeEqualSequenceMatcher("toEqualSequence", false, false);
 
 /**
  * Asserts that an iterable matches a sequence of expected items, using strict deep equality.
@@ -206,11 +190,7 @@ export const toEqualSequence = makeEqualSequenceMatcher(
  * @example
  * expect([1, 2, 3]).toStrictEqualSequence(1, 2, 3);
  */
-export const toStrictEqualSequence = makeEqualSequenceMatcher(
-  "toStrictEqualSequence",
-  false,
-  true,
-);
+export const toStrictEqualSequence = makeEqualSequenceMatcher("toStrictEqualSequence", false, true);
 
 /**
  * Matches an iterable of a sequence of expected items, using reference equality (===).
@@ -220,11 +200,7 @@ export const toStrictEqualSequence = makeEqualSequenceMatcher(
  *  value: expect.sequenceMatching(1, 2, 3),
  * });
  */
-export const sequenceMatching = makeEqualSequenceMatcher(
-  "sequenceMatching",
-  true,
-  "reference",
-);
+export const sequenceMatching = makeEqualSequenceMatcher("sequenceMatching", true, "reference");
 
 /**
  * Matches an iterable of a sequence of expected items, using deep equality.
@@ -245,11 +221,7 @@ export const sequenceOf = makeEqualSequenceMatcher("sequenceOf", true, false);
  *  value: expect.strictSequenceOf(1, 2, 3),
  * });
  */
-export const strictSequenceOf = makeEqualSequenceMatcher(
-  "strictSequenceOf",
-  true,
-  true,
-);
+export const strictSequenceOf = makeEqualSequenceMatcher("strictSequenceOf", true, true);
 
 const makeContainSequenceMatcher = (
   matcherName: string,
@@ -272,8 +244,7 @@ const makeContainSequenceMatcher = (
       return {
         pass: false,
         message: () =>
-          prefix +
-          `Expected ${printReceived(received)} to be an iterable, but it was not`,
+          prefix + `Expected ${printReceived(received)} to be an iterable, but it was not`,
       };
     }
 
@@ -403,8 +374,7 @@ export const makeContainSatisfySequenceMatcher = (
     if (!isIterable(received)) {
       return {
         pass: false,
-        message: () =>
-          prefix + `Expected ${printReceived(received)} to be an iterable`,
+        message: () => prefix + `Expected ${printReceived(received)} to be an iterable`,
       };
     }
     let expectedIdx = 0;
@@ -416,11 +386,7 @@ export const makeContainSatisfySequenceMatcher = (
         matcherErrorMessage(
           hint,
           "All predicates must be functions",
-          printWithType(
-            `Predicate at index ${expectedIdx}`,
-            predicate,
-            stringify,
-          ),
+          printWithType(`Predicate at index ${expectedIdx}`, predicate, stringify),
         ),
       );
       if (predicate(receivedItem)) {
@@ -516,9 +482,7 @@ declare module "mix-n-matchers" {
      * @example
      * expect([1, 2, 3]).toStrictEqualSequence(1, 2, 3);
      */
-    toStrictEqualSequence<S extends [unknown, ...Array<unknown>]>(
-      ...expected: S
-    ): R;
+    toStrictEqualSequence<S extends [unknown, ...Array<unknown>]>(...expected: S): R;
 
     /**
      * Asserts that an iterable contains a sequence of expected items, using reference equality (===).
@@ -529,9 +493,7 @@ declare module "mix-n-matchers" {
      * expect([0, 1, 2, 3]).toContainSequence(1, 2, 3);
      * expect([1, 2, 3, 4]).toContainSequence(1, 2, 3);
      */
-    toContainSequence<S extends [unknown, ...Array<unknown>]>(
-      ...expected: S
-    ): R;
+    toContainSequence<S extends [unknown, ...Array<unknown>]>(...expected: S): R;
 
     /**
      * Asserts that an iterable contains a sequence of expected items, using deep equality.
@@ -542,9 +504,7 @@ declare module "mix-n-matchers" {
      * expect([0, 1, 2, 3]).toContainEqualSequence(1, 2, 3);
      * expect([1, 2, 3, 4]).toContainEqualSequence(1, 2, 3);
      */
-    toContainEqualSequence<S extends [unknown, ...Array<unknown>]>(
-      ...expected: S
-    ): R;
+    toContainEqualSequence<S extends [unknown, ...Array<unknown>]>(...expected: S): R;
 
     /**
      * Asserts that an iterable contains a sequence of expected items, using strict deep equality.
@@ -555,9 +515,7 @@ declare module "mix-n-matchers" {
      * expect([0, 1, 2, 3]).toContainStrictEqualSequence(1, 2, 3);
      * expect([1, 2, 3, 4]).toContainStrictEqualSequence(1, 2, 3);
      */
-    toContainStrictEqualSequence<S extends [unknown, ...Array<unknown>]>(
-      ...expected: S
-    ): R;
+    toContainStrictEqualSequence<S extends [unknown, ...Array<unknown>]>(...expected: S): R;
 
     /**
      * Asserts that an iterable contains a sequence satisfying a sequence of predicates.
@@ -568,10 +526,7 @@ declare module "mix-n-matchers" {
      *   (x) => x === 3,
      * );
      */
-    toContainSequenceSatisfying(
-      predicate: Predicate,
-      ...predicates: Array<Predicate>
-    ): R;
+    toContainSequenceSatisfying(predicate: Predicate, ...predicates: Array<Predicate>): R;
   }
   export interface AsymmetricMixNMatchers {
     /**
@@ -595,9 +550,7 @@ declare module "mix-n-matchers" {
      *   value: expect.sequenceMatching(1, 2, 3),
      * });
      */
-    sequenceMatching<S extends [unknown, ...Array<unknown>]>(
-      ...expected: S
-    ): any;
+    sequenceMatching<S extends [unknown, ...Array<unknown>]>(...expected: S): any;
     /**
      * Matches an iterable of a sequence of expected items, using deep equality.
      *
@@ -617,9 +570,7 @@ declare module "mix-n-matchers" {
      *   value: expect.strictSequenceOf(1, 2, 3),
      * });
      */
-    strictSequenceOf<S extends [unknown, ...Array<unknown>]>(
-      ...expected: S
-    ): any;
+    strictSequenceOf<S extends [unknown, ...Array<unknown>]>(...expected: S): any;
 
     /**
      * Matches an iterable that contains a sequence of expected items, using reference equality (===).
@@ -629,9 +580,7 @@ declare module "mix-n-matchers" {
      *   value: expect.containingSequence(1, 2, 3),
      * });
      */
-    containingSequence<S extends [unknown, ...Array<unknown>]>(
-      ...expected: S
-    ): any;
+    containingSequence<S extends [unknown, ...Array<unknown>]>(...expected: S): any;
 
     /**
      * Matches an iterable that contains a sequence of expected items, using deep equality.
@@ -641,9 +590,7 @@ declare module "mix-n-matchers" {
      *   value: expect.containingEqualSequence(1, 2, 3),
      * });
      */
-    containingEqualSequence<S extends [unknown, ...Array<unknown>]>(
-      ...expected: S
-    ): any;
+    containingEqualSequence<S extends [unknown, ...Array<unknown>]>(...expected: S): any;
 
     /**
      * Matches an iterable that contains a sequence of expected items, using strict deep equality.
@@ -653,9 +600,7 @@ declare module "mix-n-matchers" {
      *   value: expect.containingStrictEqualSequence(1, 2, 3),
      * });
      */
-    containingStrictEqualSequence<S extends [unknown, ...Array<unknown>]>(
-      ...expected: S
-    ): any;
+    containingStrictEqualSequence<S extends [unknown, ...Array<unknown>]>(...expected: S): any;
 
     /**
      * Matches an iterable that contains a sequence satisfying a sequence of predicates.
@@ -668,10 +613,7 @@ declare module "mix-n-matchers" {
      *   ),
      * });
      */
-    containingSequenceSatisfying(
-      predicate: Predicate,
-      ...predicates: Array<Predicate>
-    ): any;
+    containingSequenceSatisfying(predicate: Predicate, ...predicates: Array<Predicate>): any;
     /* eslint-enable @typescript-eslint/no-unnecessary-type-parameters */
   }
 }

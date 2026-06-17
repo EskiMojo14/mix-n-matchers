@@ -22,33 +22,33 @@ import type { MatcherFunction } from "../utils/types";
  * // whereas
  * expect([1, 2, 2, 3]).toEqual(expect.arrayContaining([1, 2])); // pass
  */
-export const arrayContainingOnly: MatcherFunction<[expected: Array<unknown>]> =
-  function (received, expected) {
-    assert(Array.isArray(expected), () =>
-      matcherErrorMessage(
-        matcherHint("arrayContainingOnly", undefined, expected as never, {
-          isNot: this.isNot,
-          promise: this.promise,
-          isDirectExpectCall: true,
-        }),
-        `${EXPECTED_COLOR("Expected")} value must be an array`,
-        printWithType("Expected", expected, stringify),
-      ),
-    );
-    const equalValue = makeEqualValue(this);
-    const pass =
-      Array.isArray(received) &&
-      received.every((item) =>
-        expected.some((expectedItem) => equalValue(item, expectedItem)),
-      );
-    return {
-      pass,
-      message: () =>
-        pass
-          ? `expected ${printReceived(received)} not to be an array containing only elements from ${printExpected(expected)}`
-          : `expected ${printReceived(received)} to to be an array containing only elements from ${printExpected(expected)}`,
-    };
+export const arrayContainingOnly: MatcherFunction<[expected: Array<unknown>]> = function (
+  received,
+  expected,
+) {
+  assert(Array.isArray(expected), () =>
+    matcherErrorMessage(
+      matcherHint("arrayContainingOnly", undefined, expected as never, {
+        isNot: this.isNot,
+        promise: this.promise,
+        isDirectExpectCall: true,
+      }),
+      `${EXPECTED_COLOR("Expected")} value must be an array`,
+      printWithType("Expected", expected, stringify),
+    ),
+  );
+  const equalValue = makeEqualValue(this);
+  const pass =
+    Array.isArray(received) &&
+    received.every((item) => expected.some((expectedItem) => equalValue(item, expectedItem)));
+  return {
+    pass,
+    message: () =>
+      pass
+        ? `expected ${printReceived(received)} not to be an array containing only elements from ${printExpected(expected)}`
+        : `expected ${printReceived(received)} to to be an array containing only elements from ${printExpected(expected)}`,
   };
+};
 
 declare module "mix-n-matchers" {
   export interface AsymmetricMixNMatchers {

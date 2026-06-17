@@ -67,11 +67,7 @@ export function ensureMockOrSpy(
   }
 }
 
-export type EqualValue = (
-  a: unknown,
-  b: unknown,
-  strictCheck?: boolean,
-) => boolean;
+export type EqualValue = (a: unknown, b: unknown, strictCheck?: boolean) => boolean;
 
 export const toStrictEqualTesters: Array<Tester> = [
   iterableEquality,
@@ -86,12 +82,9 @@ export const makeEqualValue =
     utils.equals(
       a,
       b,
-      strictCheck
-        ? [...(utils.customTesters ?? []), ...toStrictEqualTesters]
-        : utils.customTesters,
+      strictCheck ? [...(utils.customTesters ?? []), ...toStrictEqualTesters] : utils.customTesters,
       strictCheck,
     );
 
 export const isIterable = (received: unknown): received is Iterable<unknown> =>
-  received != null &&
-  typeof (received as Iterable<unknown>)[Symbol.iterator] === "function";
+  received != null && typeof (received as Iterable<unknown>)[Symbol.iterator] === "function";

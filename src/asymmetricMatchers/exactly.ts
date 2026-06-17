@@ -19,10 +19,7 @@ import type { MatcherFunction } from "../utils/types";
  * expect(fn).not.toHaveBeenCalledWith(expect.exactly({}))
  * expect(fn).toHaveBeenCalledWith(expect.exactly(ref))
  */
-export const exactly: MatcherFunction<[expected: unknown]> = function (
-  received,
-  expected,
-) {
+export const exactly: MatcherFunction<[expected: unknown]> = function (received, expected) {
   const matcherName = "exactly";
   const options: MatcherHintOptions = {
     comment: "Object.is equality",
@@ -42,13 +39,7 @@ export const exactly: MatcherFunction<[expected: unknown]> = function (
       : () =>
           matcherHint(matcherName, undefined, undefined, options) +
           "\n\n" +
-          printDiffOrStringify(
-            expected,
-            received,
-            "Expected",
-            "Received",
-            this.expand ?? true,
-          ),
+          printDiffOrStringify(expected, received, "Expected", "Received", this.expand ?? true),
   };
 };
 

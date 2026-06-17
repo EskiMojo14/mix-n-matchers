@@ -13,10 +13,7 @@ type Type = typeof possibleTypes;
  *
  * expect({ value: 1 }).toEqual({ value: expect.typeOf("number") })
  */
-export const typeOf: MatcherFunction<[expected: Type]> = function (
-  received,
-  expected,
-) {
+export const typeOf: MatcherFunction<[expected: Type]> = function (received, expected) {
   const matcherName = "typeOf";
   const options: MatcherHintOptions = {
     comment: "typeof equality",
