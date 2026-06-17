@@ -19,22 +19,8 @@ describe("enum utils", () => {
       Two = 2,
     }
     it("should return valid enum values for numeric enums", () => {
-      expect(Object.keys(NumericEnum)).toEqual([
-        "0",
-        "1",
-        "2",
-        "Zero",
-        "One",
-        "Two",
-      ]);
-      expect(Object.values(NumericEnum)).toEqual([
-        "Zero",
-        "One",
-        "Two",
-        0,
-        1,
-        2,
-      ]);
+      expect(Object.keys(NumericEnum)).toEqual(["0", "1", "2", "Zero", "One", "Two"]);
+      expect(Object.values(NumericEnum)).toEqual(["Zero", "One", "Two", 0, 1, 2]);
 
       const result = getValidEnumValues(NumericEnum);
       expect(result).toEqual([0, 1, 2]);

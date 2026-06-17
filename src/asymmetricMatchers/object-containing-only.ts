@@ -38,10 +38,7 @@ function getPrototype(obj: object) {
   return obj.constructor.prototype;
 }
 
-export function hasProperty(
-  obj: object | null,
-  property: string | symbol,
-): boolean {
+export function hasProperty(obj: object | null, property: string | symbol): boolean {
   if (!obj) {
     return false;
   }
@@ -54,44 +51,40 @@ export function hasProperty(
   return hasProperty(getPrototype(obj), property);
 }
 
-export const objectContainingOnly: MatcherFunction<
-  [expected: Record<string | symbol, unknown>]
-> = function (received, expected) {
-  assert(typeof expected === "object", () =>
-    matcherErrorMessage(
-      matcherHint("objectContainingOnly", undefined, expected as never, {
-        isNot: this.isNot,
-        promise: this.promise,
-      }),
-      `${EXPECTED_COLOR("Expected")} value must be an object`,
-      printWithType("Expected", expected, stringify),
-    ),
-  );
+export const objectContainingOnly: MatcherFunction<[expected: Record<string | symbol, unknown>]> =
+  function (received, expected) {
+    assert(typeof expected === "object", () =>
+      matcherErrorMessage(
+        matcherHint("objectContainingOnly", undefined, expected as never, {
+          isNot: this.isNot,
+          promise: this.promise,
+        }),
+        `${EXPECTED_COLOR("Expected")} value must be an object`,
+        printWithType("Expected", expected, stringify),
+      ),
+    );
 
-  const receivedIsObject = typeof received === "object" && received !== null;
-  let pass = receivedIsObject;
+    const receivedIsObject = typeof received === "object" && received !== null;
+    let pass = receivedIsObject;
 
-  if (receivedIsObject) {
-    const equalValue = makeEqualValue(this);
-    const receivedKeys = getObjectKeys(received);
+    if (receivedIsObject) {
+      const equalValue = makeEqualValue(this);
+      const receivedKeys = getObjectKeys(received);
 
-    for (const key of receivedKeys) {
-      if (
-        !hasProperty(expected, key) ||
-        !equalValue(received[key as never], expected[key])
-      ) {
-        pass = false;
-        break;
+      for (const key of receivedKeys) {
+        if (!hasProperty(expected, key) || !equalValue(received[key as never], expected[key])) {
+          pass = false;
+          break;
+        }
       }
     }
-  }
 
-  return {
-    pass,
-    message: () =>
-      `expected ${printReceived(received)} ${pass ? "not" : ""} to be an object containing only keys from ${printReceived(expected)}`,
+    return {
+      pass,
+      message: () =>
+        `expected ${printReceived(received)} ${pass ? "not" : ""} to be an object containing only keys from ${printReceived(expected)}`,
+    };
   };
-};
 
 declare module "mix-n-matchers" {
   interface AsymmetricMixNMatchers {

@@ -26,19 +26,14 @@ export declare const describe: (typeof vitestDescribe | typeof jestDescribe) & {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-type TestEach = Satisfies<
-  typeof jestDescribe.each | typeof vitestDescribe.each,
-  Each
->;
+type TestEach = Satisfies<typeof jestDescribe.each | typeof vitestDescribe.each, Each>;
 
 export declare const expect: typeof vitestExpect | typeof jestExpect;
 export declare const it: typeof vitestIt | typeof jestIt;
 
 type Procedure = (...args: Array<any>) => any;
 
-export type Mock<T extends Procedure = Procedure> =
-  | jest.Mock<T>
-  | VitestMock<T>;
+export type Mock<T extends Procedure = Procedure> = jest.Mock<T> | VitestMock<T>;
 
 export declare const fn: <T extends Procedure = Procedure>(fn?: T) => Mock<T>;
 

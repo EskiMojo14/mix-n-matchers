@@ -17,9 +17,4 @@ export {
   containingStrictEqualSequence,
   containingSequenceSatisfying,
 } from "../shared/sequence";
-export {
-  iterableOf,
-  strictIterableOf,
-  recordOf,
-  strictRecordOf,
-} from "../shared/iterable-of";
+export { iterableOf, strictIterableOf, recordOf, strictRecordOf } from "../shared/iterable-of";

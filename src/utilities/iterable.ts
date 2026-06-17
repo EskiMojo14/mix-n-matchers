@@ -30,10 +30,7 @@ function aggregateErrors(errors: Array<unknown>): string {
  * });
  * // result will be 3
  */
-export function some<T, R>(
-  actual: Iterable<T>,
-  assertion: (value: T) => Promise<R>,
-): Promise<R>;
+export function some<T, R>(actual: Iterable<T>, assertion: (value: T) => Promise<R>): Promise<R>;
 export function some<T, R>(actual: Iterable<T>, assertion: (value: T) => R): R;
 export function some<T, R>(
   actual: Iterable<T>,
@@ -157,10 +154,7 @@ export function every<T, R>(
   actual: Iterable<T>,
   assertion: (value: T) => Promise<R>,
 ): Promise<Array<Awaited<R>>>;
-export function every<T, R>(
-  actual: Iterable<T>,
-  assertion: (value: T) => R,
-): Array<R>;
+export function every<T, R>(actual: Iterable<T>, assertion: (value: T) => R): Array<R>;
 export function every<T, R>(
   actual: Iterable<T>,
   assertion: (value: T) => R | Promise<R>,

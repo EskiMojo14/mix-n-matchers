@@ -16,9 +16,7 @@ declare module "react" {
   }
 }
 
-export const CustomSandpack: React.FC<{ files: SandpackFiles }> = ({
-  files,
-}) => {
+export const CustomSandpack: React.FC<{ files: SandpackFiles }> = ({ files }) => {
   const { colorMode } = useColorMode();
   const theme = colorMode === "dark" ? dracula : githubLight;
   return (
@@ -57,7 +55,6 @@ export const CustomSandpack: React.FC<{ files: SandpackFiles }> = ({
   );
 };
 
-export const TestFile: React.FC<{ name: string; children: string }> = ({
-  name,
-  children,
-}) => <CustomSandpack files={{ [`/${name}.test.ts`]: children }} />;
+export const TestFile: React.FC<{ name: string; children: string }> = ({ name, children }) => (
+  <CustomSandpack files={{ [`/${name}.test.ts`]: children }} />
+);

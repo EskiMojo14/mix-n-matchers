@@ -7,10 +7,5 @@ import React from "react";
 type Props = WrapperProps<typeof ColorModeToggleType>;
 
 export default function ColorModeToggleWrapper(props: Props) {
-  return (
-    <ColorModeToggle
-      {...props}
-      className={clsx(props.className, "color-mode-toggle")}
-    />
-  );
+  return <ColorModeToggle {...props} className={clsx(props.className, "color-mode-toggle")} />;
 }

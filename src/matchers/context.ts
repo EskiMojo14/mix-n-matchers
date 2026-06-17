@@ -25,10 +25,7 @@ const printReceivedContext = (
   equalValue: EqualValue,
   received: unknown,
   expected: unknown,
-): string =>
-  equalValue(received, expected)
-    ? printCommon(received)
-    : printReceived(received);
+): string => (equalValue(received, expected) ? printCommon(received) : printReceived(received));
 
 const printReceivedContextsNegative = (
   equalValue: EqualValue,
@@ -43,10 +40,7 @@ const printReceivedContextsNegative = (
 
   const label = "Received:     ";
   if (isOnlyCall) {
-    return `${
-      label +
-      printReceivedContext(equalValue, indexedContexts[0]?.[1], expected)
-    }\n`;
+    return `${label + printReceivedContext(equalValue, indexedContexts[0]?.[1], expected)}\n`;
   }
 
   const printAligned = getRightAlignedPrinter(label);
@@ -74,11 +68,7 @@ const printReceivedContextsPositive = (
   const label = "Received: ";
   if (isOnlyCall && (iExpectedCall === 0 || iExpectedCall === undefined)) {
     const received = indexedContexts[0]?.[1];
-    return (
-      expectedLine +
-      label +
-      printReceivedContext(equalValue, received, expected)
-    );
+    return expectedLine + label + printReceivedContext(equalValue, received, expected);
   }
 
   const printAligned = getRightAlignedPrinter(label);
@@ -88,9 +78,7 @@ const printReceivedContextsPositive = (
     "Received\n" +
     indexedContexts.reduce((printed, [i, received]) => {
       const aligned = printAligned(String(i + 1), i === iExpectedCall);
-      return `${
-        printed + aligned + printReceivedContext(equalValue, received, expected)
-      }\n`;
+      return `${printed + aligned + printReceivedContext(equalValue, received, expected)}\n`;
     }, "")
   );
 };
@@ -112,21 +100,14 @@ const extractMock = (received: Mock | Spy) => {
   };
 };
 
-const createToHaveBeenCalledWithContextMatcher = (): MatcherFunction<
-  [expected: unknown]
-> =>
+const createToHaveBeenCalledWithContextMatcher = (): MatcherFunction<[expected: unknown]> =>
   function toHaveBeenCalledWithContext(received, expected) {
     const equalValue = makeEqualValue(this);
     const options: MatcherHintOptions = {
       isNot: this.isNot,
       promise: this.promise,
     };
-    ensureMockOrSpy(
-      received,
-      "toHaveBeenCalledWithContext",
-      undefined,
-      options,
-    );
+    ensureMockOrSpy(received, "toHaveBeenCalledWithContext", undefined, options);
 
     const { receivedName, contexts } = extractMock(received);
 
@@ -137,22 +118,14 @@ const createToHaveBeenCalledWithContextMatcher = (): MatcherFunction<
         ? () => {
             const indexedContexts: Array<IndexedContext> = [];
             let i = 0;
-            while (
-              i < contexts.length &&
-              indexedContexts.length < PRINT_LIMIT
-            ) {
+            while (i < contexts.length && indexedContexts.length < PRINT_LIMIT) {
               if (equalValue(expected, contexts[i])) {
                 indexedContexts.push([i, contexts[i]]);
               }
               i += 1;
             }
             return (
-              matcherHint(
-                `toHaveBeenCalledWithContext`,
-                receivedName,
-                undefined,
-                options,
-              ) +
+              matcherHint(`toHaveBeenCalledWithContext`, receivedName, undefined, options) +
               "\n\n" +
               `Expected: not ${printExpected(expected)}\n` +
               printReceivedContextsNegative(
@@ -167,20 +140,12 @@ const createToHaveBeenCalledWithContextMatcher = (): MatcherFunction<
         : () => {
             const indexedContexts: Array<IndexedContext> = [];
             let i = 0;
-            while (
-              i < contexts.length &&
-              indexedContexts.length < PRINT_LIMIT
-            ) {
+            while (i < contexts.length && indexedContexts.length < PRINT_LIMIT) {
               indexedContexts.push([i, contexts[i]]);
               i += 1;
             }
             return (
-              matcherHint(
-                `toHaveBeenCalledWithContext`,
-                receivedName,
-                undefined,
-                options,
-              ) +
+              matcherHint(`toHaveBeenCalledWithContext`, receivedName, undefined, options) +
               "\n\n" +
               printReceivedContextsPositive(
                 equalValue,
@@ -194,21 +159,14 @@ const createToHaveBeenCalledWithContextMatcher = (): MatcherFunction<
     };
   };
 
-const createToHaveBeenLastCalledWithContextMatcher = (): MatcherFunction<
-  [expected: unknown]
-> =>
+const createToHaveBeenLastCalledWithContextMatcher = (): MatcherFunction<[expected: unknown]> =>
   function toHaveBeenLastCalledWithContext(received, expected) {
     const equalValue = makeEqualValue(this);
     const options: MatcherHintOptions = {
       isNot: this.isNot,
       promise: this.promise,
     };
-    ensureMockOrSpy(
-      received,
-      "toHaveBeenLastCalledWithContext",
-      undefined,
-      options,
-    );
+    ensureMockOrSpy(received, "toHaveBeenLastCalledWithContext", undefined, options);
 
     const { receivedName, contexts } = extractMock(received);
     const iLast = contexts.length - 1;
@@ -226,16 +184,10 @@ const createToHaveBeenLastCalledWithContextMatcher = (): MatcherFunction<
             indexedContexts.push([iLast, contexts[iLast]]);
 
             return (
-              matcherHint(
-                "toHaveBeenLastCalledWithContext",
-                receivedName,
-                undefined,
-                options,
-              ) +
+              matcherHint("toHaveBeenLastCalledWithContext", receivedName, undefined, options) +
               "\n\n" +
               `Expected: not ${printExpected(expected)}\n` +
-              (contexts.length === 1 &&
-              stringify(contexts[0]) === stringify(expected)
+              (contexts.length === 1 && stringify(contexts[0]) === stringify(expected)
                 ? ""
                 : printReceivedContextsNegative(
                     equalValue,
@@ -267,12 +219,7 @@ const createToHaveBeenLastCalledWithContextMatcher = (): MatcherFunction<
             }
 
             return (
-              matcherHint(
-                "toHaveBeenLastCalledWithContext",
-                receivedName,
-                undefined,
-                options,
-              ) +
+              matcherHint("toHaveBeenLastCalledWithContext", receivedName, undefined, options) +
               "\n\n" +
               printReceivedContextsPositive(
                 equalValue,
@@ -299,21 +246,11 @@ const createToHaveBeenNthCalledWithContextMatcher = (): MatcherFunction<
       promise: this.promise,
       secondArgument: "expected",
     };
-    ensureMockOrSpy(
-      received,
-      "toHaveBeenNthCalledWithContext",
-      expectedArgument,
-      options,
-    );
+    ensureMockOrSpy(received, "toHaveBeenNthCalledWithContext", expectedArgument, options);
 
     assert(Number.isSafeInteger(nth) && nth > 0, () =>
       matcherErrorMessage(
-        matcherHint(
-          "toHaveBeenNthCalledWithContext",
-          undefined,
-          expectedArgument,
-          options,
-        ),
+        matcherHint("toHaveBeenNthCalledWithContext", undefined, expectedArgument, options),
         `${expectedArgument} must be a positive integer`,
         printWithType(expectedArgument, nth, stringify),
       ),
@@ -351,8 +288,7 @@ const createToHaveBeenNthCalledWithContextMatcher = (): MatcherFunction<
               "\n\n" +
               `n: ${nth}\n` +
               `Expected: not ${printExpected(expected)}\n` +
-              (contexts.length === 1 &&
-              stringify(contexts[0]) === stringify(expected)
+              (contexts.length === 1 && stringify(contexts[0]) === stringify(expected)
                 ? ""
                 : printReceivedContextsNegative(
                     equalValue,
@@ -437,24 +373,21 @@ const createToHaveBeenNthCalledWithContextMatcher = (): MatcherFunction<
  *
  * Optionally you can provide a type for the expected context via a generic.
  */
-export const toHaveBeenCalledWithContext =
-  createToHaveBeenCalledWithContextMatcher();
+export const toHaveBeenCalledWithContext = createToHaveBeenCalledWithContextMatcher();
 
 /**
  * Ensure the last call to a mock function was provided a specific context (`this`)
  *
  * Optionally you can provide a type for the expected context via a generic.
  */
-export const toHaveBeenLastCalledWithContext =
-  createToHaveBeenLastCalledWithContextMatcher();
+export const toHaveBeenLastCalledWithContext = createToHaveBeenLastCalledWithContextMatcher();
 
 /**
  * Ensure that a mock function was called with a specific context on an Nth call.
  *
  * Optionally you can provide a type for the expected context via a generic.
  */
-export const toHaveBeenNthCalledWithContext =
-  createToHaveBeenNthCalledWithContextMatcher();
+export const toHaveBeenNthCalledWithContext = createToHaveBeenNthCalledWithContextMatcher();
 
 declare module "mix-n-matchers" {
   export interface MixNMatchers<R, T = unknown> {

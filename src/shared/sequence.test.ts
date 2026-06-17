@@ -420,11 +420,7 @@ describe("toStrictEqualSequence", () => {
       { value: 2 },
       { value: 3 },
     );
-    expect([
-      { value: 1 },
-      { value: 2 },
-      { value: 3 },
-    ]).not.toStrictEqualSequence(
+    expect([{ value: 1 }, { value: 2 }, { value: 3 }]).not.toStrictEqualSequence(
       { value: 1, surplus: undefined },
       { value: 2, surplus: undefined },
       { value: 3, surplus: undefined },
@@ -444,25 +440,28 @@ describe("toStrictEqualSequence", () => {
     }).toThrowErrorMatchingSnapshot();
   });
   it("works with other iterables", () => {
-    expect(
-      new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
-    ).toStrictEqualSequence({ value: 1 }, { value: 2 }, { value: 3 });
-    expect(
-      new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
-    ).not.toStrictEqualSequence(
+    expect(new Set([{ value: 1 }, { value: 2 }, { value: 3 }])).toStrictEqualSequence(
+      { value: 1 },
+      { value: 2 },
+      { value: 3 },
+    );
+    expect(new Set([{ value: 1 }, { value: 2 }, { value: 3 }])).not.toStrictEqualSequence(
       { value: 1, surplus: undefined },
       { value: 2, surplus: undefined },
       { value: 3, surplus: undefined },
     );
 
-    expect(
-      new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
-    ).toStrictEqualSequence({ value: 1 }, { value: 2 });
+    expect(new Set([{ value: 1 }, { value: 2 }, { value: 3 }])).toStrictEqualSequence(
+      { value: 1 },
+      { value: 2 },
+    );
 
     expect(() => {
-      expect(
-        new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
-      ).toStrictEqualSequence({ value: 1 }, { value: 3 }, { value: 2 });
+      expect(new Set([{ value: 1 }, { value: 2 }, { value: 3 }])).toStrictEqualSequence(
+        { value: 1 },
+        { value: 3 },
+        { value: 2 },
+      );
     }).toThrowErrorMatchingSnapshot();
   });
 
@@ -478,10 +477,7 @@ describe("toStrictEqualSequence", () => {
       expect([{ value: 0 }]).toStrictEqualSequence({ value: 0 }, { value: 1 });
     }).toThrowErrorMatchingSnapshot();
     expect(() => {
-      expect(new Set([{ value: 0 }])).toStrictEqualSequence(
-        { value: 0 },
-        { value: 1 },
-      );
+      expect(new Set([{ value: 0 }])).toStrictEqualSequence({ value: 0 }, { value: 1 });
     }).toThrowErrorMatchingSnapshot();
   });
 
@@ -595,11 +591,7 @@ describe("strictSequenceOf", () => {
 
     expect(() => {
       expect({ value: [{ value: 1 }, { value: 2 }, { value: 3 }] }).toEqual({
-        value: expect.strictSequenceOf(
-          { value: 1 },
-          { value: 3 },
-          { value: 2 },
-        ),
+        value: expect.strictSequenceOf({ value: 1 }, { value: 3 }, { value: 2 }),
       });
     }).toThrowErrorMatchingSnapshot();
   });
@@ -630,11 +622,7 @@ describe("strictSequenceOf", () => {
       expect({
         value: new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
       }).toEqual({
-        value: expect.strictSequenceOf(
-          { value: 1 },
-          { value: 3 },
-          { value: 2 },
-        ),
+        value: expect.strictSequenceOf({ value: 1 }, { value: 3 }, { value: 2 }),
       });
     }).toThrowErrorMatchingSnapshot();
   });
@@ -751,65 +739,64 @@ describe("toContainEqualSequence", () => {
 
 describe("toContainStrictEqualSequence", () => {
   it("matches a full sequence", () => {
-    expect([
+    expect([{ value: 1 }, { value: 2 }, { value: 3 }]).toContainStrictEqualSequence(
       { value: 1 },
       { value: 2 },
       { value: 3 },
-    ]).toContainStrictEqualSequence({ value: 1 }, { value: 2 }, { value: 3 });
-    expect(
-      new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
-    ).toContainStrictEqualSequence({ value: 1 }, { value: 2 }, { value: 3 });
+    );
+    expect(new Set([{ value: 1 }, { value: 2 }, { value: 3 }])).toContainStrictEqualSequence(
+      { value: 1 },
+      { value: 2 },
+      { value: 3 },
+    );
   });
   it("matches a partial sequence", () => {
-    expect([
-      { value: 1 },
+    expect([{ value: 1 }, { value: 2 }, { value: 3 }]).toContainStrictEqualSequence(
       { value: 2 },
       { value: 3 },
-    ]).toContainStrictEqualSequence({ value: 2 }, { value: 3 });
-    expect(
-      new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
-    ).toContainStrictEqualSequence({ value: 2 }, { value: 3 });
+    );
+    expect(new Set([{ value: 1 }, { value: 2 }, { value: 3 }])).toContainStrictEqualSequence(
+      { value: 2 },
+      { value: 3 },
+    );
   });
   it("fails if the sequence is not found", () => {
     expect(() => {
-      expect([
-        { value: 1 },
+      expect([{ value: 1 }, { value: 2 }, { value: 3 }]).toContainStrictEqualSequence(
         { value: 2 },
-        { value: 3 },
-      ]).toContainStrictEqualSequence({ value: 2 }, { value: 1 });
+        { value: 1 },
+      );
     }).toThrowErrorMatchingSnapshot();
     expect(() => {
-      expect(
-        new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
-      ).toContainStrictEqualSequence({ value: 2 }, { value: 1 });
+      expect(new Set([{ value: 1 }, { value: 2 }, { value: 3 }])).toContainStrictEqualSequence(
+        { value: 2 },
+        { value: 1 },
+      );
     }).toThrowErrorMatchingSnapshot();
   });
   it("fails if only part of the sequence is found", () => {
     expect(() => {
-      expect([
+      expect([{ value: 1 }, { value: 2 }, { value: 3 }]).toContainStrictEqualSequence(
         { value: 1 },
-        { value: 2 },
         { value: 3 },
-      ]).toContainStrictEqualSequence({ value: 1 }, { value: 3 });
+      );
     }).toThrowErrorMatchingSnapshot();
     expect(() => {
-      expect(
-        new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
-      ).toContainStrictEqualSequence({ value: 1 }, { value: 3 });
+      expect(new Set([{ value: 1 }, { value: 2 }, { value: 3 }])).toContainStrictEqualSequence(
+        { value: 1 },
+        { value: 3 },
+      );
     }).toThrowErrorMatchingSnapshot();
   });
   it("succeeds if the sequence is after a part of the sequence", () => {
-    expect([
-      { value: 2 },
-      { value: 1 },
+    expect([{ value: 2 }, { value: 1 }, { value: 2 }, { value: 3 }]).toContainStrictEqualSequence(
       { value: 2 },
       { value: 3 },
-    ]).toContainStrictEqualSequence({ value: 2 }, { value: 3 });
-    expect([
-      { value: 2 },
+    );
+    expect([{ value: 2 }, { value: 2 }, { value: 3 }]).toContainStrictEqualSequence(
       { value: 2 },
       { value: 3 },
-    ]).toContainStrictEqualSequence({ value: 2 }, { value: 3 });
+    );
     expect(
       new Set([{ value: 2 }, { value: 1 }, { value: 2 }, { value: 3 }]),
     ).toContainStrictEqualSequence({ value: 2 }, { value: 3 });
@@ -943,20 +930,12 @@ describe("containingEqualSequence", () => {
 describe("containingStrictEqualSequence", () => {
   it("matches a full sequence", () => {
     expect({ array: [{ value: 1 }, { value: 2 }, { value: 3 }] }).toEqual({
-      array: expect.containingStrictEqualSequence(
-        { value: 1 },
-        { value: 2 },
-        { value: 3 },
-      ),
+      array: expect.containingStrictEqualSequence({ value: 1 }, { value: 2 }, { value: 3 }),
     });
     expect({
       array: new Set([{ value: 1 }, { value: 2 }, { value: 3 }]),
     }).toEqual({
-      array: expect.containingStrictEqualSequence(
-        { value: 1 },
-        { value: 2 },
-        { value: 3 },
-      ),
+      array: expect.containingStrictEqualSequence({ value: 1 }, { value: 2 }, { value: 3 }),
     });
   });
   it("matches a partial sequence", () => {

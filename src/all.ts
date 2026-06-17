@@ -12,8 +12,7 @@ declare global {
       enum: mixNMatchers.AsymmetricMixNMatchers["ofEnum"];
     }
 
-    interface InverseAsymmetricMatchers
-      extends mixNMatchers.AsymmetricMixNMatchers {
+    interface InverseAsymmetricMatchers extends mixNMatchers.AsymmetricMixNMatchers {
       enum: mixNMatchers.AsymmetricMixNMatchers["ofEnum"];
     }
   }

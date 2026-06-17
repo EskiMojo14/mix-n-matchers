@@ -15,10 +15,7 @@ import type { MatcherFunction } from "../utils/types";
  * expect(3).toEqual(expect.oneOf([1, 2, 3]));
  * expect(4).toEqual(expect.oneOf([1, 2, 3])); // fails
  */
-export const oneOf: MatcherFunction<[Array<unknown>]> = function (
-  value,
-  expected,
-) {
+export const oneOf: MatcherFunction<[Array<unknown>]> = function (value, expected) {
   const matcherName = "oneOf";
   const options: MatcherHintOptions = {
     isNot: this.isNot,
