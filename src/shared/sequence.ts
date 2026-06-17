@@ -442,7 +442,7 @@ export const containingSequenceSatisfying = makeContainSatisfySequenceMatcher(
 
 declare module "mix-n-matchers" {
   export interface MixNMatchers<R = any, T = unknown> {
-    /* eslint-disable @typescript-eslint/no-unnecessary-type-parameters */
+    // oxlint-disable typescript/no-unnecessary-type-parameters
     /**
      * Asserts that an iterable satisfies a sequence of predicates.
      *
@@ -529,6 +529,7 @@ declare module "mix-n-matchers" {
     toContainSequenceSatisfying(predicate: Predicate, ...predicates: Array<Predicate>): R;
   }
   export interface AsymmetricMixNMatchers {
+    // oxlint-disable typescript/no-unnecessary-type-parameters
     /**
      * Matches an iterable that satisfies a sequence of predicates.
      *
@@ -614,6 +615,6 @@ declare module "mix-n-matchers" {
      * });
      */
     containingSequenceSatisfying(predicate: Predicate, ...predicates: Array<Predicate>): any;
-    /* eslint-enable @typescript-eslint/no-unnecessary-type-parameters */
+    // oxlint-enable typescript/no-unnecessary-type-parameters
   }
 }

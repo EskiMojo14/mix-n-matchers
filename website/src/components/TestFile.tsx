@@ -10,7 +10,6 @@ import { useColorMode } from "@docusaurus/theme-common";
 import React from "react";
 
 declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
   export interface CSSProperties {
     [variable: `--${string}`]: string | number;
   }

@@ -25,7 +25,7 @@ export declare const describe: (typeof vitestDescribe | typeof jestDescribe) & {
   each: Each;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// oxlint-disable-next-line no-unused-vars
 type TestEach = Satisfies<typeof jestDescribe.each | typeof vitestDescribe.each, Each>;
 
 export declare const expect: typeof vitestExpect | typeof jestExpect;
@@ -37,7 +37,7 @@ export type Mock<T extends Procedure = Procedure> = jest.Mock<T> | VitestMock<T>
 
 export declare const fn: <T extends Procedure = Procedure>(fn?: T) => Mock<T>;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// oxlint-disable-next-line no-unused-vars
 type TestFn = Satisfies<typeof jest.fn | typeof vi.fn, typeof fn>;
 
 throw new Error("This file should be mocked");
