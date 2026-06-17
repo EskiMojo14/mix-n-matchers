@@ -8,5 +8,5 @@
   "type": "module",
   "main": "../dist/vitest.cjs",
   "module": "../dist/vitest.mjs",
-  "types": "../dist/vitest.d.mts"
+  "types": "../types/vitest.d.mts"
 }

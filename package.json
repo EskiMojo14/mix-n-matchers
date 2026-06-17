@@ -24,6 +24,7 @@
   },
   "files": [
     "dist",
+    "types",
     "all",
     "jest-globals",
     "vitest",
@@ -47,31 +48,31 @@
     },
     "./all": {
       "import": {
-        "types": "./dist/all.d.mts",
+        "types": "./types/all.d.mts",
         "default": "./dist/all.mjs"
       },
       "require": {
-        "types": "./dist/all.d.cts",
+        "types": "./types/all.d.cts",
         "default": "./dist/all.cjs"
       }
     },
     "./jest-globals": {
       "import": {
-        "types": "./dist/jest-globals.d.mts",
+        "types": "./types/jest-globals.d.mts",
         "default": "./dist/jest-globals.mjs"
       },
       "require": {
-        "types": "./dist/jest-globals.d.cts",
+        "types": "./types/jest-globals.d.cts",
         "default": "./dist/jest-globals.cjs"
       }
     },
     "./vitest": {
       "import": {
-        "types": "./dist/vitest.d.mts",
+        "types": "./types/vitest.d.mts",
         "default": "./dist/vitest.mjs"
       },
       "require": {
-        "types": "./dist/vitest.d.cts",
+        "types": "./types/vitest.d.cts",
         "default": "./dist/vitest.cjs"
       }
     },
@@ -155,7 +156,12 @@
         "@jest/globals"
       ]
     },
-    "dts": true,
+    "dts": {
+      "entry": [
+        "src/index.ts",
+        "src/utilities/index.ts"
+      ]
+    },
     "entry": [
       "src/index.ts",
       "src/all.ts",

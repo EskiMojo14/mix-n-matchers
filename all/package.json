@@ -8,5 +8,5 @@
   "type": "module",
   "main": "../dist/all.cjs",
   "module": "../dist/all.mjs",
-  "types": "../dist/all.d.mts"
+  "types": "../types/all.d.mts"
 }

@@ -3,20 +3,6 @@ import * as mixNMatchers from "mix-n-matchers";
 
 const jestExpect = (globalThis as { expect?: typeof expect }).expect;
 
-declare global {
-  namespace jest {
-    interface Matchers<R, T> extends mixNMatchers.MixNMatchers<R, T> {}
-
-    interface Expect extends mixNMatchers.AsymmetricMixNMatchers {
-      enum: mixNMatchers.AsymmetricMixNMatchers["ofEnum"];
-    }
-
-    interface InverseAsymmetricMatchers extends mixNMatchers.AsymmetricMixNMatchers {
-      enum: mixNMatchers.AsymmetricMixNMatchers["ofEnum"];
-    }
-  }
-}
-
 if (jestExpect !== undefined) {
   jestExpect.extend(mixNMatchers);
   jestExpect.extend({ enum: mixNMatchers.ofEnum });

@@ -8,5 +8,5 @@
   "type": "module",
   "main": "../dist/jest-globals.cjs",
   "module": "../dist/jest-globals.mjs",
-  "types": "../dist/jest-globals.d.mts"
+  "types": "../types/jest-globals.d.mts"
 }
