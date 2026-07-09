@@ -124,6 +124,32 @@ export const toHaveMethod: MatcherFunction<[string]> = function (received, expec
 };
 
 /**
+ * Ensure the Request object has a specific URL.
+ */
+export const toHaveURL: MatcherFunction<[string]> = function (received, expectedURL) {
+  assert(globalThis.Request, "Request is not defined in the global scope.");
+  assert(received instanceof Request, "Received value is not a Request.");
+  assert(typeof expectedURL === "string", "Expected URL must be a string.");
+
+  const matcherHintOptions: MatcherHintOptions = {
+    isNot: this.isNot,
+    promise: this.promise,
+  };
+
+  const actualURL = received.url;
+  const pass = actualURL === expectedURL;
+
+  return {
+    pass,
+    message: () =>
+      `${matcherHint("toHaveURL", "request", `"${expectedURL}"`, matcherHintOptions)}\n\n` +
+      (pass
+        ? `Expected request not to have URL ${EXPECTED_COLOR(expectedURL)}, but it did.`
+        : `Expected request to have URL ${EXPECTED_COLOR(expectedURL)}, but it was ${RECEIVED_COLOR(actualURL)}.`),
+  };
+};
+
+/**
  * Ensure the Response or Request object has a specific body text.
  * @remarks This matcher is asynchronous and returns a Promise, so it should be awaited.
  */
@@ -186,6 +212,12 @@ declare module "mix-n-matchers" {
      * expect(request).toHaveMethod("POST");
      */
     toHaveMethod(expectedMethod: string): R;
+    /**
+     * Asserts that a Request object has a specific URL.
+     * @example
+     * expect(request).toHaveURL("https://example.com/api");
+     */
+    toHaveURL(expectedURL: string): R;
     /**
      * Asserts that a Response or Request object has a specific body text.
      * @example

@@ -210,6 +210,38 @@ describe("toHaveMethod", () => {
   });
 });
 
+describe("toHaveURL", () => {
+  it("passes when the request has the expected URL", () => {
+    const request = new Request("https://example.com/api");
+    expect(request).toHaveURL("https://example.com/api");
+    expect(() => {
+      expect(request).not.toHaveURL("https://example.com/api");
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails when the request does not have the expected URL", () => {
+    const request = new Request("https://example.com/other");
+    expect(() => {
+      expect(request).toHaveURL("https://example.com/api");
+    }).toThrowErrorMatchingSnapshot();
+    expect(request).not.toHaveURL("https://example.com/api");
+  });
+
+  it("fails when the received value is not a Request", () => {
+    expect(() => {
+      expect({}).toHaveURL("https://example.com/api");
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails when Request is not defined in the global scope", () => {
+    using _ = withoutGlobalRequest();
+
+    expect(() => {
+      expect({}).toHaveURL("https://example.com/api");
+    }).toThrowErrorMatchingSnapshot();
+  });
+});
+
 describe("toHaveBodyText", () => {
   it("passes when the response/request has the expected body text", async () => {
     const response = new Response("Hello, world!");
