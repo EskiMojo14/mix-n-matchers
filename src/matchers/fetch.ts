@@ -45,6 +45,41 @@ export const toHaveStatus: MatcherFunction<[number]> = function (received, expec
   };
 };
 
+export const toHaveHeader: MatcherFunction<[string, string?]> = function (
+  received,
+  headerName,
+  expectedValue,
+) {
+  assert(globalThis.Response, "Response is not defined in the global scope.");
+  assert(received instanceof Response, "Received value is not a Response.");
+  assert(typeof headerName === "string", "Header name must be a string.");
+
+  const matcherHintOptions: MatcherHintOptions = {
+    isNot: this.isNot,
+    promise: this.promise,
+    secondArgument: expectedValue && `"${expectedValue}"`,
+  };
+
+  const hasExpected = expectedValue !== undefined;
+  const actualValue = received.headers.get(headerName);
+  const pass = hasExpected ? actualValue === expectedValue : actualValue !== null;
+
+  return {
+    pass,
+    message: hasExpected
+      ? () =>
+          `${matcherHint("toHaveHeader", "response", `"${headerName}"`, matcherHintOptions)}\n\n` +
+          (pass
+            ? `Expected response not to have header ${EXPECTED_COLOR(headerName)} with a value of ${EXPECTED_COLOR(expectedValue)}, but it did.`
+            : `Expected response to have header ${EXPECTED_COLOR(headerName)} with a value of ${EXPECTED_COLOR(expectedValue)}, but it ${actualValue === null ? "was not found" : `had a value of ${RECEIVED_COLOR(actualValue)}`}.`)
+      : () =>
+          `${matcherHint("toHaveHeader", "response", `"${headerName}"`, matcherHintOptions)}\n\n` +
+          (pass
+            ? `Expected response not to have header ${EXPECTED_COLOR(headerName)}, but it did.`
+            : `Expected response to have header ${EXPECTED_COLOR(headerName)}, but it was not found.`),
+  };
+};
+
 declare module "mix-n-matchers" {
   export interface MixNMatchers<R, T = unknown> {
     /**
@@ -59,5 +94,13 @@ declare module "mix-n-matchers" {
      * expect(response).toHaveStatus(200);
      */
     toHaveStatus(expectedStatus: number): R;
+    /**
+     * Asserts that a Response object has a specific header.
+     * If no expected value is provided, it checks for the existence of the header.
+     * @example
+     * expect(response).toHaveHeader("Content-Type", "application/json");
+     * expect(response).toHaveHeader("X-Custom-Header");
+     */
+    toHaveHeader(headerName: string, expectedValue?: string): R;
   }
 }

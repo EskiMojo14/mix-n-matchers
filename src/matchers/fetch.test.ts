@@ -76,3 +76,64 @@ describe("toHaveStatus", () => {
     }).toThrowErrorMatchingSnapshot();
   });
 });
+
+describe("toHaveHeader", () => {
+  describe("when expected value is provided", () => {
+    it("passes when the response has the expected header and value", () => {
+      const response = new Response(null, {
+        headers: { "Content-Type": "application/json" },
+      });
+      expect(response).toHaveHeader("Content-Type", "application/json");
+      expect(() => {
+        expect(response).not.toHaveHeader("Content-Type", "application/json");
+      }).toThrowErrorMatchingSnapshot();
+    });
+
+    it("fails when the response does not have the expected header and value", () => {
+      const response = new Response(null, {
+        headers: { "Content-Type": "text/html" },
+      });
+      expect(() => {
+        expect(response).toHaveHeader("Content-Type", "application/json");
+      }).toThrowErrorMatchingSnapshot();
+      expect(response).not.toHaveHeader("Content-Type", "application/json");
+    });
+  });
+
+  describe("when expected value is not provided", () => {
+    it("passes when the response has the expected header", () => {
+      const response = new Response(null, {
+        headers: { "Content-Type": "application/json" },
+      });
+      expect(response).toHaveHeader("Content-Type");
+      expect(() => {
+        expect(response).not.toHaveHeader("Content-Type");
+      }).toThrowErrorMatchingSnapshot();
+    });
+
+    it("fails when the response does not have the expected header", () => {
+      const response = new Response(null, {
+        headers: { "Content-Type": "text/html" },
+      });
+      expect(() => {
+        expect(response).toHaveHeader("Authorization");
+      }).toThrowErrorMatchingSnapshot();
+      expect(response).not.toHaveHeader("Authorization");
+    });
+  });
+
+  it("fails when the received value is not a Response", () => {
+    const notAResponse = {};
+    expect(() => {
+      expect(notAResponse).toHaveHeader("Content-Type", "application/json");
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails when Response is not defined in the global scope", () => {
+    using _ = withoutGlobalResponse();
+
+    expect(() => {
+      expect({}).toHaveHeader("Content-Type", "application/json");
+    }).toThrowErrorMatchingSnapshot();
+  });
+});
