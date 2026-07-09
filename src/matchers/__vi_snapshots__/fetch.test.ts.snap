@@ -1,0 +1,33 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`toBeOK > fails when Response is not defined in the global scope 1`] = `Response is not defined in the global scope.`;
+
+exports[`toBeOK > fails when the received value is not a Response 1`] = `Received value is not a Response.`;
+
+exports[`toBeOK > fails when the response is not ok 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toBeOK<d>()</b>
+
+Expected response to be ok, but it was not ok.
+`;
+
+exports[`toBeOK > passes when the response is ok 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toBeOK<d>()</b>
+
+Expected response to be not ok, but it was ok.
+`;
+
+exports[`toHaveStatus > fails when Response is not defined in the global scope 1`] = `Response is not defined in the global scope.`;
+
+exports[`toHaveStatus > fails when the received value is not a Response 1`] = `Received value is not a Response.`;
+
+exports[`toHaveStatus > fails when the response does not have the expected status 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatus<d>(</b><g>200</g><d>)</b>
+
+Expected response to have status <g>200</g>, but it was <r>404</g>.
+`;
+
+exports[`toHaveStatus > passes when the response has the expected status 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatus<d>(</b><g>200</g><d>)</b>
+
+Expected response not to have status <g>200</g>, but it did.
+`;
