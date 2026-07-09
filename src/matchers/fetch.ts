@@ -302,6 +302,32 @@ export const toHaveBodyJSON = makeToHaveBodyJSONMatcher("toHaveBodyJSON");
  */
 export const toHaveBodyJSONStrict = makeToHaveBodyJSONMatcher("toHaveBodyJSONStrict", true);
 
+/**
+ * Asserts that a Response object has been redirected.
+ */
+export const toBeRedirected: MatcherFunction = function (received) {
+  const hint = (received?: string) =>
+    matcherHint("toBeRedirected", received, "", {
+      isNot: this.isNot,
+      promise: this.promise,
+    });
+
+  assert(globalThis.Response, () =>
+    matcherErrorMessage(hint(), "Response is not defined in the global scope."),
+  );
+  assert(received instanceof Response, () =>
+    matcherErrorMessage(hint(), "Received value is not a Response."),
+  );
+
+  const pass = received.redirected;
+  return {
+    pass,
+    message: () =>
+      `${hint("response")}\n\n` +
+      `Expected response to ${pass ? "not " : ""}be redirected, but it was ${pass ? "redirected" : "not redirected"}.`,
+  };
+};
+
 declare module "mix-n-matchers" {
   export interface MixNMatchers<R, T = unknown> {
     /**
@@ -366,5 +392,11 @@ declare module "mix-n-matchers" {
      */
     // oxlint-disable-next-line typescript/no-unnecessary-type-parameters
     toHaveBodyJSONStrict<E>(expected: E): Promise<Awaited<R>>;
+    /**
+     * Asserts that a Response object has been redirected.
+     * @example
+     * expect(response).toBeRedirected();
+     */
+    toBeRedirected(): R;
   }
 }

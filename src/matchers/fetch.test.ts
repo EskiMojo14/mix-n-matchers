@@ -492,3 +492,40 @@ describe.each(["toHaveBodyJSON", "toHaveBodyJSONStrict"] as const)("%s", (matche
     }); // Body can still be read
   });
 });
+
+function redirectedResponse(): Response {
+  // redirected doesn't allow being set directly, so we use defineProperty to mock it for testing purposes
+  return Object.defineProperty(new Response(), "redirected", { value: true });
+}
+
+describe("toBeRedirected", () => {
+  it("passes when the response is redirected", () => {
+    const response = redirectedResponse();
+    expect(response).toBeRedirected();
+    expect(() => {
+      expect(response).not.toBeRedirected();
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails when the response is not redirected", () => {
+    const response = new Response();
+    expect(() => {
+      expect(response).toBeRedirected();
+    }).toThrowErrorMatchingSnapshot();
+    expect(response).not.toBeRedirected();
+  });
+
+  it("fails when the received value is not a Response", () => {
+    expect(() => {
+      expect({}).toBeRedirected();
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails when Response is not defined in the global scope", () => {
+    using _ = withoutGlobal("Response");
+
+    expect(() => {
+      expect({}).toBeRedirected();
+    }).toThrowErrorMatchingSnapshot();
+  });
+});
