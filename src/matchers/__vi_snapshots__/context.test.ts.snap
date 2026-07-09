@@ -1,183 +1,183 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`toHaveBeenCalledWithContext > includes the custom mock name in the error message 1`] = `
-expect(named-mock).not.toHaveBeenCalledWithContext(expected)
+<d>expect(</b><r>named-mock</g><d>).</b>not<d>.</b>toHaveBeenCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: not "foo"
-Received:     "foo"
+Expected: not <g>"foo"</g>
+Received:     <d>"foo"</b>
 
-Number of calls: 1
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenCalledWithContext > works only on spies or fn 1`] = `
-expect(received).toHaveBeenCalledWithContext(expected)
+<d>expect(</b><r>received</g><d>).</b>toHaveBeenCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Matcher error: received value must be a mock or spy function
+<b>Matcher error</b>: <r>received</g> value must be a mock or spy function
 
 Received has type:  function
-Received has value: [Function mock2]
+Received has value: <r>[Function mock2]</g>
 `;
 
 exports[`toHaveBeenCalledWithContext > works when not called 1`] = `
-expect(vi.fn()).toHaveBeenCalledWithContext(expected)
+<d>expect(</b><r>vi.fn()</g><d>).</b>toHaveBeenCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: "foo"
+Expected: <g>"foo"</g>
 
-Number of calls: 0
+Number of calls: <r>0</g>
 `;
 
 exports[`toHaveBeenCalledWithContext > works with a context that doesn't match 1`] = `
-expect(vi.fn()).toHaveBeenCalledWithContext(expected)
+<d>expect(</b><r>vi.fn()</g><d>).</b>toHaveBeenCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: "foo"
-Received: "bar"
-Number of calls: 1
+Expected: <g>"foo"</g>
+Received: <r>"bar"</g>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenCalledWithContext > works with a context that doesn't match with matchers 1`] = `
-expect(vi.fn()).toHaveBeenCalledWithContext(expected)
+<d>expect(</b><r>vi.fn()</g><d>).</b>toHaveBeenCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: Any<Number>
-Received: "bar"
-Number of calls: 1
+Expected: <g>Any<Number></g>
+Received: <r>"bar"</g>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenCalledWithContext > works with a context that matches 1`] = `
-expect(vi.fn()).not.toHaveBeenCalledWithContext(expected)
+<d>expect(</b><r>vi.fn()</g><d>).</b>not<d>.</b>toHaveBeenCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: not "foo"
-Received:     "foo"
+Expected: not <g>"foo"</g>
+Received:     <d>"foo"</b>
 
-Number of calls: 1
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenCalledWithContext > works with a context that matches with a matcher 1`] = `
-expect(vi.fn()).not.toHaveBeenCalledWithContext(expected)
+<d>expect(</b><r>vi.fn()</g><d>).</b>not<d>.</b>toHaveBeenCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: not Any<String>
-Received:     "foo"
+Expected: not <g>Any<String></g>
+Received:     <d>"foo"</b>
 
-Number of calls: 1
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenLastCalledWithContext > includes the custom mock name in the error message 1`] = `
-expect(named-mock).not.toHaveBeenLastCalledWithContext(expected)
+<d>expect(</b><r>named-mock</g><d>).</b>not<d>.</b>toHaveBeenLastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: not "foo"
+Expected: not <g>"foo"</g>
 
-Number of calls: 1
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenLastCalledWithContext > works only on spies or fn 1`] = `
-expect(received).toHaveBeenLastCalledWithContext(expected)
+<d>expect(</b><r>received</g><d>).</b>toHaveBeenLastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Matcher error: received value must be a mock or spy function
+<b>Matcher error</b>: <r>received</g> value must be a mock or spy function
 
 Received has type:  function
-Received has value: [Function mock2]
+Received has value: <r>[Function mock2]</g>
 `;
 
 exports[`toHaveBeenLastCalledWithContext > works when not called 1`] = `
-expect(vi.fn()).toHaveBeenLastCalledWithContext(expected)
+<d>expect(</b><r>vi.fn()</g><d>).</b>toHaveBeenLastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: "foo"
+Expected: <g>"foo"</g>
 
-Number of calls: 0
+Number of calls: <r>0</g>
 `;
 
 exports[`toHaveBeenLastCalledWithContext > works with a context that doesn't match 1`] = `
-expect(vi.fn()).toHaveBeenLastCalledWithContext(expected)
+<d>expect(</b><r>vi.fn()</g><d>).</b>toHaveBeenLastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: "foo"
-Received: "bar"
-Number of calls: 1
+Expected: <g>"foo"</g>
+Received: <r>"bar"</g>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenLastCalledWithContext > works with a context that doesn't match with matchers 1`] = `
-expect(vi.fn()).toHaveBeenLastCalledWithContext(expected)
+<d>expect(</b><r>vi.fn()</g><d>).</b>toHaveBeenLastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: Any<Number>
-Received: "bar"
-Number of calls: 1
+Expected: <g>Any<Number></g>
+Received: <r>"bar"</g>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenLastCalledWithContext > works with a context that matches 1`] = `
-expect(vi.fn()).not.toHaveBeenLastCalledWithContext(expected)
+<d>expect(</b><r>vi.fn()</g><d>).</b>not<d>.</b>toHaveBeenLastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: not "foo"
+Expected: not <g>"foo"</g>
 
-Number of calls: 1
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenLastCalledWithContext > works with a context that matches with a matcher 1`] = `
-expect(vi.fn()).not.toHaveBeenLastCalledWithContext(expected)
+<d>expect(</b><r>vi.fn()</g><d>).</b>not<d>.</b>toHaveBeenLastCalledWithContext<d>(</b><g>expected</g><d>)</b>
 
-Expected: not Any<String>
-Received:     "foo"
+Expected: not <g>Any<String></g>
+Received:     <d>"foo"</b>
 
-Number of calls: 1
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenNthCalledWithContext > includes the custom mock name in the error message 1`] = `
-expect(named-mock).not.toHaveBeenNthCalledWithContext(n, expected)
+<d>expect(</b><r>named-mock</g><d>).</b>not<d>.</b>toHaveBeenNthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
 n: 1
-Expected: not "foo"
+Expected: not <g>"foo"</g>
 
-Number of calls: 1
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenNthCalledWithContext > works only on spies or fn 1`] = `
-expect(received).toHaveBeenNthCalledWithContext(n, expected)
+<d>expect(</b><r>received</g><d>).</b>toHaveBeenNthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
-Matcher error: received value must be a mock or spy function
+<b>Matcher error</b>: <r>received</g> value must be a mock or spy function
 
 Received has type:  function
-Received has value: [Function mock2]
+Received has value: <r>[Function mock2]</g>
 `;
 
 exports[`toHaveBeenNthCalledWithContext > works when not called 1`] = `
-expect(vi.fn()).toHaveBeenNthCalledWithContext(n, expected)
+<d>expect(</b><r>vi.fn()</g><d>).</b>toHaveBeenNthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
 n: 1
-Expected: "foo"
+Expected: <g>"foo"</g>
 
-Number of calls: 0
+Number of calls: <r>0</g>
 `;
 
 exports[`toHaveBeenNthCalledWithContext > works with a context that doesn't match 1`] = `
-expect(vi.fn()).toHaveBeenNthCalledWithContext(n, expected)
+<d>expect(</b><r>vi.fn()</g><d>).</b>toHaveBeenNthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
 n: 1
-Expected: "foo"
-Received: "bar"
-Number of calls: 1
+Expected: <g>"foo"</g>
+Received: <r>"bar"</g>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenNthCalledWithContext > works with a context that doesn't match with matchers 1`] = `
-expect(vi.fn()).toHaveBeenNthCalledWithContext(n, expected)
+<d>expect(</b><r>vi.fn()</g><d>).</b>toHaveBeenNthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
 n: 1
-Expected: Any<Number>
-Received: "bar"
-Number of calls: 1
+Expected: <g>Any<Number></g>
+Received: <r>"bar"</g>
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenNthCalledWithContext > works with a context that matches 1`] = `
-expect(vi.fn()).not.toHaveBeenNthCalledWithContext(n, expected)
+<d>expect(</b><r>vi.fn()</g><d>).</b>not<d>.</b>toHaveBeenNthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
 n: 1
-Expected: not "foo"
+Expected: not <g>"foo"</g>
 
-Number of calls: 1
+Number of calls: <r>1</g>
 `;
 
 exports[`toHaveBeenNthCalledWithContext > works with a context that matches with a matcher 1`] = `
-expect(vi.fn()).not.toHaveBeenNthCalledWithContext(n, expected)
+<d>expect(</b><r>vi.fn()</g><d>).</b>not<d>.</b>toHaveBeenNthCalledWithContext<d>(</b>n<d>, </b><g>expected</g><d>)</b>
 
 n: 1
-Expected: not Any<String>
-Received:     "foo"
+Expected: not <g>Any<String></g>
+Received:     <d>"foo"</b>
 
-Number of calls: 1
+Number of calls: <r>1</g>
 `;
