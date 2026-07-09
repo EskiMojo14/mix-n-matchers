@@ -24,6 +24,30 @@ exports[`toBeOK > passes when the response is ok 1`] = `
 Expected response to be not ok, but it was ok.
 `;
 
+exports[`toBeRedirected > fails when Response is not defined in the global scope 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeRedirected<d>()</b>
+
+<b>Matcher error</b>: Response is not defined in the global scope.
+`;
+
+exports[`toBeRedirected > fails when the received value is not a Response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeRedirected<d>()</b>
+
+<b>Matcher error</b>: Received value is not a Response.
+`;
+
+exports[`toBeRedirected > fails when the response is not redirected 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toBeRedirected<d>()</b>
+
+Expected response to be redirected, but it was not redirected.
+`;
+
+exports[`toBeRedirected > passes when the response is redirected 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toBeRedirected<d>()</b>
+
+Expected response to not be redirected, but it was redirected.
+`;
+
 exports[`toHaveBodyJSON > fails when the body has already been used > request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>toHaveBodyJSON<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
 

@@ -33,4 +33,5 @@ export {
   toHaveBodyText,
   toHaveBodyJSON,
   toHaveBodyJSONStrict,
+  toBeRedirected,
 } from "./fetch";

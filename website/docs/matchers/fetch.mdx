@@ -111,3 +111,22 @@ it("has the expected JSON body", async () => {
 :::note
 This assertion is asynchronous, so must be awaited.
 :::
+
+### `.toBeRedirected()`
+
+Use `.toBeRedirected()` to assert that a `Response` object has been redirected (`redirected` property is true).
+
+<TestFile name="toBeRedirected">
+{`
+it("is a redirect response", () => {
+  // mock a Response object with redirected property set to true
+  const response = Object.defineProperty(
+    new Response(), 
+    "redirected", 
+    { value: true }
+  );
+  expect(response).toBeRedirected();
+});
+`}
+
+</TestFile>
