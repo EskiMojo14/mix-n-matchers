@@ -379,6 +379,24 @@ describe("toHaveURL", () => {
   });
 });
 
+function erroredStream(): ReadableStream {
+  return new ReadableStream({
+    start(controller) {
+      controller.error(new Error("Stream error"));
+    },
+  });
+}
+
+function locked<T extends Response | Request>(object: T): T & AsyncDisposable {
+  const reader = object.body?.getReader();
+
+  return Object.assign(object, {
+    async [Symbol.asyncDispose]() {
+      await reader?.cancel();
+    },
+  });
+}
+
 describe("toHaveTextBody", () => {
   it("passes when the response/request has the expected body text", async () => {
     const response = new Response("Hello, world!");
@@ -460,6 +478,39 @@ describe("toHaveTextBody", () => {
     });
     await expect(request).toHaveTextBody("Hello, world!");
     await expect(request.text()).resolves.toBe("Hello, world!"); // Body can still be read
+  });
+
+  it("fails when it cannot clone the body", async () => {
+    await using response = locked(new Response("Hello, world!"));
+    await expect(async () => {
+      await expect(response).toHaveTextBody("Hello, world!");
+    }).rejects.toThrowErrorMatchingSnapshot("response");
+
+    await using request = locked(
+      new Request("https://example.com", {
+        body: "Hello, world!",
+        method: "POST",
+      }),
+    );
+    await expect(async () => {
+      await expect(request).toHaveTextBody("Hello, world!");
+    }).rejects.toThrowErrorMatchingSnapshot("request");
+  });
+
+  it("fails when it cannot read the body as text", async () => {
+    const response = new Response(erroredStream());
+    await expect(async () => {
+      await expect(response).toHaveTextBody("Hello, world!");
+    }).rejects.toThrowErrorMatchingSnapshot("response");
+
+    const request = new Request("https://example.com", {
+      body: erroredStream(),
+      method: "POST",
+      duplex: "half",
+    });
+    await expect(async () => {
+      await expect(request).toHaveTextBody("Hello, world!");
+    }).rejects.toThrowErrorMatchingSnapshot("request");
   });
 });
 
@@ -544,6 +595,33 @@ describe.each(["toHaveJSONBody", "toHaveJSONBodyStrict"] as const)("%s", (matche
     await expect(request.json()).resolves.toEqual({
       message: "Hello, world!",
     }); // Body can still be read
+  });
+
+  it("fails when it cannot clone the body", async () => {
+    await using response = locked(Response.json({ message: "Hello, world!" }));
+    await expect(async () => {
+      await expect(response)[matcherName]({ message: "Hello, world!" });
+    }).rejects.toThrowErrorMatchingSnapshot("response");
+
+    await using request = locked(jsonRequest({ message: "Hello, world!" }));
+    await expect(async () => {
+      await expect(request)[matcherName]({ message: "Hello, world!" });
+    }).rejects.toThrowErrorMatchingSnapshot("request");
+  });
+
+  it("fails when it cannot read the body as JSON", async () => {
+    const response = new Response("Hello, world!");
+    await expect(async () => {
+      await expect(response)[matcherName]({ message: "Hello, world!" });
+    }).rejects.toThrowErrorMatchingSnapshot("response");
+
+    const request = new Request("https://example.com", {
+      body: "Hello, world!",
+      method: "POST",
+    });
+    await expect(async () => {
+      await expect(request)[matcherName]({ message: "Hello, world!" });
+    }).rejects.toThrowErrorMatchingSnapshot("request");
   });
 });
 

@@ -90,192 +90,6 @@ exports[`toBeRedirected passes when the response is redirected 1`] = `
 Expected response to not be redirected, but it was redirected.
 `;
 
-exports[`toHaveJSONBody fails when the body has already been used: request 1`] = `
-<d>expect(</b><r>request</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
-
-<b>Matcher error</b>: Cannot read body JSON because it has already been used.
-`;
-
-exports[`toHaveJSONBody fails when the body has already been used: response 1`] = `
-<d>expect(</b><r>response</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
-
-<b>Matcher error</b>: Cannot read body JSON because it has already been used.
-`;
-
-exports[`toHaveJSONBody fails when the received value is not a Response or Request 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
-
-<b>Matcher error</b>: Received value is not a Request or Response.
-`;
-
-exports[`toHaveJSONBody fails when the response/request does not have the expected JSON body: request 1`] = `
-<d>expect(</b><r>request</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
-
-<g>- Expected  - 1</g>
-<r>+ Received  + 1</g>
-
-<d>  Object {</b>
-<g>-   "message": "Hello, world!",</g>
-<r>+   "message": "Goodbye, world!",</g>
-<d>  }</b>
-`;
-
-exports[`toHaveJSONBody fails when the response/request does not have the expected JSON body: response 1`] = `
-<d>expect(</b><r>response</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
-
-<g>- Expected  - 1</g>
-<r>+ Received  + 1</g>
-
-<d>  Object {</b>
-<g>-   "message": "Hello, world!",</g>
-<r>+   "message": "Goodbye, world!",</g>
-<d>  }</b>
-`;
-
-exports[`toHaveJSONBody passes when the response/request has the expected JSON body: request 1`] = `
-<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
-
-Expected request not to have body JSON <g>{"message": "Hello, world!"}</g>, but it did.
-`;
-
-exports[`toHaveJSONBody passes when the response/request has the expected JSON body: response 1`] = `
-<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
-
-Expected response not to have body JSON <g>{"message": "Hello, world!"}</g>, but it did.
-`;
-
-exports[`toHaveJSONBody when Request is not defined in the global scope fails: request 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
-
-<b>Matcher error</b>: Request or Response is not defined in the global scope.
-`;
-
-exports[`toHaveJSONBody when Response is not defined in the global scope fails: response 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
-
-<b>Matcher error</b>: Request or Response is not defined in the global scope.
-`;
-
-exports[`toHaveJSONBodyStrict fails when the body has already been used: request 1`] = `
-<d>expect(</b><r>request</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
-
-<b>Matcher error</b>: Cannot read body JSON because it has already been used.
-`;
-
-exports[`toHaveJSONBodyStrict fails when the body has already been used: response 1`] = `
-<d>expect(</b><r>response</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
-
-<b>Matcher error</b>: Cannot read body JSON because it has already been used.
-`;
-
-exports[`toHaveJSONBodyStrict fails when the received value is not a Response or Request 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
-
-<b>Matcher error</b>: Received value is not a Request or Response.
-`;
-
-exports[`toHaveJSONBodyStrict fails when the response/request does not have the expected JSON body: request 1`] = `
-<d>expect(</b><r>request</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
-
-<g>- Expected  - 1</g>
-<r>+ Received  + 1</g>
-
-<d>  Object {</b>
-<g>-   "message": "Hello, world!",</g>
-<r>+   "message": "Goodbye, world!",</g>
-<d>  }</b>
-`;
-
-exports[`toHaveJSONBodyStrict fails when the response/request does not have the expected JSON body: response 1`] = `
-<d>expect(</b><r>response</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
-
-<g>- Expected  - 1</g>
-<r>+ Received  + 1</g>
-
-<d>  Object {</b>
-<g>-   "message": "Hello, world!",</g>
-<r>+   "message": "Goodbye, world!",</g>
-<d>  }</b>
-`;
-
-exports[`toHaveJSONBodyStrict passes when the response/request has the expected JSON body: request 1`] = `
-<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
-
-Expected request not to have body JSON <g>{"message": "Hello, world!"}</g>, but it did.
-`;
-
-exports[`toHaveJSONBodyStrict passes when the response/request has the expected JSON body: response 1`] = `
-<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
-
-Expected response not to have body JSON <g>{"message": "Hello, world!"}</g>, but it did.
-`;
-
-exports[`toHaveJSONBodyStrict when Request is not defined in the global scope fails: request 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
-
-<b>Matcher error</b>: Request or Response is not defined in the global scope.
-`;
-
-exports[`toHaveJSONBodyStrict when Response is not defined in the global scope fails: response 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
-
-<b>Matcher error</b>: Request or Response is not defined in the global scope.
-`;
-
-exports[`toHaveTextBody fails when the body has already been used: request 1`] = `
-<d>expect(</b><r>request</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
-
-<b>Matcher error</b>: Cannot read body text because it has already been used.
-`;
-
-exports[`toHaveTextBody fails when the body has already been used: response 1`] = `
-<d>expect(</b><r>response</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
-
-<b>Matcher error</b>: Cannot read body text because it has already been used.
-`;
-
-exports[`toHaveTextBody fails when the received value is not a Response or Request 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
-
-<b>Matcher error</b>: Received value is not a Request or Response.
-`;
-
-exports[`toHaveTextBody fails when the response/request does not have the expected body text: request 1`] = `
-<d>expect(</b><r>request</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
-
-Expected request to have body text <g>Hello, world!</g>, but it was <r>Goodbye, world!</g>.
-`;
-
-exports[`toHaveTextBody fails when the response/request does not have the expected body text: response 1`] = `
-<d>expect(</b><r>response</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
-
-Expected response to have body text <g>Hello, world!</g>, but it was <r>Goodbye, world!</g>.
-`;
-
-exports[`toHaveTextBody passes when the response/request has the expected body text: request 1`] = `
-<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
-
-Expected request not to have body text <g>Hello, world!</g>, but it did.
-`;
-
-exports[`toHaveTextBody passes when the response/request has the expected body text: response 1`] = `
-<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
-
-Expected response not to have body text <g>Hello, world!</g>, but it did.
-`;
-
-exports[`toHaveTextBody when Request is not defined in the global scope fails: request 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
-
-<b>Matcher error</b>: Request or Response is not defined in the global scope.
-`;
-
-exports[`toHaveTextBody when Response is not defined in the global scope fails: response 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
-
-<b>Matcher error</b>: Request or Response is not defined in the global scope.
-`;
-
 exports[`toHaveHeader fails when the expected value is not a string or undefined: headers 1`] = `
 <d>expect(</b><r>headers</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>123</g><d>)</b>
 
@@ -424,6 +238,194 @@ exports[`toHaveHeader when expected value is provided passes when the response/r
 <d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
 
 Expected response not to have header <g>Content-Type</g> with a value of <g>application/json</g>, but it did.
+`;
+
+exports[`toHaveJSONBody fails when it cannot clone the body: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Failed to clone the request.
+Cause: unusable
+`;
+
+exports[`toHaveJSONBody fails when it cannot clone the body: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Failed to clone the response.
+Cause: Response.clone: Body has already been consumed.
+`;
+
+exports[`toHaveJSONBody fails when it cannot read the body as JSON: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Failed to read body JSON from the request.
+Cause: Unexpected token 'H', "Hello, world!" is not valid JSON
+`;
+
+exports[`toHaveJSONBody fails when it cannot read the body as JSON: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Failed to read body JSON from the response.
+Cause: Unexpected token 'H', "Hello, world!" is not valid JSON
+`;
+
+exports[`toHaveJSONBody fails when the body has already been used: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Cannot read body from the request because it has already been used.
+`;
+
+exports[`toHaveJSONBody fails when the body has already been used: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Cannot read body from the response because it has already been used.
+`;
+
+exports[`toHaveJSONBody fails when the received value is not a Response or Request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Received value is not a Request or Response.
+`;
+
+exports[`toHaveJSONBody fails when the response/request does not have the expected JSON body: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 1</g>
+
+<d>  Object {</b>
+<g>-   "message": "Hello, world!",</g>
+<r>+   "message": "Goodbye, world!",</g>
+<d>  }</b>
+`;
+
+exports[`toHaveJSONBody fails when the response/request does not have the expected JSON body: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 1</g>
+
+<d>  Object {</b>
+<g>-   "message": "Hello, world!",</g>
+<r>+   "message": "Goodbye, world!",</g>
+<d>  }</b>
+`;
+
+exports[`toHaveJSONBody passes when the response/request has the expected JSON body: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+Expected request not to have body JSON <g>{"message": "Hello, world!"}</g>, but it did.
+`;
+
+exports[`toHaveJSONBody passes when the response/request has the expected JSON body: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+Expected response not to have body JSON <g>{"message": "Hello, world!"}</g>, but it did.
+`;
+
+exports[`toHaveJSONBody when Request is not defined in the global scope fails: request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Request or Response is not defined in the global scope.
+`;
+
+exports[`toHaveJSONBody when Response is not defined in the global scope fails: response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Request or Response is not defined in the global scope.
+`;
+
+exports[`toHaveJSONBodyStrict fails when it cannot clone the body: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Failed to clone the request.
+Cause: unusable
+`;
+
+exports[`toHaveJSONBodyStrict fails when it cannot clone the body: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Failed to clone the response.
+Cause: Response.clone: Body has already been consumed.
+`;
+
+exports[`toHaveJSONBodyStrict fails when it cannot read the body as JSON: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Failed to read body JSON from the request.
+Cause: Unexpected token 'H', "Hello, world!" is not valid JSON
+`;
+
+exports[`toHaveJSONBodyStrict fails when it cannot read the body as JSON: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Failed to read body JSON from the response.
+Cause: Unexpected token 'H', "Hello, world!" is not valid JSON
+`;
+
+exports[`toHaveJSONBodyStrict fails when the body has already been used: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Cannot read body from the request because it has already been used.
+`;
+
+exports[`toHaveJSONBodyStrict fails when the body has already been used: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Cannot read body from the response because it has already been used.
+`;
+
+exports[`toHaveJSONBodyStrict fails when the received value is not a Response or Request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Received value is not a Request or Response.
+`;
+
+exports[`toHaveJSONBodyStrict fails when the response/request does not have the expected JSON body: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 1</g>
+
+<d>  Object {</b>
+<g>-   "message": "Hello, world!",</g>
+<r>+   "message": "Goodbye, world!",</g>
+<d>  }</b>
+`;
+
+exports[`toHaveJSONBodyStrict fails when the response/request does not have the expected JSON body: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<g>- Expected  - 1</g>
+<r>+ Received  + 1</g>
+
+<d>  Object {</b>
+<g>-   "message": "Hello, world!",</g>
+<r>+   "message": "Goodbye, world!",</g>
+<d>  }</b>
+`;
+
+exports[`toHaveJSONBodyStrict passes when the response/request has the expected JSON body: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+Expected request not to have body JSON <g>{"message": "Hello, world!"}</g>, but it did.
+`;
+
+exports[`toHaveJSONBodyStrict passes when the response/request has the expected JSON body: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+Expected response not to have body JSON <g>{"message": "Hello, world!"}</g>, but it did.
+`;
+
+exports[`toHaveJSONBodyStrict when Request is not defined in the global scope fails: request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Request or Response is not defined in the global scope.
+`;
+
+exports[`toHaveJSONBodyStrict when Response is not defined in the global scope fails: response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
+
+<b>Matcher error</b>: Request or Response is not defined in the global scope.
 `;
 
 exports[`toHaveMethod fails when Request is not defined in the global scope 1`] = `
@@ -766,6 +768,88 @@ exports[`toHaveStatusGroup short passes when the response has the expected statu
 <d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatusGroup<d>(</b><g>"2xx"</g><d>)</b>
 
 Expected response not to have status group <g>"2xx"</g>, but it did (<r>200</g>).
+`;
+
+exports[`toHaveTextBody fails when it cannot clone the body: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+<b>Matcher error</b>: Failed to clone the request.
+Cause: unusable
+`;
+
+exports[`toHaveTextBody fails when it cannot clone the body: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+<b>Matcher error</b>: Failed to clone the response.
+Cause: Response.clone: Body has already been consumed.
+`;
+
+exports[`toHaveTextBody fails when it cannot read the body as text: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+<b>Matcher error</b>: Failed to read body text from the request.
+Cause: Stream error
+`;
+
+exports[`toHaveTextBody fails when it cannot read the body as text: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+<b>Matcher error</b>: Failed to read body text from the response.
+Cause: Stream error
+`;
+
+exports[`toHaveTextBody fails when the body has already been used: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+<b>Matcher error</b>: Cannot read body because it has already been used.
+`;
+
+exports[`toHaveTextBody fails when the body has already been used: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+<b>Matcher error</b>: Cannot read body because it has already been used.
+`;
+
+exports[`toHaveTextBody fails when the received value is not a Response or Request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+<b>Matcher error</b>: Received value is not a Request or Response.
+`;
+
+exports[`toHaveTextBody fails when the response/request does not have the expected body text: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+Expected request to have body text <g>Hello, world!</g>, but it was <r>Goodbye, world!</g>.
+`;
+
+exports[`toHaveTextBody fails when the response/request does not have the expected body text: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+Expected response to have body text <g>Hello, world!</g>, but it was <r>Goodbye, world!</g>.
+`;
+
+exports[`toHaveTextBody passes when the response/request has the expected body text: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+Expected request not to have body text <g>Hello, world!</g>, but it did.
+`;
+
+exports[`toHaveTextBody passes when the response/request has the expected body text: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+Expected response not to have body text <g>Hello, world!</g>, but it did.
+`;
+
+exports[`toHaveTextBody when Request is not defined in the global scope fails: request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+<b>Matcher error</b>: Request or Response is not defined in the global scope.
+`;
+
+exports[`toHaveTextBody when Response is not defined in the global scope fails: response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
+
+<b>Matcher error</b>: Request or Response is not defined in the global scope.
 `;
 
 exports[`toHaveURL fails when the expected URL is not a string: request 1`] = `

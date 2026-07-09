@@ -296,13 +296,29 @@ export const toHaveTextBody: MatcherFunction<[string]> = async function (receive
     ),
   );
   assert(!received.bodyUsed, () =>
-    matcherErrorMessage(
-      hint(receivedName),
-      "Cannot read body text because it has already been used.",
-    ),
+    matcherErrorMessage(hint(receivedName), "Cannot read body because it has already been used."),
   );
 
-  const actualText = await received.clone().text();
+  let clone: Request | Response;
+  try {
+    clone = received.clone();
+  } catch (error) {
+    throw new Error(
+      matcherErrorMessage(hint(receivedName), `Failed to clone the ${receivedName}.`),
+      {
+        cause: error,
+      },
+    );
+  }
+  let actualText: string;
+  try {
+    actualText = await clone.text();
+  } catch (error) {
+    throw new Error(
+      matcherErrorMessage(hint(receivedName), `Failed to read body text from the ${receivedName}.`),
+      { cause: error },
+    );
+  }
   const pass = actualText === expected;
 
   return {
@@ -336,11 +352,33 @@ function maketoHaveJSONBodyMatcher(
     assert(!received.bodyUsed, () =>
       matcherErrorMessage(
         hint(receivedName),
-        "Cannot read body JSON because it has already been used.",
+        `Cannot read body from the ${receivedName} because it has already been used.`,
       ),
     );
 
-    const actualJSON = await received.clone().json();
+    let clone: Request | Response;
+    try {
+      clone = received.clone();
+    } catch (error) {
+      throw new Error(
+        matcherErrorMessage(hint(receivedName), `Failed to clone the ${receivedName}.`),
+        {
+          cause: error,
+        },
+      );
+    }
+    let actualJSON: unknown;
+    try {
+      actualJSON = await clone.json();
+    } catch (error) {
+      throw new Error(
+        matcherErrorMessage(
+          hint(receivedName),
+          `Failed to read body JSON from the ${receivedName}.`,
+        ),
+        { cause: error },
+      );
+    }
     const pass = equalValue(actualJSON, expected, strict);
 
     return {
