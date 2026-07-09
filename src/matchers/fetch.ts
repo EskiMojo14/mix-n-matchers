@@ -72,6 +72,74 @@ export const toHaveStatus: MatcherFunction<[number]> = function (received, expec
   };
 };
 
+const statusGroupsByNum = {
+  1: { long: "informational", short: "1xx" },
+  2: { long: "successful", short: "2xx" },
+  3: { long: "redirection", short: "3xx" },
+  4: { long: "client error", short: "4xx" },
+  5: { long: "server error", short: "5xx" },
+} as const;
+// 1-5, 1xx-5xx, informational-server error
+type StatusGroup =
+  | keyof typeof statusGroupsByNum
+  | (typeof statusGroupsByNum)[keyof typeof statusGroupsByNum]["long"]
+  | (typeof statusGroupsByNum)[keyof typeof statusGroupsByNum]["short"];
+const statusGroups = new Map<StatusGroup, 1 | 2 | 3 | 4 | 5>();
+for (const [key, { long, short }] of Object.entries(statusGroupsByNum)) {
+  const num = Number(key) as 1 | 2 | 3 | 4 | 5;
+  statusGroups.set(num, num);
+  statusGroups.set(long, num);
+  statusGroups.set(short, num);
+}
+/**
+ * Ensure the Response object has a specific status group (1-5, 1xx-5xx, "informational", "successful", "redirection", "client error", "server error").
+ */
+export const toHaveStatusGroup: MatcherFunction<[StatusGroup]> = function (received, expected) {
+  const hint = (received?: string) =>
+    matcherHint("toHaveStatusGroup", received, stringify(expected), {
+      isNot: this.isNot,
+      promise: this.promise,
+    });
+
+  assert(globalThis.Response, () =>
+    matcherErrorMessage(hint(), "Response is not defined in the global scope."),
+  );
+  assert(received instanceof Response, () =>
+    matcherErrorMessage(hint(), "Received value is not a Response."),
+  );
+  assert(statusGroups.has(expected), () =>
+    matcherErrorMessage(
+      hint("response"),
+      `Expected status group must be one of: ${Array.from(statusGroups.keys())
+        .map((k) => stringify(k))
+        .join(", ")}`,
+      printWithType("expected", expected, stringify),
+    ),
+  );
+
+  const expectedGroupType =
+    typeof expected === "number" ? "number" : expected.includes("xx") ? "short" : "long";
+  const expectedNum = statusGroups.get(expected)!;
+  const actualNum = Math.floor(received.status / 100);
+  let actualGroup: StatusGroup | "non-standard";
+  if (actualNum < 1 || actualNum > 5) {
+    actualGroup = "non-standard";
+  } else if (expectedGroupType === "number") {
+    actualGroup = actualNum as StatusGroup;
+  } else {
+    actualGroup = statusGroupsByNum[actualNum as keyof typeof statusGroupsByNum][expectedGroupType];
+  }
+  const pass = actualNum === expectedNum;
+  return {
+    pass,
+    message: () =>
+      `${hint("response")}\n\n` +
+      (pass
+        ? `Expected response not to have status group ${EXPECTED_COLOR(stringify(expected))}, but it did (${RECEIVED_COLOR(received.status)}).`
+        : `Expected response to have status group ${EXPECTED_COLOR(stringify(expected))}, but it was ${RECEIVED_COLOR(stringify(actualGroup))} (${RECEIVED_COLOR(received.status)}).`),
+  };
+};
+
 /**
  * Ensure the Response, Request, or Headers object has a specific header, optionally with a specific value.
  * If no expected value is provided, it checks for the existence of the header.
@@ -342,6 +410,14 @@ declare module "mix-n-matchers" {
      * expect(response).toHaveStatus(200);
      */
     toHaveStatus(expected: number): R;
+    /**
+     * Asserts that a Response object has a specific status group (1-5, 1xx-5xx, "informational", "successful", "redirection", "client error", "server error").
+     * @example
+     * expect(response).toHaveStatusGroup(2);
+     * expect(response).toHaveStatusGroup("2xx");
+     * expect(response).toHaveStatusGroup("successful");
+     */
+    toHaveStatusGroup(expected: StatusGroup): R;
     /**
      * Asserts that a Response, Request, or Headers object has a specific header.
      * If no expected value is provided, it checks for the existence of the header.

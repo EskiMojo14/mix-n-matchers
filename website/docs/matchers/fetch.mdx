@@ -32,6 +32,24 @@ it("has the expected status code", () => {
 
 </TestFile>
 
+### `.toHaveStatusGroup(expected)`
+
+Use `.toHaveStatusGroup(expected)` to assert that a `Response` object has a specific status group (1-5, 1xx-5xx, "informational", "successful", "redirection", "client error", "server error").
+
+<TestFile name="toHaveStatusGroup">
+{`
+it("has the expected status group", () => {
+  const response = new Response(null, { status: 404 });
+  expect(response).toHaveStatusGroup(4);
+  // or
+  expect(response).toHaveStatusGroup("4xx");
+  // or
+  expect(response).toHaveStatusGroup("client error");
+});
+`}
+
+</TestFile>
+
 ### `.toHaveHeader(name, value?)`
 
 Use `.toHaveHeader(name, value?)` to assert that a `Response`, `Request`, or `Headers` object has the specified header. If `value` is provided, it will also check that the header value matches.

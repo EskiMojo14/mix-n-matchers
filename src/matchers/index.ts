@@ -27,6 +27,7 @@ export {
 export {
   toBeOK,
   toHaveStatus,
+  toHaveStatusGroup,
   toHaveHeader,
   toHaveMethod,
   toHaveURL,
