@@ -1,4 +1,4 @@
 {
   "jest.jestCommandLine": "pnpm test",
-  "vitest.commandLine": "pnpm vitest"
+  "jestrunner.vitestCommand": "pnpm vitest"
 }
