@@ -117,6 +117,27 @@ value has type:  number
 value has value: 123
 `;
 
+exports[`toHaveHeader fails when the header name is invalid: headers 1`] = `
+<d>expect(</b><r>headers</g><d>).</b>toHaveHeader<d>(</b><g>"Invalid Header Name"</g><d>)</b>
+
+<b>Matcher error</b>: Failed to get the header.
+Cause: Headers.get: "Invalid Header Name" is an invalid header name.
+`;
+
+exports[`toHaveHeader fails when the header name is invalid: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveHeader<d>(</b><g>"Invalid Header Name"</g><d>)</b>
+
+<b>Matcher error</b>: Failed to get the header.
+Cause: Headers.get: "Invalid Header Name" is an invalid header name.
+`;
+
+exports[`toHaveHeader fails when the header name is invalid: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveHeader<d>(</b><g>"Invalid Header Name"</g><d>)</b>
+
+<b>Matcher error</b>: Failed to get the header.
+Cause: Headers.get: "Invalid Header Name" is an invalid header name.
+`;
+
 exports[`toHaveHeader fails when the header name is not a string: headers 1`] = `
 <d>expect(</b><r>headers</g><d>).</b>toHaveHeader<d>(</b><g>123</g><d>, </b><g>"application/json"</g><d>)</b>
 
@@ -850,6 +871,12 @@ exports[`toHaveTextBody when Response is not defined in the global scope fails: 
 <d>expect(</b><r>received</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
 
 <b>Matcher error</b>: Request or Response is not defined in the global scope.
+`;
+
+exports[`toHaveURL fails when the URL is invalid: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
+
+Expected response to have URL <g>"https://example.com/api"</g>, but it was <r>""</g>.
 `;
 
 exports[`toHaveURL fails when the expected URL is not a string: request 1`] = `

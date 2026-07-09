@@ -179,7 +179,14 @@ export const toHaveHeader: MatcherFunction<[string, string?]> = function (receiv
   );
 
   const hasValue = value !== undefined;
-  const actualValue = received instanceof Headers ? received.get(name) : received.headers.get(name);
+  let actualValue: string | null;
+  try {
+    actualValue = received instanceof Headers ? received.get(name) : received.headers.get(name);
+  } catch (error) {
+    throw new Error(matcherErrorMessage(hint(receivedName), "Failed to get the header."), {
+      cause: error,
+    });
+  }
   const pass = hasValue ? actualValue === value : actualValue !== null;
 
   return {
@@ -538,7 +545,13 @@ export const toHaveSearchParam: MatcherFunction<[string, string?]> = function (
   } else if (received instanceof URL) {
     ({ searchParams } = received);
   } else {
-    ({ searchParams } = new URL(received.url));
+    try {
+      ({ searchParams } = new URL(received.url));
+    } catch (error) {
+      throw new Error(matcherErrorMessage(hint(receivedName), "Failed to parse the URL."), {
+        cause: error,
+      });
+    }
   }
   const actualValue = searchParams.get(name);
   const pass = hasValue ? actualValue === value : actualValue !== null;

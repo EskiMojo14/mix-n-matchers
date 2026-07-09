@@ -259,6 +259,23 @@ describe("toHaveHeader", () => {
     }).toThrowErrorMatchingSnapshot("request");
   });
 
+  it("fails when the header name is invalid", () => {
+    const headers = new Headers();
+    expect(() => {
+      expect(headers).toHaveHeader("Invalid Header Name");
+    }).toThrowErrorMatchingSnapshot("headers");
+
+    const response = new Response(null, { headers });
+    expect(() => {
+      expect(response).toHaveHeader("Invalid Header Name");
+    }).toThrowErrorMatchingSnapshot("response");
+
+    const request = new Request("https://example.com", { headers });
+    expect(() => {
+      expect(request).toHaveHeader("Invalid Header Name");
+    }).toThrowErrorMatchingSnapshot("request");
+  });
+
   it("fails when the expected value is not a string or undefined", () => {
     const headers = new Headers({ "Content-Type": "application/json" });
     expect(() => {
@@ -376,6 +393,13 @@ describe("toHaveURL", () => {
       // @ts-expect-error
       expect(request).toHaveURL(123);
     }).toThrowErrorMatchingSnapshot("request");
+  });
+
+  it("fails when the URL is invalid", () => {
+    const response = urlResponse("");
+    expect(() => {
+      expect(response).toHaveURL("https://example.com/api");
+    }).toThrowErrorMatchingSnapshot("response");
   });
 });
 
