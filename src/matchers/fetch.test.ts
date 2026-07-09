@@ -366,3 +366,84 @@ describe("toHaveBodyText", () => {
     await expect(request.text()).resolves.toBe("Hello, world!"); // Body can still be read
   });
 });
+
+function jsonRequest(body: any): Request {
+  return new Request("https://example.com", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+}
+
+describe.each(["toHaveBodyJSON", "toHaveBodyJSONStrict"] as const)("%s", (matcherName) => {
+  it("passes when the response/request has the expected JSON body", async () => {
+    const response = Response.json({ message: "Hello, world!" });
+    await expect(response)[matcherName]({ message: "Hello, world!" });
+    await expect(async () => {
+      await expect(response).not[matcherName]({ message: "Hello, world!" });
+    }).rejects.toThrowErrorMatchingSnapshot("response");
+
+    const request = jsonRequest({ message: "Hello, world!" });
+    await expect(request)[matcherName]({ message: "Hello, world!" });
+    await expect(async () => {
+      await expect(request).not[matcherName]({ message: "Hello, world!" });
+    }).rejects.toThrowErrorMatchingSnapshot("request");
+  });
+
+  it("fails when the response/request does not have the expected JSON body", async () => {
+    const response = Response.json({ message: "Goodbye, world!" });
+    await expect(async () => {
+      await expect(response)[matcherName]({ message: "Hello, world!" });
+    }).rejects.toThrowErrorMatchingSnapshot("response");
+    await expect(response).not[matcherName]({ message: "Hello, world!" });
+
+    const request = jsonRequest({ message: "Goodbye, world!" });
+    await expect(async () => {
+      await expect(request)[matcherName]({ message: "Hello, world!" });
+    }).rejects.toThrowErrorMatchingSnapshot("request");
+    await expect(request).not[matcherName]({ message: "Hello, world!" });
+  });
+
+  it("fails when the received value is not a Response or Request", async () => {
+    await expect(async () => {
+      await expect({})[matcherName]({ message: "Hello, world!" });
+    }).rejects.toThrowErrorMatchingSnapshot();
+  });
+
+  describe.each(["Response", "Request"])("when %s is not defined in the global scope", (type) => {
+    it("fails", async () => {
+      using _ = type === "Response" ? withoutGlobalResponse() : withoutGlobalRequest();
+      await expect(async () => {
+        await expect({})[matcherName]({ message: "Hello, world!" });
+      }).rejects.toThrowErrorMatchingSnapshot(type.toLowerCase());
+    });
+  });
+
+  it("fails when the body has already been used", async () => {
+    const response = Response.json({ message: "Hello, world!" });
+    await response.json(); // Consume the body
+    await expect(async () => {
+      await expect(response)[matcherName]({ message: "Hello, world!" });
+    }).rejects.toThrowErrorMatchingSnapshot("response");
+
+    const request = jsonRequest({ message: "Hello, world!" });
+    await request.json(); // Consume the body
+    await expect(async () => {
+      await expect(request)[matcherName]({ message: "Hello, world!" });
+    }).rejects.toThrowErrorMatchingSnapshot("request");
+  });
+
+  it("clones to avoid consuming the body, so it can be read again later", async () => {
+    const response = Response.json({ message: "Hello, world!" });
+    await expect(response)[matcherName]({ message: "Hello, world!" });
+    await expect(response.json()).resolves.toEqual({
+      message: "Hello, world!",
+    }); // Body can still be read
+
+    const request = jsonRequest({ message: "Hello, world!" });
+    await expect(request)[matcherName]({ message: "Hello, world!" });
+    await expect(request.json()).resolves.toEqual({
+      message: "Hello, world!",
+    }); // Body can still be read
+  });
+});

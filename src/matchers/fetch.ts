@@ -1,5 +1,6 @@
 import type { MatcherFunction } from "../utils/types";
 import { assert } from "../utils/assert";
+import { makeEqualValue } from "../utils";
 import {
   matcherErrorMessage,
   matcherHint,
@@ -7,6 +8,7 @@ import {
   stringify,
   RECEIVED_COLOR,
   EXPECTED_COLOR,
+  printDiffOrStringify,
 } from "jest-matcher-utils";
 
 /**
@@ -239,6 +241,61 @@ export const toHaveBodyText: MatcherFunction<[string]> = async function (receive
   };
 };
 
+function makeToHaveBodyJSONMatcher(
+  matcherName: string,
+  strict = false,
+): MatcherFunction<[unknown]> {
+  return async function (received, expected) {
+    const equalValue = makeEqualValue(this);
+    const hint = (received?: string) =>
+      matcherHint(matcherName, received, stringify(expected), {
+        isNot: this.isNot,
+        promise: this.promise,
+      });
+    assert(globalThis.Request && globalThis.Response, () =>
+      matcherErrorMessage(hint(), "Request or Response is not defined in the global scope."),
+    );
+    assert(received instanceof Request || received instanceof Response, () =>
+      matcherErrorMessage(hint(), "Received value is not a Request or Response."),
+    );
+    const receivedName = received instanceof Request ? "request" : "response";
+    assert(!received.bodyUsed, () =>
+      matcherErrorMessage(
+        hint(receivedName),
+        "Cannot read body JSON because it has already been used.",
+      ),
+    );
+
+    const actualJSON = await received.clone().json();
+    const pass = equalValue(actualJSON, expected, strict);
+
+    return {
+      pass,
+      message: () =>
+        `${hint(receivedName)}\n\n` +
+        (pass
+          ? `Expected ${receivedName} not to have body JSON ${EXPECTED_COLOR(expected)}, but it did.`
+          : printDiffOrStringify(
+              expected,
+              actualJSON,
+              "Expected",
+              "Received",
+              this.expand ?? true,
+            )),
+    };
+  };
+}
+
+/**
+ * Asserts that a Response or Request object has a specific JSON body, using deep equality.
+ */
+export const toHaveBodyJSON = makeToHaveBodyJSONMatcher("toHaveBodyJSON");
+
+/**
+ * Asserts that a Response or Request object has a specific JSON body, using strict deep equality.
+ */
+export const toHaveBodyJSONStrict = makeToHaveBodyJSONMatcher("toHaveBodyJSONStrict", true);
+
 declare module "mix-n-matchers" {
   export interface MixNMatchers<R, T = unknown> {
     /**
@@ -282,5 +339,25 @@ declare module "mix-n-matchers" {
      * @remarks This matcher is asynchronous and returns a Promise, so it should be awaited.
      */
     toHaveBodyText(expected: string): Promise<Awaited<R>>;
+    /**
+     * Asserts that a Response or Request object has a specific JSON body, using deep equality.
+     * @example
+     * await expect(response).toHaveBodyJSON({ message: "Hello, world!" });
+     * await expect(request).toHaveBodyJSON({ message: "Hello, world!" });
+     * @remarks Will clone the object to avoid consuming the body, so it can be read again later. Will throw an error if the body has already been used.
+     * @remarks This matcher is asynchronous and returns a Promise, so it should be awaited.
+     */
+    // oxlint-disable-next-line typescript/no-unnecessary-type-parameters
+    toHaveBodyJSON<E>(expected: E): Promise<Awaited<R>>;
+    /**
+     * Asserts that a Response or Request object has a specific JSON body, using strict deep equality.
+     * @example
+     * await expect(response).toHaveBodyJSONStrict({ message: "Hello, world!" });
+     * await expect(request).toHaveBodyJSONStrict({ message: "Hello, world!" });
+     * @remarks Will clone the object to avoid consuming the body, so it can be read again later. Will throw an error if the body has already been used.
+     * @remarks This matcher is asynchronous and returns a Promise, so it should be awaited.
+     */
+    // oxlint-disable-next-line typescript/no-unnecessary-type-parameters
+    toHaveBodyJSONStrict<E>(expected: E): Promise<Awaited<R>>;
   }
 }

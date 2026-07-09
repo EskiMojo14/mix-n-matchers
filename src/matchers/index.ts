@@ -31,4 +31,6 @@ export {
   toHaveMethod,
   toHaveURL,
   toHaveBodyText,
+  toHaveBodyJSON,
+  toHaveBodyJSONStrict,
 } from "./fetch";
