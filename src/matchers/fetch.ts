@@ -73,7 +73,7 @@ export const toHaveStatus: MatcherFunction<[number]> = function (received, expec
 };
 
 /**
- * Ensure the Response or Request object has a specific header, optionally with a specific value.
+ * Ensure the Response, Request, or Headers object has a specific header, optionally with a specific value.
  * If no expected value is provided, it checks for the existence of the header.
  */
 export const toHaveHeader: MatcherFunction<[string, string?]> = function (received, name, value) {
@@ -83,13 +83,18 @@ export const toHaveHeader: MatcherFunction<[string, string?]> = function (receiv
       promise: this.promise,
       secondArgument: value && stringify(value),
     });
-  assert(globalThis.Response && globalThis.Request, () =>
-    matcherErrorMessage(hint(), "Response or Request is not defined in the global scope."),
+  assert(globalThis.Response && globalThis.Request && globalThis.Headers, () =>
+    matcherErrorMessage(
+      hint(),
+      "Response, Request, or Headers is not defined in the global scope.",
+    ),
   );
-  assert(received instanceof Response || received instanceof Request, () =>
-    matcherErrorMessage(hint(), "Received value is not a Response or Request."),
+  assert(
+    received instanceof Response || received instanceof Request || received instanceof Headers,
+    () => matcherErrorMessage(hint(), "Received value is not a Response, Request, or Headers."),
   );
-  const receivedName = received instanceof Response ? "response" : "request";
+  const receivedName =
+    received instanceof Response ? "response" : received instanceof Request ? "request" : "headers";
   assert(typeof name === "string", () =>
     matcherErrorMessage(
       hint(receivedName),
@@ -106,7 +111,7 @@ export const toHaveHeader: MatcherFunction<[string, string?]> = function (receiv
   );
 
   const hasValue = value !== undefined;
-  const actualValue = received.headers.get(name);
+  const actualValue = received instanceof Headers ? received.get(name) : received.headers.get(name);
   const pass = hasValue ? actualValue === value : actualValue !== null;
 
   return {
@@ -311,11 +316,12 @@ declare module "mix-n-matchers" {
      */
     toHaveStatus(expected: number): R;
     /**
-     * Asserts that a Response or Request object has a specific header.
+     * Asserts that a Response, Request, or Headers object has a specific header.
      * If no expected value is provided, it checks for the existence of the header.
      * @example
      * expect(response).toHaveHeader("Content-Type", "application/json");
      * expect(request).toHaveHeader("X-Custom-Header");
+     * expect(headers).toHaveHeader("Authorization");
      */
     toHaveHeader(name: string, value?: string): R;
     /**
