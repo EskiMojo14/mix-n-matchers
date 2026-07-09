@@ -258,35 +258,70 @@ describe("toHaveMethod", () => {
   });
 });
 
+function urlResponse(url: string): Response {
+  // url doesn't allow being set directly, so we use defineProperty to mock it for testing purposes
+  return Object.defineProperty(new Response(), "url", { value: url });
+}
+
 describe("toHaveURL", () => {
-  it("passes when the request has the expected URL", () => {
+  it("passes when the response/request has the expected URL", () => {
+    const response = urlResponse("https://example.com/api");
+    expect(response).toHaveURL("https://example.com/api");
+    expect(() => {
+      expect(response).not.toHaveURL("https://example.com/api");
+    }).toThrowErrorMatchingSnapshot("response");
+
     const request = new Request("https://example.com/api");
     expect(request).toHaveURL("https://example.com/api");
     expect(() => {
       expect(request).not.toHaveURL("https://example.com/api");
-    }).toThrowErrorMatchingSnapshot();
+    }).toThrowErrorMatchingSnapshot("request");
   });
 
-  it("fails when the request does not have the expected URL", () => {
+  it("fails when the response/request does not have the expected URL", () => {
+    const response = urlResponse("https://example.com/other");
+    expect(() => {
+      expect(response).toHaveURL("https://example.com/api");
+    }).toThrowErrorMatchingSnapshot("response");
+    expect(response).not.toHaveURL("https://example.com/api");
+
     const request = new Request("https://example.com/other");
     expect(() => {
       expect(request).toHaveURL("https://example.com/api");
-    }).toThrowErrorMatchingSnapshot();
+    }).toThrowErrorMatchingSnapshot("request");
     expect(request).not.toHaveURL("https://example.com/api");
   });
 
-  it("fails when the received value is not a Request", () => {
+  it("fails when the received value is not a Request or Response", () => {
     expect(() => {
       expect({}).toHaveURL("https://example.com/api");
     }).toThrowErrorMatchingSnapshot();
   });
 
-  it("fails when Request is not defined in the global scope", () => {
-    using _ = withoutGlobal("Request");
+  describe.each(["Response", "Request"] as const)(
+    "when %s is not defined in the global scope",
+    (type) => {
+      it("fails", () => {
+        using _ = withoutGlobal(type);
+        expect(() => {
+          expect({}).toHaveURL("https://example.com/api");
+        }).toThrowErrorMatchingSnapshot(type.toLowerCase());
+      });
+    },
+  );
 
+  it("fails when the expected URL is not a string", () => {
+    const response = urlResponse("https://example.com/api");
     expect(() => {
-      expect({}).toHaveURL("https://example.com/api");
-    }).toThrowErrorMatchingSnapshot();
+      // @ts-expect-error
+      expect(response).toHaveURL(123);
+    }).toThrowErrorMatchingSnapshot("response");
+
+    const request = new Request("https://example.com/api");
+    expect(() => {
+      // @ts-expect-error
+      expect(request).toHaveURL(123);
+    }).toThrowErrorMatchingSnapshot("request");
   });
 });
 

@@ -32,9 +32,9 @@ it("has the expected status code", () => {
 
 </TestFile>
 
-### `.toHaveHeader(name, expected?)`
+### `.toHaveHeader(name, value?)`
 
-Use `.toHaveHeader(name, expected?)` to assert that a `Response`, `Request`, or `Headers` object has the specified header. If `expected` is provided, it will also check that the header value matches.
+Use `.toHaveHeader(name, value?)` to assert that a `Response`, `Request`, or `Headers` object has the specified header. If `value` is provided, it will also check that the header value matches.
 
 <TestFile name="toHaveHeader">
 {`
@@ -62,7 +62,7 @@ it("has the expected HTTP method", () => {
 
 ### `.toHaveURL(expected)`
 
-Use `.toHaveURL(expected)` to assert that a `Request` object has the expected URL.
+Use `.toHaveURL(expected)` to assert that a `Response` or `Request` object has the expected URL.
 
 <TestFile name="toHaveURL">
 {`

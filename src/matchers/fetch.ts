@@ -175,15 +175,16 @@ export const toHaveURL: MatcherFunction<[string]> = function (received, expected
       isNot: this.isNot,
       promise: this.promise,
     });
-  assert(globalThis.Request, () =>
-    matcherErrorMessage(hint(), "Request is not defined in the global scope."),
+  assert(globalThis.Request || globalThis.Response, () =>
+    matcherErrorMessage(hint(), "Request or Response is not defined in the global scope."),
   );
-  assert(received instanceof Request, () =>
-    matcherErrorMessage(hint(), "Received value is not a Request."),
+  assert(received instanceof Request || received instanceof Response, () =>
+    matcherErrorMessage(hint(), "Received value is not a Request or Response."),
   );
+  const receivedName = received instanceof Request ? "request" : "response";
   assert(typeof expected === "string", () =>
     matcherErrorMessage(
-      hint("request"),
+      hint(receivedName),
       "Expected URL must be a string.",
       printWithType("expected", expected, stringify),
     ),
@@ -195,10 +196,10 @@ export const toHaveURL: MatcherFunction<[string]> = function (received, expected
   return {
     pass,
     message: () =>
-      `${hint("request")}\n\n` +
+      `${hint(receivedName)}\n\n` +
       (pass
-        ? `Expected request not to have URL ${EXPECTED_COLOR(expected)}, but it did.`
-        : `Expected request to have URL ${EXPECTED_COLOR(expected)}, but it was ${RECEIVED_COLOR(actualURL)}.`),
+        ? `Expected ${receivedName} not to have URL ${EXPECTED_COLOR(expected)}, but it did.`
+        : `Expected ${receivedName} to have URL ${EXPECTED_COLOR(expected)}, but it was ${RECEIVED_COLOR(actualURL)}.`),
   };
 };
 
