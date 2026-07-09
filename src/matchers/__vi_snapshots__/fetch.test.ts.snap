@@ -16,6 +16,34 @@ exports[`toBeOK > passes when the response is ok 1`] = `
 Expected response to be not ok, but it was ok.
 `;
 
+exports[`toHaveHeader > fails when Response is not defined in the global scope 1`] = `Response is not defined in the global scope.`;
+
+exports[`toHaveHeader > fails when the received value is not a Response 1`] = `Received value is not a Response.`;
+
+exports[`toHaveHeader > when expected value is not provided > fails when the response does not have the expected header 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveHeader<d>(</b><g>"Authorization"</g><d>)</b>
+
+Expected response to have header <g>Authorization</g>, but it was not found.
+`;
+
+exports[`toHaveHeader > when expected value is not provided > passes when the response has the expected header 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>)</b>
+
+Expected response not to have header <g>Content-Type</g>, but it did.
+`;
+
+exports[`toHaveHeader > when expected value is provided > fails when the response does not have the expected header and value 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
+
+Expected response to have header <g>Content-Type</g> with a value of <g>application/json</g>, but it had a value of <r>text/html</g>.
+`;
+
+exports[`toHaveHeader > when expected value is provided > passes when the response has the expected header and value 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
+
+Expected response not to have header <g>Content-Type</g> with a value of <g>application/json</g>, but it did.
+`;
+
 exports[`toHaveStatus > fails when Response is not defined in the global scope 1`] = `Response is not defined in the global scope.`;
 
 exports[`toHaveStatus > fails when the received value is not a Response 1`] = `Received value is not a Response.`;
