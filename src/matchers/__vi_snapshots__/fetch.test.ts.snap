@@ -244,24 +244,28 @@ exports[`toHaveJSONBody > fails when it cannot clone the body > request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
 
 <b>Matcher error</b>: Failed to clone the request.
+Cause: [TypeError: unusable]
 `;
 
 exports[`toHaveJSONBody > fails when it cannot clone the body > response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
 
 <b>Matcher error</b>: Failed to clone the response.
+Cause: [TypeError: Response.clone: Body has already been consumed.]
 `;
 
 exports[`toHaveJSONBody > fails when it cannot read the body as JSON > request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
 
 <b>Matcher error</b>: Failed to read body JSON from the request.
+Cause: [SyntaxError: Unexpected token 'H', "Hello, world!" is not valid JSON]
 `;
 
 exports[`toHaveJSONBody > fails when it cannot read the body as JSON > response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
 
 <b>Matcher error</b>: Failed to read body JSON from the response.
+Cause: [SyntaxError: Unexpected token 'H', "Hello, world!" is not valid JSON]
 `;
 
 exports[`toHaveJSONBody > fails when the body has already been used > request 1`] = `
@@ -334,24 +338,28 @@ exports[`toHaveJSONBodyStrict > fails when it cannot clone the body > request 1`
 <d>expect(</b><r>request</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
 
 <b>Matcher error</b>: Failed to clone the request.
+Cause: [TypeError: unusable]
 `;
 
 exports[`toHaveJSONBodyStrict > fails when it cannot clone the body > response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
 
 <b>Matcher error</b>: Failed to clone the response.
+Cause: [TypeError: Response.clone: Body has already been consumed.]
 `;
 
 exports[`toHaveJSONBodyStrict > fails when it cannot read the body as JSON > request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
 
 <b>Matcher error</b>: Failed to read body JSON from the request.
+Cause: [SyntaxError: Unexpected token 'H', "Hello, world!" is not valid JSON]
 `;
 
 exports[`toHaveJSONBodyStrict > fails when it cannot read the body as JSON > response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>toHaveJSONBodyStrict<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
 
 <b>Matcher error</b>: Failed to read body JSON from the response.
+Cause: [SyntaxError: Unexpected token 'H', "Hello, world!" is not valid JSON]
 `;
 
 exports[`toHaveJSONBodyStrict > fails when the body has already been used > request 1`] = `
@@ -766,24 +774,28 @@ exports[`toHaveTextBody > fails when it cannot clone the body > request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
 
 <b>Matcher error</b>: Failed to clone the request.
+Cause: [TypeError: unusable]
 `;
 
 exports[`toHaveTextBody > fails when it cannot clone the body > response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
 
 <b>Matcher error</b>: Failed to clone the response.
+Cause: [TypeError: Response.clone: Body has already been consumed.]
 `;
 
 exports[`toHaveTextBody > fails when it cannot read the body as text > request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
 
 <b>Matcher error</b>: Failed to read body text from the request.
+Cause: [Error: Stream error]
 `;
 
 exports[`toHaveTextBody > fails when it cannot read the body as text > response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
 
 <b>Matcher error</b>: Failed to read body text from the response.
+Cause: [Error: Stream error]
 `;
 
 exports[`toHaveTextBody > fails when the body has already been used > request 1`] = `

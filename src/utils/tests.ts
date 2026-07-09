@@ -58,3 +58,40 @@ export const alignedAnsiStyleSerializer = {
 export function wait(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+import type { SnapshotSerializer } from "vitest";
+
+function getErrorName(error: Error): string {
+  return error.name !== "Error"
+    ? error.name
+    : (typeof error.constructor === "function" && error.constructor.name) || "Object";
+}
+
+function serializeCausalChain(e: Error): string {
+  let error: unknown = e;
+  let message = "";
+  while (typeof error === "object" && error !== null && "cause" in error) {
+    error = error.cause;
+    if (error instanceof Error) {
+      message += `\nCause: [${getErrorName(error)}: ${error.message}]`;
+    } else {
+      if (typeof error === "string") {
+        message += `\nCause: [Error: ${error}]`;
+      }
+      break;
+    }
+  }
+  return message;
+}
+
+// Because Vitest doesn't Snapshot Error.cause automatically
+// see https://github.com/vitest-dev/vitest/issues/10339
+export const errorSerializer: SnapshotSerializer = {
+  test: (val: unknown): boolean => {
+    return !!((val as Error)?.cause && (val as Error)?.cause instanceof Error);
+  },
+
+  serialize(error: Error) {
+    return `${alignedAnsiStyleSerializer.serialize(error.message)}${serializeCausalChain(error)}`;
+  },
+};
