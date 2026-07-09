@@ -10,8 +10,7 @@ import {
 } from "jest-matcher-utils";
 import type { Mock } from "@globals";
 import type { EqualValue, Spy } from "../utils";
-import { ensureMockOrSpy, makeEqualValue, isSpy } from "../utils";
-import { assert } from "../utils/assert";
+import { ensureMockOrSpy, makeEqualValue, isSpy, assert } from "../utils";
 import { getRightAlignedPrinter } from "../utils/print";
 import type { MatcherFunction } from "../utils/types";
 

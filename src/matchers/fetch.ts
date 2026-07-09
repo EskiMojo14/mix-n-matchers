@@ -1,6 +1,5 @@
 import type { MatcherFunction } from "../utils/types";
-import { assert } from "../utils/assert";
-import { makeEqualValue } from "../utils";
+import { makeEqualValue, assert } from "../utils";
 import {
   matcherErrorMessage,
   matcherHint,
