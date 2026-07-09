@@ -13,6 +13,7 @@ export default defineConfig({
     },
     alias: {
       "@globals": "./src/utils/globals.ts",
+      "mix-n-matchers": "./src/index.ts",
     },
   },
 });
