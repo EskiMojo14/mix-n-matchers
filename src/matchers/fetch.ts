@@ -149,7 +149,7 @@ export const toHaveHeader: MatcherFunction<[string, string?]> = function (receiv
     matcherHint("toHaveHeader", received, stringify(name), {
       isNot: this.isNot,
       promise: this.promise,
-      secondArgument: value && stringify(value),
+      secondArgument: typeof value === "undefined" ? undefined : stringify(value),
     });
   assert(globalThis.Response && globalThis.Request && globalThis.Headers, () =>
     matcherErrorMessage(
@@ -449,7 +449,7 @@ export const toHaveSearchParam: MatcherFunction<[string, string?]> = function (
     matcherHint("toHaveSearchParam", received, stringify(name), {
       isNot: this.isNot,
       promise: this.promise,
-      secondArgument: value && stringify(value),
+      secondArgument: typeof value === "undefined" ? undefined : stringify(value),
     });
   assert(
     globalThis.URLSearchParams && globalThis.URL && globalThis.Request && globalThis.Response,
