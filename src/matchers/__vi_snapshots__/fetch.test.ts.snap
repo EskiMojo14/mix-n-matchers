@@ -441,6 +441,69 @@ exports[`toHaveStatus > passes when the response has the expected status 1`] = `
 Expected response not to have status <g>200</g>, but it did.
 `;
 
+exports[`toHaveStatusGroup > fails when Response is not defined in the global scope 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveStatusGroup<d>(</b><g>2</g><d>)</b>
+
+<b>Matcher error</b>: Response is not defined in the global scope.
+`;
+
+exports[`toHaveStatusGroup > fails when the expected status group is not valid 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatusGroup<d>(</b><g>"invalid"</g><d>)</b>
+
+<b>Matcher error</b>: Expected status group must be one of: 1, "informational", "1xx", 2, "successful", "2xx", 3, "redirection", "3xx", 4, "client error", "4xx", 5, "server error", "5xx"
+
+expected has type:  string
+expected has value: "invalid"
+`;
+
+exports[`toHaveStatusGroup > fails when the received value is not a Response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveStatusGroup<d>(</b><g>2</g><d>)</b>
+
+<b>Matcher error</b>: Received value is not a Response.
+`;
+
+exports[`toHaveStatusGroup > fails when the status is non-standard and does not match any group 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatusGroup<d>(</b><g>2</g><d>)</b>
+
+Expected response to have status group <g>2</g>, but it was <r>"non-standard"</g> (<r>600</g>).
+`;
+
+exports[`toHaveStatusGroup > long > fails when the response does not have the expected status group 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatusGroup<d>(</b><g>"successful"</g><d>)</b>
+
+Expected response to have status group <g>"successful"</g>, but it was <r>"client error"</g> (<r>404</g>).
+`;
+
+exports[`toHaveStatusGroup > long > passes when the response has the expected status group 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatusGroup<d>(</b><g>"successful"</g><d>)</b>
+
+Expected response not to have status group <g>"successful"</g>, but it did (<r>200</g>).
+`;
+
+exports[`toHaveStatusGroup > num > fails when the response does not have the expected status group 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatusGroup<d>(</b><g>2</g><d>)</b>
+
+Expected response to have status group <g>2</g>, but it was <r>4</g> (<r>404</g>).
+`;
+
+exports[`toHaveStatusGroup > num > passes when the response has the expected status group 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatusGroup<d>(</b><g>2</g><d>)</b>
+
+Expected response not to have status group <g>2</g>, but it did (<r>200</g>).
+`;
+
+exports[`toHaveStatusGroup > short > fails when the response does not have the expected status group 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatusGroup<d>(</b><g>"2xx"</g><d>)</b>
+
+Expected response to have status group <g>"2xx"</g>, but it was <r>"4xx"</g> (<r>404</g>).
+`;
+
+exports[`toHaveStatusGroup > short > passes when the response has the expected status group 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatusGroup<d>(</b><g>"2xx"</g><d>)</b>
+
+Expected response not to have status group <g>"2xx"</g>, but it did (<r>200</g>).
+`;
+
 exports[`toHaveURL > fails when the expected URL is not a string > request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>toHaveURL<d>(</b><g>123</g><d>)</b>
 

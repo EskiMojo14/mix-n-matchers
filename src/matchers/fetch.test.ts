@@ -83,6 +83,60 @@ describe("toHaveStatus", () => {
   });
 });
 
+describe("toHaveStatusGroup", () => {
+  describe.each([
+    ["num", 2],
+    ["short", "2xx"],
+    ["long", "successful"],
+  ] as const)("%s", (_, expected) => {
+    it("passes when the response has the expected status group", () => {
+      const response = new Response(null, { status: 200 });
+      expect(response).toHaveStatusGroup(expected);
+      expect(() => {
+        expect(response).not.toHaveStatusGroup(expected);
+      }).toThrowErrorMatchingSnapshot();
+    });
+
+    it("fails when the response does not have the expected status group", () => {
+      const response = new Response(null, { status: 404 });
+      expect(() => {
+        expect(response).toHaveStatusGroup(expected);
+      }).toThrowErrorMatchingSnapshot();
+      expect(response).not.toHaveStatusGroup(expected);
+    });
+  });
+
+  it("fails when the received value is not a Response", () => {
+    expect(() => {
+      expect({}).toHaveStatusGroup(2);
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails when Response is not defined in the global scope", () => {
+    using _ = withoutGlobal("Response");
+
+    expect(() => {
+      expect({}).toHaveStatusGroup(2);
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails when the expected status group is not valid", () => {
+    const response = new Response(null, { status: 200 });
+    expect(() => {
+      // @ts-expect-error
+      expect(response).toHaveStatusGroup("invalid");
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails when the status is non-standard and does not match any group", () => {
+    const response = Object.defineProperty(new Response(), "status", { value: 600 });
+    expect(() => {
+      expect(response).toHaveStatusGroup(2);
+    }).toThrowErrorMatchingSnapshot();
+    expect(response).not.toHaveStatusGroup(2);
+  });
+});
+
 describe("toHaveHeader", () => {
   describe("when expected value is provided", () => {
     it("passes when the response/request has the expected header and value", () => {
