@@ -619,3 +619,183 @@ describe("toHaveResponseType", () => {
     }).toThrowErrorMatchingSnapshot();
   });
 });
+
+describe("toHaveSearchParam", () => {
+  describe("when expected value is provided", () => {
+    it("passes when the URLSearchParams, URL, Response or Request has the expected search param and value", () => {
+      const params = new URLSearchParams("foo=bar");
+      expect(params).toHaveSearchParam("foo", "bar");
+      expect(() => {
+        expect(params).not.toHaveSearchParam("foo", "bar");
+      }).toThrowErrorMatchingSnapshot("params");
+
+      const url = new URL(`https://example.com?${params.toString()}`);
+      expect(url).toHaveSearchParam("foo", "bar");
+      expect(() => {
+        expect(url).not.toHaveSearchParam("foo", "bar");
+      }).toThrowErrorMatchingSnapshot("url");
+
+      const request = new Request(url);
+      expect(request).toHaveSearchParam("foo", "bar");
+      expect(() => {
+        expect(request).not.toHaveSearchParam("foo", "bar");
+      }).toThrowErrorMatchingSnapshot("request");
+
+      const response = urlResponse(url.toString());
+      expect(response).toHaveSearchParam("foo", "bar");
+      expect(() => {
+        expect(response).not.toHaveSearchParam("foo", "bar");
+      }).toThrowErrorMatchingSnapshot("response");
+    });
+
+    it("fails when the URLSearchParams, URL, Response or Request does not have the expected search param and value", () => {
+      const params = new URLSearchParams("foo=baz");
+      expect(() => {
+        expect(params).toHaveSearchParam("foo", "bar");
+      }).toThrowErrorMatchingSnapshot("params");
+      expect(params).not.toHaveSearchParam("foo", "bar");
+
+      const url = new URL(`https://example.com?${params.toString()}`);
+      expect(() => {
+        expect(url).toHaveSearchParam("foo", "bar");
+      }).toThrowErrorMatchingSnapshot("url");
+      expect(url).not.toHaveSearchParam("foo", "bar");
+
+      const request = new Request(url);
+      expect(() => {
+        expect(request).toHaveSearchParam("foo", "bar");
+      }).toThrowErrorMatchingSnapshot("request");
+      expect(request).not.toHaveSearchParam("foo", "bar");
+
+      const response = urlResponse(url.toString());
+      expect(() => {
+        expect(response).toHaveSearchParam("foo", "bar");
+      }).toThrowErrorMatchingSnapshot("response");
+      expect(response).not.toHaveSearchParam("foo", "bar");
+    });
+  });
+
+  describe("when expected value is not provided", () => {
+    it("passes when the URLSearchParams, URL, Response or Request has the expected search param", () => {
+      const params = new URLSearchParams("foo=bar");
+      expect(params).toHaveSearchParam("foo");
+      expect(() => {
+        expect(params).not.toHaveSearchParam("foo");
+      }).toThrowErrorMatchingSnapshot("params");
+
+      const url = new URL(`https://example.com?${params.toString()}`);
+      expect(url).toHaveSearchParam("foo");
+      expect(() => {
+        expect(url).not.toHaveSearchParam("foo");
+      }).toThrowErrorMatchingSnapshot("url");
+
+      const request = new Request(url);
+      expect(request).toHaveSearchParam("foo");
+      expect(() => {
+        expect(request).not.toHaveSearchParam("foo");
+      }).toThrowErrorMatchingSnapshot("request");
+
+      const response = urlResponse(url.toString());
+      expect(response).toHaveSearchParam("foo");
+      expect(() => {
+        expect(response).not.toHaveSearchParam("foo");
+      }).toThrowErrorMatchingSnapshot("response");
+    });
+
+    it("fails when the URLSearchParams, URL, Response or Request does not have the expected search param", () => {
+      const params = new URLSearchParams();
+      expect(() => {
+        expect(params).toHaveSearchParam("foo");
+      }).toThrowErrorMatchingSnapshot("params");
+      expect(params).not.toHaveSearchParam("foo");
+
+      const url = new URL("https://example.com");
+      expect(() => {
+        expect(url).toHaveSearchParam("foo");
+      }).toThrowErrorMatchingSnapshot("url");
+      expect(url).not.toHaveSearchParam("foo");
+
+      const request = new Request(url);
+      expect(() => {
+        expect(request).toHaveSearchParam("foo");
+      }).toThrowErrorMatchingSnapshot("request");
+      expect(request).not.toHaveSearchParam("foo");
+
+      const response = urlResponse(url.toString());
+      expect(() => {
+        expect(response).toHaveSearchParam("foo");
+      }).toThrowErrorMatchingSnapshot("response");
+      expect(response).not.toHaveSearchParam("foo");
+    });
+  });
+
+  it("fails when the received value is not a URLSearchParams, URL, Response or Request", () => {
+    expect(() => {
+      expect({}).toHaveSearchParam("foo", "bar");
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  describe.each(["URLSearchParams", "URL", "Response", "Request"] as const)(
+    "when %s is not defined in the global scope",
+    (type) => {
+      it("fails", () => {
+        using _ = withoutGlobal(type);
+        expect(() => {
+          expect({}).toHaveSearchParam("foo", "bar");
+        }).toThrowErrorMatchingSnapshot(type.toLowerCase());
+      });
+    },
+  );
+
+  it("fails when the search param name is not a string", () => {
+    const params = new URLSearchParams("foo=bar");
+    expect(() => {
+      // @ts-expect-error
+      expect(params).toHaveSearchParam(123, "bar");
+    }).toThrowErrorMatchingSnapshot("params");
+
+    const url = new URL(`https://example.com?${params.toString()}`);
+    expect(() => {
+      // @ts-expect-error
+      expect(url).toHaveSearchParam(123, "bar");
+    }).toThrowErrorMatchingSnapshot("url");
+
+    const request = new Request(url);
+    expect(() => {
+      // @ts-expect-error
+      expect(request).toHaveSearchParam(123, "bar");
+    }).toThrowErrorMatchingSnapshot("request");
+
+    const response = urlResponse(url.toString());
+    expect(() => {
+      // @ts-expect-error
+      expect(response).toHaveSearchParam(123, "bar");
+    }).toThrowErrorMatchingSnapshot("response");
+  });
+
+  it("fails when the expected value is not a string or undefined", () => {
+    const params = new URLSearchParams("foo=bar");
+    expect(() => {
+      // @ts-expect-error
+      expect(params).toHaveSearchParam("foo", 123);
+    }).toThrowErrorMatchingSnapshot("params");
+
+    const url = new URL(`https://example.com?${params.toString()}`);
+    expect(() => {
+      // @ts-expect-error
+      expect(url).toHaveSearchParam("foo", 123);
+    }).toThrowErrorMatchingSnapshot("url");
+
+    const request = new Request(url);
+    expect(() => {
+      // @ts-expect-error
+      expect(request).toHaveSearchParam("foo", 123);
+    }).toThrowErrorMatchingSnapshot("request");
+
+    const response = urlResponse(url.toString());
+    expect(() => {
+      // @ts-expect-error
+      expect(response).toHaveSearchParam("foo", 123);
+    }).toThrowErrorMatchingSnapshot("response");
+  });
+});

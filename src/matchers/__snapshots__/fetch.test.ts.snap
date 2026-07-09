@@ -432,6 +432,204 @@ exports[`toHaveResponseType passes when the response has the expected type 1`] =
 Expected response not to have type <g>basic</g>, but it did.
 `;
 
+exports[`toHaveSearchParam fails when the expected value is not a string or undefined: params 1`] = `
+<d>expect(</b><r>params</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>123</g><d>)</b>
+
+<b>Matcher error</b>: Expected value must be a string or undefined.
+
+value has type:  number
+value has value: 123
+`;
+
+exports[`toHaveSearchParam fails when the expected value is not a string or undefined: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>123</g><d>)</b>
+
+<b>Matcher error</b>: Expected value must be a string or undefined.
+
+value has type:  number
+value has value: 123
+`;
+
+exports[`toHaveSearchParam fails when the expected value is not a string or undefined: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>123</g><d>)</b>
+
+<b>Matcher error</b>: Expected value must be a string or undefined.
+
+value has type:  number
+value has value: 123
+`;
+
+exports[`toHaveSearchParam fails when the expected value is not a string or undefined: url 1`] = `
+<d>expect(</b><r>url</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>123</g><d>)</b>
+
+<b>Matcher error</b>: Expected value must be a string or undefined.
+
+value has type:  number
+value has value: 123
+`;
+
+exports[`toHaveSearchParam fails when the received value is not a URLSearchParams, URL, Response or Request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+<b>Matcher error</b>: Received value is not a URLSearchParams, URL, Request, or Response.
+`;
+
+exports[`toHaveSearchParam fails when the search param name is not a string: params 1`] = `
+<d>expect(</b><r>params</g><d>).</b>toHaveSearchParam<d>(</b><g>123</g><d>, </b><g>"bar"</g><d>)</b>
+
+<b>Matcher error</b>: Query parameter name must be a string.
+
+name has type:  number
+name has value: 123
+`;
+
+exports[`toHaveSearchParam fails when the search param name is not a string: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveSearchParam<d>(</b><g>123</g><d>, </b><g>"bar"</g><d>)</b>
+
+<b>Matcher error</b>: Query parameter name must be a string.
+
+name has type:  number
+name has value: 123
+`;
+
+exports[`toHaveSearchParam fails when the search param name is not a string: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveSearchParam<d>(</b><g>123</g><d>, </b><g>"bar"</g><d>)</b>
+
+<b>Matcher error</b>: Query parameter name must be a string.
+
+name has type:  number
+name has value: 123
+`;
+
+exports[`toHaveSearchParam fails when the search param name is not a string: url 1`] = `
+<d>expect(</b><r>url</g><d>).</b>toHaveSearchParam<d>(</b><g>123</g><d>, </b><g>"bar"</g><d>)</b>
+
+<b>Matcher error</b>: Query parameter name must be a string.
+
+name has type:  number
+name has value: 123
+`;
+
+exports[`toHaveSearchParam when Request is not defined in the global scope fails: request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+<b>Matcher error</b>: URLSearchParams, URL, Request, or Response is not defined in the global scope.
+`;
+
+exports[`toHaveSearchParam when Response is not defined in the global scope fails: response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+<b>Matcher error</b>: URLSearchParams, URL, Request, or Response is not defined in the global scope.
+`;
+
+exports[`toHaveSearchParam when URL is not defined in the global scope fails: url 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+<b>Matcher error</b>: URLSearchParams, URL, Request, or Response is not defined in the global scope.
+`;
+
+exports[`toHaveSearchParam when URLSearchParams is not defined in the global scope fails: urlsearchparams 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+<b>Matcher error</b>: URLSearchParams, URL, Request, or Response is not defined in the global scope.
+`;
+
+exports[`toHaveSearchParam when expected value is not provided fails when the URLSearchParams, URL, Response or Request does not have the expected search param: params 1`] = `
+<d>expect(</b><r>params</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
+
+Expected params to have search parameter <g>foo</g>, but it was not found.
+`;
+
+exports[`toHaveSearchParam when expected value is not provided fails when the URLSearchParams, URL, Response or Request does not have the expected search param: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
+
+Expected request to have search parameter <g>foo</g>, but it was not found.
+`;
+
+exports[`toHaveSearchParam when expected value is not provided fails when the URLSearchParams, URL, Response or Request does not have the expected search param: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
+
+Expected response to have search parameter <g>foo</g>, but it was not found.
+`;
+
+exports[`toHaveSearchParam when expected value is not provided fails when the URLSearchParams, URL, Response or Request does not have the expected search param: url 1`] = `
+<d>expect(</b><r>url</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
+
+Expected url to have search parameter <g>foo</g>, but it was not found.
+`;
+
+exports[`toHaveSearchParam when expected value is not provided passes when the URLSearchParams, URL, Response or Request has the expected search param: params 1`] = `
+<d>expect(</b><r>params</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
+
+Expected params not to have search parameter <g>foo</g>, but it did.
+`;
+
+exports[`toHaveSearchParam when expected value is not provided passes when the URLSearchParams, URL, Response or Request has the expected search param: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
+
+Expected request not to have search parameter <g>foo</g>, but it did.
+`;
+
+exports[`toHaveSearchParam when expected value is not provided passes when the URLSearchParams, URL, Response or Request has the expected search param: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
+
+Expected response not to have search parameter <g>foo</g>, but it did.
+`;
+
+exports[`toHaveSearchParam when expected value is not provided passes when the URLSearchParams, URL, Response or Request has the expected search param: url 1`] = `
+<d>expect(</b><r>url</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
+
+Expected url not to have search parameter <g>foo</g>, but it did.
+`;
+
+exports[`toHaveSearchParam when expected value is provided fails when the URLSearchParams, URL, Response or Request does not have the expected search param and value: params 1`] = `
+<d>expect(</b><r>params</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+Expected params to have search parameter <g>foo</g> with a value of <g>bar</g>, but it had a value of <r>baz</g>.
+`;
+
+exports[`toHaveSearchParam when expected value is provided fails when the URLSearchParams, URL, Response or Request does not have the expected search param and value: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+Expected request to have search parameter <g>foo</g> with a value of <g>bar</g>, but it had a value of <r>baz</g>.
+`;
+
+exports[`toHaveSearchParam when expected value is provided fails when the URLSearchParams, URL, Response or Request does not have the expected search param and value: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+Expected response to have search parameter <g>foo</g> with a value of <g>bar</g>, but it had a value of <r>baz</g>.
+`;
+
+exports[`toHaveSearchParam when expected value is provided fails when the URLSearchParams, URL, Response or Request does not have the expected search param and value: url 1`] = `
+<d>expect(</b><r>url</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+Expected url to have search parameter <g>foo</g> with a value of <g>bar</g>, but it had a value of <r>baz</g>.
+`;
+
+exports[`toHaveSearchParam when expected value is provided passes when the URLSearchParams, URL, Response or Request has the expected search param and value: params 1`] = `
+<d>expect(</b><r>params</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+Expected params not to have search parameter <g>foo</g> with a value of <g>bar</g>, but it did.
+`;
+
+exports[`toHaveSearchParam when expected value is provided passes when the URLSearchParams, URL, Response or Request has the expected search param and value: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+Expected request not to have search parameter <g>foo</g> with a value of <g>bar</g>, but it did.
+`;
+
+exports[`toHaveSearchParam when expected value is provided passes when the URLSearchParams, URL, Response or Request has the expected search param and value: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+Expected response not to have search parameter <g>foo</g> with a value of <g>bar</g>, but it did.
+`;
+
+exports[`toHaveSearchParam when expected value is provided passes when the URLSearchParams, URL, Response or Request has the expected search param and value: url 1`] = `
+<d>expect(</b><r>url</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
+
+Expected url not to have search parameter <g>foo</g> with a value of <g>bar</g>, but it did.
+`;
+
 exports[`toHaveStatus fails when Response is not defined in the global scope 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toHaveStatus<d>(</b><g>200</g><d>)</b>
 
