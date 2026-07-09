@@ -148,7 +148,7 @@
     }
   },
   "lint-staged": {
-    "*": "oxfmt"
+    "*": "oxfmt --no-error-on-unmatched-pattern"
   },
   "tsdown": {
     "deps": {
