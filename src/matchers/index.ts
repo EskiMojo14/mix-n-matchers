@@ -24,4 +24,4 @@ export {
   toBeRecordOf,
   toBeStrictRecordOf,
 } from "../shared/iterable-of";
-export { toBeOK, toHaveStatus, toHaveHeader } from "./fetch";
+export { toBeOK, toHaveStatus, toHaveHeader, toHaveMethod } from "./fetch";

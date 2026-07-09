@@ -40,9 +40,8 @@ describe("toBeOK", () => {
   });
 
   it("fails when the received value is not a Response", () => {
-    const notAResponse = {};
     expect(() => {
-      expect(notAResponse).toBeOK();
+      expect({}).toBeOK();
     }).toThrowErrorMatchingSnapshot();
   });
 
@@ -73,9 +72,8 @@ describe("toHaveStatus", () => {
   });
 
   it("fails when the received value is not a Response", () => {
-    const notAResponse = {};
     expect(() => {
-      expect(notAResponse).toHaveStatus(200);
+      expect({}).toHaveStatus(200);
     }).toThrowErrorMatchingSnapshot();
   });
 
@@ -177,5 +175,37 @@ describe("toHaveHeader", () => {
         expect({}).toHaveHeader("Content-Type", "application/json");
       }).toThrowErrorMatchingSnapshot(type.toLowerCase());
     });
+  });
+});
+
+describe("toHaveMethod", () => {
+  it("passes when the request has the expected method", () => {
+    const request = new Request("https://example.com", { method: "POST" });
+    expect(request).toHaveMethod("POST");
+    expect(() => {
+      expect(request).not.toHaveMethod("POST");
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails when the request does not have the expected method", () => {
+    const request = new Request("https://example.com", { method: "GET" });
+    expect(() => {
+      expect(request).toHaveMethod("POST");
+    }).toThrowErrorMatchingSnapshot();
+    expect(request).not.toHaveMethod("POST");
+  });
+
+  it("fails when the received value is not a Request", () => {
+    expect(() => {
+      expect({}).toHaveMethod("POST");
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails when Request is not defined in the global scope", () => {
+    using _ = withoutGlobalRequest();
+
+    expect(() => {
+      expect({}).toHaveMethod("POST");
+    }).toThrowErrorMatchingSnapshot();
   });
 });
