@@ -32,7 +32,7 @@ export const oneOf: MatcherFunction<[Array<unknown>]> = function (value, expecte
     message: () =>
       matcherHint(matcherName, undefined, undefined, options) +
       "\n\n" +
-      `Expected ${printReceived(value)} to be one of ${expected.map(printReceived).join(", ")}`,
+      `Expected ${printReceived(value)} ${this.isNot ? "not " : ""}to be one of ${expected.map(printReceived).join(", ")}`,
   };
 };
 
