@@ -1,0 +1,12 @@
+{
+  "name": "mix-n-matchers-rstest",
+  "version": "1.0.0",
+  "description": "Miscellaneous custom Jest matchers",
+  "files": [
+    "../dist"
+  ],
+  "type": "module",
+  "main": "../dist/rstest.cjs",
+  "module": "../dist/rstest.mjs",
+  "types": "../types/rstest.d.mts"
+}

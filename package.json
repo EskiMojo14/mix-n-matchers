@@ -27,6 +27,7 @@
     "types",
     "all",
     "jest-globals",
+    "rstest",
     "vitest",
     "utilities"
   ],
