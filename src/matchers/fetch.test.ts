@@ -209,3 +209,84 @@ describe("toHaveMethod", () => {
     }).toThrowErrorMatchingSnapshot();
   });
 });
+
+describe("toHaveBodyText", () => {
+  it("passes when the response/request has the expected body text", async () => {
+    const response = new Response("Hello, world!");
+    await expect(response).toHaveBodyText("Hello, world!");
+    await expect(async () => {
+      await expect(response).not.toHaveBodyText("Hello, world!");
+    }).rejects.toThrowErrorMatchingSnapshot("response");
+
+    const request = new Request("https://example.com", {
+      body: "Hello, world!",
+      method: "POST",
+    });
+    await expect(request).toHaveBodyText("Hello, world!");
+    await expect(async () => {
+      await expect(request).not.toHaveBodyText("Hello, world!");
+    }).rejects.toThrowErrorMatchingSnapshot("request");
+  });
+
+  it("fails when the response/request does not have the expected body text", async () => {
+    const response = new Response("Goodbye, world!");
+    await expect(async () => {
+      await expect(response).toHaveBodyText("Hello, world!");
+    }).rejects.toThrowErrorMatchingSnapshot("response");
+    await expect(response).not.toHaveBodyText("Hello, world!");
+
+    const request = new Request("https://example.com", {
+      body: "Goodbye, world!",
+      method: "POST",
+    });
+    await expect(async () => {
+      await expect(request).toHaveBodyText("Hello, world!");
+    }).rejects.toThrowErrorMatchingSnapshot("request");
+    await expect(request).not.toHaveBodyText("Hello, world!");
+  });
+
+  it("fails when the received value is not a Response or Request", async () => {
+    await expect(async () => {
+      await expect({}).toHaveBodyText("Hello, world!");
+    }).rejects.toThrowErrorMatchingSnapshot();
+  });
+
+  describe.each(["Response", "Request"])("when %s is not defined in the global scope", (type) => {
+    it("fails", async () => {
+      using _ = type === "Response" ? withoutGlobalResponse() : withoutGlobalRequest();
+      await expect(async () => {
+        await expect({}).toHaveBodyText("Hello, world!");
+      }).rejects.toThrowErrorMatchingSnapshot(type.toLowerCase());
+    });
+  });
+
+  it("fails when the body has already been used", async () => {
+    const response = new Response("Hello, world!");
+    await response.text(); // Consume the body
+    await expect(async () => {
+      await expect(response).toHaveBodyText("Hello, world!");
+    }).rejects.toThrowErrorMatchingSnapshot("response");
+
+    const request = new Request("https://example.com", {
+      body: "Hello, world!",
+      method: "POST",
+    });
+    await request.text(); // Consume the body
+    await expect(async () => {
+      await expect(request).toHaveBodyText("Hello, world!");
+    }).rejects.toThrowErrorMatchingSnapshot("request");
+  });
+
+  it("clones to avoid consuming the body, so it can be read again later", async () => {
+    const response = new Response("Hello, world!");
+    await expect(response).toHaveBodyText("Hello, world!");
+    await expect(response.text()).resolves.toBe("Hello, world!"); // Body can still be read
+
+    const request = new Request("https://example.com", {
+      body: "Hello, world!",
+      method: "POST",
+    });
+    await expect(request).toHaveBodyText("Hello, world!");
+    await expect(request.text()).resolves.toBe("Hello, world!"); // Body can still be read
+  });
+});

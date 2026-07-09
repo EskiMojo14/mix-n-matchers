@@ -75,11 +75,11 @@ export const toHaveHeader: MatcherFunction<[string, string?]> = function (
     promise: this.promise,
     secondArgument: expectedValue && `"${expectedValue}"`,
   };
+  const receivedName = received instanceof Response ? "response" : "request";
 
   const hasExpected = expectedValue !== undefined;
   const actualValue = received.headers.get(headerName);
   const pass = hasExpected ? actualValue === expectedValue : actualValue !== null;
-  const receivedName = received instanceof Response ? "response" : "request";
 
   return {
     pass,
@@ -123,6 +123,41 @@ export const toHaveMethod: MatcherFunction<[string]> = function (received, expec
   };
 };
 
+/**
+ * Ensure the Response or Request object has a specific body text.
+ * @remarks This matcher is asynchronous and returns a Promise, so it should be awaited.
+ */
+export const toHaveBodyText: MatcherFunction<[string]> = async function (received, expectedText) {
+  assert(
+    globalThis.Request && globalThis.Response,
+    "Request or Response is not defined in the global scope.",
+  );
+  assert(
+    received instanceof Request || received instanceof Response,
+    "Received value is not a Request or Response.",
+  );
+  assert(typeof expectedText === "string", "Expected text must be a string.");
+  assert(!received.bodyUsed, "Cannot read body text because it has already been used.");
+
+  const matcherHintOptions: MatcherHintOptions = {
+    isNot: this.isNot,
+    promise: this.promise,
+  };
+  const receivedName = received instanceof Request ? "request" : "response";
+
+  const actualText = await received.clone().text();
+  const pass = actualText === expectedText;
+
+  return {
+    pass,
+    message: () =>
+      `${matcherHint("toHaveBodyText", receivedName, `"${expectedText}"`, matcherHintOptions)}\n\n` +
+      (pass
+        ? `Expected ${receivedName} not to have body text ${EXPECTED_COLOR(expectedText)}, but it did.`
+        : `Expected ${receivedName} to have body text ${EXPECTED_COLOR(expectedText)}, but it was ${RECEIVED_COLOR(actualText)}.`),
+  };
+};
+
 declare module "mix-n-matchers" {
   export interface MixNMatchers<R, T = unknown> {
     /**
@@ -151,5 +186,14 @@ declare module "mix-n-matchers" {
      * expect(request).toHaveMethod("POST");
      */
     toHaveMethod(expectedMethod: string): R;
+    /**
+     * Asserts that a Response or Request object has a specific body text.
+     * @example
+     * await expect(response).toHaveBodyText("Hello, world!");
+     * await expect(request).toHaveBodyText("Hello, world!");
+     * @remarks Will clone the object to avoid consuming the body, so it can be read again later. Will throw an error if the body has already been used.
+     * @remarks This matcher is asynchronous and returns a Promise, so it should be awaited.
+     */
+    toHaveBodyText(expectedText: string): Promise<Awaited<R>>;
   }
 }
