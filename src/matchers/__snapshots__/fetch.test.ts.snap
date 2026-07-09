@@ -210,6 +210,15 @@ exports[`toHaveBodyText when Response is not defined in the global scope fails: 
 <b>Matcher error</b>: Request or Response is not defined in the global scope.
 `;
 
+exports[`toHaveHeader fails when the expected value is not a string or undefined: headers 1`] = `
+<d>expect(</b><r>headers</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>123</g><d>)</b>
+
+<b>Matcher error</b>: Expected value must be a string or undefined.
+
+value has type:  number
+value has value: 123
+`;
+
 exports[`toHaveHeader fails when the expected value is not a string or undefined: request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>123</g><d>)</b>
 
@@ -226,6 +235,15 @@ exports[`toHaveHeader fails when the expected value is not a string or undefined
 
 value has type:  number
 value has value: 123
+`;
+
+exports[`toHaveHeader fails when the header name is not a string: headers 1`] = `
+<d>expect(</b><r>headers</g><d>).</b>toHaveHeader<d>(</b><g>123</g><d>, </b><g>"application/json"</g><d>)</b>
+
+<b>Matcher error</b>: Header name must be a string.
+
+name has type:  number
+name has value: 123
 `;
 
 exports[`toHaveHeader fails when the header name is not a string: request 1`] = `
@@ -246,22 +264,34 @@ name has type:  number
 name has value: 123
 `;
 
-exports[`toHaveHeader fails when the received value is not a Response or Request 1`] = `
+exports[`toHaveHeader fails when the received value is not a Response, Request, or Headers 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
 
-<b>Matcher error</b>: Received value is not a Response or Request.
+<b>Matcher error</b>: Received value is not a Response, Request, or Headers.
+`;
+
+exports[`toHaveHeader when Headers is not defined in the global scope fails: headers 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
+
+<b>Matcher error</b>: Response, Request, or Headers is not defined in the global scope.
 `;
 
 exports[`toHaveHeader when Request is not defined in the global scope fails: request 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
 
-<b>Matcher error</b>: Response or Request is not defined in the global scope.
+<b>Matcher error</b>: Response, Request, or Headers is not defined in the global scope.
 `;
 
 exports[`toHaveHeader when Response is not defined in the global scope fails: response 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
 
-<b>Matcher error</b>: Response or Request is not defined in the global scope.
+<b>Matcher error</b>: Response, Request, or Headers is not defined in the global scope.
+`;
+
+exports[`toHaveHeader when expected value is not provided fails when the response/request does not have the expected header: headers 1`] = `
+<d>expect(</b><r>headers</g><d>).</b>toHaveHeader<d>(</b><g>"Authorization"</g><d>)</b>
+
+Expected headers to have header <g>Authorization</g>, but it was not found.
 `;
 
 exports[`toHaveHeader when expected value is not provided fails when the response/request does not have the expected header: request 1`] = `
@@ -276,6 +306,12 @@ exports[`toHaveHeader when expected value is not provided fails when the respons
 Expected response to have header <g>Authorization</g>, but it was not found.
 `;
 
+exports[`toHaveHeader when expected value is not provided passes when the response/request has the expected header: headers 1`] = `
+<d>expect(</b><r>headers</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>)</b>
+
+Expected headers not to have header <g>Content-Type</g>, but it did.
+`;
+
 exports[`toHaveHeader when expected value is not provided passes when the response/request has the expected header: request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>)</b>
 
@@ -288,6 +324,12 @@ exports[`toHaveHeader when expected value is not provided passes when the respon
 Expected response not to have header <g>Content-Type</g>, but it did.
 `;
 
+exports[`toHaveHeader when expected value is provided fails when the response/request does not have the expected header and value: headers 1`] = `
+<d>expect(</b><r>headers</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
+
+Expected headers to have header <g>Content-Type</g> with a value of <g>application/json</g>, but it had a value of <r>text/html</g>.
+`;
+
 exports[`toHaveHeader when expected value is provided fails when the response/request does not have the expected header and value: request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
 
@@ -298,6 +340,12 @@ exports[`toHaveHeader when expected value is provided fails when the response/re
 <d>expect(</b><r>response</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
 
 Expected response to have header <g>Content-Type</g> with a value of <g>application/json</g>, but it had a value of <r>text/html</g>.
+`;
+
+exports[`toHaveHeader when expected value is provided passes when the response/request has the expected header and value: headers 1`] = `
+<d>expect(</b><r>headers</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
+
+Expected headers not to have header <g>Content-Type</g> with a value of <g>application/json</g>, but it did.
 `;
 
 exports[`toHaveHeader when expected value is provided passes when the response/request has the expected header and value: request 1`] = `
