@@ -1,7 +1,7 @@
 {
   "name": "mix-n-matchers-all",
   "version": "1.0.0",
-  "description": "Miscellaneous custom Jest matchers",
+  "description": "Miscellaneous custom Jest compatible matchers",
   "files": [
     "../dist"
   ],

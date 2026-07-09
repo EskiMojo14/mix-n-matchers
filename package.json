@@ -1,13 +1,14 @@
 {
   "name": "mix-n-matchers",
   "version": "2.3.0",
-  "description": "Miscellaneous custom Jest matchers",
+  "description": "Miscellaneous custom Jest compatible matchers",
   "keywords": [
     "assertions",
     "extend",
     "extended",
     "jest",
     "matchers",
+    "rstest",
     "test",
     "testing",
     "vitest"
