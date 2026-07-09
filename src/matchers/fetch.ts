@@ -348,7 +348,7 @@ function makeToHaveBodyJSONMatcher(
       message: () =>
         `${hint(receivedName)}\n\n` +
         (pass
-          ? `Expected ${receivedName} not to have body JSON ${EXPECTED_COLOR(expected)}, but it did.`
+          ? `Expected ${receivedName} not to have body JSON ${EXPECTED_COLOR(stringify(expected))}, but it did.`
           : printDiffOrStringify(
               expected,
               actualJSON,
