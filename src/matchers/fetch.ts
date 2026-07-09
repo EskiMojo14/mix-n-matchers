@@ -433,6 +433,91 @@ export const toHaveResponseType: MatcherFunction<[typeof Response.prototype.type
   };
 };
 
+/**
+ * Assert that a URLSearchParams, URL, Response or Request object has a specific query parameter with a specific value.
+ * If no expected value is provided, it checks for the existence of the parameter.
+ */
+export const toHaveSearchParam: MatcherFunction<[string, string?]> = function (
+  received,
+  name,
+  value,
+) {
+  const hint = (received?: string) =>
+    matcherHint("toHaveSearchParam", received, stringify(name), {
+      isNot: this.isNot,
+      promise: this.promise,
+      secondArgument: value && stringify(value),
+    });
+  assert(
+    globalThis.URLSearchParams && globalThis.URL && globalThis.Request && globalThis.Response,
+    () =>
+      matcherErrorMessage(
+        hint(),
+        "URLSearchParams, URL, Request, or Response is not defined in the global scope.",
+      ),
+  );
+  assert(
+    received instanceof URLSearchParams ||
+      received instanceof URL ||
+      received instanceof Request ||
+      received instanceof Response,
+    () =>
+      matcherErrorMessage(
+        hint(),
+        "Received value is not a URLSearchParams, URL, Request, or Response.",
+      ),
+  );
+  const receivedName =
+    received instanceof URLSearchParams
+      ? "params"
+      : received instanceof URL
+        ? "url"
+        : received instanceof Request
+          ? "request"
+          : "response";
+  assert(typeof name === "string", () =>
+    matcherErrorMessage(
+      hint(receivedName),
+      "Query parameter name must be a string.",
+      printWithType("name", name, stringify),
+    ),
+  );
+  assert(value === undefined || typeof value === "string", () =>
+    matcherErrorMessage(
+      hint(receivedName),
+      "Expected value must be a string or undefined.",
+      printWithType("value", value, stringify),
+    ),
+  );
+
+  const hasValue = value !== undefined;
+  let searchParams: URLSearchParams;
+  if (received instanceof URLSearchParams) {
+    searchParams = received;
+  } else if (received instanceof URL) {
+    ({ searchParams } = received);
+  } else {
+    ({ searchParams } = new URL(received.url));
+  }
+  const actualValue = searchParams.get(name);
+  const pass = hasValue ? actualValue === value : actualValue !== null;
+
+  return {
+    pass,
+    message: hasValue
+      ? () =>
+          `${hint(receivedName)}\n\n` +
+          (pass
+            ? `Expected ${receivedName} not to have search parameter ${EXPECTED_COLOR(name)} with a value of ${EXPECTED_COLOR(value)}, but it did.`
+            : `Expected ${receivedName} to have search parameter ${EXPECTED_COLOR(name)} with a value of ${EXPECTED_COLOR(value)}, but it ${actualValue === null ? "was not found" : `had a value of ${RECEIVED_COLOR(actualValue)}`}.`)
+      : () =>
+          `${hint(receivedName)}\n\n` +
+          (pass
+            ? `Expected ${receivedName} not to have search parameter ${EXPECTED_COLOR(name)}, but it did.`
+            : `Expected ${receivedName} to have search parameter ${EXPECTED_COLOR(name)}, but it was not found.`),
+  };
+};
+
 declare module "mix-n-matchers" {
   export interface MixNMatchers<R, T = unknown> {
     /**
@@ -517,5 +602,15 @@ declare module "mix-n-matchers" {
      * expect(response).toHaveResponseType("basic");
      */
     toHaveResponseType(expected: typeof Response.prototype.type): R;
+    /**
+     * Asserts that a URLSearchParams, URL, Response or Request object has a specific query parameter with a specific value.
+     * If no expected value is provided, it checks for the existence of the parameter.
+     * @example
+     * expect(params).toHaveSearchParam("foo", "bar");
+     * expect(url).toHaveSearchParam("foo", "bar");
+     * expect(request).toHaveSearchParam("foo", "bar");
+     * expect(response).toHaveSearchParam("foo", "bar");
+     */
+    toHaveSearchParam(name: string, value?: string): R;
   }
 }

@@ -36,4 +36,5 @@ export {
   toHaveBodyJSONStrict,
   toBeRedirected,
   toHaveResponseType,
+  toHaveSearchParam,
 } from "./fetch";

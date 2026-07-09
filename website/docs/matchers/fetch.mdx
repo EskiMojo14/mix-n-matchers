@@ -162,3 +162,17 @@ it("has the expected response type", () => {
 `}
 
 </TestFile>
+
+### `.toHaveSearchParam(name, value?)`
+
+Use `.toHaveSearchParam(name, value?)` to assert that a `URLSearchParams`, `URL`, `Response`, or `Request` object has the specified query parameter. If `value` is provided, it will also check that the parameter value matches.
+
+<TestFile name="toHaveSearchParam">
+{`
+it("has the expected search parameter", () => {
+  const url = new URL("https://example.com?foo=bar");
+  expect(url).toHaveSearchParam("foo", "bar");
+});
+`}
+
+</TestFile>
