@@ -92,15 +92,15 @@ it("has the expected URL", () => {
 
 </TestFile>
 
-### `.toHaveBodyText(expected)`
+### `.toHaveTextBody(expected)`
 
-Use `.toHaveBodyText(expected)` to assert that a `Response` or `Request` object has the expected body text.
+Use `.toHaveTextBody(expected)` to assert that a `Response` or `Request` object has the expected body text.
 
-<TestFile name="toHaveBodyText">
+<TestFile name="toHaveTextBody">
 {`
 it("has the expected body text", async () => {
   const response = new Response("Hello, world!");
-  await expect(response).toHaveBodyText("Hello, world!");
+  await expect(response).toHaveTextBody("Hello, world!");
 });
 `}
 
@@ -110,17 +110,17 @@ it("has the expected body text", async () => {
 This assertion is asynchronous, so must be awaited.
 :::
 
-### `.toHaveBodyJSON(expected)`
+### `.toHaveJSONBody(expected)`
 
-Use `.toHaveBodyJSON(expected)` to assert that a `Response` or `Request` object has the expected JSON body, using deep equality.
+Use `.toHaveJSONBody(expected)` to assert that a `Response` or `Request` object has the expected JSON body, using deep equality.
 
-`.toHaveBodyJSONStrict(expected)` is also available to use [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
+`.toHaveJSONBodyStrict(expected)` is also available to use [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
 
-<TestFile name="toHaveBodyJSON">
+<TestFile name="toHaveJSONBody">
 {`
 it("has the expected JSON body", async () => {
   const response = Response.json({ message: "Hello, world!" });
-  await expect(response).toHaveBodyJSON({ message: "Hello, world!" });
+  await expect(response).toHaveJSONBody({ message: "Hello, world!" });
 });
 `}
 
