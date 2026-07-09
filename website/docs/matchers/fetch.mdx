@@ -85,8 +85,8 @@ Use `.toHaveURL(expected)` to assert that a `Response` or `Request` object has t
 <TestFile name="toHaveURL">
 {`
 it("has the expected URL", () => {
-  const request = new Request("https://example.com");
-  expect(request).toHaveURL("https://example.com");
+  const request = new Request("https://example.com/");
+  expect(request).toHaveURL("https://example.com/");
 });
 `}
 
