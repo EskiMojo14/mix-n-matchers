@@ -11,6 +11,17 @@ function withoutGlobalResponse(): Disposable {
   };
 }
 
+function withoutGlobalRequest(): Disposable {
+  const originalRequest = globalThis.Request;
+  // @ts-expect-error: Temporarily remove Request from the global scope for testing
+  delete globalThis.Request;
+  return {
+    [Symbol.dispose]() {
+      globalThis.Request = originalRequest;
+    },
+  };
+}
+
 describe("toBeOK", () => {
   it("passes when the response is ok", () => {
     const response = new Response(null, { status: 200 });
@@ -79,61 +90,92 @@ describe("toHaveStatus", () => {
 
 describe("toHaveHeader", () => {
   describe("when expected value is provided", () => {
-    it("passes when the response has the expected header and value", () => {
+    it("passes when the response/request has the expected header and value", () => {
       const response = new Response(null, {
         headers: { "Content-Type": "application/json" },
       });
       expect(response).toHaveHeader("Content-Type", "application/json");
       expect(() => {
         expect(response).not.toHaveHeader("Content-Type", "application/json");
-      }).toThrowErrorMatchingSnapshot();
+      }).toThrowErrorMatchingSnapshot("response");
+
+      const request = new Request("https://example.com", {
+        headers: { "Content-Type": "application/json" },
+      });
+      expect(request).toHaveHeader("Content-Type", "application/json");
+      expect(() => {
+        expect(request).not.toHaveHeader("Content-Type", "application/json");
+      }).toThrowErrorMatchingSnapshot("request");
     });
 
-    it("fails when the response does not have the expected header and value", () => {
+    it("fails when the response/request does not have the expected header and value", () => {
       const response = new Response(null, {
         headers: { "Content-Type": "text/html" },
       });
       expect(() => {
         expect(response).toHaveHeader("Content-Type", "application/json");
-      }).toThrowErrorMatchingSnapshot();
+      }).toThrowErrorMatchingSnapshot("response");
       expect(response).not.toHaveHeader("Content-Type", "application/json");
+
+      const request = new Request("https://example.com", {
+        headers: { "Content-Type": "text/html" },
+      });
+      expect(() => {
+        expect(request).toHaveHeader("Content-Type", "application/json");
+      }).toThrowErrorMatchingSnapshot("request");
+      expect(request).not.toHaveHeader("Content-Type", "application/json");
     });
   });
 
   describe("when expected value is not provided", () => {
-    it("passes when the response has the expected header", () => {
+    it("passes when the response/request has the expected header", () => {
       const response = new Response(null, {
         headers: { "Content-Type": "application/json" },
       });
       expect(response).toHaveHeader("Content-Type");
       expect(() => {
         expect(response).not.toHaveHeader("Content-Type");
-      }).toThrowErrorMatchingSnapshot();
+      }).toThrowErrorMatchingSnapshot("response");
+
+      const request = new Request("https://example.com", {
+        headers: { "Content-Type": "application/json" },
+      });
+      expect(request).toHaveHeader("Content-Type");
+      expect(() => {
+        expect(request).not.toHaveHeader("Content-Type");
+      }).toThrowErrorMatchingSnapshot("request");
     });
 
-    it("fails when the response does not have the expected header", () => {
+    it("fails when the response/request does not have the expected header", () => {
       const response = new Response(null, {
         headers: { "Content-Type": "text/html" },
       });
       expect(() => {
         expect(response).toHaveHeader("Authorization");
-      }).toThrowErrorMatchingSnapshot();
+      }).toThrowErrorMatchingSnapshot("response");
       expect(response).not.toHaveHeader("Authorization");
+
+      const request = new Request("https://example.com", {
+        headers: { "Content-Type": "text/html" },
+      });
+      expect(() => {
+        expect(request).toHaveHeader("Authorization");
+      }).toThrowErrorMatchingSnapshot("request");
     });
   });
 
-  it("fails when the received value is not a Response", () => {
-    const notAResponse = {};
-    expect(() => {
-      expect(notAResponse).toHaveHeader("Content-Type", "application/json");
-    }).toThrowErrorMatchingSnapshot();
-  });
-
-  it("fails when Response is not defined in the global scope", () => {
-    using _ = withoutGlobalResponse();
-
+  it("fails when the received value is not a Response or Request", () => {
     expect(() => {
       expect({}).toHaveHeader("Content-Type", "application/json");
     }).toThrowErrorMatchingSnapshot();
+  });
+
+  describe.each(["Response", "Request"])("when %s is not defined in the global scope", (type) => {
+    it("fails", () => {
+      using _ = type === "Response" ? withoutGlobalResponse() : withoutGlobalRequest();
+      expect(() => {
+        expect({}).toHaveHeader("Content-Type", "application/json");
+      }).toThrowErrorMatchingSnapshot(type.toLowerCase());
+    });
   });
 });
