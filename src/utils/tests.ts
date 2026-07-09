@@ -9,10 +9,16 @@ import ansiRegex from "ansi-regex";
 // ansi-styles is ESM - as a result we need to run our Jest tests with `--experimental-vm-modules` flag
 import style from "ansi-styles";
 
-export const alignedAnsiStyleSerializer = {
-  serialize(val: string | Error): string {
-    // Return the string itself, not escaped nor enclosed in double quote marks.
-    return (val instanceof Error ? val.message : val).replace(ansiRegex(), (match) => {
+const makeSerializer = <T>(test: (val: unknown) => val is T, serialize: (val: T) => string) => ({
+  test,
+  serialize,
+});
+
+export const alignedAnsiStyleSerializer = makeSerializer(
+  (val) => typeof val === "string" || val instanceof Error,
+  // Return the string itself, not escaped nor enclosed in double quote marks.
+  (val) =>
+    (val instanceof Error ? val.message : val).replace(ansiRegex(), (match) => {
       switch (match) {
         case style.inverse.open:
           return "<i>";
@@ -48,18 +54,12 @@ export const alignedAnsiStyleSerializer = {
         default:
           return match; // unexpected escape sequence
       }
-    });
-  },
-  test(val: unknown) {
-    return typeof val === "string" || val instanceof Error;
-  },
-};
+    }),
+);
 
 export function wait(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
-import type { SnapshotSerializer } from "vitest";
 
 function getErrorName(error: Error): string {
   return error.name !== "Error"
@@ -86,12 +86,7 @@ function serializeCausalChain(e: Error): string {
 
 // Because Vitest doesn't Snapshot Error.cause automatically
 // see https://github.com/vitest-dev/vitest/issues/10339
-export const errorSerializer: SnapshotSerializer = {
-  test: (val: unknown): boolean => {
-    return !!((val as Error)?.cause && (val as Error)?.cause instanceof Error);
-  },
-
-  serialize(error: Error) {
-    return `${alignedAnsiStyleSerializer.serialize(error.message)}${serializeCausalChain(error)}`;
-  },
-};
+export const errorCauseSerializer = makeSerializer(
+  (val): val is Error => !!((val as Error)?.cause && (val as Error)?.cause instanceof Error),
+  (error) => `${alignedAnsiStyleSerializer.serialize(error.message)}${serializeCausalChain(error)}`,
+);

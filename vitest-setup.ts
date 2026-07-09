@@ -1,9 +1,9 @@
 import { expect, describe, it, vi } from "vitest";
 import type * as globals from "@globals";
-import { alignedAnsiStyleSerializer, errorSerializer } from "./src/utils/tests";
+import { alignedAnsiStyleSerializer, errorCauseSerializer } from "./src/utils/tests";
 
 expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
-expect.addSnapshotSerializer(errorSerializer);
+expect.addSnapshotSerializer(errorCauseSerializer);
 
 vi.mock("@globals", (): typeof globals => {
   return { describe, it, expect, fn: vi.fn };
