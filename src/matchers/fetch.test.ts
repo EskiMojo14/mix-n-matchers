@@ -799,3 +799,52 @@ describe("toHaveSearchParam", () => {
     }).toThrowErrorMatchingSnapshot("response");
   });
 });
+
+describe("toBeAborted", () => {
+  it("passes when the signal/request has been aborted", () => {
+    const signal = AbortSignal.abort();
+    expect(signal).toBeAborted();
+    expect(() => {
+      expect(signal).not.toBeAborted();
+    }).toThrowErrorMatchingSnapshot("signal");
+
+    const request = new Request("https://example.com", { signal });
+    expect(request).toBeAborted();
+    expect(() => {
+      expect(request).not.toBeAborted();
+    }).toThrowErrorMatchingSnapshot("request");
+  });
+
+  it("fails when the signal/request has not been aborted", () => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+    expect(() => {
+      expect(signal).toBeAborted();
+    }).toThrowErrorMatchingSnapshot("signal");
+    expect(signal).not.toBeAborted();
+
+    const request = new Request("https://example.com", { signal });
+    expect(() => {
+      expect(request).toBeAborted();
+    }).toThrowErrorMatchingSnapshot("request");
+    expect(request).not.toBeAborted();
+  });
+
+  it("fails when the received value is not an AbortSignal or Request", () => {
+    expect(() => {
+      expect({}).toBeAborted();
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  describe.each(["AbortSignal", "Request"] as const)(
+    "when %s is not defined in the global scope",
+    (type) => {
+      it("fails", () => {
+        using _ = withoutGlobal(type);
+        expect(() => {
+          expect({}).toBeAborted();
+        }).toThrowErrorMatchingSnapshot();
+      });
+    },
+  );
+});

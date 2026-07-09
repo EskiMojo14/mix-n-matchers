@@ -37,4 +37,5 @@ export {
   toBeRedirected,
   toHaveResponseType,
   toHaveSearchParam,
+  toBeAborted,
 } from "./fetch";

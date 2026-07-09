@@ -176,3 +176,20 @@ it("has the expected search parameter", () => {
 `}
 
 </TestFile>
+
+### `.toBeAborted()`
+
+Use `.toBeAborted()` to assert that an `AbortSignal` is aborted, or that a `Request` object has an aborted signal.
+
+<TestFile name="toBeAborted">
+{`
+it("is aborted", () => {
+  const controller = new AbortController();
+  expect(controller.signal).not.toBeAborted();
+
+controller.abort();
+expect(controller.signal).toBeAborted();
+});
+`}
+
+</TestFile>
