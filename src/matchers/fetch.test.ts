@@ -583,3 +583,39 @@ describe("toBeRedirected", () => {
     }).toThrowErrorMatchingSnapshot();
   });
 });
+
+function typedResponse(type: typeof Response.prototype.type): Response {
+  // type doesn't allow being set directly, so we use defineProperty to mock it for testing purposes
+  return Object.defineProperty(new Response(), "type", { value: type });
+}
+describe("toHaveResponseType", () => {
+  it("passes when the response has the expected type", () => {
+    const response = typedResponse("basic");
+    expect(response).toHaveResponseType("basic");
+    expect(() => {
+      expect(response).not.toHaveResponseType("basic");
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails when the response does not have the expected type", () => {
+    const response = typedResponse("cors");
+    expect(() => {
+      expect(response).toHaveResponseType("basic");
+    }).toThrowErrorMatchingSnapshot();
+    expect(response).not.toHaveResponseType("basic");
+  });
+
+  it("fails when the received value is not a Response", () => {
+    expect(() => {
+      expect({}).toHaveResponseType("basic");
+    }).toThrowErrorMatchingSnapshot();
+  });
+
+  it("fails when Response is not defined in the global scope", () => {
+    using _ = withoutGlobal("Response");
+
+    expect(() => {
+      expect({}).toHaveResponseType("basic");
+    }).toThrowErrorMatchingSnapshot();
+  });
+});

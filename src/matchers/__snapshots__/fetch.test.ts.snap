@@ -408,6 +408,30 @@ exports[`toHaveMethod passes when the request has the expected method 1`] = `
 Expected request not to have method <g>POST</g>, but it did.
 `;
 
+exports[`toHaveResponseType fails when Response is not defined in the global scope 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveResponseType<d>(</b><g>"basic"</g><d>)</b>
+
+<b>Matcher error</b>: Response is not defined in the global scope.
+`;
+
+exports[`toHaveResponseType fails when the received value is not a Response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveResponseType<d>(</b><g>"basic"</g><d>)</b>
+
+<b>Matcher error</b>: Received value is not a Response.
+`;
+
+exports[`toHaveResponseType fails when the response does not have the expected type 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveResponseType<d>(</b><g>"basic"</g><d>)</b>
+
+Expected response to have type <g>basic</g>, but it was <r>cors</g>.
+`;
+
+exports[`toHaveResponseType passes when the response has the expected type 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveResponseType<d>(</b><g>"basic"</g><d>)</b>
+
+Expected response not to have type <g>basic</g>, but it did.
+`;
+
 exports[`toHaveStatus fails when Response is not defined in the global scope 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toHaveStatus<d>(</b><g>200</g><d>)</b>
 
