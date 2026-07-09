@@ -275,9 +275,9 @@ export const toHaveURL: MatcherFunction<[string]> = function (received, expected
  * Ensure the Response or Request object has a specific body text.
  * @remarks This matcher is asynchronous and returns a Promise, so it should be awaited.
  */
-export const toHaveBodyText: MatcherFunction<[string]> = async function (received, expected) {
+export const toHaveTextBody: MatcherFunction<[string]> = async function (received, expected) {
   const hint = (received?: string) =>
-    matcherHint("toHaveBodyText", received, stringify(expected), {
+    matcherHint("toHaveTextBody", received, stringify(expected), {
       isNot: this.isNot,
       promise: this.promise,
     });
@@ -315,7 +315,7 @@ export const toHaveBodyText: MatcherFunction<[string]> = async function (receive
   };
 };
 
-function makeToHaveBodyJSONMatcher(
+function maketoHaveJSONBodyMatcher(
   matcherName: string,
   strict = false,
 ): MatcherFunction<[unknown]> {
@@ -363,12 +363,12 @@ function makeToHaveBodyJSONMatcher(
 /**
  * Asserts that a Response or Request object has a specific JSON body, using deep equality.
  */
-export const toHaveBodyJSON = makeToHaveBodyJSONMatcher("toHaveBodyJSON");
+export const toHaveJSONBody = maketoHaveJSONBodyMatcher("toHaveJSONBody");
 
 /**
  * Asserts that a Response or Request object has a specific JSON body, using strict deep equality.
  */
-export const toHaveBodyJSONStrict = makeToHaveBodyJSONMatcher("toHaveBodyJSONStrict", true);
+export const toHaveJSONBodyStrict = maketoHaveJSONBodyMatcher("toHaveJSONBodyStrict", true);
 
 /**
  * Asserts that a Response object has been redirected.
@@ -594,32 +594,32 @@ declare module "mix-n-matchers" {
     /**
      * Asserts that a Response or Request object has a specific body text.
      * @example
-     * await expect(response).toHaveBodyText("Hello, world!");
-     * await expect(request).toHaveBodyText("Hello, world!");
+     * await expect(response).toHaveTextBody("Hello, world!");
+     * await expect(request).toHaveTextBody("Hello, world!");
      * @remarks Will clone the object to avoid consuming the body, so it can be read again later. Will throw an error if the body has already been used.
      * @remarks This matcher is asynchronous and returns a Promise, so it should be awaited.
      */
-    toHaveBodyText(expected: string): Promise<Awaited<R>>;
+    toHaveTextBody(expected: string): Promise<Awaited<R>>;
     /**
      * Asserts that a Response or Request object has a specific JSON body, using deep equality.
      * @example
-     * await expect(response).toHaveBodyJSON({ message: "Hello, world!" });
-     * await expect(request).toHaveBodyJSON({ message: "Hello, world!" });
+     * await expect(response).toHaveJSONBody({ message: "Hello, world!" });
+     * await expect(request).toHaveJSONBody({ message: "Hello, world!" });
      * @remarks Will clone the object to avoid consuming the body, so it can be read again later. Will throw an error if the body has already been used.
      * @remarks This matcher is asynchronous and returns a Promise, so it should be awaited.
      */
     // oxlint-disable-next-line typescript/no-unnecessary-type-parameters
-    toHaveBodyJSON<E>(expected: E): Promise<Awaited<R>>;
+    toHaveJSONBody<E>(expected: E): Promise<Awaited<R>>;
     /**
      * Asserts that a Response or Request object has a specific JSON body, using strict deep equality.
      * @example
-     * await expect(response).toHaveBodyJSONStrict({ message: "Hello, world!" });
-     * await expect(request).toHaveBodyJSONStrict({ message: "Hello, world!" });
+     * await expect(response).toHaveJSONBodyStrict({ message: "Hello, world!" });
+     * await expect(request).toHaveJSONBodyStrict({ message: "Hello, world!" });
      * @remarks Will clone the object to avoid consuming the body, so it can be read again later. Will throw an error if the body has already been used.
      * @remarks This matcher is asynchronous and returns a Promise, so it should be awaited.
      */
     // oxlint-disable-next-line typescript/no-unnecessary-type-parameters
-    toHaveBodyJSONStrict<E>(expected: E): Promise<Awaited<R>>;
+    toHaveJSONBodyStrict<E>(expected: E): Promise<Awaited<R>>;
     /**
      * Asserts that a Response object has been redirected.
      * @example
