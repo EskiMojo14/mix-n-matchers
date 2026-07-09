@@ -396,6 +396,43 @@ export const toBeRedirected: MatcherFunction = function (received) {
   };
 };
 
+export const toHaveResponseType: MatcherFunction<[typeof Response.prototype.type]> = function (
+  received,
+  expected,
+) {
+  const hint = (received?: string) =>
+    matcherHint("toHaveResponseType", received, stringify(expected), {
+      isNot: this.isNot,
+      promise: this.promise,
+    });
+
+  assert(globalThis.Response, () =>
+    matcherErrorMessage(hint(), "Response is not defined in the global scope."),
+  );
+  assert(received instanceof Response, () =>
+    matcherErrorMessage(hint(), "Received value is not a Response."),
+  );
+  assert(typeof expected === "string", () =>
+    matcherErrorMessage(
+      hint("response"),
+      "Expected type must be a string.",
+      printWithType("expected", expected, stringify),
+    ),
+  );
+
+  const actualType = received.type;
+  const pass = actualType === expected;
+
+  return {
+    pass,
+    message: () =>
+      `${hint("response")}\n\n` +
+      (pass
+        ? `Expected response not to have type ${EXPECTED_COLOR(expected)}, but it did.`
+        : `Expected response to have type ${EXPECTED_COLOR(expected)}, but it was ${RECEIVED_COLOR(actualType)}.`),
+  };
+};
+
 declare module "mix-n-matchers" {
   export interface MixNMatchers<R, T = unknown> {
     /**
@@ -474,5 +511,11 @@ declare module "mix-n-matchers" {
      * expect(response).toBeRedirected();
      */
     toBeRedirected(): R;
+    /**
+     * Asserts that a Response object has a specific type.
+     * @example
+     * expect(response).toHaveResponseType("basic");
+     */
+    toHaveResponseType(expected: typeof Response.prototype.type): R;
   }
 }

@@ -148,3 +148,17 @@ it("is a redirect response", () => {
 `}
 
 </TestFile>
+
+### `.toHaveResponseType(expected)`
+
+Use `.toHaveResponseType(expected)` to assert that a `Response` object has the expected type (e.g., `"basic"`, `"cors"`, `"error"`, `"opaque"`, `"opaqueredirect"`).
+
+<TestFile name="toHaveResponseType">
+{`
+it("has the expected response type", () => {
+  const response = new Response();
+  expect(response).toHaveResponseType("default");
+});
+`}
+
+</TestFile>

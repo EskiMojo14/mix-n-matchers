@@ -35,4 +35,5 @@ export {
   toHaveBodyJSON,
   toHaveBodyJSONStrict,
   toBeRedirected,
+  toHaveResponseType,
 } from "./fetch";
