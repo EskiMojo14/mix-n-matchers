@@ -171,73 +171,73 @@ exports[`toHaveHeader when Response is not defined in the global scope fails: re
 exports[`toHaveHeader when expected value is not provided fails when the response/request does not have the expected header: headers 1`] = `
 <d>expect(</b><r>headers</g><d>).</b>toHaveHeader<d>(</b><g>"Authorization"</g><d>)</b>
 
-Expected headers to have header <g>Authorization</g>, but it was not found.
+Expected headers to have header <g>"Authorization"</g>, but it was not found.
 `;
 
 exports[`toHaveHeader when expected value is not provided fails when the response/request does not have the expected header: request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>toHaveHeader<d>(</b><g>"Authorization"</g><d>)</b>
 
-Expected request to have header <g>Authorization</g>, but it was not found.
+Expected request to have header <g>"Authorization"</g>, but it was not found.
 `;
 
 exports[`toHaveHeader when expected value is not provided fails when the response/request does not have the expected header: response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>toHaveHeader<d>(</b><g>"Authorization"</g><d>)</b>
 
-Expected response to have header <g>Authorization</g>, but it was not found.
+Expected response to have header <g>"Authorization"</g>, but it was not found.
 `;
 
 exports[`toHaveHeader when expected value is not provided passes when the response/request has the expected header: headers 1`] = `
 <d>expect(</b><r>headers</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>)</b>
 
-Expected headers not to have header <g>Content-Type</g>, but it did.
+Expected headers not to have header <g>"Content-Type"</g>, but it did.
 `;
 
 exports[`toHaveHeader when expected value is not provided passes when the response/request has the expected header: request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>)</b>
 
-Expected request not to have header <g>Content-Type</g>, but it did.
+Expected request not to have header <g>"Content-Type"</g>, but it did.
 `;
 
 exports[`toHaveHeader when expected value is not provided passes when the response/request has the expected header: response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>)</b>
 
-Expected response not to have header <g>Content-Type</g>, but it did.
+Expected response not to have header <g>"Content-Type"</g>, but it did.
 `;
 
 exports[`toHaveHeader when expected value is provided fails when the response/request does not have the expected header and value: headers 1`] = `
 <d>expect(</b><r>headers</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
 
-Expected headers to have header <g>Content-Type</g> with a value of <g>application/json</g>, but it had a value of <r>text/html</g>.
+Expected headers to have header <g>"Content-Type"</g> with a value of <g>"application/json"</g>, but it had a value of <r>"text/html"</g>.
 `;
 
 exports[`toHaveHeader when expected value is provided fails when the response/request does not have the expected header and value: request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
 
-Expected request to have header <g>Content-Type</g> with a value of <g>application/json</g>, but it had a value of <r>text/html</g>.
+Expected request to have header <g>"Content-Type"</g> with a value of <g>"application/json"</g>, but it had a value of <r>"text/html"</g>.
 `;
 
 exports[`toHaveHeader when expected value is provided fails when the response/request does not have the expected header and value: response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
 
-Expected response to have header <g>Content-Type</g> with a value of <g>application/json</g>, but it had a value of <r>text/html</g>.
+Expected response to have header <g>"Content-Type"</g> with a value of <g>"application/json"</g>, but it had a value of <r>"text/html"</g>.
 `;
 
 exports[`toHaveHeader when expected value is provided passes when the response/request has the expected header and value: headers 1`] = `
 <d>expect(</b><r>headers</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
 
-Expected headers not to have header <g>Content-Type</g> with a value of <g>application/json</g>, but it did.
+Expected headers not to have header <g>"Content-Type"</g> with a value of <g>"application/json"</g>, but it did.
 `;
 
 exports[`toHaveHeader when expected value is provided passes when the response/request has the expected header and value: request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
 
-Expected request not to have header <g>Content-Type</g> with a value of <g>application/json</g>, but it did.
+Expected request not to have header <g>"Content-Type"</g> with a value of <g>"application/json"</g>, but it did.
 `;
 
 exports[`toHaveHeader when expected value is provided passes when the response/request has the expected header and value: response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>"application/json"</g><d>)</b>
 
-Expected response not to have header <g>Content-Type</g> with a value of <g>application/json</g>, but it did.
+Expected response not to have header <g>"Content-Type"</g> with a value of <g>"application/json"</g>, but it did.
 `;
 
 exports[`toHaveJSONBody fails when it cannot clone the body: request 1`] = `
@@ -443,13 +443,13 @@ exports[`toHaveMethod fails when the received value is not a Request 1`] = `
 exports[`toHaveMethod fails when the request does not have the expected method 1`] = `
 <d>expect(</b><r>request</g><d>).</b>toHaveMethod<d>(</b><g>"POST"</g><d>)</b>
 
-Expected request to have method <g>POST</g>, but it was <r>GET</g>.
+Expected request to have method <g>"POST"</g>, but it was <r>"GET"</g>.
 `;
 
 exports[`toHaveMethod passes when the request has the expected method 1`] = `
 <d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveMethod<d>(</b><g>"POST"</g><d>)</b>
 
-Expected request not to have method <g>POST</g>, but it did.
+Expected request not to have method <g>"POST"</g>, but it did.
 `;
 
 exports[`toHaveResponseType fails when Response is not defined in the global scope 1`] = `
@@ -467,13 +467,13 @@ exports[`toHaveResponseType fails when the received value is not a Response 1`] 
 exports[`toHaveResponseType fails when the response does not have the expected type 1`] = `
 <d>expect(</b><r>response</g><d>).</b>toHaveResponseType<d>(</b><g>"basic"</g><d>)</b>
 
-Expected response to have type <g>basic</g>, but it was <r>cors</g>.
+Expected response to have type <g>"basic"</g>, but it was <r>"cors"</g>.
 `;
 
 exports[`toHaveResponseType passes when the response has the expected type 1`] = `
 <d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveResponseType<d>(</b><g>"basic"</g><d>)</b>
 
-Expected response not to have type <g>basic</g>, but it did.
+Expected response not to have type <g>"basic"</g>, but it did.
 `;
 
 exports[`toHaveSearchParam fails when the expected value is not a string or undefined: params 1`] = `
@@ -581,97 +581,97 @@ exports[`toHaveSearchParam when URLSearchParams is not defined in the global sco
 exports[`toHaveSearchParam when expected value is not provided fails when the URLSearchParams, URL, Response or Request does not have the expected search param: params 1`] = `
 <d>expect(</b><r>params</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
 
-Expected params to have search parameter <g>foo</g>, but it was not found.
+Expected params to have search parameter <g>"foo"</g>, but it was not found.
 `;
 
 exports[`toHaveSearchParam when expected value is not provided fails when the URLSearchParams, URL, Response or Request does not have the expected search param: request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
 
-Expected request to have search parameter <g>foo</g>, but it was not found.
+Expected request to have search parameter <g>"foo"</g>, but it was not found.
 `;
 
 exports[`toHaveSearchParam when expected value is not provided fails when the URLSearchParams, URL, Response or Request does not have the expected search param: response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
 
-Expected response to have search parameter <g>foo</g>, but it was not found.
+Expected response to have search parameter <g>"foo"</g>, but it was not found.
 `;
 
 exports[`toHaveSearchParam when expected value is not provided fails when the URLSearchParams, URL, Response or Request does not have the expected search param: url 1`] = `
 <d>expect(</b><r>url</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
 
-Expected url to have search parameter <g>foo</g>, but it was not found.
+Expected url to have search parameter <g>"foo"</g>, but it was not found.
 `;
 
 exports[`toHaveSearchParam when expected value is not provided passes when the URLSearchParams, URL, Response or Request has the expected search param: params 1`] = `
 <d>expect(</b><r>params</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
 
-Expected params not to have search parameter <g>foo</g>, but it did.
+Expected params not to have search parameter <g>"foo"</g>, but it did.
 `;
 
 exports[`toHaveSearchParam when expected value is not provided passes when the URLSearchParams, URL, Response or Request has the expected search param: request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
 
-Expected request not to have search parameter <g>foo</g>, but it did.
+Expected request not to have search parameter <g>"foo"</g>, but it did.
 `;
 
 exports[`toHaveSearchParam when expected value is not provided passes when the URLSearchParams, URL, Response or Request has the expected search param: response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
 
-Expected response not to have search parameter <g>foo</g>, but it did.
+Expected response not to have search parameter <g>"foo"</g>, but it did.
 `;
 
 exports[`toHaveSearchParam when expected value is not provided passes when the URLSearchParams, URL, Response or Request has the expected search param: url 1`] = `
 <d>expect(</b><r>url</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>)</b>
 
-Expected url not to have search parameter <g>foo</g>, but it did.
+Expected url not to have search parameter <g>"foo"</g>, but it did.
 `;
 
 exports[`toHaveSearchParam when expected value is provided fails when the URLSearchParams, URL, Response or Request does not have the expected search param and value: params 1`] = `
 <d>expect(</b><r>params</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
 
-Expected params to have search parameter <g>foo</g> with a value of <g>bar</g>, but it had a value of <r>baz</g>.
+Expected params to have search parameter <g>"foo"</g> with a value of <g>"bar"</g>, but it had a value of <r>"baz"</g>.
 `;
 
 exports[`toHaveSearchParam when expected value is provided fails when the URLSearchParams, URL, Response or Request does not have the expected search param and value: request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
 
-Expected request to have search parameter <g>foo</g> with a value of <g>bar</g>, but it had a value of <r>baz</g>.
+Expected request to have search parameter <g>"foo"</g> with a value of <g>"bar"</g>, but it had a value of <r>"baz"</g>.
 `;
 
 exports[`toHaveSearchParam when expected value is provided fails when the URLSearchParams, URL, Response or Request does not have the expected search param and value: response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
 
-Expected response to have search parameter <g>foo</g> with a value of <g>bar</g>, but it had a value of <r>baz</g>.
+Expected response to have search parameter <g>"foo"</g> with a value of <g>"bar"</g>, but it had a value of <r>"baz"</g>.
 `;
 
 exports[`toHaveSearchParam when expected value is provided fails when the URLSearchParams, URL, Response or Request does not have the expected search param and value: url 1`] = `
 <d>expect(</b><r>url</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
 
-Expected url to have search parameter <g>foo</g> with a value of <g>bar</g>, but it had a value of <r>baz</g>.
+Expected url to have search parameter <g>"foo"</g> with a value of <g>"bar"</g>, but it had a value of <r>"baz"</g>.
 `;
 
 exports[`toHaveSearchParam when expected value is provided passes when the URLSearchParams, URL, Response or Request has the expected search param and value: params 1`] = `
 <d>expect(</b><r>params</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
 
-Expected params not to have search parameter <g>foo</g> with a value of <g>bar</g>, but it did.
+Expected params not to have search parameter <g>"foo"</g> with a value of <g>"bar"</g>, but it did.
 `;
 
 exports[`toHaveSearchParam when expected value is provided passes when the URLSearchParams, URL, Response or Request has the expected search param and value: request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
 
-Expected request not to have search parameter <g>foo</g> with a value of <g>bar</g>, but it did.
+Expected request not to have search parameter <g>"foo"</g> with a value of <g>"bar"</g>, but it did.
 `;
 
 exports[`toHaveSearchParam when expected value is provided passes when the URLSearchParams, URL, Response or Request has the expected search param and value: response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
 
-Expected response not to have search parameter <g>foo</g> with a value of <g>bar</g>, but it did.
+Expected response not to have search parameter <g>"foo"</g> with a value of <g>"bar"</g>, but it did.
 `;
 
 exports[`toHaveSearchParam when expected value is provided passes when the URLSearchParams, URL, Response or Request has the expected search param and value: url 1`] = `
 <d>expect(</b><r>url</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>"bar"</g><d>)</b>
 
-Expected url not to have search parameter <g>foo</g> with a value of <g>bar</g>, but it did.
+Expected url not to have search parameter <g>"foo"</g> with a value of <g>"bar"</g>, but it did.
 `;
 
 exports[`toHaveStatus fails when Response is not defined in the global scope 1`] = `
@@ -819,25 +819,25 @@ exports[`toHaveTextBody fails when the received value is not a Response or Reque
 exports[`toHaveTextBody fails when the response/request does not have the expected body text: request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
 
-Expected request to have body text <g>Hello, world!</g>, but it was <r>Goodbye, world!</g>.
+Expected request to have body text <g>"Hello, world!"</g>, but it was <r>"Goodbye, world!"</g>.
 `;
 
 exports[`toHaveTextBody fails when the response/request does not have the expected body text: response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
 
-Expected response to have body text <g>Hello, world!</g>, but it was <r>Goodbye, world!</g>.
+Expected response to have body text <g>"Hello, world!"</g>, but it was <r>"Goodbye, world!"</g>.
 `;
 
 exports[`toHaveTextBody passes when the response/request has the expected body text: request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
 
-Expected request not to have body text <g>Hello, world!</g>, but it did.
+Expected request not to have body text <g>"Hello, world!"</g>, but it did.
 `;
 
 exports[`toHaveTextBody passes when the response/request has the expected body text: response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveTextBody<d>(</b><g>"Hello, world!"</g><d>)</b>
 
-Expected response not to have body text <g>Hello, world!</g>, but it did.
+Expected response not to have body text <g>"Hello, world!"</g>, but it did.
 `;
 
 exports[`toHaveTextBody when Request is not defined in the global scope fails: request 1`] = `
@@ -879,25 +879,25 @@ exports[`toHaveURL fails when the received value is not a Request or Response 1`
 exports[`toHaveURL fails when the response/request does not have the expected URL: request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
 
-Expected request to have URL <g>https://example.com/api</g>, but it was <r>https://example.com/other</g>.
+Expected request to have URL <g>"https://example.com/api"</g>, but it was <r>"https://example.com/other"</g>.
 `;
 
 exports[`toHaveURL fails when the response/request does not have the expected URL: response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
 
-Expected response to have URL <g>https://example.com/api</g>, but it was <r>https://example.com/other</g>.
+Expected response to have URL <g>"https://example.com/api"</g>, but it was <r>"https://example.com/other"</g>.
 `;
 
 exports[`toHaveURL passes when the response/request has the expected URL: request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
 
-Expected request not to have URL <g>https://example.com/api</g>, but it did.
+Expected request not to have URL <g>"https://example.com/api"</g>, but it did.
 `;
 
 exports[`toHaveURL passes when the response/request has the expected URL: response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
 
-Expected response not to have URL <g>https://example.com/api</g>, but it did.
+Expected response not to have URL <g>"https://example.com/api"</g>, but it did.
 `;
 
 exports[`toHaveURL when Request is not defined in the global scope fails: request 1`] = `Request is not defined`;

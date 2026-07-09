@@ -67,8 +67,8 @@ export const toHaveStatus: MatcherFunction<[number]> = function (received, expec
     message: () =>
       `${hint("response")}\n\n` +
       (pass
-        ? `Expected response not to have status ${EXPECTED_COLOR(expected)}, but it did.`
-        : `Expected response to have status ${EXPECTED_COLOR(expected)}, but it was ${RECEIVED_COLOR(received.status)}.`),
+        ? `Expected response not to have status ${EXPECTED_COLOR(stringify(expected))}, but it did.`
+        : `Expected response to have status ${EXPECTED_COLOR(stringify(expected))}, but it was ${RECEIVED_COLOR(stringify(received.status))}.`),
   };
 };
 
@@ -135,8 +135,8 @@ export const toHaveStatusGroup: MatcherFunction<[StatusGroup]> = function (recei
     message: () =>
       `${hint("response")}\n\n` +
       (pass
-        ? `Expected response not to have status group ${EXPECTED_COLOR(stringify(expected))}, but it did (${RECEIVED_COLOR(received.status)}).`
-        : `Expected response to have status group ${EXPECTED_COLOR(stringify(expected))}, but it was ${RECEIVED_COLOR(stringify(actualGroup))} (${RECEIVED_COLOR(received.status)}).`),
+        ? `Expected response not to have status group ${EXPECTED_COLOR(stringify(expected))}, but it did (${RECEIVED_COLOR(stringify(received.status))}).`
+        : `Expected response to have status group ${EXPECTED_COLOR(stringify(expected))}, but it was ${RECEIVED_COLOR(stringify(actualGroup))} (${RECEIVED_COLOR(stringify(received.status))}).`),
   };
 };
 
@@ -188,13 +188,13 @@ export const toHaveHeader: MatcherFunction<[string, string?]> = function (receiv
       ? () =>
           `${hint(receivedName)}\n\n` +
           (pass
-            ? `Expected ${receivedName} not to have header ${EXPECTED_COLOR(name)} with a value of ${EXPECTED_COLOR(value)}, but it did.`
-            : `Expected ${receivedName} to have header ${EXPECTED_COLOR(name)} with a value of ${EXPECTED_COLOR(value)}, but it ${actualValue === null ? "was not found" : `had a value of ${RECEIVED_COLOR(actualValue)}`}.`)
+            ? `Expected ${receivedName} not to have header ${EXPECTED_COLOR(stringify(name))} with a value of ${EXPECTED_COLOR(stringify(value))}, but it did.`
+            : `Expected ${receivedName} to have header ${EXPECTED_COLOR(stringify(name))} with a value of ${EXPECTED_COLOR(stringify(value))}, but it ${actualValue === null ? "was not found" : `had a value of ${RECEIVED_COLOR(stringify(actualValue))}`}.`)
       : () =>
           `${hint(receivedName)}\n\n` +
           (pass
-            ? `Expected ${receivedName} not to have header ${EXPECTED_COLOR(name)}, but it did.`
-            : `Expected ${receivedName} to have header ${EXPECTED_COLOR(name)}, but it was not found.`),
+            ? `Expected ${receivedName} not to have header ${EXPECTED_COLOR(stringify(name))}, but it did.`
+            : `Expected ${receivedName} to have header ${EXPECTED_COLOR(stringify(name))}, but it was not found.`),
   };
 };
 
@@ -229,8 +229,8 @@ export const toHaveMethod: MatcherFunction<[string]> = function (received, expec
     message: () =>
       `${hint("request")}\n\n` +
       (pass
-        ? `Expected request not to have method ${EXPECTED_COLOR(expected)}, but it did.`
-        : `Expected request to have method ${EXPECTED_COLOR(expected)}, but it was ${RECEIVED_COLOR(actualMethod)}.`),
+        ? `Expected request not to have method ${EXPECTED_COLOR(stringify(expected))}, but it did.`
+        : `Expected request to have method ${EXPECTED_COLOR(stringify(expected))}, but it was ${RECEIVED_COLOR(stringify(actualMethod))}.`),
   };
 };
 
@@ -266,8 +266,8 @@ export const toHaveURL: MatcherFunction<[string]> = function (received, expected
     message: () =>
       `${hint(receivedName)}\n\n` +
       (pass
-        ? `Expected ${receivedName} not to have URL ${EXPECTED_COLOR(expected)}, but it did.`
-        : `Expected ${receivedName} to have URL ${EXPECTED_COLOR(expected)}, but it was ${RECEIVED_COLOR(actualURL)}.`),
+        ? `Expected ${receivedName} not to have URL ${EXPECTED_COLOR(stringify(expected))}, but it did.`
+        : `Expected ${receivedName} to have URL ${EXPECTED_COLOR(stringify(expected))}, but it was ${RECEIVED_COLOR(stringify(actualURL))}.`),
   };
 };
 
@@ -326,8 +326,8 @@ export const toHaveTextBody: MatcherFunction<[string]> = async function (receive
     message: () =>
       `${hint(receivedName)}\n\n` +
       (pass
-        ? `Expected ${receivedName} not to have body text ${EXPECTED_COLOR(expected)}, but it did.`
-        : `Expected ${receivedName} to have body text ${EXPECTED_COLOR(expected)}, but it was ${RECEIVED_COLOR(actualText)}.`),
+        ? `Expected ${receivedName} not to have body text ${EXPECTED_COLOR(stringify(expected))}, but it did.`
+        : `Expected ${receivedName} to have body text ${EXPECTED_COLOR(stringify(expected))}, but it was ${RECEIVED_COLOR(stringify(actualText))}.`),
   };
 };
 
@@ -469,8 +469,8 @@ export const toHaveResponseType: MatcherFunction<[typeof Response.prototype.type
     message: () =>
       `${hint("response")}\n\n` +
       (pass
-        ? `Expected response not to have type ${EXPECTED_COLOR(expected)}, but it did.`
-        : `Expected response to have type ${EXPECTED_COLOR(expected)}, but it was ${RECEIVED_COLOR(actualType)}.`),
+        ? `Expected response not to have type ${EXPECTED_COLOR(stringify(expected))}, but it did.`
+        : `Expected response to have type ${EXPECTED_COLOR(stringify(expected))}, but it was ${RECEIVED_COLOR(stringify(actualType))}.`),
   };
 };
 
@@ -549,13 +549,13 @@ export const toHaveSearchParam: MatcherFunction<[string, string?]> = function (
       ? () =>
           `${hint(receivedName)}\n\n` +
           (pass
-            ? `Expected ${receivedName} not to have search parameter ${EXPECTED_COLOR(name)} with a value of ${EXPECTED_COLOR(value)}, but it did.`
-            : `Expected ${receivedName} to have search parameter ${EXPECTED_COLOR(name)} with a value of ${EXPECTED_COLOR(value)}, but it ${actualValue === null ? "was not found" : `had a value of ${RECEIVED_COLOR(actualValue)}`}.`)
+            ? `Expected ${receivedName} not to have search parameter ${EXPECTED_COLOR(stringify(name))} with a value of ${EXPECTED_COLOR(stringify(value))}, but it did.`
+            : `Expected ${receivedName} to have search parameter ${EXPECTED_COLOR(stringify(name))} with a value of ${EXPECTED_COLOR(stringify(value))}, but it ${actualValue === null ? "was not found" : `had a value of ${RECEIVED_COLOR(stringify(actualValue))}`}.`)
       : () =>
           `${hint(receivedName)}\n\n` +
           (pass
-            ? `Expected ${receivedName} not to have search parameter ${EXPECTED_COLOR(name)}, but it did.`
-            : `Expected ${receivedName} to have search parameter ${EXPECTED_COLOR(name)}, but it was not found.`),
+            ? `Expected ${receivedName} not to have search parameter ${EXPECTED_COLOR(stringify(name))}, but it did.`
+            : `Expected ${receivedName} to have search parameter ${EXPECTED_COLOR(stringify(name))}, but it was not found.`),
   };
 };
 
