@@ -135,3 +135,19 @@ exports[`toHaveStatus passes when the response has the expected status 1`] = `
 
 Expected response not to have status <g>200</g>, but it did.
 `;
+
+exports[`toHaveURL fails when Request is not defined in the global scope 1`] = `Request is not defined in the global scope.`;
+
+exports[`toHaveURL fails when the received value is not a Request 1`] = `Received value is not a Request.`;
+
+exports[`toHaveURL fails when the request does not have the expected URL 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
+
+Expected request to have URL <g>https://example.com/api</g>, but it was <r>https://example.com/other</g>.
+`;
+
+exports[`toHaveURL passes when the request has the expected URL 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
+
+Expected request not to have URL <g>https://example.com/api</g>, but it did.
+`;
