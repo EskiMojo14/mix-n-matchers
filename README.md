@@ -2,7 +2,7 @@
 
 ![logo](./website/static/img/logo.png)
 
-Miscellaneous custom Jest matchers.
+Miscellaneous custom Jest compatible matchers.
 
 ```ts
 import { some } from "mix-n-matchers/utilities";
