@@ -97,6 +97,32 @@ export const toHaveHeader: MatcherFunction<[string, string?]> = function (
   };
 };
 
+/**
+ * Ensure the Request object has a specific method.
+ */
+export const toHaveMethod: MatcherFunction<[string]> = function (received, expectedMethod) {
+  assert(globalThis.Request, "Request is not defined in the global scope.");
+  assert(received instanceof Request, "Received value is not a Request.");
+  assert(typeof expectedMethod === "string", "Expected method must be a string.");
+
+  const matcherHintOptions: MatcherHintOptions = {
+    isNot: this.isNot,
+    promise: this.promise,
+  };
+
+  const actualMethod = received.method;
+  const pass = actualMethod.toUpperCase() === expectedMethod.toUpperCase();
+
+  return {
+    pass,
+    message: () =>
+      `${matcherHint("toHaveMethod", "request", `"${expectedMethod}"`, matcherHintOptions)}\n\n` +
+      (pass
+        ? `Expected request not to have method ${EXPECTED_COLOR(expectedMethod)}, but it did.`
+        : `Expected request to have method ${EXPECTED_COLOR(expectedMethod)}, but it was ${RECEIVED_COLOR(actualMethod)}.`),
+  };
+};
+
 declare module "mix-n-matchers" {
   export interface MixNMatchers<R, T = unknown> {
     /**
@@ -119,5 +145,11 @@ declare module "mix-n-matchers" {
      * expect(request).toHaveHeader("X-Custom-Header");
      */
     toHaveHeader(headerName: string, expectedValue?: string): R;
+    /**
+     * Asserts that a Request object has a specific method.
+     * @example
+     * expect(request).toHaveMethod("POST");
+     */
+    toHaveMethod(expectedMethod: string): R;
   }
 }

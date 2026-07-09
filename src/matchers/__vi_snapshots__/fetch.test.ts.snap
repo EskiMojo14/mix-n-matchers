@@ -70,6 +70,22 @@ exports[`toHaveHeader > when expected value is provided > passes when the respon
 Expected response not to have header <g>Content-Type</g> with a value of <g>application/json</g>, but it did.
 `;
 
+exports[`toHaveMethod > fails when Request is not defined in the global scope 1`] = `Request is not defined in the global scope.`;
+
+exports[`toHaveMethod > fails when the received value is not a Request 1`] = `Received value is not a Request.`;
+
+exports[`toHaveMethod > fails when the request does not have the expected method 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveMethod<d>(</b><g>"POST"</g><d>)</b>
+
+Expected request to have method <g>POST</g>, but it was <r>GET</g>.
+`;
+
+exports[`toHaveMethod > passes when the request has the expected method 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveMethod<d>(</b><g>"POST"</g><d>)</b>
+
+Expected request not to have method <g>POST</g>, but it did.
+`;
+
 exports[`toHaveStatus > fails when Response is not defined in the global scope 1`] = `Response is not defined in the global scope.`;
 
 exports[`toHaveStatus > fails when the received value is not a Response 1`] = `Received value is not a Response.`;
