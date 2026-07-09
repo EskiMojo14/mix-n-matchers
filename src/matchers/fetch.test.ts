@@ -84,6 +84,14 @@ describe("toHaveStatus", () => {
       expect({}).toHaveStatus(200);
     }).toThrowErrorMatchingSnapshot();
   });
+
+  it("fails when the expected status is not a number", () => {
+    const response = new Response(null, { status: 200 });
+    expect(() => {
+      // @ts-expect-error
+      expect(response).toHaveStatus("200");
+    }).toThrowErrorMatchingSnapshot();
+  });
 });
 
 describe("toHaveHeader", () => {
@@ -175,6 +183,42 @@ describe("toHaveHeader", () => {
         expect({}).toHaveHeader("Content-Type", "application/json");
       }).toThrowErrorMatchingSnapshot(type.toLowerCase());
     });
+  });
+
+  it("fails when the header name is not a string", () => {
+    const response = new Response(null, {
+      headers: { "Content-Type": "application/json" },
+    });
+    expect(() => {
+      // @ts-expect-error
+      expect(response).toHaveHeader(123, "application/json");
+    }).toThrowErrorMatchingSnapshot("response");
+
+    const request = new Request("https://example.com", {
+      headers: { "Content-Type": "application/json" },
+    });
+    expect(() => {
+      // @ts-expect-error
+      expect(request).toHaveHeader(123, "application/json");
+    }).toThrowErrorMatchingSnapshot("request");
+  });
+
+  it("fails when the expected value is not a string or undefined", () => {
+    const response = new Response(null, {
+      headers: { "Content-Type": "application/json" },
+    });
+    expect(() => {
+      // @ts-expect-error
+      expect(response).toHaveHeader("Content-Type", 123);
+    }).toThrowErrorMatchingSnapshot("response");
+
+    const request = new Request("https://example.com", {
+      headers: { "Content-Type": "application/json" },
+    });
+    expect(() => {
+      // @ts-expect-error
+      expect(request).toHaveHeader("Content-Type", 123);
+    }).toThrowErrorMatchingSnapshot("request");
   });
 });
 
