@@ -1,0 +1,113 @@
+import { TestFile } from "/src/components/TestFile";
+
+# Fetch
+
+Matchers for `fetch` related objects, such as `Response`, `Request`, and `Headers`.
+
+### `.toBeOK()`
+
+Use `.toBeOK()` to assert that a `Response` object has an OK status (status code in the range 200-299).
+
+<TestFile name="toBeOK">
+{`
+it("is an OK response", () => {
+  const response = new Response(null, { status: 200 });
+  expect(response).toBeOK();
+});
+`}
+
+</TestFile>
+
+### `.toHaveStatus(expected)`
+
+Use `.toHaveStatus(expected)` to assert that a `Response` object has the expected status code.
+
+<TestFile name="toHaveStatus">
+{`
+it("has the expected status code", () => {
+  const response = new Response(null, { status: 404 });
+  expect(response).toHaveStatus(404);
+});
+`}
+
+</TestFile>
+
+### `.toHaveHeader(name, expected?)`
+
+Use `.toHaveHeader(name, expected?)` to assert that a `Response`, `Request`, or `Headers` object has the specified header. If `expected` is provided, it will also check that the header value matches.
+
+<TestFile name="toHaveHeader">
+{`
+it("has the expected header", () => {
+  const response = new Response(null, { headers: { "Content-Type": "application/json" } });
+  expect(response).toHaveHeader("Content-Type", "application/json");
+});
+`}
+
+</TestFile>
+
+### `.toHaveMethod(expected)`
+
+Use `.toHaveMethod(expected)` to assert that a `Request` object has the expected HTTP method.
+
+<TestFile name="toHaveMethod">
+{`
+it("has the expected HTTP method", () => {
+  const request = new Request("https://example.com", { method: "POST" });
+  expect(request).toHaveMethod("POST");
+});
+`}
+
+</TestFile>
+
+### `.toHaveURL(expected)`
+
+Use `.toHaveURL(expected)` to assert that a `Request` object has the expected URL.
+
+<TestFile name="toHaveURL">
+{`
+it("has the expected URL", () => {
+  const request = new Request("https://example.com");
+  expect(request).toHaveURL("https://example.com");
+});
+`}
+
+</TestFile>
+
+### `.toHaveBodyText(expected)`
+
+Use `.toHaveBodyText(expected)` to assert that a `Response` or `Request` object has the expected body text.
+
+<TestFile name="toHaveBodyText">
+{`
+it("has the expected body text", async () => {
+  const response = new Response("Hello, world!");
+  await expect(response).toHaveBodyText("Hello, world!");
+});
+`}
+
+</TestFile>
+
+:::note
+This assertion is asynchronous, so must be awaited.
+:::
+
+### `.toHaveBodyJSON(expected)`
+
+Use `.toHaveBodyJSON(expected)` to assert that a `Response` or `Request` object has the expected JSON body, using deep equality.
+
+`.toHaveBodyJSONStrict(expected)` is also available to use [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
+
+<TestFile name="toHaveBodyJSON">
+{`
+it("has the expected JSON body", async () => {
+  const response = Response.json({ message: "Hello, world!" });
+  await expect(response).toHaveBodyJSON({ message: "Hello, world!" });
+});
+`}
+
+</TestFile>
+
+:::note
+This assertion is asynchronous, so must be awaited.
+:::
