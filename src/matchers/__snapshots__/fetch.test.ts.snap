@@ -417,26 +417,54 @@ exports[`toHaveStatus passes when the response has the expected status 1`] = `
 Expected response not to have status <g>200</g>, but it did.
 `;
 
-exports[`toHaveURL fails when Request is not defined in the global scope 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
+exports[`toHaveURL fails when the expected URL is not a string: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveURL<d>(</b><g>123</g><d>)</b>
 
-<b>Matcher error</b>: Request is not defined in the global scope.
+<b>Matcher error</b>: Expected URL must be a string.
+
+expected has type:  number
+expected has value: 123
 `;
 
-exports[`toHaveURL fails when the received value is not a Request 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
+exports[`toHaveURL fails when the expected URL is not a string: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveURL<d>(</b><g>123</g><d>)</b>
 
-<b>Matcher error</b>: Received value is not a Request.
+<b>Matcher error</b>: Expected URL must be a string.
+
+expected has type:  number
+expected has value: 123
 `;
 
-exports[`toHaveURL fails when the request does not have the expected URL 1`] = `
+exports[`toHaveURL fails when the received value is not a Request or Response 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
+
+<b>Matcher error</b>: Received value is not a Request or Response.
+`;
+
+exports[`toHaveURL fails when the response/request does not have the expected URL: request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
 
 Expected request to have URL <g>https://example.com/api</g>, but it was <r>https://example.com/other</g>.
 `;
 
-exports[`toHaveURL passes when the request has the expected URL 1`] = `
+exports[`toHaveURL fails when the response/request does not have the expected URL: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
+
+Expected response to have URL <g>https://example.com/api</g>, but it was <r>https://example.com/other</g>.
+`;
+
+exports[`toHaveURL passes when the response/request has the expected URL: request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
 
 Expected request not to have URL <g>https://example.com/api</g>, but it did.
 `;
+
+exports[`toHaveURL passes when the response/request has the expected URL: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
+
+Expected response not to have URL <g>https://example.com/api</g>, but it did.
+`;
+
+exports[`toHaveURL when Request is not defined in the global scope fails: request 1`] = `Request is not defined`;
+
+exports[`toHaveURL when Response is not defined in the global scope fails: response 1`] = `Response is not defined`;
