@@ -1,11 +1,12 @@
 import {
   matcherErrorMessage,
   matcherHint,
+  type MatcherHintOptions,
   printReceived,
   printWithType,
   stringify,
 } from "jest-matcher-utils";
-import { isIterable, makeEqualValue } from "../utils";
+import { ensureIterable, makeEqualValue } from "../utils";
 import { assert } from "../utils/assert";
 import type { MatcherFunction } from "../utils/types";
 
@@ -19,21 +20,17 @@ const makeSatisfySequenceMatcher = (
   asymmetric: boolean,
 ): MatcherFunction<[predicate: Predicate, ...predicates: Array<Predicate>]> =>
   function toSatisfySequence(received, ...predicates) {
-    const hint = matcherHint(matcherName, undefined, undefined, {
+    const hintOptions: MatcherHintOptions = {
       isNot: this.isNot,
       promise: this.promise,
       isDirectExpectCall: asymmetric,
-    });
+    };
+    const hint = matcherHint(matcherName, undefined, undefined, hintOptions);
     assert(predicates.length > 0, () =>
       matcherErrorMessage(hint, "At least one predicate must be provided"),
     );
+    ensureIterable(received, matcherName, hintOptions);
     const prefix = hint + "\n\n";
-    if (!isIterable(received)) {
-      return {
-        pass: false,
-        message: () => prefix + `Expected ${printReceived(received)} to be an iterable`,
-      };
-    }
     let i = 0;
     const sequenceSoFar: Array<unknown> = [];
     for (const receivedItem of received) {
@@ -109,23 +106,19 @@ const makeEqualSequenceMatcher = (
   strict: boolean | "reference",
 ): MatcherFunction<[value: unknown, ...sequence: Array<unknown>]> =>
   function toEqualSequence(received, ...expected) {
-    const hint = matcherHint(matcherName, undefined, undefined, {
+    const hintOptions: MatcherHintOptions = {
       isNot: this.isNot,
       promise: this.promise,
       isDirectExpectCall: asymmetric,
-    });
+    };
+    const hint = matcherHint(matcherName, undefined, undefined, hintOptions);
     assert(expected.length > 0, () =>
       matcherErrorMessage(hint, "At least one expected item must be provided"),
     );
+    ensureIterable(received, matcherName, hintOptions);
 
     const prefix = hint + "\n\n";
-    if (!isIterable(received)) {
-      return {
-        pass: false,
-        message: () =>
-          prefix + `Expected ${printReceived(received)} to be an iterable, but it was not`,
-      };
-    }
+
     const equalValue = makeEqualValue(this);
     let i = 0;
     const sequenceSoFar: Array<unknown> = [];
@@ -229,24 +222,19 @@ const makeContainSequenceMatcher = (
   strict: boolean | "reference",
 ): MatcherFunction<[value: unknown, ...sequence: Array<unknown>]> =>
   function toContainSequence(received, ...expected) {
-    const hint = matcherHint(matcherName, undefined, undefined, {
+    const hintOptions: MatcherHintOptions = {
       isNot: this.isNot,
       promise: this.promise,
       isDirectExpectCall: asymmetric,
-    });
+    };
+    const hint = matcherHint(matcherName, undefined, undefined, hintOptions);
     const prefix = hint + "\n\n";
 
     assert(expected.length > 0, () =>
       matcherErrorMessage(hint, "At least one expected item must be provided"),
     );
 
-    if (!isIterable(received)) {
-      return {
-        pass: false,
-        message: () =>
-          prefix + `Expected ${printReceived(received)} to be an iterable, but it was not`,
-      };
-    }
+    ensureIterable(received, matcherName, hintOptions);
 
     const equalValue = makeEqualValue(this);
     let expectedIdx = 0;
@@ -362,21 +350,17 @@ export const makeContainSatisfySequenceMatcher = (
   asymmetric: boolean,
 ): MatcherFunction<[predicate: Predicate, ...predicates: Array<Predicate>]> =>
   function toContainSequenceSatisfying(received, ...predicates) {
-    const hint = matcherHint(matcherName, undefined, undefined, {
+    const hintOptions: MatcherHintOptions = {
       isNot: this.isNot,
       promise: this.promise,
       isDirectExpectCall: asymmetric,
-    });
+    };
+    const hint = matcherHint(matcherName, undefined, undefined, hintOptions);
     assert(predicates.length > 0, () =>
       matcherErrorMessage(hint, "At least one predicate must be provided"),
     );
+    ensureIterable(received, matcherName, hintOptions);
     const prefix = hint + "\n\n";
-    if (!isIterable(received)) {
-      return {
-        pass: false,
-        message: () => prefix + `Expected ${printReceived(received)} to be an iterable`,
-      };
-    }
     let expectedIdx = 0;
     const sequenceSoFar: Array<unknown> = [];
     for (const receivedItem of received) {

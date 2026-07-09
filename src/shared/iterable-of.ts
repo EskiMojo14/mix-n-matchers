@@ -1,5 +1,13 @@
-import { matcherHint, printExpected, printReceived } from "jest-matcher-utils";
-import { isIterable, makeEqualValue } from "../utils";
+import {
+  matcherErrorMessage,
+  matcherHint,
+  type MatcherHintOptions,
+  printExpected,
+  printReceived,
+  printWithType,
+  RECEIVED_COLOR,
+} from "jest-matcher-utils";
+import { ensureIterable, makeEqualValue } from "../utils";
 import type { MatcherFunction } from "../utils/types";
 
 const makeIterableOfMatcher = (
@@ -8,18 +16,13 @@ const makeIterableOfMatcher = (
   strict = false,
 ): MatcherFunction<[expected: unknown]> =>
   function toBeIterableOf(received, expected) {
-    if (!isIterable(received)) {
-      return {
-        pass: false,
-        message: () => `Expected ${printReceived(received)} to be an iterable`,
-      };
-    }
-    const prefix =
-      matcherHint(matcherName, undefined, undefined, {
-        isNot: this.isNot,
-        promise: this.promise,
-        isDirectExpectCall: asymmetric,
-      }) + "\n\n";
+    const hintOptions: MatcherHintOptions = {
+      isNot: this.isNot,
+      promise: this.promise,
+      isDirectExpectCall: asymmetric,
+    };
+    ensureIterable(received, matcherName, hintOptions);
+    const prefix = matcherHint(matcherName, undefined, undefined, hintOptions) + "\n\n";
     const equalValue = makeEqualValue(this);
 
     let i = 0;
@@ -92,19 +95,22 @@ const makeRecordOfMatcher = (
   strict = false,
 ): MatcherFunction<[expectedKeyOrValue: unknown, expectedValue?: unknown]> =>
   function toBeRecordOf(received, ...expected) {
+    const hintOptions: MatcherHintOptions = {
+      isNot: this.isNot,
+      promise: this.promise,
+      isDirectExpectCall: asymmetric,
+    };
+    const hint = matcherHint(matcherName, undefined, undefined, hintOptions);
     if (typeof received !== "object" || received === null) {
-      return {
-        pass: false,
-        message: () =>
-          `Expected ${printReceived(received)} to be an object, but it was ${printReceived(typeof received)}`,
-      };
+      throw new Error(
+        matcherErrorMessage(
+          hint,
+          `${RECEIVED_COLOR("received")} value must be a record (object)`,
+          printWithType("Received", received, printReceived),
+        ),
+      );
     }
-    const prefix =
-      matcherHint(matcherName, undefined, undefined, {
-        isNot: this.isNot,
-        promise: this.promise,
-        isDirectExpectCall: asymmetric,
-      }) + "\n\n";
+    const prefix = hint + "\n\n";
     const equalValue = makeEqualValue(this);
 
     const hasExpectedKey = expected.length >= 2;

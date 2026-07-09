@@ -27,10 +27,13 @@ describe("toBeIterableOf", () => {
   });
 
   it("should not match a non-iterable", () => {
-    expect(1).not.toBeIterableOf(1);
     expect(() => {
       expect(1).toBeIterableOf(1);
     }).toThrowErrorMatchingSnapshot();
+
+    expect(() => {
+      expect(1).not.toBeIterableOf(1);
+    }).toThrowErrorMatchingSnapshot("not");
   });
 });
 
@@ -88,10 +91,12 @@ describe("toBeStrictIterableOf", () => {
   });
 
   it("should not match a non-iterable", () => {
-    expect(1).not.toBeStrictIterableOf(1);
     expect(() => {
       expect(1).toBeStrictIterableOf(1);
     }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect(1).not.toBeStrictIterableOf(1);
+    }).toThrowErrorMatchingSnapshot("not");
   });
 });
 
@@ -124,10 +129,12 @@ describe("toBeRecordOf", () => {
   });
 
   it("should not match a non-record", () => {
-    expect(1).not.toBeRecordOf(1);
     expect(() => {
       expect(1).toBeRecordOf(1);
     }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect(1).not.toBeRecordOf(1);
+    }).toThrowErrorMatchingSnapshot("not");
   });
 });
 
@@ -177,10 +184,12 @@ describe("toBeStrictRecordOf", () => {
   });
 
   it("should not match a non-record", () => {
-    expect(1).not.toBeStrictRecordOf(1);
     expect(() => {
       expect(1).toBeStrictRecordOf(1);
     }).toThrowErrorMatchingSnapshot();
+    expect(() => {
+      expect(1).not.toBeStrictRecordOf(1);
+    }).toThrowErrorMatchingSnapshot("not");
   });
 });
 

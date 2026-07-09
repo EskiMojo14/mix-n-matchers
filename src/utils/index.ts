@@ -83,3 +83,19 @@ export const makeEqualValue =
 
 export const isIterable = (received: unknown): received is Iterable<unknown> =>
   received != null && typeof (received as Iterable<unknown>)[Symbol.iterator] === "function";
+
+export function ensureIterable(
+  received: unknown,
+  matcherName: string,
+  options?: MatcherHintOptions,
+): asserts received is Iterable<unknown> {
+  if (!isIterable(received)) {
+    throw new Error(
+      matcherErrorMessage(
+        matcherHint(matcherName, undefined, undefined, options),
+        `${RECEIVED_COLOR("received")} value must be an iterable`,
+        printWithType("Received", received, printReceived),
+      ),
+    );
+  }
+}

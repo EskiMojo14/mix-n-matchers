@@ -69,7 +69,9 @@ describe("toSatisfySequence", () => {
     expect(() => {
       expect(0).toSatisfySequence((x) => x === 0);
     }).toThrowErrorMatchingSnapshot();
-    expect(0).not.toSatisfySequence((x) => x === 0);
+    expect(() => {
+      expect(0).not.toSatisfySequence((x) => x === 0);
+    }).toThrowErrorMatchingSnapshot("not");
   });
   it("fails if not passed any predicates", () => {
     expect(() => {
@@ -193,9 +195,11 @@ describe("sequence", () => {
         array: expect.sequence((x) => x === 0),
       });
     }).toThrowErrorMatchingSnapshot();
-    expect({ array: 0 }).toEqual({
-      array: expect.not.sequence((x) => x === 0),
-    });
+    expect(() => {
+      expect({ array: 0 }).toEqual({
+        array: expect.not.sequence((x) => x === 0),
+      });
+    }).toThrowErrorMatchingSnapshot("not");
   });
   it("fails if not passed any predicates", () => {
     expect(() => {
@@ -272,7 +276,9 @@ describe("toBeSequence", () => {
     expect(() => {
       expect(0).toBeSequence(0);
     }).toThrowErrorMatchingSnapshot();
-    expect(0).not.toBeSequence(0);
+    expect(() => {
+      expect(0).not.toBeSequence(0);
+    }).toThrowErrorMatchingSnapshot("not");
   });
   it("fails if the iterable is too short", () => {
     expect(() => {
@@ -339,9 +345,11 @@ describe("sequenceMatching", () => {
         array: expect.sequenceMatching(0),
       });
     }).toThrowErrorMatchingSnapshot();
-    expect({ array: 0 }).toEqual({
-      array: expect.not.sequenceMatching(0),
-    });
+    expect(() => {
+      expect({ array: 0 }).toEqual({
+        array: expect.not.sequenceMatching(0),
+      });
+    }).toThrowErrorMatchingSnapshot("not");
   });
   it("fails if the iterable is too short", () => {
     expect(() => {
@@ -394,7 +402,9 @@ describe("toEqualSequence", () => {
     expect(() => {
       expect(0).toEqualSequence(0);
     }).toThrowErrorMatchingSnapshot();
-    expect(0).not.toEqualSequence(0);
+    expect(() => {
+      expect(0).not.toEqualSequence(0);
+    }).toThrowErrorMatchingSnapshot("not");
   });
   it("fails if the iterable is too short", () => {
     expect(() => {
@@ -468,7 +478,9 @@ describe("toStrictEqualSequence", () => {
     expect(() => {
       expect(0).toStrictEqualSequence(0);
     }).toThrowErrorMatchingSnapshot();
-    expect(0).not.toStrictEqualSequence(0);
+    expect(() => {
+      expect(0).not.toStrictEqualSequence(0);
+    }).toThrowErrorMatchingSnapshot("not");
   });
 
   it("fails if the iterable is too short", () => {
@@ -545,9 +557,11 @@ describe("sequenceOf", () => {
         value: expect.sequenceOf(0),
       });
     }).toThrowErrorMatchingSnapshot();
-    expect({ value: 0 }).toEqual({
-      value: expect.not.sequenceOf(0),
-    });
+    expect(() => {
+      expect({ value: 0 }).toEqual({
+        value: expect.not.sequenceOf(0),
+      });
+    }).toThrowErrorMatchingSnapshot("not");
   });
   it("fails if the iterable is too short", () => {
     expect(() => {
@@ -632,9 +646,11 @@ describe("strictSequenceOf", () => {
         value: expect.strictSequenceOf(0),
       });
     }).toThrowErrorMatchingSnapshot();
-    expect({ value: 0 }).toEqual({
-      value: expect.not.strictSequenceOf(0),
-    });
+    expect(() => {
+      expect({ value: 0 }).toEqual({
+        value: expect.not.strictSequenceOf(0),
+      });
+    }).toThrowErrorMatchingSnapshot("not");
   });
 
   it("fails if the iterable is too short", () => {
