@@ -151,7 +151,7 @@ it("is a redirect response", () => {
 
 ### `.toHaveResponseType(expected)`
 
-Use `.toHaveResponseType(expected)` to assert that a `Response` object has the expected type (e.g., `"basic"`, `"cors"`, `"error"`, `"opaque"`, `"opaqueredirect"`).
+Use `.toHaveResponseType(expected)` to assert that a `Response` object has the expected [type](https://developer.mozilla.org/en-US/docs/Web/API/Response/type).
 
 <TestFile name="toHaveResponseType">
 {`
@@ -165,7 +165,7 @@ it("has the expected response type", () => {
 
 ### `.toHaveSearchParam(name, value?)`
 
-Use `.toHaveSearchParam(name, value?)` to assert that a `URLSearchParams`, `URL`, `Response`, or `Request` object has the specified query parameter. If `value` is provided, it will also check that the parameter value matches.
+Use `.toHaveSearchParam(name, value?)` to assert that a `URLSearchParams`, `URL`, `Response`, or `Request` object has the specified search parameter. If `value` is provided, it will also check that the parameter value matches.
 
 <TestFile name="toHaveSearchParam">
 {`
