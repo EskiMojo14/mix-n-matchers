@@ -1,5 +1,47 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
+exports[`toBeAborted fails when the received value is not an AbortSignal or Request 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeAborted<d>()</b>
+
+<b>Matcher error</b>: Received value is not an AbortSignal or Request.
+`;
+
+exports[`toBeAborted fails when the signal/request has not been aborted: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toBeAborted<d>()</b>
+
+Expected request to be aborted, but it was not.
+`;
+
+exports[`toBeAborted fails when the signal/request has not been aborted: signal 1`] = `
+<d>expect(</b><r>signal</g><d>).</b>toBeAborted<d>()</b>
+
+Expected signal to be aborted, but it was not.
+`;
+
+exports[`toBeAborted passes when the signal/request has been aborted: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toBeAborted<d>()</b>
+
+Expected request not to be aborted, but it was.
+`;
+
+exports[`toBeAborted passes when the signal/request has been aborted: signal 1`] = `
+<d>expect(</b><r>signal</g><d>).</b>not<d>.</b>toBeAborted<d>()</b>
+
+Expected signal not to be aborted, but it was.
+`;
+
+exports[`toBeAborted when AbortSignal is not defined in the global scope fails 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeAborted<d>()</b>
+
+<b>Matcher error</b>: AbortSignal or Request is not defined in the global scope.
+`;
+
+exports[`toBeAborted when Request is not defined in the global scope fails 1`] = `
+<d>expect(</b><r>received</g><d>).</b>toBeAborted<d>()</b>
+
+<b>Matcher error</b>: AbortSignal or Request is not defined in the global scope.
+`;
+
 exports[`toBeOK fails when Response is not defined in the global scope 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toBeOK<d>()</b>
 

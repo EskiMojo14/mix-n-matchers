@@ -518,6 +518,33 @@ export const toHaveSearchParam: MatcherFunction<[string, string?]> = function (
   };
 };
 
+/**
+ * Assert that an AbortSignal object is aborted, or that a Request object has an aborted signal.
+ */
+export const toBeAborted: MatcherFunction = function (received) {
+  const hint = (received?: string) =>
+    matcherHint("toBeAborted", received, "", {
+      isNot: this.isNot,
+      promise: this.promise,
+    });
+
+  assert(globalThis.AbortSignal && globalThis.Request, () =>
+    matcherErrorMessage(hint(), "AbortSignal or Request is not defined in the global scope."),
+  );
+  assert(received instanceof AbortSignal || received instanceof Request, () =>
+    matcherErrorMessage(hint(), "Received value is not an AbortSignal or Request."),
+  );
+  const receivedName = received instanceof AbortSignal ? "signal" : "request";
+
+  const pass = received instanceof AbortSignal ? received.aborted : received.signal.aborted;
+  return {
+    pass,
+    message: () =>
+      `${hint(receivedName)}\n\n` +
+      `Expected ${receivedName} ${pass ? "not " : ""}to be aborted, but it was${pass ? "" : " not"}.`,
+  };
+};
+
 declare module "mix-n-matchers" {
   export interface MixNMatchers<R, T = unknown> {
     /**
@@ -612,5 +639,11 @@ declare module "mix-n-matchers" {
      * expect(response).toHaveSearchParam("foo", "bar");
      */
     toHaveSearchParam(name: string, value?: string): R;
+    /**
+     * Asserts that an AbortSignal object is aborted.
+     * @example
+     * expect(signal).toBeAborted();
+     */
+    toBeAborted(): R;
   }
 }
