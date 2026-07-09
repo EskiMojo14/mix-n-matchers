@@ -235,7 +235,7 @@ export const toHaveMethod: MatcherFunction<[string]> = function (received, expec
 };
 
 /**
- * Ensure the Request object has a specific URL.
+ * Ensure the Request or Response object has a specific URL.
  */
 export const toHaveURL: MatcherFunction<[string]> = function (received, expected) {
   const hint = (received?: string) =>
@@ -396,6 +396,9 @@ export const toBeRedirected: MatcherFunction = function (received) {
   };
 };
 
+/**
+ * Asserts that a Response object has a specific type.
+ */
 export const toHaveResponseType: MatcherFunction<[typeof Response.prototype.type]> = function (
   received,
   expected,
@@ -640,9 +643,10 @@ declare module "mix-n-matchers" {
      */
     toHaveSearchParam(name: string, value?: string): R;
     /**
-     * Asserts that an AbortSignal object is aborted.
+     * Asserts that an AbortSignal object is aborted, or that a Request object has an aborted signal.
      * @example
      * expect(signal).toBeAborted();
+     * expect(request).toBeAborted();
      */
     toBeAborted(): R;
   }
