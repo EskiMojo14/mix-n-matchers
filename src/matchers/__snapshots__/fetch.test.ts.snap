@@ -91,25 +91,25 @@ Expected response to not be redirected, but it was redirected.
 `;
 
 exports[`toHaveFormDataBody fails when the body has already been used: request 1`] = `
-<d>expect(</b><r>request</g><d>).</b>toHaveFormDataBody<d>(</b><g>{}</g><d>)</b>
+<d>expect(</b><r>request</g><d>).</b>toHaveFormDataBody<d>(</b><g>FormData [["foo", "bar"]]</g><d>)</b>
 
 <b>Matcher error</b>: Cannot read body from the request because it has already been used.
 `;
 
 exports[`toHaveFormDataBody fails when the body has already been used: response 1`] = `
-<d>expect(</b><r>response</g><d>).</b>toHaveFormDataBody<d>(</b><g>{}</g><d>)</b>
+<d>expect(</b><r>response</g><d>).</b>toHaveFormDataBody<d>(</b><g>FormData [["foo", "bar"]]</g><d>)</b>
 
 <b>Matcher error</b>: Cannot read body from the response because it has already been used.
 `;
 
 exports[`toHaveFormDataBody fails when the received value is not a Response or Request 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toHaveFormDataBody<d>(</b><g>{}</g><d>)</b>
+<d>expect(</b><r>received</g><d>).</b>toHaveFormDataBody<d>(</b><g>FormData [["foo", "bar"]]</g><d>)</b>
 
 <b>Matcher error</b>: Received value is not a Request or Response.
 `;
 
 exports[`toHaveFormDataBody fails when the response/request does not have the expected FormData body: request 1`] = `
-<d>expect(</b><r>request</g><d>).</b>toHaveFormDataBody<d>(</b><g>{}</g><d>)</b>
+<d>expect(</b><r>request</g><d>).</b>toHaveFormDataBody<d>(</b><g>FormData [["foo", "bar"]]</g><d>)</b>
 
 <g>- Expected  - 1</g>
 <r>+ Received  + 1</g>
@@ -124,7 +124,7 @@ exports[`toHaveFormDataBody fails when the response/request does not have the ex
 `;
 
 exports[`toHaveFormDataBody fails when the response/request does not have the expected FormData body: response 1`] = `
-<d>expect(</b><r>response</g><d>).</b>toHaveFormDataBody<d>(</b><g>{}</g><d>)</b>
+<d>expect(</b><r>response</g><d>).</b>toHaveFormDataBody<d>(</b><g>FormData [["foo", "bar"]]</g><d>)</b>
 
 <g>- Expected  - 1</g>
 <r>+ Received  + 1</g>
@@ -139,13 +139,13 @@ exports[`toHaveFormDataBody fails when the response/request does not have the ex
 `;
 
 exports[`toHaveFormDataBody when Request is not defined in the global scope fails: request 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toHaveFormDataBody<d>(</b><g>{}</g><d>)</b>
+<d>expect(</b><r>received</g><d>).</b>toHaveFormDataBody<d>(</b><g>FormData [["foo", "bar"]]</g><d>)</b>
 
 <b>Matcher error</b>: Request, Response, or FormData is not defined in the global scope.
 `;
 
 exports[`toHaveFormDataBody when Response is not defined in the global scope fails: response 1`] = `
-<d>expect(</b><r>received</g><d>).</b>toHaveFormDataBody<d>(</b><g>{}</g><d>)</b>
+<d>expect(</b><r>received</g><d>).</b>toHaveFormDataBody<d>(</b><g>FormData [["foo", "bar"]]</g><d>)</b>
 
 <b>Matcher error</b>: Request, Response, or FormData is not defined in the global scope.
 `;

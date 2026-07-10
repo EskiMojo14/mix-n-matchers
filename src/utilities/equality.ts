@@ -6,7 +6,8 @@ import type { Tester } from "../utils/types";
  */
 export const formDataEquality: Tester = function (a, b, customTesters) {
   const { equals } = this;
-  if (!(a instanceof FormData && b instanceof FormData)) return undefined;
+  const FormDataCtor = globalThis.FormData;
+  if (!FormDataCtor || !(a instanceof FormDataCtor && b instanceof FormDataCtor)) return undefined;
   // quick win
   if (a === b) return true;
 
