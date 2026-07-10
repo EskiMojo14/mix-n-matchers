@@ -34,6 +34,7 @@ export {
   toHaveTextBody,
   toHaveJSONBody,
   toHaveJSONBodyStrict,
+  toHaveFormDataBody,
   toBeRedirected,
   toHaveResponseType,
   toHaveSearchParam,
