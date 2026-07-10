@@ -19,6 +19,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Setup environment
         uses: ./.github/actions/setup-node-pnpm
         with:
@@ -58,6 +61,9 @@ jobs:
             command: pnpm run vitest --run
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Setup environment
         uses: ./.github/actions/setup-node-pnpm
         with:
@@ -80,6 +86,9 @@ jobs:
             command: pnpm run vitest:dist --run
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Setup environment
         uses: ./.github/actions/setup-node-pnpm
         with:
