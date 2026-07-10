@@ -2,7 +2,7 @@ import type { Config } from "jest";
 import { pathsToModuleNameMapper } from "ts-jest";
 import tsconfig from "./tsconfig.json" with { type: "json" };
 
-const config: Config = {
+const config = {
   preset: "ts-jest/presets/js-with-ts-esm",
   testEnvironment: "node",
   extensionsToTreatAsEsm: [".ts"],
@@ -12,6 +12,6 @@ const config: Config = {
     prefix: "<rootDir>/",
   }),
   setupFilesAfterEnv: ["<rootDir>/src/jest-globals.ts", "<rootDir>/jest-setup.ts"],
-};
+} satisfies Config;
 
 export default config;
