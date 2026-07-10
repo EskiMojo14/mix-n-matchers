@@ -82,8 +82,7 @@ const statusGroupsByNum = {
 // 1-5, 1xx-5xx, informational-server error
 export type StatusGroup =
   | keyof typeof statusGroupsByNum
-  | (typeof statusGroupsByNum)[keyof typeof statusGroupsByNum]["long"]
-  | (typeof statusGroupsByNum)[keyof typeof statusGroupsByNum]["short"];
+  | (typeof statusGroupsByNum)[keyof typeof statusGroupsByNum]["long" | "short"];
 const statusGroups = new Map<StatusGroup, 1 | 2 | 3 | 4 | 5>();
 for (const [key, { long, short }] of Object.entries(statusGroupsByNum)) {
   const num = Number(key) as 1 | 2 | 3 | 4 | 5;
