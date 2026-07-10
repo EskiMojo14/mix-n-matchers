@@ -1,4 +1,7 @@
 {
   "jest.jestCommandLine": "pnpm test",
-  "jestrunner.vitestCommand": "pnpm vitest"
+  "jestrunner.vitestCommand": "pnpm vitest",
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  }
 }

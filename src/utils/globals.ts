@@ -5,6 +5,8 @@ import type {
   it as jestIt,
   expect as jestExpect,
   jest,
+  beforeAll as jestBeforeAll,
+  afterAll as jestAfterAll,
 } from "@jest/globals";
 import type {
   describe as vitestDescribe,
@@ -12,6 +14,8 @@ import type {
   expect as vitestExpect,
   vi,
   Mock as VitestMock,
+  beforeAll as vitestBeforeAll,
+  afterAll as vitestAfterAll,
 } from "vitest";
 import type { Satisfies } from "./types.typetest";
 
@@ -39,5 +43,8 @@ export declare const fn: <T extends Procedure = Procedure>(fn?: T) => Mock<T>;
 
 // oxlint-disable-next-line no-unused-vars
 type TestFn = Satisfies<typeof jest.fn | typeof vi.fn, typeof fn>;
+
+export declare const beforeAll: typeof vitestBeforeAll | typeof jestBeforeAll;
+export declare const afterAll: typeof vitestAfterAll | typeof jestAfterAll;
 
 throw new Error("This file should be mocked");

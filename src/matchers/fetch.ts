@@ -9,6 +9,7 @@ import {
   EXPECTED_COLOR,
   printDiffOrStringify,
 } from "jest-matcher-utils";
+import { caseInsensitiveEquality } from "../utilities";
 
 /**
  * Ensure the Response object has an ok status (200-299).
@@ -227,13 +228,6 @@ export const toHaveHeader: MatcherFunction<[string, string?]> = function (receiv
             : `Expected ${receivedName} to have header ${EXPECTED_COLOR(stringify(name))}, but it was not found.`),
   };
 };
-
-// oxlint-disable-next-line typescript/consistent-return
-function caseInsensitiveEquality(a: unknown, b: unknown) {
-  if (typeof a === "string" && typeof b === "string") {
-    return a.toLowerCase() === b.toLowerCase();
-  }
-}
 
 /**
  * Ensure the Request object has a specific method.
