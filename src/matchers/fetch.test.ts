@@ -406,6 +406,14 @@ describe("toHaveMethod", () => {
     expect(request).not.toHaveMethod("POST");
   });
 
+  it("is case insensitive", () => {
+    const request = new Request("https://example.com", { method: "POST" });
+    expect(request).toHaveMethod("post");
+    expect(() => {
+      expect(request).not.toHaveMethod("post");
+    }).toThrowErrorMatchingSnapshot();
+  });
+
   it("fails when the received value is not a Request", () => {
     expect(() => {
       expect({}).toHaveMethod("POST");
