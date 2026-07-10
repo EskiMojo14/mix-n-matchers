@@ -9,7 +9,7 @@ import {
   EXPECTED_COLOR,
   printDiffOrStringify,
 } from "jest-matcher-utils";
-import { caseInsensitiveEquality, formDataEquality } from "../utilities";
+import { caseInsensitiveStringEquality, formDataEquality } from "../utilities";
 
 /**
  * Ensure the Response object has an ok status (200-299).
@@ -252,7 +252,7 @@ export const toHaveMethod: MatcherFunction<[string]> = function (received, expec
     ),
   );
 
-  const equalValue = makeEqualValue(this, [caseInsensitiveEquality]);
+  const equalValue = makeEqualValue(this, [caseInsensitiveStringEquality]);
   const actualMethod = received.method;
   const pass = equalValue(actualMethod, expected);
 

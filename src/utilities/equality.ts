@@ -29,7 +29,7 @@ export const formDataEquality: Tester = function (a, b, customTesters) {
 /**
  * Equality tester for case-insensitive string comparison. It checks if two strings are equal, ignoring case differences.
  */
-export function caseInsensitiveEquality(a: unknown, b: unknown) {
+export function caseInsensitiveStringEquality(a: unknown, b: unknown) {
   if (typeof a === "string" && typeof b === "string") {
     return a.toLowerCase() === b.toLowerCase();
   }

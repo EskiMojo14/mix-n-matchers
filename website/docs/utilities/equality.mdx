@@ -1,0 +1,46 @@
+import { TestFile } from "/src/components/TestFile";
+
+# Equality
+
+Custom equality testers can be added to Jest's `expect` function using the `addEqualityTesters` function. This allows you to define how certain types of values should be compared for equality in your tests.
+
+## `caseInsensitiveStringEquality`
+
+Compares two strings for equality, ignoring case differences. Returns `true` if the strings are equal (case-insensitive), and `false` otherwise.
+
+<TestFile name="caseInsensitiveStringEquality">
+{`
+import { caseInsensitiveStringEquality } from "mix-n-matchers/utilities";
+
+expect.addEqualityTesters([caseInsensitiveStringEquality]);
+
+it("matches strings case-insensitively", () => {
+expect("Hello").toEqual("hello");
+expect("WORLD").toEqual("world");
+expect("Test").not.toEqual("testing");
+});
+`}
+
+</TestFile>
+
+## `formDataEquality`
+
+Compares two `FormData` objects for equality. Returns `true` if the `FormData` objects have the same keys and values (and insertion order), and `false` otherwise.
+
+<TestFile name="formDataEquality">
+{`
+import { formDataEquality } from "mix-n-matchers/utilities";
+
+expect.addEqualityTesters([formDataEquality]);
+
+it("matches FormData objects with the same keys and values", () => {
+const formData1 = new FormData();
+formData1.append("key1", "value1");
+const formData2 = new FormData();
+formData2.append("key1", "value1");
+
+expect(formData1).toEqual(formData2);
+});
+`}
+
+</TestFile>
