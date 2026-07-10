@@ -1,0 +1,95 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Format, Lint, Typecheck, Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup environment
+        uses: ./.github/actions/setup-node-pnpm
+        with:
+          node-version: "25"
+
+      - name: Format
+        run: pnpm run format --check
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Build
+        run: pnpm run build:only
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            dist
+            types
+          if-no-files-found: error
+
+  tests:
+    name: Tests (${{ matrix.runner.name }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        runner:
+          - name: Jest
+            command: pnpm run test
+          - name: Vitest
+            command: pnpm run vitest --run
+
+    steps:
+      - name: Setup environment
+        uses: ./.github/actions/setup-node-pnpm
+        with:
+          node-version: "25"
+
+      - name: Run ${{ matrix.runner.name }}
+        run: ${{ matrix.runner.command }}
+
+  tests_dist:
+    name: Tests on dist (${{ matrix.runner.name }})
+    runs-on: ubuntu-latest
+    needs: quality
+    strategy:
+      fail-fast: false
+      matrix:
+        runner:
+          - name: Jest
+            command: pnpm run test:dist
+          - name: Vitest
+            command: pnpm run vitest:dist --run
+
+    steps:
+      - name: Setup environment
+        uses: ./.github/actions/setup-node-pnpm
+        with:
+          node-version: "25"
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: .
+
+      - name: Run ${{ matrix.runner.name }}
+        run: ${{ matrix.runner.command }}
