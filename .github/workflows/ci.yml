@@ -71,6 +71,8 @@ jobs:
 
       - name: Run ${{ matrix.runner.name }}
         run: ${{ matrix.runner.command }}
+        env:
+          FORCE_COLOR: 1
 
   tests_dist:
     name: Tests on dist (${{ matrix.runner.name }})
@@ -102,3 +104,5 @@ jobs:
 
       - name: Run ${{ matrix.runner.name }}
         run: ${{ matrix.runner.command }}
+        env:
+          FORCE_COLOR: 1
