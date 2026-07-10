@@ -1,4 +1,5 @@
 import { it, expect, describe } from "@globals";
+import type { StatusGroup } from "./fetch";
 
 function withoutGlobal(global: keyof typeof globalThis): Disposable {
   const original = globalThis[global];
@@ -81,6 +82,24 @@ describe("toHaveStatus", () => {
       expect(response).toHaveStatus("200");
     }).toThrowErrorMatchingSnapshot();
   });
+
+  describe("with asymmetric matchers", () => {
+    it("passes when the status matches", () => {
+      const response = new Response(null, { status: 200 });
+      expect(response).toHaveStatus(expect.oneOf([200, 201]));
+      expect(() => {
+        expect(response).not.toHaveStatus(expect.oneOf([200, 201]));
+      }).toThrowErrorMatchingSnapshot();
+    });
+
+    it("fails when the status does not match", () => {
+      const response = new Response(null, { status: 404 });
+      expect(() => {
+        expect(response).toHaveStatus(expect.oneOf([200, 201]));
+      }).toThrowErrorMatchingSnapshot();
+      expect(response).not.toHaveStatus(expect.oneOf([200, 201]));
+    });
+  });
 });
 
 describe("toHaveStatusGroup", () => {
@@ -134,6 +153,37 @@ describe("toHaveStatusGroup", () => {
       expect(response).toHaveStatusGroup(2);
     }).toThrowErrorMatchingSnapshot();
     expect(response).not.toHaveStatusGroup(2);
+  });
+
+  describe("with asymmetric matchers", () => {
+    describe.each([
+      ["num", [2, 3]],
+      ["short", ["2xx", "3xx"]],
+      ["long", ["successful", "redirection"]],
+    ] as const)("%s", (_, values) => {
+      it("passes when the group matches", () => {
+        const response = new Response(null, { status: 200 });
+        expect(response).toHaveStatusGroup(expect.oneOf<StatusGroup>(values));
+        expect(() => {
+          expect(response).not.toHaveStatusGroup(expect.oneOf<StatusGroup>(values));
+        }).toThrowErrorMatchingSnapshot();
+      });
+      it("fails when the group does not match", () => {
+        const response = new Response(null, { status: 404 });
+        expect(() => {
+          expect(response).toHaveStatusGroup(expect.oneOf<StatusGroup>(values));
+        }).toThrowErrorMatchingSnapshot();
+        expect(response).not.toHaveStatusGroup(expect.oneOf<StatusGroup>(values));
+      });
+    });
+
+    it("fails when the status is non-standard", () => {
+      const response = Object.defineProperty(new Response(), "status", { value: 600 });
+      expect(() => {
+        expect(response).toHaveStatusGroup(expect.oneOf([2, 3]));
+      }).toThrowErrorMatchingSnapshot();
+      expect(response).not.toHaveStatusGroup(expect.oneOf([2, 3]));
+    });
   });
 });
 
@@ -295,6 +345,48 @@ describe("toHaveHeader", () => {
       expect(request).toHaveHeader("Content-Type", 123);
     }).toThrowErrorMatchingSnapshot("request");
   });
+
+  describe("with asymmetric matchers", () => {
+    it("passes when the header value matches", () => {
+      const headers = new Headers({ "Content-Type": "application/json" });
+      expect(headers).toHaveHeader("Content-Type", expect.stringContaining("json"));
+      expect(() => {
+        expect(headers).not.toHaveHeader("Content-Type", expect.stringContaining("json"));
+      }).toThrowErrorMatchingSnapshot("headers");
+
+      const response = new Response(null, { headers });
+      expect(response).toHaveHeader("Content-Type", expect.stringContaining("json"));
+      expect(() => {
+        expect(response).not.toHaveHeader("Content-Type", expect.stringContaining("json"));
+      }).toThrowErrorMatchingSnapshot("response");
+
+      const request = new Request("https://example.com", { headers });
+      expect(request).toHaveHeader("Content-Type", expect.stringContaining("json"));
+      expect(() => {
+        expect(request).not.toHaveHeader("Content-Type", expect.stringContaining("json"));
+      }).toThrowErrorMatchingSnapshot("request");
+    });
+
+    it("fails when the header value does not match", () => {
+      const headers = new Headers({ "Content-Type": "text/html" });
+      expect(() => {
+        expect(headers).toHaveHeader("Content-Type", expect.stringContaining("json"));
+      }).toThrowErrorMatchingSnapshot("headers");
+      expect(headers).not.toHaveHeader("Content-Type", expect.stringContaining("json"));
+
+      const response = new Response(null, { headers });
+      expect(() => {
+        expect(response).toHaveHeader("Content-Type", expect.stringContaining("json"));
+      }).toThrowErrorMatchingSnapshot("response");
+      expect(response).not.toHaveHeader("Content-Type", expect.stringContaining("json"));
+
+      const request = new Request("https://example.com", { headers });
+      expect(() => {
+        expect(request).toHaveHeader("Content-Type", expect.stringContaining("json"));
+      }).toThrowErrorMatchingSnapshot("request");
+      expect(request).not.toHaveHeader("Content-Type", expect.stringContaining("json"));
+    });
+  });
 });
 
 describe("toHaveMethod", () => {
@@ -326,6 +418,24 @@ describe("toHaveMethod", () => {
     expect(() => {
       expect({}).toHaveMethod("POST");
     }).toThrowErrorMatchingSnapshot();
+  });
+
+  describe("with asymmetric matchers", () => {
+    it("passes when the method matches", () => {
+      const request = new Request("https://example.com", { method: "POST" });
+      expect(request).toHaveMethod(expect.oneOf(["GET", "POST"]));
+      expect(() => {
+        expect(request).not.toHaveMethod(expect.oneOf(["GET", "POST"]));
+      }).toThrowErrorMatchingSnapshot();
+    });
+
+    it("fails when the method does not match", () => {
+      const request = new Request("https://example.com", { method: "DELETE" });
+      expect(() => {
+        expect(request).toHaveMethod(expect.oneOf(["GET", "POST"]));
+      }).toThrowErrorMatchingSnapshot();
+      expect(request).not.toHaveMethod(expect.oneOf(["GET", "POST"]));
+    });
   });
 });
 
@@ -400,6 +510,36 @@ describe("toHaveURL", () => {
     expect(() => {
       expect(response).toHaveURL("https://example.com/api");
     }).toThrowErrorMatchingSnapshot("response");
+  });
+
+  describe("with asymmetric matchers", () => {
+    it("passes when the URL matches", () => {
+      const response = urlResponse("https://example.com/api");
+      expect(response).toHaveURL(expect.stringContaining("example.com"));
+      expect(() => {
+        expect(response).not.toHaveURL(expect.stringContaining("example.com"));
+      }).toThrowErrorMatchingSnapshot("response");
+
+      const request = new Request("https://example.com/api");
+      expect(request).toHaveURL(expect.stringContaining("example.com"));
+      expect(() => {
+        expect(request).not.toHaveURL(expect.stringContaining("example.com"));
+      }).toThrowErrorMatchingSnapshot("request");
+    });
+
+    it("fails when the URL does not match", () => {
+      const response = urlResponse("https://other.com/api");
+      expect(() => {
+        expect(response).toHaveURL(expect.stringContaining("example.com"));
+      }).toThrowErrorMatchingSnapshot("response");
+      expect(response).not.toHaveURL(expect.stringContaining("example.com"));
+
+      const request = new Request("https://other.com/api");
+      expect(() => {
+        expect(request).toHaveURL(expect.stringContaining("example.com"));
+      }).toThrowErrorMatchingSnapshot("request");
+      expect(request).not.toHaveURL(expect.stringContaining("example.com"));
+    });
   });
 });
 
@@ -535,6 +675,42 @@ describe("toHaveTextBody", () => {
     await expect(async () => {
       await expect(request).toHaveTextBody("Hello, world!");
     }).rejects.toThrowErrorMatchingSnapshot("request");
+  });
+
+  describe("with asymmetric matchers", () => {
+    it("passes when the body text matches", async () => {
+      const response = new Response("Hello, world!");
+      await expect(response).toHaveTextBody(expect.stringContaining("Hello"));
+      await expect(async () => {
+        await expect(response).not.toHaveTextBody(expect.stringContaining("Hello"));
+      }).rejects.toThrowErrorMatchingSnapshot("response");
+
+      const request = new Request("https://example.com", {
+        body: "Hello, world!",
+        method: "POST",
+      });
+      await expect(request).toHaveTextBody(expect.stringContaining("Hello"));
+      await expect(async () => {
+        await expect(request).not.toHaveTextBody(expect.stringContaining("Hello"));
+      }).rejects.toThrowErrorMatchingSnapshot("request");
+    });
+
+    it("fails when the body text does not match", async () => {
+      const response = new Response("Goodbye, world!");
+      await expect(async () => {
+        await expect(response).toHaveTextBody(expect.stringContaining("Hello"));
+      }).rejects.toThrowErrorMatchingSnapshot("response");
+      await expect(response).not.toHaveTextBody(expect.stringContaining("Hello"));
+
+      const request = new Request("https://example.com", {
+        body: "Goodbye, world!",
+        method: "POST",
+      });
+      await expect(async () => {
+        await expect(request).toHaveTextBody(expect.stringContaining("Hello"));
+      }).rejects.toThrowErrorMatchingSnapshot("request");
+      await expect(request).not.toHaveTextBody(expect.stringContaining("Hello"));
+    });
   });
 });
 
@@ -720,6 +896,24 @@ describe("toHaveResponseType", () => {
       expect({}).toHaveResponseType("basic");
     }).toThrowErrorMatchingSnapshot();
   });
+
+  describe("with asymmetric matchers", () => {
+    it("passes when the response type matches", () => {
+      const response = typedResponse("basic");
+      expect(response).toHaveResponseType(expect.oneOf(["basic", "cors"]));
+      expect(() => {
+        expect(response).not.toHaveResponseType(expect.oneOf(["basic", "cors"]));
+      }).toThrowErrorMatchingSnapshot();
+    });
+
+    it("fails when the response type does not match", () => {
+      const response = typedResponse("opaque");
+      expect(() => {
+        expect(response).toHaveResponseType(expect.oneOf(["basic", "cors"]));
+      }).toThrowErrorMatchingSnapshot();
+      expect(response).not.toHaveResponseType(expect.oneOf(["basic", "cors"]));
+    });
+  });
 });
 
 describe("toHaveSearchParam", () => {
@@ -899,6 +1093,60 @@ describe("toHaveSearchParam", () => {
       // @ts-expect-error
       expect(response).toHaveSearchParam("foo", 123);
     }).toThrowErrorMatchingSnapshot("response");
+  });
+
+  describe("with asymmetric matchers", () => {
+    it("passes when the search param value matches", () => {
+      const params = new URLSearchParams("foo=bar");
+      expect(params).toHaveSearchParam("foo", expect.stringContaining("ba"));
+      expect(() => {
+        expect(params).not.toHaveSearchParam("foo", expect.stringContaining("ba"));
+      }).toThrowErrorMatchingSnapshot("params");
+
+      const url = new URL(`https://example.com?${params.toString()}`);
+      expect(url).toHaveSearchParam("foo", expect.stringContaining("ba"));
+      expect(() => {
+        expect(url).not.toHaveSearchParam("foo", expect.stringContaining("ba"));
+      }).toThrowErrorMatchingSnapshot("url");
+
+      const request = new Request(url);
+      expect(request).toHaveSearchParam("foo", expect.stringContaining("ba"));
+      expect(() => {
+        expect(request).not.toHaveSearchParam("foo", expect.stringContaining("ba"));
+      }).toThrowErrorMatchingSnapshot("request");
+
+      const response = urlResponse(url.toString());
+      expect(response).toHaveSearchParam("foo", expect.stringContaining("ba"));
+      expect(() => {
+        expect(response).not.toHaveSearchParam("foo", expect.stringContaining("ba"));
+      }).toThrowErrorMatchingSnapshot("response");
+    });
+
+    it("fails when the search param value does not match", () => {
+      const params = new URLSearchParams("foo=baz");
+      expect(() => {
+        expect(params).toHaveSearchParam("foo", expect.stringContaining("bar"));
+      }).toThrowErrorMatchingSnapshot("params");
+      expect(params).not.toHaveSearchParam("foo", expect.stringContaining("bar"));
+
+      const url = new URL(`https://example.com?${params.toString()}`);
+      expect(() => {
+        expect(url).toHaveSearchParam("foo", expect.stringContaining("bar"));
+      }).toThrowErrorMatchingSnapshot("url");
+      expect(url).not.toHaveSearchParam("foo", expect.stringContaining("bar"));
+
+      const request = new Request(url);
+      expect(() => {
+        expect(request).toHaveSearchParam("foo", expect.stringContaining("bar"));
+      }).toThrowErrorMatchingSnapshot("request");
+      expect(request).not.toHaveSearchParam("foo", expect.stringContaining("bar"));
+
+      const response = urlResponse(url.toString());
+      expect(() => {
+        expect(response).toHaveSearchParam("foo", expect.stringContaining("bar"));
+      }).toThrowErrorMatchingSnapshot("response");
+      expect(response).not.toHaveSearchParam("foo", expect.stringContaining("bar"));
+    });
   });
 });
 

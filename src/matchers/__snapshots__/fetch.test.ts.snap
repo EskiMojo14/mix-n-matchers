@@ -261,6 +261,42 @@ exports[`toHaveHeader when expected value is provided passes when the response/r
 Expected response not to have header <g>"Content-Type"</g> with a value of <g>"application/json"</g>, but it did.
 `;
 
+exports[`toHaveHeader with asymmetric matchers fails when the header value does not match: headers 1`] = `
+<d>expect(</b><r>headers</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>StringContaining "json"</g><d>)</b>
+
+Expected headers to have header <g>"Content-Type"</g> with a value of <g>StringContaining "json"</g>, but it had a value of <r>"text/html"</g>.
+`;
+
+exports[`toHaveHeader with asymmetric matchers fails when the header value does not match: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>StringContaining "json"</g><d>)</b>
+
+Expected request to have header <g>"Content-Type"</g> with a value of <g>StringContaining "json"</g>, but it had a value of <r>"text/html"</g>.
+`;
+
+exports[`toHaveHeader with asymmetric matchers fails when the header value does not match: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>StringContaining "json"</g><d>)</b>
+
+Expected response to have header <g>"Content-Type"</g> with a value of <g>StringContaining "json"</g>, but it had a value of <r>"text/html"</g>.
+`;
+
+exports[`toHaveHeader with asymmetric matchers passes when the header value matches: headers 1`] = `
+<d>expect(</b><r>headers</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>StringContaining "json"</g><d>)</b>
+
+Expected headers not to have header <g>"Content-Type"</g> with a value of <g>StringContaining "json"</g>, but it did.
+`;
+
+exports[`toHaveHeader with asymmetric matchers passes when the header value matches: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>StringContaining "json"</g><d>)</b>
+
+Expected request not to have header <g>"Content-Type"</g> with a value of <g>StringContaining "json"</g>, but it did.
+`;
+
+exports[`toHaveHeader with asymmetric matchers passes when the header value matches: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveHeader<d>(</b><g>"Content-Type"</g><d>, </b><g>StringContaining "json"</g><d>)</b>
+
+Expected response not to have header <g>"Content-Type"</g> with a value of <g>StringContaining "json"</g>, but it did.
+`;
+
 exports[`toHaveJSONBody fails when it cannot clone the body: request 1`] = `
 <d>expect(</b><r>request</g><d>).</b>toHaveJSONBody<d>(</b><g>{"message": "Hello, world!"}</g><d>)</b>
 
@@ -473,6 +509,18 @@ exports[`toHaveMethod passes when the request has the expected method 1`] = `
 Expected request not to have method <g>"POST"</g>, but it did.
 `;
 
+exports[`toHaveMethod with asymmetric matchers fails when the method does not match 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveMethod<d>(</b><g>oneOf<GET,POST></g><d>)</b>
+
+Expected request to have method <g>oneOf<GET,POST></g>, but it was <r>"DELETE"</g>.
+`;
+
+exports[`toHaveMethod with asymmetric matchers passes when the method matches 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveMethod<d>(</b><g>oneOf<GET,POST></g><d>)</b>
+
+Expected request not to have method <g>oneOf<GET,POST></g>, but it did.
+`;
+
 exports[`toHaveResponseType fails when Response is not defined in the global scope 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toHaveResponseType<d>(</b><g>"basic"</g><d>)</b>
 
@@ -495,6 +543,18 @@ exports[`toHaveResponseType passes when the response has the expected type 1`] =
 <d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveResponseType<d>(</b><g>"basic"</g><d>)</b>
 
 Expected response not to have type <g>"basic"</g>, but it did.
+`;
+
+exports[`toHaveResponseType with asymmetric matchers fails when the response type does not match 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveResponseType<d>(</b><g>oneOf<basic,cors></g><d>)</b>
+
+Expected response to have type <g>oneOf<basic,cors></g>, but it was <r>"opaque"</g>.
+`;
+
+exports[`toHaveResponseType with asymmetric matchers passes when the response type matches 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveResponseType<d>(</b><g>oneOf<basic,cors></g><d>)</b>
+
+Expected response not to have type <g>oneOf<basic,cors></g>, but it did.
 `;
 
 exports[`toHaveSearchParam fails when the expected value is not a string or undefined: params 1`] = `
@@ -695,6 +755,54 @@ exports[`toHaveSearchParam when expected value is provided passes when the URLSe
 Expected url not to have search parameter <g>"foo"</g> with a value of <g>"bar"</g>, but it did.
 `;
 
+exports[`toHaveSearchParam with asymmetric matchers fails when the search param value does not match: params 1`] = `
+<d>expect(</b><r>params</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>StringContaining "bar"</g><d>)</b>
+
+Expected params to have search parameter <g>"foo"</g> with a value of <g>StringContaining "bar"</g>, but it had a value of <r>"baz"</g>.
+`;
+
+exports[`toHaveSearchParam with asymmetric matchers fails when the search param value does not match: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>StringContaining "bar"</g><d>)</b>
+
+Expected request to have search parameter <g>"foo"</g> with a value of <g>StringContaining "bar"</g>, but it had a value of <r>"baz"</g>.
+`;
+
+exports[`toHaveSearchParam with asymmetric matchers fails when the search param value does not match: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>StringContaining "bar"</g><d>)</b>
+
+Expected response to have search parameter <g>"foo"</g> with a value of <g>StringContaining "bar"</g>, but it had a value of <r>"baz"</g>.
+`;
+
+exports[`toHaveSearchParam with asymmetric matchers fails when the search param value does not match: url 1`] = `
+<d>expect(</b><r>url</g><d>).</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>StringContaining "bar"</g><d>)</b>
+
+Expected url to have search parameter <g>"foo"</g> with a value of <g>StringContaining "bar"</g>, but it had a value of <r>"baz"</g>.
+`;
+
+exports[`toHaveSearchParam with asymmetric matchers passes when the search param value matches: params 1`] = `
+<d>expect(</b><r>params</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>StringContaining "ba"</g><d>)</b>
+
+Expected params not to have search parameter <g>"foo"</g> with a value of <g>StringContaining "ba"</g>, but it did.
+`;
+
+exports[`toHaveSearchParam with asymmetric matchers passes when the search param value matches: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>StringContaining "ba"</g><d>)</b>
+
+Expected request not to have search parameter <g>"foo"</g> with a value of <g>StringContaining "ba"</g>, but it did.
+`;
+
+exports[`toHaveSearchParam with asymmetric matchers passes when the search param value matches: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>StringContaining "ba"</g><d>)</b>
+
+Expected response not to have search parameter <g>"foo"</g> with a value of <g>StringContaining "ba"</g>, but it did.
+`;
+
+exports[`toHaveSearchParam with asymmetric matchers passes when the search param value matches: url 1`] = `
+<d>expect(</b><r>url</g><d>).</b>not<d>.</b>toHaveSearchParam<d>(</b><g>"foo"</g><d>, </b><g>StringContaining "ba"</g><d>)</b>
+
+Expected url not to have search parameter <g>"foo"</g> with a value of <g>StringContaining "ba"</g>, but it did.
+`;
+
 exports[`toHaveStatus fails when Response is not defined in the global scope 1`] = `
 <d>expect(</b><r>received</g><d>).</b>toHaveStatus<d>(</b><g>200</g><d>)</b>
 
@@ -702,7 +810,7 @@ exports[`toHaveStatus fails when Response is not defined in the global scope 1`]
 `;
 
 exports[`toHaveStatus fails when the expected status is not a number 1`] = `
-<d>expect(</b><r>response</g><d>).</b>toHaveStatus<d>(</b><g>200</g><d>)</b>
+<d>expect(</b><r>response</g><d>).</b>toHaveStatus<d>(</b><g>"200"</g><d>)</b>
 
 <b>Matcher error</b>: Expected status must be a number.
 
@@ -726,6 +834,18 @@ exports[`toHaveStatus passes when the response has the expected status 1`] = `
 <d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatus<d>(</b><g>200</g><d>)</b>
 
 Expected response not to have status <g>200</g>, but it did.
+`;
+
+exports[`toHaveStatus with asymmetric matchers fails when the status does not match 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatus<d>(</b><g>oneOf<200,201></g><d>)</b>
+
+Expected response to have status <g>oneOf<200,201></g>, but it was <r>404</g>.
+`;
+
+exports[`toHaveStatus with asymmetric matchers passes when the status matches 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatus<d>(</b><g>oneOf<200,201></g><d>)</b>
+
+Expected response not to have status <g>oneOf<200,201></g>, but it did.
 `;
 
 exports[`toHaveStatusGroup fails when Response is not defined in the global scope 1`] = `
@@ -789,6 +909,48 @@ exports[`toHaveStatusGroup short passes when the response has the expected statu
 <d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatusGroup<d>(</b><g>"2xx"</g><d>)</b>
 
 Expected response not to have status group <g>"2xx"</g>, but it did (<r>200</g>).
+`;
+
+exports[`toHaveStatusGroup with asymmetric matchers fails when the status is non-standard 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatusGroup<d>(</b><g>oneOf<2,3></g><d>)</b>
+
+Expected response to have status group <g>oneOf<2,3></g>, but it was <r>600</g>.
+`;
+
+exports[`toHaveStatusGroup with asymmetric matchers long fails when the group does not match 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatusGroup<d>(</b><g>oneOf<successful,redirection></g><d>)</b>
+
+Expected response to have status group <g>oneOf<successful,redirection></g>, but it was <r>404</g>.
+`;
+
+exports[`toHaveStatusGroup with asymmetric matchers long passes when the group matches 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatusGroup<d>(</b><g>oneOf<successful,redirection></g><d>)</b>
+
+Expected response not to have status group <g>oneOf<successful,redirection></g>, but it did (<r>200</g>).
+`;
+
+exports[`toHaveStatusGroup with asymmetric matchers num fails when the group does not match 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatusGroup<d>(</b><g>oneOf<2,3></g><d>)</b>
+
+Expected response to have status group <g>oneOf<2,3></g>, but it was <r>404</g>.
+`;
+
+exports[`toHaveStatusGroup with asymmetric matchers num passes when the group matches 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatusGroup<d>(</b><g>oneOf<2,3></g><d>)</b>
+
+Expected response not to have status group <g>oneOf<2,3></g>, but it did (<r>200</g>).
+`;
+
+exports[`toHaveStatusGroup with asymmetric matchers short fails when the group does not match 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveStatusGroup<d>(</b><g>oneOf<2xx,3xx></g><d>)</b>
+
+Expected response to have status group <g>oneOf<2xx,3xx></g>, but it was <r>404</g>.
+`;
+
+exports[`toHaveStatusGroup with asymmetric matchers short passes when the group matches 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveStatusGroup<d>(</b><g>oneOf<2xx,3xx></g><d>)</b>
+
+Expected response not to have status group <g>oneOf<2xx,3xx></g>, but it did (<r>200</g>).
 `;
 
 exports[`toHaveTextBody fails when it cannot clone the body: request 1`] = `
@@ -873,6 +1035,30 @@ exports[`toHaveTextBody when Response is not defined in the global scope fails: 
 <b>Matcher error</b>: Request or Response is not defined in the global scope.
 `;
 
+exports[`toHaveTextBody with asymmetric matchers fails when the body text does not match: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveTextBody<d>(</b><g>StringContaining "Hello"</g><d>)</b>
+
+Expected request to have body text <g>StringContaining "Hello"</g>, but it was <r>"Goodbye, world!"</g>.
+`;
+
+exports[`toHaveTextBody with asymmetric matchers fails when the body text does not match: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveTextBody<d>(</b><g>StringContaining "Hello"</g><d>)</b>
+
+Expected response to have body text <g>StringContaining "Hello"</g>, but it was <r>"Goodbye, world!"</g>.
+`;
+
+exports[`toHaveTextBody with asymmetric matchers passes when the body text matches: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveTextBody<d>(</b><g>StringContaining "Hello"</g><d>)</b>
+
+Expected request not to have body text <g>StringContaining "Hello"</g>, but it did.
+`;
+
+exports[`toHaveTextBody with asymmetric matchers passes when the body text matches: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveTextBody<d>(</b><g>StringContaining "Hello"</g><d>)</b>
+
+Expected response not to have body text <g>StringContaining "Hello"</g>, but it did.
+`;
+
 exports[`toHaveURL fails when the URL is invalid: response 1`] = `
 <d>expect(</b><r>response</g><d>).</b>toHaveURL<d>(</b><g>"https://example.com/api"</g><d>)</b>
 
@@ -930,3 +1116,27 @@ Expected response not to have URL <g>"https://example.com/api"</g>, but it did.
 exports[`toHaveURL when Request is not defined in the global scope fails: request 1`] = `Request is not defined`;
 
 exports[`toHaveURL when Response is not defined in the global scope fails: response 1`] = `Response is not defined`;
+
+exports[`toHaveURL with asymmetric matchers fails when the URL does not match: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>toHaveURL<d>(</b><g>StringContaining "example.com"</g><d>)</b>
+
+Expected request to have URL <g>StringContaining "example.com"</g>, but it was <r>"https://other.com/api"</g>.
+`;
+
+exports[`toHaveURL with asymmetric matchers fails when the URL does not match: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>toHaveURL<d>(</b><g>StringContaining "example.com"</g><d>)</b>
+
+Expected response to have URL <g>StringContaining "example.com"</g>, but it was <r>"https://other.com/api"</g>.
+`;
+
+exports[`toHaveURL with asymmetric matchers passes when the URL matches: request 1`] = `
+<d>expect(</b><r>request</g><d>).</b>not<d>.</b>toHaveURL<d>(</b><g>StringContaining "example.com"</g><d>)</b>
+
+Expected request not to have URL <g>StringContaining "example.com"</g>, but it did.
+`;
+
+exports[`toHaveURL with asymmetric matchers passes when the URL matches: response 1`] = `
+<d>expect(</b><r>response</g><d>).</b>not<d>.</b>toHaveURL<d>(</b><g>StringContaining "example.com"</g><d>)</b>
+
+Expected response not to have URL <g>StringContaining "example.com"</g>, but it did.
+`;

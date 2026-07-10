@@ -64,6 +64,11 @@ export function ensureMockOrSpy(
 
 export type EqualValue = (a: unknown, b: unknown, strictCheck?: boolean) => boolean;
 
+export const isAsymmetricMatcher = (
+  val: unknown,
+): val is { asymmetricMatch: (other: unknown) => boolean } =>
+  typeof (val as Record<string, unknown>)?.asymmetricMatch === "function";
+
 export const toStrictEqualTesters: Array<Tester> = [
   iterableEquality,
   typeEquality,
@@ -72,12 +77,14 @@ export const toStrictEqualTesters: Array<Tester> = [
 ];
 
 export const makeEqualValue =
-  (utils: MatcherUtils): EqualValue =>
+  (utils: MatcherUtils, extraTesters: Array<Tester> = []): EqualValue =>
   (a, b, strictCheck) =>
     utils.equals(
       a,
       b,
-      strictCheck ? [...(utils.customTesters ?? []), ...toStrictEqualTesters] : utils.customTesters,
+      strictCheck
+        ? [...(utils.customTesters ?? []), ...extraTesters, ...toStrictEqualTesters]
+        : [...(utils.customTesters ?? []), ...extraTesters],
       strictCheck,
     );
 

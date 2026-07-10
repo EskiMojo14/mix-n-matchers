@@ -1,5 +1,5 @@
 import type { MatcherFunction } from "../utils/types";
-import { makeEqualValue, assert } from "../utils";
+import { makeEqualValue, isAsymmetricMatcher, assert } from "../utils";
 import {
   matcherErrorMessage,
   matcherHint,
@@ -41,7 +41,7 @@ export const toBeOK: MatcherFunction = function (received) {
  */
 export const toHaveStatus: MatcherFunction<[number]> = function (received, expected) {
   const hint = (received?: string) =>
-    matcherHint("toHaveStatus", received, String(expected), {
+    matcherHint("toHaveStatus", received, stringify(expected), {
       isNot: this.isNot,
       promise: this.promise,
     });
@@ -52,7 +52,7 @@ export const toHaveStatus: MatcherFunction<[number]> = function (received, expec
   assert(received instanceof Response, () =>
     matcherErrorMessage(hint(), "Received value is not a Response."),
   );
-  assert(typeof expected === "number", () =>
+  assert(typeof expected === "number" || isAsymmetricMatcher(expected), () =>
     matcherErrorMessage(
       hint("response"),
       "Expected status must be a number.",
@@ -60,7 +60,8 @@ export const toHaveStatus: MatcherFunction<[number]> = function (received, expec
     ),
   );
 
-  const pass = received.status === expected;
+  const equalValue = makeEqualValue(this);
+  const pass = equalValue(received.status, expected);
   return {
     pass,
     message: () =>
@@ -79,7 +80,7 @@ const statusGroupsByNum = {
   5: { long: "server error", short: "5xx" },
 } as const;
 // 1-5, 1xx-5xx, informational-server error
-type StatusGroup =
+export type StatusGroup =
   | keyof typeof statusGroupsByNum
   | (typeof statusGroupsByNum)[keyof typeof statusGroupsByNum]["long"]
   | (typeof statusGroupsByNum)[keyof typeof statusGroupsByNum]["short"];
@@ -106,7 +107,7 @@ export const toHaveStatusGroup: MatcherFunction<[StatusGroup]> = function (recei
   assert(received instanceof Response, () =>
     matcherErrorMessage(hint(), "Received value is not a Response."),
   );
-  assert(statusGroups.has(expected), () =>
+  assert(statusGroups.has(expected) || isAsymmetricMatcher(expected), () =>
     matcherErrorMessage(
       hint("response"),
       `Expected status group must be one of: ${Array.from(statusGroups.keys())
@@ -116,10 +117,33 @@ export const toHaveStatusGroup: MatcherFunction<[StatusGroup]> = function (recei
     ),
   );
 
+  const actualNum = Math.floor(received.status / 100);
+
+  if (isAsymmetricMatcher(expected)) {
+    const equalValue = makeEqualValue(this);
+    let pass: boolean;
+    if (actualNum < 1 || actualNum > 5) {
+      pass = false;
+    } else {
+      const num = actualNum as 1 | 2 | 3 | 4 | 5;
+      const { long, short } = statusGroupsByNum[num];
+      // Try all three representations so expect.oneOf([2]), expect.oneOf(["2xx"]),
+      // and expect.oneOf(["successful"]) all work.
+      pass = equalValue(num, expected) || equalValue(short, expected) || equalValue(long, expected);
+    }
+    return {
+      pass,
+      message: () =>
+        `${hint("response")}\n\n` +
+        (pass
+          ? `Expected response not to have status group ${EXPECTED_COLOR(stringify(expected))}, but it did (${RECEIVED_COLOR(stringify(received.status))}).`
+          : `Expected response to have status group ${EXPECTED_COLOR(stringify(expected))}, but it was ${RECEIVED_COLOR(stringify(received.status))}.`),
+    };
+  }
+
   const expectedGroupType =
     typeof expected === "number" ? "number" : expected.includes("xx") ? "short" : "long";
   const expectedNum = statusGroups.get(expected)!;
-  const actualNum = Math.floor(received.status / 100);
   let actualGroup: StatusGroup | "non-standard";
   if (actualNum < 1 || actualNum > 5) {
     actualGroup = "non-standard";
@@ -169,7 +193,7 @@ export const toHaveHeader: MatcherFunction<[string, string?]> = function (receiv
       printWithType("name", name, stringify),
     ),
   );
-  assert(value === undefined || typeof value === "string", () =>
+  assert(value === undefined || typeof value === "string" || isAsymmetricMatcher(value), () =>
     matcherErrorMessage(
       hint(receivedName),
       "Expected value must be a string or undefined.",
@@ -177,6 +201,7 @@ export const toHaveHeader: MatcherFunction<[string, string?]> = function (receiv
     ),
   );
 
+  const equalValue = makeEqualValue(this);
   const hasValue = value !== undefined;
   let actualValue: string | null;
   try {
@@ -186,7 +211,7 @@ export const toHaveHeader: MatcherFunction<[string, string?]> = function (receiv
       cause: error,
     });
   }
-  const pass = hasValue ? actualValue === value : actualValue !== null;
+  const pass = hasValue ? equalValue(actualValue, value) : actualValue !== null;
 
   return {
     pass,
@@ -204,6 +229,13 @@ export const toHaveHeader: MatcherFunction<[string, string?]> = function (receiv
   };
 };
 
+// oxlint-disable-next-line typescript/consistent-return
+function caseInsensitiveEquality(a: unknown, b: unknown) {
+  if (typeof a === "string" && typeof b === "string") {
+    return a.toLowerCase() === b.toLowerCase();
+  }
+}
+
 /**
  * Ensure the Request object has a specific method.
  */
@@ -219,7 +251,7 @@ export const toHaveMethod: MatcherFunction<[string]> = function (received, expec
   assert(received instanceof Request, () =>
     matcherErrorMessage(hint(), "Received value is not a Request."),
   );
-  assert(typeof expected === "string", () =>
+  assert(typeof expected === "string" || isAsymmetricMatcher(expected), () =>
     matcherErrorMessage(
       hint("request"),
       "Expected method must be a string.",
@@ -227,8 +259,9 @@ export const toHaveMethod: MatcherFunction<[string]> = function (received, expec
     ),
   );
 
+  const equalValue = makeEqualValue(this, [caseInsensitiveEquality]);
   const actualMethod = received.method;
-  const pass = actualMethod.toUpperCase() === expected.toUpperCase();
+  const pass = equalValue(actualMethod, expected);
 
   return {
     pass,
@@ -256,7 +289,7 @@ export const toHaveURL: MatcherFunction<[string]> = function (received, expected
     matcherErrorMessage(hint(), "Received value is not a Request or Response."),
   );
   const receivedName = received instanceof Request ? "request" : "response";
-  assert(typeof expected === "string", () =>
+  assert(typeof expected === "string" || isAsymmetricMatcher(expected), () =>
     matcherErrorMessage(
       hint(receivedName),
       "Expected URL must be a string.",
@@ -264,8 +297,9 @@ export const toHaveURL: MatcherFunction<[string]> = function (received, expected
     ),
   );
 
+  const equalValue = makeEqualValue(this);
   const actualURL = received.url;
-  const pass = actualURL === expected;
+  const pass = equalValue(actualURL, expected);
 
   return {
     pass,
@@ -294,7 +328,7 @@ export const toHaveTextBody: MatcherFunction<[string]> = async function (receive
     matcherErrorMessage(hint(), "Received value is not a Request or Response."),
   );
   const receivedName = received instanceof Request ? "request" : "response";
-  assert(typeof expected === "string", () =>
+  assert(typeof expected === "string" || isAsymmetricMatcher(expected), () =>
     matcherErrorMessage(
       hint(receivedName),
       "Expected text must be a string.",
@@ -325,7 +359,8 @@ export const toHaveTextBody: MatcherFunction<[string]> = async function (receive
       { cause: error },
     );
   }
-  const pass = actualText === expected;
+  const equalValue = makeEqualValue(this);
+  const pass = equalValue(actualText, expected);
 
   return {
     pass,
@@ -459,7 +494,7 @@ export const toHaveResponseType: MatcherFunction<[typeof Response.prototype.type
   assert(received instanceof Response, () =>
     matcherErrorMessage(hint(), "Received value is not a Response."),
   );
-  assert(typeof expected === "string", () =>
+  assert(typeof expected === "string" || isAsymmetricMatcher(expected), () =>
     matcherErrorMessage(
       hint("response"),
       "Expected type must be a string.",
@@ -467,8 +502,9 @@ export const toHaveResponseType: MatcherFunction<[typeof Response.prototype.type
     ),
   );
 
+  const equalValue = makeEqualValue(this);
   const actualType = received.type;
-  const pass = actualType === expected;
+  const pass = equalValue(actualType, expected);
 
   return {
     pass,
@@ -529,7 +565,7 @@ export const toHaveSearchParam: MatcherFunction<[string, string?]> = function (
       printWithType("name", name, stringify),
     ),
   );
-  assert(value === undefined || typeof value === "string", () =>
+  assert(value === undefined || typeof value === "string" || isAsymmetricMatcher(value), () =>
     matcherErrorMessage(
       hint(receivedName),
       "Expected value must be a string or undefined.",
@@ -537,6 +573,7 @@ export const toHaveSearchParam: MatcherFunction<[string, string?]> = function (
     ),
   );
 
+  const equalValue = makeEqualValue(this);
   const hasValue = value !== undefined;
   let searchParams: URLSearchParams;
   if (received instanceof URLSearchParams) {
@@ -553,7 +590,7 @@ export const toHaveSearchParam: MatcherFunction<[string, string?]> = function (
     }
   }
   const actualValue = searchParams.get(name);
-  const pass = hasValue ? actualValue === value : actualValue !== null;
+  const pass = hasValue ? equalValue(actualValue, value) : actualValue !== null;
 
   return {
     pass,
