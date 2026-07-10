@@ -11,6 +11,7 @@ const config: Config = {
     useESM: true,
     prefix: "<rootDir>/",
   }),
+  setupFilesAfterEnv: ["<rootDir>/src/jest-globals.ts", "<rootDir>/jest-setup.ts"],
 };
 
 export default config;
