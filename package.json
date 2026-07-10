@@ -88,10 +88,9 @@
     }
   },
   "scripts": {
-    "clean": "rimraf dist",
     "prepare": "husky",
     "prebuild": "pnpm run typecheck",
-    "build:only": "pnpm clean && tsdown",
+    "build:only": "tsdown",
     "build": "pnpm run build:only",
     "test": "pnpm node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:dist": "pnpm node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest-dist.config.ts",
