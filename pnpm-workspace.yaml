@@ -11,3 +11,6 @@ allowBuilds:
 catalog:
   typescript: ~6.0.3
   "@typescript/native-preview": 7.0.0-dev.20260616.1
+
+patchedDependencies:
+  "@docusaurus/tsconfig": patches/@docusaurus__tsconfig.patch
