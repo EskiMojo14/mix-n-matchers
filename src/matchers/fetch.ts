@@ -442,15 +442,23 @@ export const toHaveJSONBody = maketoHaveJSONBodyMatcher("toHaveJSONBody");
  */
 export const toHaveJSONBodyStrict = maketoHaveJSONBodyMatcher("toHaveJSONBodyStrict", true);
 
+const formatFormData = (formData: FormData) => Array.from(formData.entries());
 /**
  * Asserts that a Response or Request object has a specific FormData body, using `formDataEquality`.
  */
 export const toHaveFormDataBody: MatcherFunction<[FormData]> = async function (received, expected) {
   const hint = (received?: string) =>
-    matcherHint("toHaveFormDataBody", received, stringify(expected), {
-      isNot: this.isNot,
-      promise: this.promise,
-    });
+    matcherHint(
+      "toHaveFormDataBody",
+      received,
+      globalThis.FormData && expected instanceof globalThis.FormData
+        ? `FormData ${stringify(formatFormData(expected))}`
+        : stringify(expected),
+      {
+        isNot: this.isNot,
+        promise: this.promise,
+      },
+    );
   assert(globalThis.Request && globalThis.Response && globalThis.FormData, () =>
     matcherErrorMessage(
       hint(),
@@ -459,6 +467,13 @@ export const toHaveFormDataBody: MatcherFunction<[FormData]> = async function (r
   );
   assert(received instanceof Request || received instanceof Response, () =>
     matcherErrorMessage(hint(), "Received value is not a Request or Response."),
+  );
+  assert(expected instanceof FormData, () =>
+    matcherErrorMessage(
+      hint(received instanceof Request ? "request" : "response"),
+      "Expected value is not a FormData.",
+      printWithType("expected", expected, stringify),
+    ),
   );
   const receivedName = received instanceof Request ? "request" : "response";
   assert(!received.bodyUsed, () =>
@@ -501,8 +516,8 @@ export const toHaveFormDataBody: MatcherFunction<[FormData]> = async function (r
       (pass
         ? `Expected ${receivedName} not to have body FormData ${EXPECTED_COLOR(stringify(expected))}, but it did.`
         : printDiffOrStringify(
-            Array.from(expected.entries()),
-            Array.from(actualFormData.entries()),
+            formatFormData(expected),
+            formatFormData(actualFormData),
             "Expected",
             "Received",
             this.expand ?? true,
