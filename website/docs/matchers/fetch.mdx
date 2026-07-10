@@ -130,6 +130,26 @@ it("has the expected JSON body", async () => {
 This assertion is asynchronous, so must be awaited.
 :::
 
+### `.toHaveFormDataBody(expected)`
+
+Use `.toHaveFormDataBody(expected)` to assert that a `Response` or `Request` object has the expected `FormData` body, using [`formDataEquality`](/mix-n-matchers/utilities/equality#formDataEquality).
+
+<TestFile name="toHaveFormDataBody">
+{`
+it("has the expected FormData body", async () => {
+  const formData = new FormData();
+  formData.append("key", "value");
+  const response = new Response(formData);
+  await expect(response).toHaveFormDataBody(formData);
+});
+`}
+
+</TestFile>
+
+:::note
+This assertion is asynchronous, so must be awaited.
+:::
+
 ### `.toBeRedirected()`
 
 Use `.toBeRedirected()` to assert that a `Response` object has been redirected (`redirected` property is true).

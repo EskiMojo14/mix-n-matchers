@@ -8,7 +8,7 @@ const noopTester = () => undefined;
 const fakeEquality: {
   -readonly [K in keyof typeof realEquality]: Tester;
 } = {
-  caseInsensitiveEquality: noopTester,
+  caseInsensitiveStringEquality: noopTester,
   formDataEquality: noopTester,
 };
 
@@ -23,20 +23,20 @@ function withReal(key: keyof typeof realEquality) {
 
 expect.addEqualityTesters([
   function ci(...args) {
-    return fakeEquality.caseInsensitiveEquality.call(this, ...args);
+    return fakeEquality.caseInsensitiveStringEquality.call(this, ...args);
   },
   function fd(...args) {
     return fakeEquality.formDataEquality.call(this, ...args);
   },
 ]);
 
-describe("caseInsensitiveEquality", () => {
-  withReal("caseInsensitiveEquality");
+describe("caseInsensitiveStringEquality", () => {
+  withReal("caseInsensitiveStringEquality");
 
   it("returns undefined when values are not both strings", () => {
-    expect(realEquality.caseInsensitiveEquality(1, "test")).toBeUndefined();
-    expect(realEquality.caseInsensitiveEquality("test", 1)).toBeUndefined();
-    expect(realEquality.caseInsensitiveEquality(1, 2)).toBeUndefined();
+    expect(realEquality.caseInsensitiveStringEquality(1, "test")).toBeUndefined();
+    expect(realEquality.caseInsensitiveStringEquality("test", 1)).toBeUndefined();
+    expect(realEquality.caseInsensitiveStringEquality(1, 2)).toBeUndefined();
   });
 
   it("returns true for equal strings ignoring case", () => {
@@ -102,7 +102,7 @@ describe("formDataEquality", () => {
   });
 
   describe("with custom testers", () => {
-    withReal("caseInsensitiveEquality");
+    withReal("caseInsensitiveStringEquality");
     it("uses custom testers through equals", () => {
       const a = new FormData();
       a.append("a", "Hello");
