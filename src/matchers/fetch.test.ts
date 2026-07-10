@@ -833,6 +833,86 @@ describe.each(["toHaveJSONBody", "toHaveJSONBodyStrict"] as const)("%s", (matche
   });
 });
 
+function formDataFrom(entries: Record<string, string>): FormData {
+  const formData = new FormData();
+  for (const [key, value] of Object.entries(entries)) {
+    formData.append(key, value);
+  }
+  return formData;
+}
+function formDataRequest(body: FormData): Request {
+  return new Request("https://example.com", {
+    method: "POST",
+    body,
+  });
+}
+function formDataResponse(body: FormData): Response {
+  return new Response(body);
+}
+
+describe("toHaveFormDataBody", () => {
+  it("passes when the response/request has the expected FormData body", async () => {
+    const formData = formDataFrom({ foo: "bar" });
+    const response = formDataResponse(formData);
+    await expect(response).toHaveFormDataBody(formData);
+  });
+  it("fails when the response/request does not have the expected FormData body", async () => {
+    const bazFormData = formDataFrom({ foo: "baz" });
+    const barFormData = formDataFrom({ foo: "bar" });
+    const response = formDataResponse(bazFormData);
+    await expect(async () => {
+      await expect(response).toHaveFormDataBody(barFormData);
+    }).rejects.toThrowErrorMatchingSnapshot("response");
+    await expect(response).not.toHaveFormDataBody(barFormData);
+
+    const request = formDataRequest(bazFormData);
+    await expect(async () => {
+      await expect(request).toHaveFormDataBody(barFormData);
+    }).rejects.toThrowErrorMatchingSnapshot("request");
+    await expect(request).not.toHaveFormDataBody(barFormData);
+  });
+  it("fails when the received value is not a Response or Request", async () => {
+    await expect(async () => {
+      await expect({}).toHaveFormDataBody(formDataFrom({ foo: "bar" }));
+    }).rejects.toThrowErrorMatchingSnapshot();
+  });
+  describe.each(["Response", "Request"] as const)(
+    "when %s is not defined in the global scope",
+    (type) => {
+      it("fails", async () => {
+        using _ = withoutGlobal(type);
+        await expect(async () => {
+          await expect({}).toHaveFormDataBody(formDataFrom({ foo: "bar" }));
+        }).rejects.toThrowErrorMatchingSnapshot(type.toLowerCase());
+      });
+    },
+  );
+  it("fails when the body has already been used", async () => {
+    const formData = formDataFrom({ foo: "bar" });
+    const response = formDataResponse(formData);
+    await response.formData(); // Consume the body
+    await expect(async () => {
+      await expect(response).toHaveFormDataBody(formData);
+    }).rejects.toThrowErrorMatchingSnapshot("response");
+
+    const request = formDataRequest(formData);
+    await request.formData(); // Consume the body
+    await expect(async () => {
+      await expect(request).toHaveFormDataBody(formData);
+    }).rejects.toThrowErrorMatchingSnapshot("request");
+  });
+  it("clones to avoid consuming the body, so it can be read again later", async () => {
+    const formData = formDataFrom({ foo: "bar" });
+    const response = formDataResponse(formData);
+    await expect(response).toHaveFormDataBody(formData);
+    await expect(response.formData()).resolves.toBeInstanceOf(FormData); // Body can still be read
+
+    const request = formDataRequest(formData);
+    await expect(request).toHaveFormDataBody(formData);
+    await expect(request.formData()).resolves.toBeInstanceOf(FormData); // Body can still be read
+  });
+});
+
 function redirectedResponse(): Response {
   // redirected doesn't allow being set directly, so we use defineProperty to mock it for testing purposes
   return Object.defineProperty(new Response(), "redirected", { value: true });

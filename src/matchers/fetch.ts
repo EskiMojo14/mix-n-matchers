@@ -9,7 +9,7 @@ import {
   EXPECTED_COLOR,
   printDiffOrStringify,
 } from "jest-matcher-utils";
-import { caseInsensitiveEquality } from "../utilities";
+import { caseInsensitiveEquality, formDataEquality } from "../utilities";
 
 /**
  * Ensure the Response object has an ok status (200-299).
@@ -443,6 +443,74 @@ export const toHaveJSONBody = maketoHaveJSONBodyMatcher("toHaveJSONBody");
 export const toHaveJSONBodyStrict = maketoHaveJSONBodyMatcher("toHaveJSONBodyStrict", true);
 
 /**
+ * Asserts that a Response or Request object has a specific FormData body, using `formDataEquality`.
+ */
+export const toHaveFormDataBody: MatcherFunction<[FormData]> = async function (received, expected) {
+  const hint = (received?: string) =>
+    matcherHint("toHaveFormDataBody", received, stringify(expected), {
+      isNot: this.isNot,
+      promise: this.promise,
+    });
+  assert(globalThis.Request && globalThis.Response && globalThis.FormData, () =>
+    matcherErrorMessage(
+      hint(),
+      "Request, Response, or FormData is not defined in the global scope.",
+    ),
+  );
+  assert(received instanceof Request || received instanceof Response, () =>
+    matcherErrorMessage(hint(), "Received value is not a Request or Response."),
+  );
+  const receivedName = received instanceof Request ? "request" : "response";
+  assert(!received.bodyUsed, () =>
+    matcherErrorMessage(
+      hint(receivedName),
+      `Cannot read body from the ${receivedName} because it has already been used.`,
+    ),
+  );
+
+  let clone: Request | Response;
+  try {
+    clone = received.clone();
+  } catch (error) {
+    throw new Error(
+      matcherErrorMessage(hint(receivedName), `Failed to clone the ${receivedName}.`),
+      {
+        cause: error,
+      },
+    );
+  }
+  let actualFormData: FormData;
+  try {
+    actualFormData = await clone.formData();
+  } catch (error) {
+    throw new Error(
+      matcherErrorMessage(
+        hint(receivedName),
+        `Failed to read body FormData from the ${receivedName}.`,
+      ),
+      { cause: error },
+    );
+  }
+  const equalValue = makeEqualValue(this, [formDataEquality]);
+  const pass = equalValue(actualFormData, expected);
+
+  return {
+    pass,
+    message: () =>
+      `${hint(receivedName)}\n\n` +
+      (pass
+        ? `Expected ${receivedName} not to have body FormData ${EXPECTED_COLOR(stringify(expected))}, but it did.`
+        : printDiffOrStringify(
+            Array.from(expected.entries()),
+            Array.from(actualFormData.entries()),
+            "Expected",
+            "Received",
+            this.expand ?? true,
+          ).replace("Array", "FormData")),
+  };
+};
+
+/**
  * Asserts that a Response object has been redirected.
  */
 export const toBeRedirected: MatcherFunction = function (received) {
@@ -700,6 +768,17 @@ declare module "mix-n-matchers" {
      */
     // oxlint-disable-next-line typescript/no-unnecessary-type-parameters
     toHaveJSONBodyStrict<E>(expected: E): Promise<Awaited<R>>;
+    /**
+     * Asserts that a Response or Request object has a specific FormData body, using `formDataEquality`.
+     * @example
+     * const formData = new FormData();
+     * formData.append("foo", "bar");
+     * await expect(response).toHaveFormDataBody(formData);
+     * await expect(request).toHaveFormDataBody(formData);
+     * @remarks Will clone the object to avoid consuming the body, so it can be read again later. Will throw an error if the body has already been used.
+     * @remarks This matcher is asynchronous and returns a Promise, so it should be awaited.
+     */
+    toHaveFormDataBody(expected: FormData): Promise<Awaited<R>>;
     /**
      * Asserts that a Response object has been redirected.
      * @example
