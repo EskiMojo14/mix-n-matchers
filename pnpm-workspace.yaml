@@ -12,5 +12,9 @@ catalog:
   typescript: ~6.0.3
   "@typescript/native-preview": 7.0.0-dev.20260616.1
 
+minimumReleaseAgeExclude:
+  - "@rsbuild/core@2.1.6"
+  - "@rstest/core@0.11.2"
+
 patchedDependencies:
   "@docusaurus/tsconfig": patches/@docusaurus__tsconfig.patch

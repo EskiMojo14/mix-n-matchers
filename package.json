@@ -129,7 +129,7 @@
     "@arethetypeswrong/cli": "^0.18.3",
     "@jest/expect": "^30.4.1",
     "@jest/globals": "^30.4.1",
-    "@rstest/core": "^0.10.4",
+    "@rstest/core": "^0.11.2",
     "@types/node": "^25.9.3",
     "@typescript/native-preview": "catalog:",
     "@vitest/expect": "^4.1.9",
@@ -152,7 +152,7 @@
     "vitest": "^4.1.9"
   },
   "peerDependencies": {
-    "@rstest/core": ">=0.8.0",
+    "@rstest/core": ">=0.11.2",
     "jest": ">=28.0.0",
     "vitest": ">=1.0.0"
   },
