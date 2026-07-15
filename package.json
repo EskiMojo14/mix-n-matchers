@@ -1,6 +1,6 @@
 {
   "name": "mix-n-matchers",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Miscellaneous custom Jest compatible matchers",
   "keywords": [
     "assertions",
