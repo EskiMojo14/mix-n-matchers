@@ -3,7 +3,10 @@ import { pathsToModuleNameMapper } from "ts-jest";
 import tsconfig from "./tsconfig.json" with { type: "json" };
 
 const config = {
-  preset: "ts-jest/presets/js-with-ts-esm",
+  transform: {
+    "^.+\\.(t|j)sx?$": "@swc/jest",
+  },
+  extensionsToTreatAsEsm: [".ts", ".tsx"],
   moduleNameMapper:
     pathsToModuleNameMapper(tsconfig.compilerOptions.paths, {
       useESM: true,

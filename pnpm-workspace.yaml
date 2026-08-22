@@ -2,6 +2,7 @@ packages:
   - website
 allowBuilds:
   "@parcel/watcher": false
+  "@swc/core": false
   core-js: false
   core-js-pure: false
   es5-ext: false
@@ -9,8 +10,7 @@ allowBuilds:
   unrs-resolver: false
 
 catalog:
-  typescript: ~6.0.3
-  "@typescript/native-preview": 7.0.0-dev.20260616.1
+  typescript: ~7.0.2
 
 minimumReleaseAgeExclude:
   - "@rsbuild/core@2.1.6"

@@ -162,7 +162,7 @@ exports[`containingSequenceSatisfying fails if only part of the sequence is foun
 <r>+ Received  + 5</g>
 
 <d>  Object {</b>
-<g>-   "array": containingSequenceSatisfying<(x) => x === 1, (x) => x === 3>,</g>
+<g>-   "array": containingSequenceSatisfying<(x)=>x === 1, (x)=>x === 3>,</g>
 <r>+   "array": Array [</g>
 <r>+     1,</g>
 <r>+     2,</g>
@@ -178,7 +178,7 @@ exports[`containingSequenceSatisfying fails if only part of the sequence is foun
 <r>+ Received  + 5</g>
 
 <d>  Object {</b>
-<g>-   "array": containingSequenceSatisfying<(x) => x === 1, (x) => x === 3>,</g>
+<g>-   "array": containingSequenceSatisfying<(x)=>x === 1, (x)=>x === 3>,</g>
 <r>+   "array": Set {</g>
 <r>+     1,</g>
 <r>+     2,</g>
@@ -194,7 +194,7 @@ exports[`containingSequenceSatisfying fails if the sequence is not found 1`] = `
 <r>+ Received  + 5</g>
 
 <d>  Object {</b>
-<g>-   "array": containingSequenceSatisfying<(x) => x === 2, (x) => x === 1>,</g>
+<g>-   "array": containingSequenceSatisfying<(x)=>x === 2, (x)=>x === 1>,</g>
 <r>+   "array": Array [</g>
 <r>+     1,</g>
 <r>+     2,</g>
@@ -210,7 +210,7 @@ exports[`containingSequenceSatisfying fails if the sequence is not found 2`] = `
 <r>+ Received  + 5</g>
 
 <d>  Object {</b>
-<g>-   "array": containingSequenceSatisfying<(x) => x === 2, (x) => x === 1>,</g>
+<g>-   "array": containingSequenceSatisfying<(x)=>x === 2, (x)=>x === 1>,</g>
 <r>+   "array": Set {</g>
 <r>+     1,</g>
 <r>+     2,</g>
@@ -326,7 +326,7 @@ exports[`sequence fails if the iterable is too short 1`] = `
 <r>+ Received  + 3</g>
 
 <d>  Object {</b>
-<g>-   "array": sequence<(x) => x === 0, (x) => x === 1>,</g>
+<g>-   "array": sequence<(x)=>x === 0, (x)=>x === 1>,</g>
 <r>+   "array": Array [</g>
 <r>+     0,</g>
 <r>+   ],</g>
@@ -340,7 +340,7 @@ exports[`sequence fails if the iterable is too short 2`] = `
 <r>+ Received  + 3</g>
 
 <d>  Object {</b>
-<g>-   "array": sequence<(x) => x === 0, (x) => x === 1>,</g>
+<g>-   "array": sequence<(x)=>x === 0, (x)=>x === 1>,</g>
 <r>+   "array": Set {</g>
 <r>+     0,</g>
 <r>+   },</g>
@@ -381,7 +381,7 @@ exports[`sequence works with an array 1`] = `
 <r>+ Received  + 5</g>
 
 <d>  Object {</b>
-<g>-   "array": sequence<(x) => x === 1, (x) => x === 3, (x) => x === 2>,</g>
+<g>-   "array": sequence<(x)=>x === 1, (x)=>x === 3, (x)=>x === 2>,</g>
 <r>+   "array": Array [</g>
 <r>+     1,</g>
 <r>+     2,</g>
@@ -397,7 +397,7 @@ exports[`sequence works with an array 2`] = `
 <r>+ Received  + 5</g>
 
 <d>  Object {</b>
-<g>-   "array": not.sequence<(x) => x === 1, (x) => x === 2>,</g>
+<g>-   "array": not.sequence<(x)=>x === 1, (x)=>x === 2>,</g>
 <r>+   "array": Array [</g>
 <r>+     1,</g>
 <r>+     2,</g>
@@ -413,7 +413,7 @@ exports[`sequence works with other iterables 1`] = `
 <r>+ Received  + 5</g>
 
 <d>  Object {</b>
-<g>-   "array": sequence<(x) => x === 1, (x) => x === 3, (x) => x === 2>,</g>
+<g>-   "array": sequence<(x)=>x === 1, (x)=>x === 3, (x)=>x === 2>,</g>
 <r>+   "array": Set {</g>
 <r>+     1,</g>
 <r>+     2,</g>
@@ -429,7 +429,7 @@ exports[`sequence works with other iterables 2`] = `
 <r>+ Received  + 5</g>
 
 <d>  Object {</b>
-<g>-   "array": not.sequence<(x) => x === 1, (x) => x === 2>,</g>
+<g>-   "array": not.sequence<(x)=>x === 1, (x)=>x === 2>,</g>
 <r>+   "array": Set {</g>
 <r>+     1,</g>
 <r>+     2,</g>

@@ -1,19 +1,15 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`exactly allows Object.is equality where deep equality would normally be used 1`] = `
-<d>expect(</b><r>jest.fn()</g><d>).</b>toHaveBeenCalledWith<d>(</b><g>...expected</g><d>)</b>
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
 
 Expected: <g>exactly<[object Object]></g>
 Received: <r>{}</g>
-
-Number of calls: <r>1</g>
 `;
 
 exports[`exactly allows Object.is equality where deep equality would normally be used 2`] = `
-<d>expect(</b><r>jest.fn()</g><d>).</b>toHaveBeenCalledWith<d>(</b><g>...expected</g><d>)</b>
+<d>expect(</b><r>received</g><d>).</b>toEqual<d>(</b><g>expected</g><d>) // deep equality</b>
 
 Expected: <g>not.exactly<[object Object]></g>
 Received: <r>{}</g>
-
-Number of calls: <r>1</g>
 `;

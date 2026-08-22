@@ -1,18 +1,16 @@
-import { describe, it, expect, fn } from "@globals";
+import { describe, it, expect } from "@globals";
 
 describe("exactly", () => {
   it("allows Object.is equality where deep equality would normally be used", () => {
     const ref = {};
-    const mock = fn();
-    mock(ref);
-    expect(mock).toHaveBeenCalledWith(expect.exactly(ref));
+    expect(ref).toEqual(expect.exactly(ref));
     expect(() => {
-      expect(mock).toHaveBeenCalledWith(expect.exactly({}));
+      expect({}).toEqual(expect.exactly(ref));
     }).toThrowErrorMatchingSnapshot();
 
-    expect(mock).toHaveBeenCalledWith(expect.not.exactly({}));
+    expect(ref).toEqual(expect.not.exactly({}));
     expect(() => {
-      expect(mock).toHaveBeenCalledWith(expect.not.exactly(ref));
+      expect(ref).toEqual(expect.not.exactly(ref));
     }).toThrowErrorMatchingSnapshot();
   });
 });
