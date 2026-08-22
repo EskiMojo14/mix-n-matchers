@@ -17,6 +17,28 @@ function aggregateErrors(errors: Array<unknown>): string {
  * @template T - The type of the elements in the iterable.
  * @template R - The return type of the assertion function.
  * @param actual - The iterable of elements to be tested.
+ * @param assertion - The async assertion function to be applied to each element of the iterable.
+ * @returns A promise that resolves to the result of the assertion function for the first element that passes the assertion.
+ * @throws {RangeError} If the iterable is empty
+ * @throws {AggregateError} If none of the elements satisfy the assertion, containing all the errors encountered during the assertions.
+ *
+ * @example
+ * const array = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)];
+ * const result = await some(array, (promise) => {
+ *   const value = await promise;
+ *   expect(value).toBeGreaterThan(2);
+ *   return value;
+ * });
+ * // result will be 3
+ */
+export function some<T, R>(actual: Iterable<T>, assertion: (value: T) => Promise<R>): Promise<R>;
+/**
+ * Runs the assertion function on each element of the iterable until one of them passes. If none pass, it throws the last error encountered.
+ * If the iterable is empty, it throws an error indicating that the assertion cannot be performed.
+ *
+ * @template T - The type of the elements in the iterable.
+ * @template R - The return type of the assertion function.
+ * @param actual - The iterable of elements to be tested.
  * @param assertion - The assertion function to be applied to each element of the iterable.
  * @returns The result of the assertion function for the first element that passes the assertion.
  * @throws {RangeError} If the iterable is empty
@@ -30,7 +52,6 @@ function aggregateErrors(errors: Array<unknown>): string {
  * });
  * // result will be 3
  */
-export function some<T, R>(actual: Iterable<T>, assertion: (value: T) => Promise<R>): Promise<R>;
 export function some<T, R>(actual: Iterable<T>, assertion: (value: T) => R): R;
 export function some<T, R>(
   actual: Iterable<T>,
@@ -138,6 +159,29 @@ export async function someAsync<T, R>(
  * @template T - The type of the elements in the iterable.
  * @template R - The return type of the assertion function.
  * @param actual - The iterable of elements to be tested.
+ * @param assertion - The async assertion function to be applied to each element of the iterable.
+ * @returns A promise that resolves to an array of results from the assertion function for each element that passes the assertion.
+ * @throws {Error} If any of the elements do not satisfy the assertion.
+ *
+ * @example
+ * const array = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)];
+ * const results = await every(array, async (promise) => {
+ *   const value = await promise;
+ *   expect(value).toBeGreaterThan(0);
+ *   return value * 2;
+ * });
+ * // results will be [2, 4, 6]
+ */
+export function every<T, R>(
+  actual: Iterable<T>,
+  assertion: (value: T) => Promise<R>,
+): Promise<Array<Awaited<R>>>;
+/**
+ * Runs the assertion function on each element of the iterable and collects the results. If any element does not satisfy the assertion, it throws an error.
+ *
+ * @template T - The type of the elements in the iterable.
+ * @template R - The return type of the assertion function.
+ * @param actual - The iterable of elements to be tested.
  * @param assertion - The assertion function to be applied to each element of the iterable.
  * @returns An array of results from the assertion function for each element that passes the assertion.
  * @throws {Error} If any of the elements do not satisfy the assertion.
@@ -150,10 +194,6 @@ export async function someAsync<T, R>(
  * });
  * // results will be [2, 4, 6]
  */
-export function every<T, R>(
-  actual: Iterable<T>,
-  assertion: (value: T) => Promise<R>,
-): Promise<Array<Awaited<R>>>;
 export function every<T, R>(actual: Iterable<T>, assertion: (value: T) => R): Array<R>;
 export function every<T, R>(
   actual: Iterable<T>,
