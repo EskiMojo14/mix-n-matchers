@@ -54,3 +54,9 @@ export type MixNMatchersFrom<
   R = any,
   T = unknown,
 > = Pick<MixNMatchers<R, T>, keyof Matchers & keyof MixNMatchers<R, T>>;
+
+export namespace Autocomplete {
+  export type String<T extends string> = T | (string & {});
+  export type PropertyKey<T extends string> = String<T> | number | symbol;
+  export type Unknown<T> = T | {} | null | undefined;
+}

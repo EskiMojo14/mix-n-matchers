@@ -1,4 +1,4 @@
-import type { MatcherFunction } from "../utils/types";
+import type { Autocomplete, MatcherFunction } from "../utils/types";
 import { makeEqualValue, isAsymmetricMatcher, assert } from "../utils";
 import {
   matcherErrorMessage,
@@ -229,10 +229,25 @@ export const toHaveHeader: MatcherFunction<[string, string?]> = function (receiv
   };
 };
 
+export type KnownMethod =
+  | "GET"
+  | "POST"
+  | "PUT"
+  | "DELETE"
+  | "PATCH"
+  | "HEAD"
+  | "OPTIONS"
+  | "CONNECT"
+  | "TRACE"
+  | "QUERY";
+
 /**
  * Ensure the Request object has a specific method.
  */
-export const toHaveMethod: MatcherFunction<[string]> = function (received, expected) {
+export const toHaveMethod: MatcherFunction<[Autocomplete.String<KnownMethod>]> = function (
+  received,
+  expected,
+) {
   const hint = (received?: string) =>
     matcherHint("toHaveMethod", received, stringify(expected), {
       isNot: this.isNot,
@@ -747,7 +762,7 @@ declare module "mix-n-matchers" {
      * @example
      * expect(request).toHaveMethod("POST");
      */
-    toHaveMethod(expected: string): R;
+    toHaveMethod(expected: Autocomplete.String<KnownMethod>): R;
     /**
      * Asserts that a Request object has a specific URL.
      * @example
