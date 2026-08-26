@@ -1,3 +1,6 @@
+import { isThenable } from "../utils";
+import type { MaybePromise, MaybePromiseLike } from "../utils/types";
+
 function aggregateErrors(errors: Array<unknown>): string {
   let errorMsg = "None of the items satisfied the assertion.";
   for (const error of errors) {
@@ -31,7 +34,10 @@ function aggregateErrors(errors: Array<unknown>): string {
  * });
  * // result will be 3
  */
-export function some<T, R>(actual: Iterable<T>, assertion: (value: T) => Promise<R>): Promise<R>;
+export function some<T, R>(
+  actual: Iterable<T>,
+  assertion: (value: T) => PromiseLike<R>,
+): Promise<R>;
 /**
  * Runs the assertion function on each element of the iterable until one of them passes. If none pass, it throws the last error encountered.
  * If the iterable is empty, it throws an error indicating that the assertion cannot be performed.
@@ -55,8 +61,8 @@ export function some<T, R>(actual: Iterable<T>, assertion: (value: T) => Promise
 export function some<T, R>(actual: Iterable<T>, assertion: (value: T) => R): R;
 export function some<T, R>(
   actual: Iterable<T>,
-  assertion: (value: T) => R | Promise<R>,
-): R | Promise<R> {
+  assertion: (value: T) => MaybePromiseLike<R>,
+): MaybePromise<R> {
   const errors: Array<unknown> = [];
   const iterator = actual[Symbol.iterator]();
   let hasAsserted = false;
@@ -67,8 +73,8 @@ export function some<T, R>(
     try {
       const result = assertion(next.value);
 
-      // If we got a Promise, switch to async path
-      if (result instanceof Promise) {
+      // If we got a thenable, switch to async path
+      if (isThenable(result)) {
         return handleAsyncSome(iterator, assertion, result, errors);
       }
 
@@ -86,8 +92,8 @@ export function some<T, R>(
 
 async function handleAsyncSome<T, R>(
   iterator: Iterator<T>,
-  assertion: (value: T) => R | Promise<R>,
-  firstResult: Promise<R>,
+  assertion: (value: T) => MaybePromiseLike<R>,
+  firstResult: PromiseLike<R>,
   errors: Array<unknown>,
 ): Promise<R> {
   try {
@@ -134,7 +140,7 @@ async function handleAsyncSome<T, R>(
  */
 export async function someAsync<T, R>(
   actual: AsyncIterable<T>,
-  assertion: (value: Awaited<T>) => Promise<R> | R,
+  assertion: (value: Awaited<T>) => MaybePromiseLike<R>,
 ): Promise<R> {
   const errors: Array<unknown> = [];
   let hasAsserted = false;
@@ -174,7 +180,7 @@ export async function someAsync<T, R>(
  */
 export function every<T, R>(
   actual: Iterable<T>,
-  assertion: (value: T) => Promise<R>,
+  assertion: (value: T) => PromiseLike<R>,
 ): Promise<Array<Awaited<R>>>;
 /**
  * Runs the assertion function on each element of the iterable and collects the results. If any element does not satisfy the assertion, it throws an error.
@@ -197,14 +203,14 @@ export function every<T, R>(
 export function every<T, R>(actual: Iterable<T>, assertion: (value: T) => R): Array<R>;
 export function every<T, R>(
   actual: Iterable<T>,
-  assertion: (value: T) => R | Promise<R>,
+  assertion: (value: T) => MaybePromiseLike<R>,
 ): Array<R> | Promise<Array<Awaited<R>>> {
-  const results: Array<R | Promise<R>> = [];
+  const results: Array<MaybePromiseLike<R>> = [];
   let hasPromise = false;
 
   for (const item of actual) {
     const result = assertion(item);
-    if (result instanceof Promise) {
+    if (isThenable(result)) {
       hasPromise = true;
     }
     results.push(result);
@@ -238,7 +244,7 @@ export function every<T, R>(
  */
 export async function everyAsync<T, R>(
   actual: AsyncIterable<T>,
-  assertion: (value: Awaited<T>) => Promise<R> | R,
+  assertion: (value: Awaited<T>) => MaybePromiseLike<R>,
 ): Promise<Array<Awaited<R>>> {
   const results: Array<Awaited<R>> = [];
   for await (const item of actual) {

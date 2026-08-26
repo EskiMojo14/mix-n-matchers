@@ -15,6 +15,17 @@ async function* asyncEmpty() {
   // No items yielded
 }
 
+class Thenable<T> implements PromiseLike<Awaited<T>> {
+  constructor(private value: T) {}
+  // oxlint-disable-next-line unicorn/no-thenable
+  then<TResult1 = Awaited<T>, TResult2 = never>(
+    onfulfilled?: ((value: Awaited<T>) => TResult1 | PromiseLike<TResult1>) | null,
+    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null,
+  ): PromiseLike<TResult1 | TResult2> {
+    return Promise.resolve(this.value).then(onfulfilled, onrejected);
+  }
+}
+
 describe("some", () => {
   it("should return the result of the assertion if at least one element satisfies the condition", () => {
     expect(
@@ -38,13 +49,24 @@ describe("some", () => {
       });
     }).toThrowErrorMatchingSnapshot();
   });
-  it("should allow asynchronous assertion function that returns a Promise", async () => {
-    const result = await some(numsPromises, async (promise) => {
-      const value = await promise;
-      expect(value).toBeGreaterThan(2);
-      return value;
-    });
-    expect(result).toBe(3);
+  it("should allow asynchronous assertion function that returns a Promise or thenable", async () => {
+    await expect(
+      some(numsPromises, async (promise) => {
+        const value = await promise;
+        expect(value).toBeGreaterThan(2);
+        return value;
+      }),
+    ).resolves.toBe(3);
+    await expect(
+      some(numsPromises, (promise) => {
+        return new Thenable(
+          promise.then((value) => {
+            expect(value).toBeGreaterThan(2);
+            return value;
+          }),
+        );
+      }),
+    ).resolves.toBe(3);
   });
   it("should throw an AggregateError with all errors if no elements satisfy the condition with async assertion", async () => {
     await expect(
@@ -97,12 +119,22 @@ describe("every", () => {
       });
     }).toThrowErrorMatchingSnapshot();
   });
-  it("should allow asynchronous assertion function that returns a Promise", async () => {
+  it("should allow asynchronous assertion function that returns a Promise or thenable", async () => {
     await expect(
       every(numsPromises, async (promise) => {
         const value = await promise;
         expect(value).toBeGreaterThan(0);
         return value * 2;
+      }),
+    ).resolves.toEqual([2, 4, 6]);
+    await expect(
+      every(numsPromises, (promise) => {
+        return new Thenable(
+          promise.then((value) => {
+            expect(value).toBeGreaterThan(0);
+            return value * 2;
+          }),
+        );
       }),
     ).resolves.toEqual([2, 4, 6]);
   });

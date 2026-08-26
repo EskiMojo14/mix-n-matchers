@@ -112,3 +112,11 @@ export function assert(condition: unknown, message: string | (() => string)): as
     throw new Error(typeof message === "function" ? message() : message);
   }
 }
+
+export function isThenable(received: unknown): received is PromiseLike<unknown> {
+  return (
+    received !== null &&
+    typeof received === "object" &&
+    typeof (received as PromiseLike<unknown>).then === "function"
+  );
+}
