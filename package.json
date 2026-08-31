@@ -90,12 +90,12 @@
     },
     "./utilities": {
       "import": {
-        "types": "./dist/utilities/index.d.mts",
-        "default": "./dist/utilities/index.mjs"
+        "types": "./dist/utilities.d.mts",
+        "default": "./dist/utilities.mjs"
       },
       "require": {
-        "types": "./dist/utilities/index.d.cts",
-        "default": "./dist/utilities/index.cjs"
+        "types": "./dist/utilities.d.cts",
+        "default": "./dist/utilities.cjs"
       }
     }
   },
@@ -180,7 +180,7 @@
     "dts": {
       "entry": [
         "src/index.ts",
-        "src/utilities/index.ts"
+        "src/utilities.ts"
       ]
     },
     "entry": [
@@ -189,7 +189,7 @@
       "src/jest-globals.ts",
       "src/vitest.ts",
       "src/rstest.ts",
-      "src/utilities/index.ts"
+      "src/utilities.ts"
     ],
     "format": [
       "esm",

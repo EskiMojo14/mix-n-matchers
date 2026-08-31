@@ -5,7 +5,7 @@
     "../dist"
   ],
   "type": "module",
-  "main": "../dist/utilities/index.cjs",
-  "module": "../dist/utilities/index.mjs",
-  "types": "../dist/utilities/index.d.mts"
+  "main": "../dist/utilities.cjs",
+  "module": "../dist/utilities.mjs",
+  "types": "../dist/utilities.d.mts"
 }
