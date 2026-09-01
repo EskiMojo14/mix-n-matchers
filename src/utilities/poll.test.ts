@@ -1,12 +1,4 @@
-import {
-  describe,
-  expect,
-  it,
-  fn,
-  useFakeTimers,
-  advanceTimers,
-  advanceTimersAsync,
-} from "@globals";
+import { describe, expect, it, fn, useFakeTimers } from "@globals";
 import { waitFor, waitUntil } from "./poll";
 
 describe("waitFor", () => {
@@ -35,21 +27,22 @@ describe("waitFor", () => {
     expect(callback).toHaveBeenCalled();
   });
 
-  it.each([
-    ["sync", advanceTimers],
-    ["async", advanceTimersAsync],
-  ])("it works with %s fake timers", async (label, advanceTimers) => {
-    // oxlint-disable-next-line no-underscore-dangle
-    using _fakeTimers = useFakeTimers();
+  it.each(["sync", "async"] as const)("it works with %s fake timers", async (type) => {
+    using fakeTimers = useFakeTimers();
     const callback = fn().mockRejectedValue(new Error("first attempt fails"));
 
     setTimeout(() => {
       callback.mockResolvedValue("done");
     }, 15);
 
-    await expect(waitFor(callback, { interval: 5, timeout: 100, advanceTimers })).resolves.toBe(
-      "done",
-    );
+    await expect(
+      waitFor(callback, {
+        interval: 5,
+        timeout: 100,
+        advanceTimers:
+          type === "sync" ? fakeTimers.advanceTimersByTime : fakeTimers.advanceTimersByTimeAsync,
+      }),
+    ).resolves.toBe("done");
     expect(callback).toHaveBeenCalledTimes(4);
   });
 });
@@ -83,21 +76,22 @@ describe("waitUntil", () => {
     expect(callback).toHaveBeenCalled();
   });
 
-  it.each([
-    ["sync", advanceTimers],
-    ["async", advanceTimersAsync],
-  ])("it works with %s fake timers", async (label, advanceTimers) => {
-    // oxlint-disable-next-line no-underscore-dangle
-    using _fakeTimers = useFakeTimers();
+  it.each(["sync", "async"] as const)("it works with %s fake timers", async (type) => {
+    using fakeTimers = useFakeTimers();
     const callback = fn(() => 0);
 
     setTimeout(() => {
       callback.mockImplementation(() => 1);
     }, 15);
 
-    await expect(waitUntil(callback, { interval: 5, timeout: 100, advanceTimers })).resolves.toBe(
-      1,
-    );
+    await expect(
+      waitUntil(callback, {
+        interval: 5,
+        timeout: 100,
+        advanceTimers:
+          type === "sync" ? fakeTimers.advanceTimersByTime : fakeTimers.advanceTimersByTimeAsync,
+      }),
+    ).resolves.toBe(1);
     expect(callback).toHaveBeenCalledTimes(4);
   });
 });

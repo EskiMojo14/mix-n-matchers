@@ -49,10 +49,9 @@ type TestFn = Satisfies<typeof jest.fn | typeof vi.fn, typeof fn>;
 export declare const beforeAll: typeof vitestBeforeAll | typeof jestBeforeAll;
 export declare const afterAll: typeof vitestAfterAll | typeof jestAfterAll;
 
-export declare const useFakeTimers: () => Disposable;
-
-export declare const advanceTimers: (ms: number) => void;
-
-export declare const advanceTimersAsync: (ms: number) => Promise<unknown>;
+export declare const useFakeTimers: () => Disposable & {
+  advanceTimersByTime: (ms: number) => void;
+  advanceTimersByTimeAsync: (ms: number) => Promise<unknown>;
+};
 
 throw new Error("This file should be mocked");

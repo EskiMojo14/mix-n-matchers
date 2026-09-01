@@ -13,11 +13,10 @@ vi.mock("@globals", (): typeof globals => {
     fn: vi.fn,
     beforeAll,
     afterAll,
-    advanceTimers: vi.advanceTimersByTime,
-    advanceTimersAsync: vi.advanceTimersByTimeAsync,
     useFakeTimers() {
       vi.useFakeTimers();
       return {
+        ...vi,
         [Symbol.dispose]() {
           vi.useRealTimers();
         },

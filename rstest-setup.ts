@@ -12,8 +12,6 @@ rs.mock("@globals", (): Record<keyof typeof globals, unknown> => {
     fn: rs.fn,
     beforeAll,
     afterAll,
-    advanceTimers: rs.advanceTimersByTime,
-    advanceTimersAsync: rs.advanceTimersByTimeAsync,
     useFakeTimers: rs.useFakeTimers,
   };
 });

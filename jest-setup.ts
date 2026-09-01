@@ -12,11 +12,10 @@ jest.unstable_mockModule("@globals", (): typeof globals => {
     fn: jest.fn,
     beforeAll,
     afterAll,
-    advanceTimers: jest.advanceTimersByTime.bind(jest),
-    advanceTimersAsync: jest.advanceTimersByTimeAsync.bind(jest),
     useFakeTimers() {
       jest.useFakeTimers();
       return {
+        ...jest,
         [Symbol.dispose]() {
           jest.useRealTimers();
         },
