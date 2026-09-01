@@ -40,6 +40,14 @@ describe("waitUntil", () => {
     expect(callback).toHaveBeenCalledTimes(3);
   });
 
+  it("fails immediately when the callback throws an error", async () => {
+    const error = new Error("callback exploded");
+    const callback = fn().mockRejectedValue(error);
+
+    await expect(waitUntil(callback, { interval: 5, timeout: 100 })).rejects.toThrow(error);
+    expect(callback).toHaveBeenCalledTimes(1);
+  });
+
   it("throws when the value never becomes truthy before the timeout", async () => {
     const callback = fn(() => 0);
 

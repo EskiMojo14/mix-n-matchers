@@ -50,24 +50,36 @@ export async function waitFor<T>(fn: () => MaybePromiseLike<T>, options?: PollOp
 }
 
 /**
- * Waits for a function to return a truthy value, retrying on failure until a timeout is reached.
+ * Waits for a function to return a truthy value, retrying on falsy values until a timeout is reached.
+ * If the callback throws an error, it is re-thrown immediately instead of retrying.
  * @param fn The function to execute.
  * @param options Optional polling options, including interval and timeout.
  * @returns A promise that resolves with the truthy result of the function if successful.
- * @throws An error if the function does not return a truthy value within the timeout period.
+ * @throws An error if the callback throws or if the function does not return a truthy value within the timeout period.
  *
  * @example
  * const firstItem = await waitUntil(() => {
  *   return array.length > 0 ? array[0] : null;
  * });
  */
-export function waitUntil<T>(
+export async function waitUntil<T>(
   fn: () => MaybePromiseLike<T>,
   options?: PollOptions,
 ): Promise<Truthy<T>> {
-  return waitFor(async () => {
+  const { interval, timeout } = { ...defaultOptions, ...options };
+  const startTime = Date.now();
+
+  while (true) {
     const result = await fn();
-    if (!result) throw new Error("Condition not met", { cause: result });
+
+    if (!result) {
+      if (Date.now() - startTime >= timeout) {
+        throw new Error("Condition not met", { cause: result });
+      }
+      await wait(interval);
+      continue;
+    }
+
     return result as Truthy<T>;
-  }, options);
+  }
 }

@@ -1,0 +1,59 @@
+import { TestFile } from "/src/components/TestFile";
+
+# Polling
+
+## `waitFor(fn, options)`
+
+Wait for the callback to execute successfully. If the callback throws an error or returns a rejected promise, it will continue to wait until it succeeds or times out.
+
+This is useful when you need to wait for some asynchronous action to complete, for example, when a server is starting up.
+
+<TestFile name="waitFor">
+{`
+import { waitFor } from "mix-n-matchers/utilities";
+
+const server = { isReady: false };
+
+setTimeout(() => {
+server.isReady = true;
+}, 100);
+
+await waitFor(
+() => {
+if (!server.isReady) {
+throw new Error("Server not started");
+}
+},
+{
+timeout: 500,
+interval: 20,
+},
+);
+
+expect(server.isReady).toBe(true);
+`}
+
+</TestFile>
+
+## `waitUntil(fn, options)`
+
+This is similar to `waitFor`, but if the callback throws any errors, execution is immediately interrupted and an error message is received. If the callback returns a falsy value, the next check will continue until a truthy value is returned.
+
+This is useful when you need to wait for something to exist before taking the next step.
+
+<TestFile name="waitUntil">
+{`
+import { waitUntil } from "mix-n-matchers/utilities";
+
+const element = await waitUntil(
+() => document.querySelector(".element"),
+{
+timeout: 500,
+interval: 20,
+},
+);
+
+expect(element?.querySelector(".element-child")).toBeTruthy();
+`}
+
+</TestFile>
