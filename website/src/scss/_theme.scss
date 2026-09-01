@@ -55,7 +55,7 @@ $contrast: (
         )};
     }
   } @else {
-    @error 'Invalid stops provided #{meta.inspect($stops)}';
+    @error "Invalid stops provided #{meta.inspect($stops)}";
   }
 }
 
@@ -65,8 +65,8 @@ $contrast: (
     @include infima-color(
       $name,
       if(sass(meta.type-of($color) == color): $color; else: map.get($color, color)),
-      if(sass(meta.type-of($color) == color): () ; else: map.get($color, shades)),
-      if(sass(meta.type-of($color) == color): () ; else: map.get($color, contrast)),
+      if(sass(meta.type-of($color) == color): (); else: map.get($color, shades)),
+      if(sass(meta.type-of($color) == color): (); else: map.get($color, contrast)),
       $dark: map.get($theme, dark)
     );
   }
@@ -96,10 +96,7 @@ $contrast: (
     @if $name != "highlighted" {
       $selector: map.get($highlight, selector);
 
-      #{if(
-        sass($selector): $selector;
-        else: '.code-block-#{$name}-line'
-      )} {
+      #{if(sass($selector): $selector; else: ".code-block-#{$name}-line")} {
         // specificity shenanigans
         :where(&) {
           display: block;
@@ -110,9 +107,7 @@ $contrast: (
             --docusaurus-#{$name}-code-line-border-width,
             var(--docusaurus-highlighted-code-line-border-width)
           )
-          0
-          0
-          var(--docusaurus-#{$name}-code-line-border);
+          0 0 var(--docusaurus-#{$name}-code-line-border);
         margin: 0 calc(-1 * var(--ifm-pre-padding));
         padding: 0 var(--ifm-pre-padding);
         .code-block-line-number {
@@ -120,9 +115,7 @@ $contrast: (
               --docusaurus-#{$name}-code-line-border-width,
               var(--docusaurus-highlighted-code-line-border-width)
             )
-            0
-            0
-            var(--docusaurus-#{$name}-code-line-border);
+            0 0 var(--docusaurus-#{$name}-code-line-border);
           &::before {
             @if (meta.type-of(map.get($highlight, number)) == color) {
               color: map.get($highlight, number);
