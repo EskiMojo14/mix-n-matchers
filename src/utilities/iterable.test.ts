@@ -1,5 +1,5 @@
 import { describe, it, expect } from "@globals";
-import { wait } from "../utils/tests";
+import { wait } from "../utils";
 import { some, someAsync, every, everyAsync } from "./iterable";
 
 const nums = [1, 2, 3];

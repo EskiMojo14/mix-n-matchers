@@ -3,7 +3,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "target": "ES2016",
+    "target": "esnext",
     "allowJs": true,
     "resolveJsonModule": true,
     "moduleDetection": "force",
@@ -12,12 +12,13 @@
     "moduleResolution": "Bundler",
     "module": "ESNext",
     "noEmit": true,
-    "lib": ["ES2022"],
+    "lib": ["ESNext"],
     "allowImportingTsExtensions": true,
     "paths": {
       "mix-n-matchers": ["./src/index"],
       "@globals": ["./src/utils/globals"]
-    }
+    },
+    "types": ["node", "jest"]
   },
   "exclude": ["website"]
 }

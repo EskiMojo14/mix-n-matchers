@@ -62,3 +62,6 @@ export namespace Autocomplete {
   export type PropertyKey<T extends string> = String<T> | number | symbol;
   export type Unknown<T> = T | {} | null | undefined;
 }
+
+export type Falsy = false | 0 | "" | null | undefined;
+export type Truthy<T> = T extends Falsy ? never : T;

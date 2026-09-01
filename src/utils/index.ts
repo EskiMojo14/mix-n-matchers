@@ -120,3 +120,7 @@ export function isThenable(received: unknown): received is PromiseLike<unknown> 
     typeof (received as PromiseLike<unknown>).then === "function"
   );
 }
+
+export function wait(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
