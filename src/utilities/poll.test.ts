@@ -41,13 +41,16 @@ describe("waitFor", () => {
   ])("it works with %s fake timers", async (label, advanceTimers) => {
     // oxlint-disable-next-line no-underscore-dangle
     using _fakeTimers = useFakeTimers();
-    const callback = fn()
-      .mockRejectedValueOnce(new Error("first attempt fails"))
-      .mockResolvedValue("done");
+    const callback = fn().mockRejectedValue(new Error("first attempt fails"));
+
+    setTimeout(() => {
+      callback.mockResolvedValue("done");
+    }, 15);
 
     await expect(waitFor(callback, { interval: 5, timeout: 100, advanceTimers })).resolves.toBe(
       "done",
     );
+    expect(callback).toHaveBeenCalledTimes(4);
   });
 });
 
@@ -86,14 +89,15 @@ describe("waitUntil", () => {
   ])("it works with %s fake timers", async (label, advanceTimers) => {
     // oxlint-disable-next-line no-underscore-dangle
     using _fakeTimers = useFakeTimers();
-    let attempts = 0;
-    const callback = fn(() => {
-      attempts += 1;
-      return attempts >= 3 ? "ready" : 0;
-    });
+    const callback = fn(() => 0);
+
+    setTimeout(() => {
+      callback.mockImplementation(() => 1);
+    }, 15);
 
     await expect(waitUntil(callback, { interval: 5, timeout: 100, advanceTimers })).resolves.toBe(
-      "ready",
+      1,
     );
+    expect(callback).toHaveBeenCalledTimes(4);
   });
 });
