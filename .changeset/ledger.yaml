@@ -1,0 +1,7 @@
+mix-n-matchers@2.5.0:
+  dir: ""
+  intents:
+    - curly-glasses-vanish
+    - giant-pans-check
+    - slick-tires-change
+    - wicked-spies-obey
