@@ -2,7 +2,7 @@
 
 ### Minor Changes
 
-- allow assertion functions to return thenables, not just functions
+- allow assertion functions to return thenables, not just promises
 
 - add waitFor and waitUntil utilities
 
