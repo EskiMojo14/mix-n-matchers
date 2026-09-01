@@ -6,5 +6,22 @@ expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 expect.addSnapshotSerializer(errorCauseSerializer);
 
 vi.mock("@globals", (): typeof globals => {
-  return { describe, it, expect, fn: vi.fn, beforeAll, afterAll };
+  return {
+    describe,
+    it,
+    expect,
+    fn: vi.fn,
+    beforeAll,
+    afterAll,
+    advanceTimers: vi.advanceTimersByTime,
+    advanceTimersAsync: vi.advanceTimersByTimeAsync,
+    useFakeTimers() {
+      vi.useFakeTimers();
+      return {
+        [Symbol.dispose]() {
+          vi.useRealTimers();
+        },
+      };
+    },
+  };
 });

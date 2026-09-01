@@ -33,7 +33,9 @@ export declare const describe: (typeof vitestDescribe | typeof jestDescribe) & {
 type TestEach = Satisfies<typeof jestDescribe.each | typeof vitestDescribe.each, Each>;
 
 export declare const expect: typeof vitestExpect | typeof jestExpect;
-export declare const it: typeof vitestIt | typeof jestIt;
+export declare const it: (typeof vitestIt | typeof jestIt) & {
+  each: Each;
+};
 
 type Procedure = (...args: Array<any>) => any;
 
@@ -46,5 +48,11 @@ type TestFn = Satisfies<typeof jest.fn | typeof vi.fn, typeof fn>;
 
 export declare const beforeAll: typeof vitestBeforeAll | typeof jestBeforeAll;
 export declare const afterAll: typeof vitestAfterAll | typeof jestAfterAll;
+
+export declare const useFakeTimers: () => Disposable;
+
+export declare const advanceTimers: (ms: number) => void;
+
+export declare const advanceTimersAsync: (ms: number) => Promise<unknown>;
 
 throw new Error("This file should be mocked");

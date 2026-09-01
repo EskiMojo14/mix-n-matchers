@@ -5,5 +5,15 @@ import { alignedAnsiStyleSerializer } from "./src/utils/tests";
 expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 
 rs.mock("@globals", (): Record<keyof typeof globals, unknown> => {
-  return { describe, it, expect, fn: rs.fn, beforeAll, afterAll };
+  return {
+    describe,
+    it,
+    expect,
+    fn: rs.fn,
+    beforeAll,
+    afterAll,
+    advanceTimers: rs.advanceTimersByTime,
+    advanceTimersAsync: rs.advanceTimersByTimeAsync,
+    useFakeTimers: rs.useFakeTimers,
+  };
 });

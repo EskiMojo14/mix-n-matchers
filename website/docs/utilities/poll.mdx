@@ -35,6 +35,42 @@ expect(server.isReady).toBe(true);
 
 </TestFile>
 
+### Using fake timers
+
+If you're using fake timers, pass an `advanceTimers` option so the polling loop advances the mocked clock instead of waiting on a real `setTimeout`, which would never resolve.
+
+<TestFile name="waitForFakeTimers">
+{`
+import { waitFor } from "mix-n-matchers/utilities";
+
+jest.useFakeTimers();
+
+const server = { isReady: false };
+
+setTimeout(() => {
+server.isReady = true;
+}, 100);
+
+await waitFor(
+() => {
+if (!server.isReady) {
+throw new Error("Server not started");
+}
+},
+{
+timeout: 500,
+interval: 20,
+advanceTimers: (ms) => jest.advanceTimersByTimeAsync(ms),
+},
+);
+
+expect(server.isReady).toBe(true);
+
+jest.useRealTimers();
+`}
+
+</TestFile>
+
 ## `waitUntil(fn, options)`
 
 This is similar to `waitFor`, but if the callback throws any errors, execution is immediately interrupted and an error message is received. If the callback returns a falsy value, the next check will continue until a truthy value is returned.
@@ -57,3 +93,5 @@ expect(element?.querySelector(".element-child")).toBeTruthy();
 `}
 
 </TestFile>
+
+`waitUntil` also supports the `advanceTimers` option for use with fake timers, just like `waitFor`.

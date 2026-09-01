@@ -1,4 +1,12 @@
-import { describe, expect, it, fn } from "@globals";
+import {
+  describe,
+  expect,
+  it,
+  fn,
+  useFakeTimers,
+  advanceTimers,
+  advanceTimersAsync,
+} from "@globals";
 import { waitFor, waitUntil } from "./poll";
 
 describe("waitFor", () => {
@@ -25,6 +33,21 @@ describe("waitFor", () => {
 
     await expect(waitFor(callback, { interval: 5, timeout: 25 })).rejects.toThrow(error);
     expect(callback).toHaveBeenCalled();
+  });
+
+  it.each([
+    ["sync", advanceTimers],
+    ["async", advanceTimersAsync],
+  ])("it works with %s fake timers", async (label, advanceTimers) => {
+    // oxlint-disable-next-line no-underscore-dangle
+    using _fakeTimers = useFakeTimers();
+    const callback = fn()
+      .mockRejectedValueOnce(new Error("first attempt fails"))
+      .mockResolvedValue("done");
+
+    await expect(waitFor(callback, { interval: 5, timeout: 100, advanceTimers })).resolves.toBe(
+      "done",
+    );
   });
 });
 
@@ -55,5 +78,22 @@ describe("waitUntil", () => {
       "Condition not met",
     );
     expect(callback).toHaveBeenCalled();
+  });
+
+  it.each([
+    ["sync", advanceTimers],
+    ["async", advanceTimersAsync],
+  ])("it works with %s fake timers", async (label, advanceTimers) => {
+    // oxlint-disable-next-line no-underscore-dangle
+    using _fakeTimers = useFakeTimers();
+    let attempts = 0;
+    const callback = fn(() => {
+      attempts += 1;
+      return attempts >= 3 ? "ready" : 0;
+    });
+
+    await expect(waitUntil(callback, { interval: 5, timeout: 100, advanceTimers })).resolves.toBe(
+      "ready",
+    );
   });
 });

@@ -12,12 +12,18 @@ export interface PollOptions {
    * @default 5000
    */
   timeout?: number;
+
+  /**
+   * Optional function to advance timers in testing environments.
+   * This makes sure that the polling mechanism works correctly in tests that use fake timers.
+   */
+  advanceTimers?: (ms: number) => MaybePromiseLike<unknown>;
 }
 
-const defaultOptions: Required<PollOptions> = {
+const defaultOptions = {
   interval: 100,
   timeout: 5000,
-};
+} satisfies PollOptions;
 
 /**
  * Waits for a function to complete successfully, retrying on failure until a timeout is reached.
@@ -33,7 +39,7 @@ const defaultOptions: Required<PollOptions> = {
  * });
  */
 export async function waitFor<T>(fn: () => MaybePromiseLike<T>, options?: PollOptions): Promise<T> {
-  const { interval, timeout } = { ...defaultOptions, ...options };
+  const { interval, timeout, advanceTimers } = { ...defaultOptions, ...options };
 
   const startTime = Date.now();
 
@@ -44,7 +50,11 @@ export async function waitFor<T>(fn: () => MaybePromiseLike<T>, options?: PollOp
       if (Date.now() - startTime >= timeout) {
         throw error;
       }
-      await wait(interval);
+      if (advanceTimers) {
+        await advanceTimers(interval);
+      } else {
+        await wait(interval);
+      }
     }
   }
 }
@@ -66,20 +76,22 @@ export async function waitUntil<T>(
   fn: () => MaybePromiseLike<T>,
   options?: PollOptions,
 ): Promise<Truthy<T>> {
-  const { interval, timeout } = { ...defaultOptions, ...options };
+  const { interval, timeout, advanceTimers } = { ...defaultOptions, ...options };
   const startTime = Date.now();
 
   while (true) {
     const result = await fn();
 
-    if (!result) {
-      if (Date.now() - startTime >= timeout) {
-        throw new Error("Condition not met", { cause: result });
-      }
-      await wait(interval);
-      continue;
+    if (result) return result as Truthy<T>;
+
+    if (Date.now() - startTime >= timeout) {
+      throw new Error("Condition not met", { cause: result });
     }
 
-    return result as Truthy<T>;
+    if (advanceTimers) {
+      await advanceTimers(interval);
+    } else {
+      await wait(interval);
+    }
   }
 }

@@ -5,5 +5,22 @@ import { alignedAnsiStyleSerializer } from "./src/utils/tests";
 expect.addSnapshotSerializer(alignedAnsiStyleSerializer);
 
 jest.unstable_mockModule("@globals", (): typeof globals => {
-  return { describe, it, expect, fn: jest.fn, beforeAll, afterAll };
+  return {
+    describe,
+    it,
+    expect,
+    fn: jest.fn,
+    beforeAll,
+    afterAll,
+    advanceTimers: jest.advanceTimersByTime.bind(jest),
+    advanceTimersAsync: jest.advanceTimersByTimeAsync.bind(jest),
+    useFakeTimers() {
+      jest.useFakeTimers();
+      return {
+        [Symbol.dispose]() {
+          jest.useRealTimers();
+        },
+      };
+    },
+  };
 });
