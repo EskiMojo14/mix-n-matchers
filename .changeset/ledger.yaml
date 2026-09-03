@@ -5,3 +5,8 @@ mix-n-matchers@2.5.0:
     - giant-pans-check
     - slick-tires-change
     - wicked-spies-obey
+mix-n-matchers@3.0.0:
+  dir: ""
+  intents:
+    - nice-times-cheat
+    - twelve-wombats-start
