@@ -13,8 +13,12 @@ catalog:
   typescript: ~7.0.2
 
 minimumReleaseAgeExclude:
-  - "@rsbuild/core@2.1.6"
-  - "@rstest/core@0.11.2"
+  - "@vitest/expect@5.0.0"
+  - "@vitest/mocker@5.0.0"
+  - "@vitest/pretty-format@5.0.0"
+  - "@vitest/spy@5.0.0"
+  - "@vitest/utils@5.0.0"
+  - vitest@5.0.0
 
 patchedDependencies:
   "@docusaurus/tsconfig": patches/@docusaurus__tsconfig.patch

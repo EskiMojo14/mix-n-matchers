@@ -15,7 +15,7 @@ exports[`toHaveBeenCalledWithContext > works only on spies or fn 1`] = `
 <b>Matcher error</b>: <r>received</g> value must be a mock or spy function
 
 Received has type:  function
-Received has value: <r>[Function mock2]</g>
+Received has value: <r>[Function mock]</g>
 `;
 
 exports[`toHaveBeenCalledWithContext > works when not called 1`] = `
@@ -74,7 +74,7 @@ exports[`toHaveBeenLastCalledWithContext > works only on spies or fn 1`] = `
 <b>Matcher error</b>: <r>received</g> value must be a mock or spy function
 
 Received has type:  function
-Received has value: <r>[Function mock2]</g>
+Received has value: <r>[Function mock]</g>
 `;
 
 exports[`toHaveBeenLastCalledWithContext > works when not called 1`] = `
@@ -133,7 +133,7 @@ exports[`toHaveBeenNthCalledWithContext > works only on spies or fn 1`] = `
 <b>Matcher error</b>: <r>received</g> value must be a mock or spy function
 
 Received has type:  function
-Received has value: <r>[Function mock2]</g>
+Received has value: <r>[Function mock]</g>
 `;
 
 exports[`toHaveBeenNthCalledWithContext > works when not called 1`] = `
