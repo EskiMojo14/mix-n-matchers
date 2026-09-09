@@ -132,6 +132,7 @@
     "@rstest/core": "^0.11.9",
     "@swc/core": "^1.16.1",
     "@swc/jest": "^0.2.39",
+    "@types/eslint": "^9.6.1",
     "@types/node": "^26.2.0",
     "@vitest/expect": "^5.0.0",
     "ansi-regex": "^6.3.0",

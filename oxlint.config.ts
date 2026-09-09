@@ -11,6 +11,7 @@ export default defineConfig({
     suspicious: "warn",
   },
   rules: {
+    "mix-n-matchers/no-instanceof-promise": "error",
     "eslint/no-shadow": "off",
     "typescript/array-type": ["error", { default: "generic" }],
     "react/react-in-jsx-scope": "off",
@@ -22,6 +23,7 @@ export default defineConfig({
       typecheck: true,
     },
   },
+  jsPlugins: [{ specifier: "./lint/index.mjs", name: "mix-n-matchers" }],
   env: {
     builtin: true,
   },
