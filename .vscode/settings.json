@@ -1,6 +1,6 @@
 {
-  "jest.jestCommandLine": "pnpm test",
-  "jestrunner.vitestCommand": "pnpm vitest",
+  "jest.jestCommandLine": "pnpm exec vpr test",
+  "jestrunner.vitestCommand": "pnpm exec vpr vitest",
   "[typescript]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   }
