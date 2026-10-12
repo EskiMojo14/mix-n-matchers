@@ -15,29 +15,24 @@ concurrency:
 
 jobs:
   quality:
-    name: Format, Lint, Typecheck, Build
+    name: Check and Pack
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup environment
-        uses: ./.github/actions/setup-node-pnpm
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@v1.21.2
         with:
-          node-version: "25"
+          node-version: "24"
+          cache: true
 
-      - name: Format
-        run: pnpm run format --check
+      - name: Check
+        run: vp check
 
-      - name: Lint
-        run: pnpm run lint
-
-      - name: Typecheck
-        run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build:only
+      - name: Pack
+        run: vp pack
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -56,20 +51,21 @@ jobs:
       matrix:
         runner:
           - name: Jest
-            command: pnpm run test
+            command: vp run test
           - name: Vitest
-            command: pnpm run vitest --run
+            command: vpr vitest --run
           - name: Rstest
-            command: pnpm run rstest
+            command: vpr rstest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup environment
-        uses: ./.github/actions/setup-node-pnpm
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@v1.21.2
         with:
-          node-version: "25"
+          node-version: "24"
+          cache: true
 
       - name: Run ${{ matrix.runner.name }}
         run: ${{ matrix.runner.command }}
@@ -85,19 +81,20 @@ jobs:
       matrix:
         runner:
           - name: Jest
-            command: pnpm run test:dist
+            command: vp run test:dist
           - name: Vitest
-            command: pnpm run vitest:dist --run
+            command: vpr vitest:dist --run
           - name: Rstest
-            command: pnpm run rstest:dist
+            command: vpr rstest:dist
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup environment
-        uses: ./.github/actions/setup-node-pnpm
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@v1.21.2
         with:
-          node-version: "25"
+          node-version: "24"
+          cache: true
 
       - name: Download build artifacts
         uses: actions/download-artifact@v4

@@ -16,7 +16,7 @@ import type {
   Mock as VitestMock,
   beforeAll as vitestBeforeAll,
   afterAll as vitestAfterAll,
-} from "vitest";
+} from "vite-plus/test";
 import type { Satisfies } from "./types.typetest";
 
 interface Each {

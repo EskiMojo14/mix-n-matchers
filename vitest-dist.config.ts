@@ -1,5 +1,5 @@
-import { mergeConfig } from "vitest/config";
-import defaultConfig from "./vitest.config";
+import { mergeConfig } from "vite-plus";
+import defaultConfig from "./vite.config";
 
 export default mergeConfig(defaultConfig, {
   test: {

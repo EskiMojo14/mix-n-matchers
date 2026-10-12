@@ -11,6 +11,10 @@ allowBuilds:
 
 catalog:
   typescript: ~7.0.2
+  "@vitest/expect": 5.0.3
+  vite: npm:@voidzero-dev/vite-plus-core@1.1.0
+  vitest: 5.0.3
+  vite-plus: 1.1.0
 
 minimumReleaseAgeExclude:
   - "@vitest/expect@5.0.0"
@@ -22,3 +26,13 @@ minimumReleaseAgeExclude:
 
 patchedDependencies:
   "@docusaurus/tsconfig": patches/@docusaurus__tsconfig.patch
+overrides:
+  vite@*: "catalog:"
+  vitest@*: "catalog:"
+peerDependencyRules:
+  allowAny:
+    - vite
+    - vitest
+  allowedVersions:
+    vite: "*"
+    vitest: "*"

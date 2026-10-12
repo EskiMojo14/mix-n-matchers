@@ -73,7 +73,6 @@ declare module "mix-n-matchers" {
      */
     toBeEnum(expected: EnumLike): R;
   }
-  // oxlint-disable-next-line no-unused-vars
   interface AsymmetricMixNMatchers {
     /**
      * Matches a valid enum value.
