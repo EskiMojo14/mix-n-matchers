@@ -1,32 +1,25 @@
-import { TestFile } from "/src/components/TestFile";
-
 # Mocks
 
 ## `.toHaveBeenCalledWithContext(context)`
 
 Use `.toHaveBeenCalledWithContext` to assert that a mock function was called with a specific context (`this` value).
 
-<TestFile name="toHaveBeenCalledWithContext">
-{`
+```ts
 const mock = jest.fn();
 const context = {};
 
 mock.call(context);
 
 it("was called with the context", () => {
-expect(mock).toHaveBeenCalledWithContext(context);
+  expect(mock).toHaveBeenCalledWithContext(context);
 });
-`}
-
-</TestFile>
+```
 
 ## `.toHaveBeenLastCalledWithContext(context)`
 
 Use `.toHaveBeenLastCalledWithContext` to assert that a mock function was last called with a specific context (`this` value).
 
-<TestFile name="toHaveBeenLastCalledWithContext">
-{`
-
+```ts
 const mock = jest.fn();
 const context = {};
 
@@ -34,18 +27,15 @@ mock.call({});
 mock.call(context);
 
 it("was last called with the context", () => {
-expect(mock).toHaveBeenLastCalledWithContext(context);
+  expect(mock).toHaveBeenLastCalledWithContext(context);
 });
-`}
-
-</TestFile>
+```
 
 ## `.toHaveBeenNthCalledWithContext(nthCall, context)`
 
 Use `.toHaveBeenNthCalledWithContext` to assert that a mock function was called at a specific index with a specific context (`this` value).
 
-<TestFile name="toHaveBeenNthCalledWithContext">
-{`
+```ts
 const mock = jest.fn();
 const context = {};
 
@@ -54,8 +44,6 @@ mock.call(context);
 mock.call({});
 
 it("was nth called with the context", () => {
-expect(mock).toHaveBeenNthCalledWithContext(2, context);
+  expect(mock).toHaveBeenNthCalledWithContext(2, context);
 });
-`}
-
-</TestFile>
+```
