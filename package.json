@@ -104,8 +104,8 @@
     "prebuild": "vpr typecheck",
     "build:only": "vp pack",
     "build": "vpr build:only",
-    "test": "pnpm node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "test:dist": "pnpm node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest-dist.config.ts",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:dist": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest-dist.config.ts",
     "vitest": "FORCE_COLOR=1 vp test",
     "vitest:dist": "FORCE_COLOR=1 vp test --config vitest-dist.config.ts",
     "rstest": "FORCE_COLOR=1 rstest run",
@@ -118,7 +118,7 @@
     "publint": "publint",
     "typecheck": "tsc",
     "prepack": "vpr publint --pack false",
-    "website": "pnpm --filter website start"
+    "website": "vpr --filter website start"
   },
   "dependencies": {
     "@jest/expect-utils": "^30.4.1",
