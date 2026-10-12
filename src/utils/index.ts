@@ -13,7 +13,7 @@ import {
   RECEIVED_COLOR,
   printReceived,
 } from "jest-matcher-utils";
-import type { Mock } from "vitest";
+import type { Mock } from "vite-plus/test";
 import type { MatcherUtils, Tester } from "./types";
 
 export const isMock = (received: any): received is jest.Mock | Mock =>

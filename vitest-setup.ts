@@ -1,4 +1,4 @@
-import { expect, describe, it, vi, beforeAll, afterAll } from "vitest";
+import { expect, describe, it, vi, beforeAll, afterAll } from "vite-plus/test";
 import type * as globals from "@globals";
 import { alignedAnsiStyleSerializer, errorCauseSerializer } from "./src/utils/tests";
 

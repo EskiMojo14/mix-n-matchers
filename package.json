@@ -100,25 +100,24 @@
     }
   },
   "scripts": {
-    "prepare": "husky",
-    "prebuild": "pnpm run typecheck",
-    "build:only": "tsdown",
-    "build": "pnpm run build:only",
+    "prepare": "vp config",
+    "prebuild": "vpr typecheck",
+    "build:only": "vp pack",
+    "build": "vpr build:only",
     "test": "pnpm node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:dist": "pnpm node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest-dist.config.ts",
-    "vitest": "FORCE_COLOR=1 vitest",
-    "vitest:dist": "FORCE_COLOR=1 vitest --config vitest-dist.config.ts",
-    "rstest": "rstest run",
-    "rstest:dist": "rstest run --config rstest-dist.config.ts",
-    "test:all": "pnpm run test && pnpm run vitest --run && pnpm run rstest",
-    "test:all:dist": "pnpm run test:dist && pnpm run vitest:dist --run && pnpm run rstest:dist",
-    "lint": "oxlint",
-    "format": "oxfmt",
-    "pre-commit": "lint-staged",
+    "vitest": "FORCE_COLOR=1 vp test",
+    "vitest:dist": "FORCE_COLOR=1 vp test --config vitest-dist.config.ts",
+    "rstest": "FORCE_COLOR=1 rstest run",
+    "rstest:dist": "FORCE_COLOR=1 rstest run --config rstest-dist.config.ts",
+    "test:all": "vpr test && vpr vitest --run && vpr rstest",
+    "test:all:dist": "vpr test:dist && vpr vitest:dist --run && vpr rstest:dist",
+    "lint": "vp lint",
+    "format": "vp fmt",
     "attw": "attw",
     "publint": "publint",
     "typecheck": "tsc",
-    "prepack": "pnpm run publint --pack false",
+    "prepack": "vpr publint --pack false",
     "website": "pnpm --filter website start"
   },
   "dependencies": {
@@ -134,24 +133,19 @@
     "@swc/jest": "^0.2.39",
     "@types/eslint": "^9.6.1",
     "@types/node": "^26.2.0",
-    "@vitest/expect": "^5.0.0",
+    "@vitest/expect": "catalog:",
     "ansi-regex": "^6.3.0",
     "ansi-styles": "^7.0.0",
     "expect": "^30.4.1",
-    "husky": "^9.1.7",
     "jest": "^30.4.2",
-    "lint-staged": "^17.3.0",
     "mutative": "^1.3.0",
-    "oxfmt": "^0.64.0",
-    "oxlint": "^1.79.0",
-    "oxlint-tsgolint": "^7.0.2001",
     "publint": "^0.3.24",
     "rimraf": "^6.1.3",
     "ts-jest": "^29.4.12",
     "ts-node": "^10.9.2",
-    "tsdown": "^0.22.14",
     "typescript": "catalog:",
-    "vitest": "^5.0.0"
+    "vite-plus": "catalog:",
+    "vitest": "catalog:"
   },
   "peerDependencies": {
     "@rstest/core": ">=0.11.2",
@@ -168,35 +162,6 @@
     "@rstest/core": {
       "optional": true
     }
-  },
-  "lint-staged": {
-    "*": "oxfmt --no-error-on-unmatched-pattern"
-  },
-  "tsdown": {
-    "deps": {
-      "neverBundle": [
-        "@jest/globals"
-      ]
-    },
-    "dts": {
-      "entry": [
-        "src/index.ts",
-        "src/utilities.ts"
-      ]
-    },
-    "entry": [
-      "src/index.ts",
-      "src/all.ts",
-      "src/jest-globals.ts",
-      "src/vitest.ts",
-      "src/rstest.ts",
-      "src/utilities.ts"
-    ],
-    "format": [
-      "esm",
-      "cjs"
-    ],
-    "sourcemap": true
   },
   "engines": {
     "node": "^14.15.0 || ^16.10.0 || >=18.0.0"

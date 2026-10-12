@@ -1,4 +1,4 @@
-import type { MatcherState } from "@vitest/expect";
+import { type MatcherState } from "vite-plus/test";
 import type { MatcherContext as JestMatcherContext } from "expect";
 import type { MatcherContext } from "./types";
 
