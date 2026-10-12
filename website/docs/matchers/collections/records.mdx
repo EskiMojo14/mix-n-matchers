@@ -1,5 +1,3 @@
-import { TestFile } from "/src/components/TestFile";
-
 # Records
 
 ## `.toBeRecordOf(expected)`
@@ -12,17 +10,14 @@ Optionally, you can pass two arguments and the first one will be matched against
 
 `.toBeStrictRecordOf(expected)` and `expect.strictRecordOf(expected)` are also available to use [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
 
-<TestFile name="toBeRecordOf">
-{`
+```ts
 const record = { a: 1, b: 2, c: 3 };
 
 it("is a record of the expected values", () => {
-expect(record).toBeRecordOf(expect.any(Number));
-expect(record).toBeRecordOf(expect.any(String), expect.any(Number));
+  expect(record).toBeRecordOf(expect.any(Number));
+  expect(record).toBeRecordOf(expect.any(String), expect.any(Number));
 });
-`}
-
-</TestFile>
+```
 
 :::caution
 

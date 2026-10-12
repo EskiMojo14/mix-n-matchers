@@ -2,14 +2,11 @@
 sidebar_position: 3
 ---
 
-import { TestFile } from "/src/components/TestFile";
-
 # `expect.oneOf([values])`
 
 An asymmetric matcher that checks if the received value is one of the expected values, using deep equality.
 
-<TestFile name="exactly">
-  {`
+```ts
 it("is one of the expected values", () => {
   const values = {
     number: 1,
@@ -22,5 +19,4 @@ it("is one of the expected values", () => {
     boolean: expect.oneOf([true, false]),
   });
 });
-`}
-</TestFile>
+```

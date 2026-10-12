@@ -1,5 +1,3 @@
-import { TestFile } from "/src/components/TestFile";
-
 # Fetch
 
 Matchers for `fetch` related objects, such as `Response`, `Request`, and `Headers`.
@@ -8,36 +6,29 @@ Matchers for `fetch` related objects, such as `Response`, `Request`, and `Header
 
 Use `.toBeOK()` to assert that a `Response` object has an OK status (status code in the range 200-299).
 
-<TestFile name="toBeOK">
-{`
+```ts
 it("is an OK response", () => {
   const response = new Response(null, { status: 200 });
   expect(response).toBeOK();
 });
-`}
-
-</TestFile>
+```
 
 ### `.toHaveStatus(expected)`
 
 Use `.toHaveStatus(expected)` to assert that a `Response` object has the expected status code.
 
-<TestFile name="toHaveStatus">
-{`
+```ts
 it("has the expected status code", () => {
   const response = new Response(null, { status: 404 });
   expect(response).toHaveStatus(404);
 });
-`}
-
-</TestFile>
+```
 
 ### `.toHaveStatusGroup(expected)`
 
 Use `.toHaveStatusGroup(expected)` to assert that a `Response` object has a specific status group (`1-5`, `1xx-5xx`, `"informational"`, `"successful"`, `"redirection"`, `"client error"`, `"server error"`).
 
-<TestFile name="toHaveStatusGroup">
-{`
+```ts
 it("has the expected status group", () => {
   const response = new Response(null, { status: 404 });
   expect(response).toHaveStatusGroup(4);
@@ -46,65 +37,53 @@ it("has the expected status group", () => {
   // or
   expect(response).toHaveStatusGroup("client error");
 });
-`}
-
-</TestFile>
+```
 
 ### `.toHaveHeader(name, value?)`
 
 Use `.toHaveHeader(name, value?)` to assert that a `Response`, `Request`, or `Headers` object has the specified header. If `value` is provided, it will also check that the header value matches.
 
-<TestFile name="toHaveHeader">
-{`
+```ts
 it("has the expected header", () => {
-  const response = new Response(null, { headers: { "Content-Type": "application/json" } });
+  const response = new Response(null, {
+    headers: { "Content-Type": "application/json" },
+  });
   expect(response).toHaveHeader("Content-Type", "application/json");
 });
-`}
-
-</TestFile>
+```
 
 ### `.toHaveMethod(expected)`
 
 Use `.toHaveMethod(expected)` to assert that a `Request` object has the expected HTTP method.
 
-<TestFile name="toHaveMethod">
-{`
+```ts
 it("has the expected HTTP method", () => {
   const request = new Request("https://example.com", { method: "POST" });
   expect(request).toHaveMethod("POST");
 });
-`}
-
-</TestFile>
+```
 
 ### `.toHaveURL(expected)`
 
 Use `.toHaveURL(expected)` to assert that a `Response` or `Request` object has the expected URL.
 
-<TestFile name="toHaveURL">
-{`
+```ts
 it("has the expected URL", () => {
   const request = new Request("https://example.com/");
   expect(request).toHaveURL("https://example.com/");
 });
-`}
-
-</TestFile>
+```
 
 ### `.toHaveTextBody(expected)`
 
 Use `.toHaveTextBody(expected)` to assert that a `Response` or `Request` object has the expected body text.
 
-<TestFile name="toHaveTextBody">
-{`
+```ts
 it("has the expected body text", async () => {
   const response = new Response("Hello, world!");
   await expect(response).toHaveTextBody("Hello, world!");
 });
-`}
-
-</TestFile>
+```
 
 :::note
 This assertion is asynchronous, so must be awaited.
@@ -116,15 +95,12 @@ Use `.toHaveJSONBody(expected)` to assert that a `Response` or `Request` object 
 
 `.toHaveJSONBodyStrict(expected)` is also available to use [strict deep equality](https://jestjs.io/docs/expect#tostrictequalvalue).
 
-<TestFile name="toHaveJSONBody">
-{`
+```ts
 it("has the expected JSON body", async () => {
   const response = Response.json({ message: "Hello, world!" });
   await expect(response).toHaveJSONBody({ message: "Hello, world!" });
 });
-`}
-
-</TestFile>
+```
 
 :::note
 This assertion is asynchronous, so must be awaited.
@@ -134,17 +110,14 @@ This assertion is asynchronous, so must be awaited.
 
 Use `.toHaveFormDataBody(expected)` to assert that a `Response` or `Request` object has the expected `FormData` body, using [`formDataEquality`](/mix-n-matchers/utilities/equality#formdataequality).
 
-<TestFile name="toHaveFormDataBody">
-{`
+```ts
 it("has the expected FormData body", async () => {
   const formData = new FormData();
   formData.append("key", "value");
   const response = new Response(formData);
   await expect(response).toHaveFormDataBody(formData);
 });
-`}
-
-</TestFile>
+```
 
 :::note
 This assertion is asynchronous, so must be awaited.
@@ -152,64 +125,47 @@ This assertion is asynchronous, so must be awaited.
 
 ### `.toBeRedirected()`
 
-Use `.toBeRedirected()` to assert that a `Response` object has been redirected (`redirected` property is true).
+Use `.toBeRedirected()` to assert that `fetch` followed a redirect and returned a response with its `redirected` property set to `true`. This example requires an internet connection.
 
-<TestFile name="toBeRedirected">
-{`
-it("is a redirect response", () => {
-  // mock a Response object with redirected property set to true
-  const response = Object.defineProperty(
-    new Response(), 
-    "redirected", 
-    { value: true }
-  );
+```ts
+it("follows a redirect", async () => {
+  const response = await fetch("https://httpbin.org/redirect/1");
   expect(response).toBeRedirected();
 });
-`}
-
-</TestFile>
+```
 
 ### `.toHaveResponseType(expected)`
 
 Use `.toHaveResponseType(expected)` to assert that a `Response` object has the expected [type](https://developer.mozilla.org/en-US/docs/Web/API/Response/type).
 
-<TestFile name="toHaveResponseType">
-{`
+```ts
 it("has the expected response type", () => {
   const response = new Response();
   expect(response).toHaveResponseType("default");
 });
-`}
-
-</TestFile>
+```
 
 ### `.toHaveSearchParam(name, value?)`
 
 Use `.toHaveSearchParam(name, value?)` to assert that a `URLSearchParams`, `URL`, `Response`, or `Request` object has the specified search parameter. If `value` is provided, it will also check that the parameter value matches.
 
-<TestFile name="toHaveSearchParam">
-{`
+```ts
 it("has the expected search parameter", () => {
   const url = new URL("https://example.com?foo=bar");
   expect(url).toHaveSearchParam("foo", "bar");
 });
-`}
-
-</TestFile>
+```
 
 ### `.toBeAborted()`
 
 Use `.toBeAborted()` to assert that an `AbortSignal` is aborted, or that a `Request` object has an aborted signal.
 
-<TestFile name="toBeAborted">
-{`
+```ts
 it("is aborted", () => {
   const controller = new AbortController();
   expect(controller.signal).not.toBeAborted();
 
-controller.abort();
-expect(controller.signal).toBeAborted();
+  controller.abort();
+  expect(controller.signal).toBeAborted();
 });
-`}
-
-</TestFile>
+```

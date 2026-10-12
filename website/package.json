@@ -15,8 +15,6 @@
     "write-translations": "docusaurus write-translations"
   },
   "dependencies": {
-    "@codesandbox/sandpack-react": "^2.20.0",
-    "@codesandbox/sandpack-themes": "^2.0.21",
     "@docusaurus/core": "^3.10.2",
     "@docusaurus/preset-classic": "^3.10.2",
     "@mdx-js/react": "^3.1.1",

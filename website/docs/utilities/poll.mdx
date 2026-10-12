@@ -1,5 +1,3 @@
-import { TestFile } from "/src/components/TestFile";
-
 # Polling
 
 ## `waitFor(fn, options)`
@@ -8,39 +6,35 @@ Wait for the callback to execute successfully. If the callback throws an error o
 
 This is useful when you need to wait for some asynchronous action to complete, for example, when a server is starting up.
 
-<TestFile name="waitFor">
-{`
+```ts
 import { waitFor } from "mix-n-matchers/utilities";
 
 const server = { isReady: false };
 
 setTimeout(() => {
-server.isReady = true;
+  server.isReady = true;
 }, 100);
 
 await waitFor(
-() => {
-if (!server.isReady) {
-throw new Error("Server not started");
-}
-},
-{
-timeout: 500,
-interval: 20,
-},
+  () => {
+    if (!server.isReady) {
+      throw new Error("Server not started");
+    }
+  },
+  {
+    timeout: 500,
+    interval: 20,
+  },
 );
 
 expect(server.isReady).toBe(true);
-`}
-
-</TestFile>
+```
 
 ### Using fake timers
 
 If you're using fake timers, pass an `advanceTimers` option so the polling loop advances the mocked clock instead of waiting on a real `setTimeout`, which would never resolve.
 
-<TestFile name="waitForFakeTimers">
-{`
+```ts
 import { waitFor } from "mix-n-matchers/utilities";
 
 jest.useFakeTimers();
@@ -48,28 +42,26 @@ jest.useFakeTimers();
 const server = { isReady: false };
 
 setTimeout(() => {
-server.isReady = true;
+  server.isReady = true;
 }, 100);
 
 await waitFor(
-() => {
-if (!server.isReady) {
-throw new Error("Server not started");
-}
-},
-{
-timeout: 500,
-interval: 20,
-advanceTimers: (ms) => jest.advanceTimersByTimeAsync(ms),
-},
+  () => {
+    if (!server.isReady) {
+      throw new Error("Server not started");
+    }
+  },
+  {
+    timeout: 500,
+    interval: 20,
+    advanceTimers: (ms) => jest.advanceTimersByTimeAsync(ms),
+  },
 );
 
 expect(server.isReady).toBe(true);
 
 jest.useRealTimers();
-`}
-
-</TestFile>
+```
 
 ## `waitUntil(fn, options)`
 
@@ -77,21 +69,15 @@ This is similar to `waitFor`, but if the callback throws any errors, execution i
 
 This is useful when you need to wait for something to exist before taking the next step.
 
-<TestFile name="waitUntil">
-{`
+```ts
 import { waitUntil } from "mix-n-matchers/utilities";
 
-const element = await waitUntil(
-() => document.querySelector(".element"),
-{
-timeout: 500,
-interval: 20,
-},
-);
+const element = await waitUntil(() => document.querySelector(".element"), {
+  timeout: 500,
+  interval: 20,
+});
 
 expect(element?.querySelector(".element-child")).toBeTruthy();
-`}
-
-</TestFile>
+```
 
 `waitUntil` also supports the `advanceTimers` option for use with fake timers, just like `waitFor`.

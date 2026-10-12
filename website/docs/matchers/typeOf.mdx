@@ -2,14 +2,11 @@
 sidebar_position: 2
 ---
 
-import { TestFile } from "/src/components/TestFile";
-
 # `expect.typeOf(type)`
 
 An asymmetric matcher that checks if the received value is of the specified type, using `typeof`.
 
-<TestFile name="exactly">
-  {`
+```ts
 it("is of the correct type", () => {
   const values = {
     number: 1,
@@ -22,5 +19,4 @@ it("is of the correct type", () => {
     boolean: expect.typeOf("boolean"),
   });
 });
-`}
-</TestFile>
+```
