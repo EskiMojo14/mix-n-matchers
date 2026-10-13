@@ -1,6 +1,6 @@
 # Iterables
 
-## `some(iterable, assertion)`
+## some(iterable, assertion)
 
 Use `some` to assert that at least one value in an iterable passes the provided assertion. Throws an error if no values pass the assertion.
 
@@ -23,7 +23,7 @@ expect(result).toBe(3);
 Assertion callback can be asynchronous, in which case `some` will return a promise that resolves to the result of calling the assertion on the first value that passes.
 :::
 
-## `someAsync(asyncIterable, assertion)`
+## someAsync(asyncIterable, assertion)
 
 Use `someAsync` to assert that at least one value in an asynchronous iterable passes the provided assertion. Throws an error if no values pass the assertion.
 
@@ -46,7 +46,7 @@ const promise = someAsync(asyncNums(), (value) => {
 await expect(promise).resolves.toBe(3);
 ```
 
-## `every(iterable, assertion)`
+## every(iterable, assertion)
 
 Use `every` to assert that every value in an iterable passes the provided assertion. Throws an error if any value fails the assertion.
 
@@ -69,7 +69,7 @@ expect(results).toEqual([2, 4, 6]);
 Assertion callback can be asynchronous, in which case `every` will return a promise that resolves to an array of the results of calling the assertion on each value.
 :::
 
-## `everyAsync(asyncIterable, assertion)`
+## everyAsync(asyncIterable, assertion)
 
 Use `everyAsync` to assert that every value in an asynchronous iterable passes the provided assertion. Throws an error if any value fails the assertion.
 

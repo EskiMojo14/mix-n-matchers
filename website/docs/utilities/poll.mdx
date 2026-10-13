@@ -1,6 +1,6 @@
 # Polling
 
-## `waitFor(fn, options)`
+## waitFor(fn, options)
 
 Wait for the callback to execute successfully. If the callback throws an error or returns a rejected promise, it will continue to wait until it succeeds or times out.
 
@@ -63,7 +63,7 @@ expect(server.isReady).toBe(true);
 jest.useRealTimers();
 ```
 
-## `waitUntil(fn, options)`
+## waitUntil(fn, options)
 
 This is similar to `waitFor`, but if the callback throws any errors, execution is immediately interrupted and an error message is received. If the callback returns a falsy value, the next check will continue until a truthy value is returned.
 

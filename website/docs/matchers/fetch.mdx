@@ -2,7 +2,7 @@
 
 Matchers for `fetch` related objects, such as `Response`, `Request`, and `Headers`.
 
-### `.toBeOK()`
+### toBeOK()
 
 Use `.toBeOK()` to assert that a `Response` object has an OK status (status code in the range 200-299).
 
@@ -13,7 +13,7 @@ it("is an OK response", () => {
 });
 ```
 
-### `.toHaveStatus(expected)`
+### toHaveStatus(expected)
 
 Use `.toHaveStatus(expected)` to assert that a `Response` object has the expected status code.
 
@@ -24,7 +24,7 @@ it("has the expected status code", () => {
 });
 ```
 
-### `.toHaveStatusGroup(expected)`
+### toHaveStatusGroup(expected)
 
 Use `.toHaveStatusGroup(expected)` to assert that a `Response` object has a specific status group (`1-5`, `1xx-5xx`, `"informational"`, `"successful"`, `"redirection"`, `"client error"`, `"server error"`).
 
@@ -39,7 +39,7 @@ it("has the expected status group", () => {
 });
 ```
 
-### `.toHaveHeader(name, value?)`
+### toHaveHeader(name, value?)
 
 Use `.toHaveHeader(name, value?)` to assert that a `Response`, `Request`, or `Headers` object has the specified header. If `value` is provided, it will also check that the header value matches.
 
@@ -52,7 +52,7 @@ it("has the expected header", () => {
 });
 ```
 
-### `.toHaveMethod(expected)`
+### toHaveMethod(expected)
 
 Use `.toHaveMethod(expected)` to assert that a `Request` object has the expected HTTP method.
 
@@ -63,7 +63,7 @@ it("has the expected HTTP method", () => {
 });
 ```
 
-### `.toHaveURL(expected)`
+### toHaveURL(expected)
 
 Use `.toHaveURL(expected)` to assert that a `Response` or `Request` object has the expected URL.
 
@@ -74,7 +74,7 @@ it("has the expected URL", () => {
 });
 ```
 
-### `.toHaveTextBody(expected)`
+### toHaveTextBody(expected)
 
 Use `.toHaveTextBody(expected)` to assert that a `Response` or `Request` object has the expected body text.
 
@@ -89,7 +89,7 @@ it("has the expected body text", async () => {
 This assertion is asynchronous, so must be awaited.
 :::
 
-### `.toHaveJSONBody(expected)`
+### toHaveJSONBody(expected)
 
 Use `.toHaveJSONBody(expected)` to assert that a `Response` or `Request` object has the expected JSON body, using deep equality.
 
@@ -106,7 +106,7 @@ it("has the expected JSON body", async () => {
 This assertion is asynchronous, so must be awaited.
 :::
 
-### `.toHaveFormDataBody(expected)`
+### toHaveFormDataBody(expected)
 
 Use `.toHaveFormDataBody(expected)` to assert that a `Response` or `Request` object has the expected `FormData` body, using [`formDataEquality`](/mix-n-matchers/utilities/equality#formdataequality).
 
@@ -123,7 +123,7 @@ it("has the expected FormData body", async () => {
 This assertion is asynchronous, so must be awaited.
 :::
 
-### `.toBeRedirected()`
+### toBeRedirected()
 
 Use `.toBeRedirected()` to assert that `fetch` followed a redirect and returned a response with its `redirected` property set to `true`. This example requires an internet connection.
 
@@ -134,7 +134,7 @@ it("follows a redirect", async () => {
 });
 ```
 
-### `.toHaveResponseType(expected)`
+### toHaveResponseType(expected)
 
 Use `.toHaveResponseType(expected)` to assert that a `Response` object has the expected [type](https://developer.mozilla.org/en-US/docs/Web/API/Response/type).
 
@@ -145,7 +145,7 @@ it("has the expected response type", () => {
 });
 ```
 
-### `.toHaveSearchParam(name, value?)`
+### toHaveSearchParam(name, value?)
 
 Use `.toHaveSearchParam(name, value?)` to assert that a `URLSearchParams`, `URL`, `Response`, or `Request` object has the specified search parameter. If `value` is provided, it will also check that the parameter value matches.
 
@@ -156,7 +156,7 @@ it("has the expected search parameter", () => {
 });
 ```
 
-### `.toBeAborted()`
+### toBeAborted()
 
 Use `.toBeAborted()` to assert that an `AbortSignal` is aborted, or that a `Request` object has an aborted signal.
 

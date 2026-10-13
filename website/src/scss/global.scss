@@ -5,7 +5,13 @@
 @use "util";
 @use "material-colors/dist/colors";
 
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto+Slab:wght@100..900&display=swap");
+@font-face {
+  font-family: "Paper Mono";
+  src: url("/fonts/PaperMono[wght].ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
 
 $github: (
   background: #f6f8fa,
@@ -42,8 +48,8 @@ $themes: (
     info: colors.$md-light-blue-500,
     warning: colors.$md-amber-500,
     danger: colors.$md-red-500,
-    background: colors.$md-grey-50,
-    surface: white,
+    background: #f6f5ef,
+    surface: #fffdf7,
   ),
   dark: (
     primary: colors.$md-teal-300,
@@ -52,8 +58,8 @@ $themes: (
     info: colors.$md-light-blue-300,
     warning: colors.$md-amber-300,
     danger: colors.$md-red-300,
-    background: colors.$md-grey-900,
-    surface: colors.$md-grey-800,
+    background: #25241f,
+    surface: #302f29,
   ),
 );
 
@@ -69,12 +75,12 @@ $themes: (
     (
       colors: map.get($themes, light),
       emphasis: (
-        0: white,
-        1000: #212121,
+        0: #fffdf7,
+        1000: #292821,
       ),
       fonts: (
         base: (
-          Lato,
+          "Paper Mono",
           -apple-system,
           BlinkMacSystemFont,
           Segoe UI,
@@ -88,7 +94,7 @@ $themes: (
           sans-serif,
         ),
         monospace: (
-          "Fira Code",
+          "Paper Mono",
           SFMono-Regular,
           Menlo,
           Monaco,
@@ -121,7 +127,14 @@ $themes: (
     )
   );
   --docusaurus-highlighted-code-line-border-width: 2px;
-  --ifm-heading-font-family: "Roboto Slab", serif;
+  /*
+   * ss01: coding ligatures; ss02: duospace characters; ss03: narrow spaces;
+   * ss04: small arrows (not enabled); cv01: single-story a; zero: slashed zero.
+   */
+  font-feature-settings:
+    "ss02" 1,
+    "ss03" 1,
+    "cv01" 1;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -131,8 +144,8 @@ html[data-theme="dark"] {
       dark: true,
       colors: map.get($themes, dark),
       emphasis: (
-        0: black,
-        1000: #fafafa,
+        0: #22221d,
+        1000: #f5f2e9,
       ),
     )
   );
@@ -158,9 +171,22 @@ html[data-theme="dark"] {
   );
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  /* Disable narrow spaces in headings. */
+  font-feature-settings:
+    "ss02" 1,
+    "ss03" 0,
+    "cv01" 1;
+}
+
 .navbar {
   [data-theme="light"] & {
-    --ifm-navbar-background-color: #{colors.$md-grey-200};
+    --ifm-navbar-background-color: #{map.get($themes, light, surface)};
   }
   .color-mode-toggle {
     color: var(--ifm-navbar-link-color);
@@ -192,6 +218,17 @@ html[data-theme="dark"] {
 .theme-code-block-highlighted-line {
   box-shadow: inset var(--docusaurus-highlighted-code-line-border-width) 0 0
     var(--docusaurus-highlighted-code-line-border);
+}
+
+code,
+pre {
+  /* Keep code monospace by disabling duospace characters, narrow spaces, and cv01. */
+  font-feature-settings:
+    "ss01" 1,
+    "zero" 1,
+    "ss02" 0,
+    "ss03" 0,
+    "cv01" 0;
 }
 
 @function make-github-logo($color) {
