@@ -1,4 +1,5 @@
 import { mergeConfig } from "vite-plus";
+
 import defaultConfig from "./vite.config";
 
 export default mergeConfig(defaultConfig, {

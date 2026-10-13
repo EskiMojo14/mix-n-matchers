@@ -1,5 +1,5 @@
-import { RuleTester } from "vite-plus/lint/plugins-dev";
 import { describe, it } from "@globals";
+import { RuleTester } from "vite-plus/lint/plugins-dev";
 
 import rule from "./no-instanceof-promise.mjs";
 

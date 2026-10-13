@@ -1,4 +1,5 @@
 import { mergeRstestConfig } from "@rstest/core";
+
 import defaultConfig from "./rstest.config";
 
 export default mergeRstestConfig(defaultConfig, {

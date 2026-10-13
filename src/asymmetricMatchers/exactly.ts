@@ -4,6 +4,7 @@ import {
   type MatcherHintOptions,
   printDiffOrStringify,
 } from "jest-matcher-utils";
+
 import type { MatcherFunction } from "../utils/types";
 
 /**

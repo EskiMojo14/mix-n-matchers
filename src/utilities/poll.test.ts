@@ -1,4 +1,5 @@
 import { describe, expect, it, fn, useFakeTimers } from "@globals";
+
 import { waitFor, waitUntil } from "./poll";
 
 describe("waitFor", () => {

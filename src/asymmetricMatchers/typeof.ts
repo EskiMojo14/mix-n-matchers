@@ -1,5 +1,6 @@
 import type { MatcherHintOptions } from "jest-matcher-utils";
 import { matcherHint, printExpected, printReceived } from "jest-matcher-utils";
+
 import type { MatcherFunction } from "../utils/types";
 
 const possibleTypes = typeof 1;

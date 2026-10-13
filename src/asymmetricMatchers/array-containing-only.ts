@@ -7,6 +7,7 @@ import {
   printWithType,
   stringify,
 } from "jest-matcher-utils";
+
 import { makeEqualValue, assert } from "../utils";
 import type { MatcherFunction } from "../utils/types";
 

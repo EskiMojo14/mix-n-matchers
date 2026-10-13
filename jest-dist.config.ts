@@ -1,5 +1,6 @@
-import baseConfig from "./jest.config.ts";
 import { create } from "mutative";
+
+import baseConfig from "./jest.config.ts";
 
 export default create(baseConfig, (draftConfig) => {
   draftConfig.setupFilesAfterEnv = ["mix-n-matchers/jest-globals", "<rootDir>/jest-setup.ts"];

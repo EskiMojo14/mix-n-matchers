@@ -1,6 +1,7 @@
 import { describe, expect, it, beforeAll, afterAll } from "@globals";
-import * as realEquality from "./equality";
+
 import type { Tester } from "../utils/types";
+import * as realEquality from "./equality";
 
 // expect.addEqualityTesters cannot be reset, so we add testers we can enable/disable to avoid affecting other tests.
 

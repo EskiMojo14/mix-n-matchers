@@ -1,5 +1,6 @@
 import type { Mock } from "@globals";
 import { it, expect, describe, fn } from "@globals";
+
 import type { CallInfo, Spy } from "../utils";
 
 // Given a Jest mock function, return a minimal mock of a spy.

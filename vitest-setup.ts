@@ -1,5 +1,6 @@
-import { expect, describe, it, vi, beforeAll, afterAll } from "vite-plus/test";
 import type * as globals from "@globals";
+import { expect, describe, it, vi, beforeAll, afterAll } from "vite-plus/test";
+
 import { alignedAnsiStyleSerializer, errorCauseSerializer } from "./src/utils/tests";
 
 expect.addSnapshotSerializer(alignedAnsiStyleSerializer);

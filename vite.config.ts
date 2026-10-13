@@ -1,4 +1,5 @@
 import * as path from "node:path";
+
 import { defineConfig } from "vite-plus";
 
 export default defineConfig({
@@ -55,7 +56,9 @@ export default defineConfig({
       },
     ],
   },
-  fmt: {},
+  fmt: {
+    sortImports: true,
+  },
   pack: {
     deps: {
       neverBundle: ["@jest/globals"],

@@ -17,6 +17,7 @@ import type {
   beforeAll as vitestBeforeAll,
   afterAll as vitestAfterAll,
 } from "vite-plus/test";
+
 import type { Satisfies } from "./types.typetest";
 
 interface Each {

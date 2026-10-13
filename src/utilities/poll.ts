@@ -1,5 +1,5 @@
-import type { MaybePromiseLike, Truthy } from "../utils/types";
 import { wait } from "../utils";
+import type { MaybePromiseLike, Truthy } from "../utils/types";
 
 export interface PollOptions {
   /**

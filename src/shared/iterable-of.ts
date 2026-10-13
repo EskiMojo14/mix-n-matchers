@@ -7,6 +7,7 @@ import {
   printWithType,
   RECEIVED_COLOR,
 } from "jest-matcher-utils";
+
 import { ensureIterable, makeEqualValue } from "../utils";
 import type { MatcherFunction } from "../utils/types";
 

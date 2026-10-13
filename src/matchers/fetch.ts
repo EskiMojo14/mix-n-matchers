@@ -1,5 +1,3 @@
-import type { Autocomplete, MatcherFunction } from "../utils/types";
-import { makeEqualValue, isAsymmetricMatcher, assert } from "../utils";
 import {
   matcherErrorMessage,
   matcherHint,
@@ -9,7 +7,10 @@ import {
   EXPECTED_COLOR,
   printDiffOrStringify,
 } from "jest-matcher-utils";
+
 import { caseInsensitiveStringEquality, formDataEquality } from "../utilities";
+import { makeEqualValue, isAsymmetricMatcher, assert } from "../utils";
+import type { Autocomplete, MatcherFunction } from "../utils/types";
 
 /**
  * Ensure the Response object has an ok status (200-299).

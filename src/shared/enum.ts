@@ -1,5 +1,6 @@
 import type { MatcherHintOptions } from "jest-matcher-utils";
 import { matcherHint, printExpected, printReceived } from "jest-matcher-utils";
+
 import type { EnumLike } from "../utils/enum";
 import { getValidEnumValues } from "../utils/enum";
 import type { MatcherFunction } from "../utils/types";

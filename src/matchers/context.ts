@@ -1,3 +1,4 @@
+import type { Mock } from "@globals";
 import {
   matcherErrorMessage,
   matcherHint,
@@ -8,7 +9,7 @@ import {
   printReceived,
   DIM_COLOR,
 } from "jest-matcher-utils";
-import type { Mock } from "@globals";
+
 import type { EqualValue, Spy } from "../utils";
 import { ensureMockOrSpy, makeEqualValue, isSpy, assert } from "../utils";
 import { getRightAlignedPrinter } from "../utils/print";

@@ -1,4 +1,5 @@
 import { it, expect, describe } from "@globals";
+
 import type { StatusGroup } from "./fetch";
 
 function withoutGlobal(global: keyof typeof globalThis): Disposable {
