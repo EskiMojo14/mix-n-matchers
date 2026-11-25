@@ -23,4 +23,4 @@ some(iterable, (item) => {
 });
 ```
 
-See [website](https://eskimojo14.github.io/mix-n-matchers/) for more information.
+See [website](https://mix-n-matchers.eskimojo.dev) for more information.
